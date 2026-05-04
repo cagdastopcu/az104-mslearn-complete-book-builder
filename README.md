@@ -4,19 +4,9 @@ This project builds Azure AZ-104 study content from official Microsoft Learn sou
 
 Repository name: `az104-mslearn-complete-book-builder`
 
-## What This Project Produces
+## Run Output
 
-After a run, a timestamped folder is created under `output/`, for example:
-
-`output/20260504_225156/`
-
-That folder contains:
-
-- `manifest.json`: discovered Azure AZ-104 learning paths, modules, and units.
-- `unit_content.jsonl`: fetched unit text content.
-- `official_pages.jsonl`: fetched Azure AZ-104 official related pages.
-- `coverage_report.json`: source coverage summary.
-- `book/`: all generated books and test books.
+Each run creates a timestamped folder under `output/` (for example, `output/20260504_225156/`) that stores the full AZ-104 build snapshot: discovered learning structure (`manifest.json`), fetched unit and official-page source content (`unit_content.jsonl`, `official_pages.jsonl`), a coverage summary (`coverage_report.json`), and a `book/` directory containing all generated study and test books in the supported formats.
 
 ## Install
 
