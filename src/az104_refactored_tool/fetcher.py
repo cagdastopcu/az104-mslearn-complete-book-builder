@@ -37,6 +37,37 @@ REMOVE_SELECTORS = [
     "svg",
 ]
 
+NOISE_LINE_PATTERNS = [
+    r"^Skip to main content$",
+    r"^Module Assessment Results$",
+    r"^Assess your understanding of this module\..*",
+    r"^Choose the Azure account that's right for you\..*",
+    r"^Get started with Azure$",
+    r"^Read in English$",
+    r"^Feedback$",
+    r"^Back to top$",
+    r"^Ask Learn$",
+    r"^Light\s+Dark\s+High contrast$",
+    r"^Would you like to request an achievement code\?$",
+    r"^Achievement Code$",
+    r"^Loading\.\.\.$",
+    r"^Previous$",
+    r"^Next$",
+    r"^Sign in$",
+    r"^-\s+Module$",
+    r"^-\s+Learning Path$",
+    r"^-\s+Level\b.*$",
+    r"^-\s+Skill\b.*$",
+    r"^-\s+Role\b.*$",
+    r"^-\s+Introduction\s+min$",
+    r"^-\s+Summary\s+min$",
+    r"^-\s+Summary and resources\s+min$",
+    r"^-\s+Module assessment\s+min$",
+    r"^-\s+\d+\s+minutes?$",
+    r"^In this unit$",
+    r"^In this module$",
+]
+
 HEADERS = {
     "User-Agent": (
         "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
@@ -46,6 +77,45 @@ HEADERS = {
     "Accept-Language": "en-US,en;q=0.9",
     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
 }
+
+
+MOJIBAKE_MARKERS = ("â", "Ã", "\ufffd", "\x80", "\x99", "\x9c", "\x9d")
+
+
+def _mojibake_score(text: str) -> int:
+    return sum(text.count(marker) for marker in MOJIBAKE_MARKERS)
+
+
+def _repair_mojibake(text: str) -> str:
+    """Fix common UTF-8->Latin-1/CP1252 decode corruption."""
+    if _mojibake_score(text) == 0:
+        return text
+
+    best = text
+    best_score = _mojibake_score(best)
+
+    for source_encoding in ("latin-1", "cp1252"):
+        try:
+            candidate = text.encode(source_encoding).decode("utf-8")
+        except UnicodeError:
+            continue
+        score = _mojibake_score(candidate)
+        if score < best_score:
+            best = candidate
+            best_score = score
+
+    return best
+
+
+def _response_to_html(response: requests.Response) -> str:
+    """Decode HTML deterministically to avoid requests' charset guess issues."""
+    content = response.content
+    if not content:
+        return ""
+    try:
+        return content.decode("utf-8")
+    except UnicodeDecodeError:
+        return response.text
 
 
 def _extract_title(soup: BeautifulSoup, fallback: str) -> str:
@@ -106,6 +176,43 @@ def _extract_fallback_text(soup: BeautifulSoup) -> str:
     return re.sub(r"\n{3,}", "\n\n", raw).strip()
 
 
+def _is_noise_line(line: str) -> bool:
+    text = line.strip()
+    if not text:
+        return False
+    for pattern in NOISE_LINE_PATTERNS:
+        if re.match(pattern, text, flags=re.IGNORECASE):
+            return True
+    return False
+
+
+def _normalize_content(content: str) -> str:
+    content = _repair_mojibake(content)
+    content = content.replace("\xa0", " ")
+    raw_lines = [ln.rstrip() for ln in content.splitlines()]
+
+    cleaned: list[str] = []
+    prev_norm = ""
+    for line in raw_lines:
+        line = re.sub(r"\s+", " ", line).strip()
+        if not line:
+            if cleaned and cleaned[-1] != "":
+                cleaned.append("")
+            continue
+        if _is_noise_line(line):
+            continue
+        norm = line.lower()
+        # Remove immediate duplicates caused by mirrored UI regions.
+        if norm == prev_norm:
+            continue
+        prev_norm = norm
+        cleaned.append(line)
+
+    text = "\n".join(cleaned).strip()
+    text = re.sub(r"\n{3,}", "\n\n", text)
+    return text
+
+
 def _request_with_retry(
     session: requests.Session,
     url: str,
@@ -164,11 +271,15 @@ def fetch_from_manifest(
                         retries=retries,
                         base_backoff_sec=backoff_sec,
                     )
-                    soup = BeautifulSoup(response.text, "html.parser")
+                    html = _response_to_html(response)
+                    soup = BeautifulSoup(html, "html.parser")
                     extracted_title = _extract_title(soup, unit_title)
                     content = _extract_content_text(soup)
                     if not content:
                         raise RuntimeError("No extractable content found")
+                    content = _normalize_content(content)
+                    if not content:
+                        raise RuntimeError("No extractable content found after normalization")
 
                     results.append(
                         UnitContent(
@@ -227,11 +338,13 @@ def fetch_pages(
                 retries=retries,
                 base_backoff_sec=backoff_sec,
             )
-            soup = BeautifulSoup(response.text, "html.parser")
+            html = _response_to_html(response)
+            soup = BeautifulSoup(html, "html.parser")
             title = _extract_title(soup, url)
             content = _extract_content_text(soup)
             if not content:
                 content = _extract_fallback_text(soup)
+            content = _normalize_content(content)
             if not content:
                 content = (
                     "This page contains limited or dynamic content in the current session. "

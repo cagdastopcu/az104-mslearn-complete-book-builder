@@ -135,7 +135,7 @@ def _build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--official-max-connected-pages",
         type=int,
-        default=120,
+        default=150,
         help="Maximum number of additional connected official pages to include.",
     )
     parser.add_argument("--verbose", action="store_true", help="Enable debug logs.")

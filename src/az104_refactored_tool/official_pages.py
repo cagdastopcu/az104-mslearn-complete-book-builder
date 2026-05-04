@@ -167,7 +167,7 @@ def collect_official_pages(
     manifest: dict,
     source_url: str,
     link_jumps: int = 1,
-    max_connected_pages: int = 120,
+    max_connected_pages: int = 150,
 ) -> list[str]:
     urls: list[str] = []
     seen: set[str] = set()

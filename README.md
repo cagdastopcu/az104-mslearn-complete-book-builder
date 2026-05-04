@@ -1,6 +1,8 @@
-# az104-mslearn-complete-book-builder
+# AZ-104 Microsoft Learn Complete Book Builder
 
-`az104-mslearn-complete-book-builder` is a command-line tool that collects official AZ-104 Microsoft Learn content and produces a complete study book in multiple formats.
+This project is a command-line tool that collects official AZ-104 Microsoft Learn content and builds a complete study book in multiple formats.
+
+Repository name: `az104-mslearn-complete-book-builder`
 
 ## What It Does
 
@@ -31,7 +33,7 @@ Run everything in one command:
 az104-tool \
   --input-url "https://learn.microsoft.com/en-us/training/courses/az-104t00" \
   --out-dir output \
-  --title "AZ-104 Microsoft Learn Verbatim"
+  --title "AZ-104 Microsoft Learn Complete Study Book"
 ```
 
 Or run the wrapper script:
