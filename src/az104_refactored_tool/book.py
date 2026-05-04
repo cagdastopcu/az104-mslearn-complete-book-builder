@@ -3,6 +3,8 @@ from __future__ import annotations
 import html
 import logging
 import re
+import tempfile
+import zipfile
 from pathlib import Path
 from typing import Any
 
@@ -21,6 +23,39 @@ def _unit_map(content_rows: list[dict[str, Any]]) -> dict[tuple[int, int, int], 
         key = (row["learning_path_index"], row["module_index"], row["unit_index"])
         mapping[key] = row
     return mapping
+
+
+def _normalize_epub_archive(epub_path: Path) -> None:
+    # Normalize ZIP metadata so identical content produces stable EPUB binaries across runs.
+    timestamp = (2000, 1, 1, 0, 0, 0)
+    fixed_modified = "2000-01-01T00:00:00Z"
+    with tempfile.NamedTemporaryFile(delete=False, suffix=".epub", dir=str(epub_path.parent)) as tmp:
+        temp_path = Path(tmp.name)
+
+    try:
+        with zipfile.ZipFile(epub_path, "r") as source, zipfile.ZipFile(temp_path, "w") as target:
+            for info in source.infolist():
+                data = source.read(info.filename)
+                if info.filename.lower().endswith("content.opf"):
+                    opf = data.decode("utf-8", errors="replace")
+                    opf = re.sub(
+                        r"(<meta\s+property=\"dcterms:modified\">)([^<]+)(</meta>)",
+                        rf"\g<1>{fixed_modified}\g<3>",
+                        opf,
+                        flags=re.IGNORECASE,
+                    )
+                    data = opf.encode("utf-8")
+                normalized = zipfile.ZipInfo(filename=info.filename, date_time=timestamp)
+                normalized.compress_type = info.compress_type
+                normalized.external_attr = info.external_attr
+                normalized.comment = info.comment
+                normalized.create_system = 0
+                normalized.extra = b""
+                target.writestr(normalized, data, compress_type=info.compress_type)
+        temp_path.replace(epub_path)
+    finally:
+        if temp_path.exists():
+            temp_path.unlink(missing_ok=True)
 
 
 def build_txt_book(manifest: dict[str, Any], content_rows: list[dict[str, Any]], output_path: Path, title: str) -> None:
@@ -220,6 +255,7 @@ def build_epub_book(
     book.add_item(epub.EpubNav())
     output_path.parent.mkdir(parents=True, exist_ok=True)
     epub.write_epub(str(output_path), book)
+    _normalize_epub_archive(output_path)
     return True
 
 

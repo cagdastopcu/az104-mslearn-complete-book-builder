@@ -4,6 +4,8 @@ import html
 import random
 import re
 import json
+import tempfile
+import zipfile
 from hashlib import sha1
 from pathlib import Path
 from typing import NamedTuple
@@ -65,6 +67,38 @@ STEM_TEMPLATES = [
 class Fact(NamedTuple):
     text: str
     section: str
+
+
+def _normalize_epub_archive(epub_path: Path) -> None:
+    timestamp = (2000, 1, 1, 0, 0, 0)
+    fixed_modified = "2000-01-01T00:00:00Z"
+    with tempfile.NamedTemporaryFile(delete=False, suffix=".epub", dir=str(epub_path.parent)) as tmp:
+        temp_path = Path(tmp.name)
+
+    try:
+        with zipfile.ZipFile(epub_path, "r") as source, zipfile.ZipFile(temp_path, "w") as target:
+            for info in source.infolist():
+                data = source.read(info.filename)
+                if info.filename.lower().endswith("content.opf"):
+                    opf = data.decode("utf-8", errors="replace")
+                    opf = re.sub(
+                        r"(<meta\s+property=\"dcterms:modified\">)([^<]+)(</meta>)",
+                        rf"\g<1>{fixed_modified}\g<3>",
+                        opf,
+                        flags=re.IGNORECASE,
+                    )
+                    data = opf.encode("utf-8")
+                normalized = zipfile.ZipInfo(filename=info.filename, date_time=timestamp)
+                normalized.compress_type = info.compress_type
+                normalized.external_attr = info.external_attr
+                normalized.comment = info.comment
+                normalized.create_system = 0
+                normalized.extra = b""
+                target.writestr(normalized, data, compress_type=info.compress_type)
+        temp_path.replace(epub_path)
+    finally:
+        if temp_path.exists():
+            temp_path.unlink(missing_ok=True)
 
 
 def _safe_filename(text: str) -> str:
@@ -415,6 +449,7 @@ def _write_test_book_formats(md_path: Path) -> dict[str, Path]:
         book.add_item(epub.EpubNcx())
         book.add_item(epub.EpubNav())
         epub.write_epub(str(epub_path), book)
+        _normalize_epub_archive(epub_path)
         written["epub"] = epub_path
     except Exception:
         # Keep md/txt even if EPUB package is not available in current environment.
