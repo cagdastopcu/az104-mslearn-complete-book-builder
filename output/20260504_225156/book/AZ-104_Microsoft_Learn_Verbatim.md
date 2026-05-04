@@ -15445,12 +15445,6 @@ To speed up your search, use Account Management to deselect any subscriptions th
 - Manage Azure Blob storage resources with Storage Explorer
 - Manage Azure Data Lake Store resources with Storage Explorer
 
-## Feedback
-
-Was this page helpful?
-Need help with this topic?
-Want to try using Ask Learn to clarify or guide you through this topic?
-
 ## Additional resources
 
 - Last updated on 2025-04-14
