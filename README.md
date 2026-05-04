@@ -82,12 +82,20 @@ Files:
 Purpose:
 
 - Broad chapter-by-chapter recall checks from the source text.
+- Best for high-volume coverage and memory reinforcement after you read the verbatim book.
+- Every question is grounded to extracted chapter statements and includes source-line explanation.
 
 Question count behavior:
 
 - Variable count per chapter.
 - At least 15 questions per chapter.
 - If a chapter has more extracted facts, it generates more so coverage is not capped.
+
+Exact counts for the included snapshot `output/20260504_225156/`:
+
+- Chapters: `29`
+- Total questions: `2946`
+- Question style: section-grounded chapter MCQ format (single-answer recall style)
 
 ### 2) Scenario Test Book
 
@@ -101,11 +109,20 @@ Files:
 Purpose:
 
 - Scenario/case-style practice based on source content.
+- Best for practicing grouped case flow and linked questions under shared context.
+- Uses case studies with multiple linked questions and source-grounded explanations.
 
 Question count behavior:
 
 - Variable by chapter/fact extraction.
 - Includes case-study style grouping and linked questions.
+
+Exact counts for the included snapshot `output/20260504_225156/`:
+
+- Chapters: `29`
+- Total case studies: `604`
+- Total questions: `2946`
+- Question style: case-study linked questions (`Case Study N` + `Q1..Qn`)
 
 ### 3) Exam-Style Chapter Test Book (Non-Scenario)
 
@@ -119,6 +136,8 @@ Files:
 Purpose:
 
 - Chapter-based exam-style practice without scenario blocks.
+- Best for mixed exam-style item practice without case-study scenario framing.
+- Uses operational tradeoff constraints and mixed item types while staying chapter-grounded.
 
 Question count behavior:
 
@@ -133,6 +152,15 @@ Item styles in this book:
 - `True/False combination`
 
 Style distribution is automatic and mixed throughout each chapter.
+
+Exact counts for the included snapshot `output/20260504_225156/`:
+
+- Chapters: `29`
+- Total questions: `4360`
+- `Single best answer`: `1100`
+- `Choose TWO`: `1092`
+- `Sequence`: `1088`
+- `True/False combination`: `1080`
 
 ## Source Grounding Rules For Answers And Explanations
 
