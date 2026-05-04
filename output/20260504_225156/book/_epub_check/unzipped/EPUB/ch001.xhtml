@@ -1,0 +1,103 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" epub:prefix="z3998: http://www.daisy.org/z3998/2012/vocab/structure/#" lang="en" xml:lang="en">
+  <head>
+    <title>LP 1 M1 - Introduction to Azure Cloud Shell</title>
+    <link href="style/main.css" rel="stylesheet" type="text/css"/>
+  </head>
+  <body><h1>LP 1 M1 - Introduction to Azure Cloud Shell</h1>
+<p>https://learn.microsoft.com/en-us/training/modules/intro-to-azure-cloud-shell/?WT.mc_id=api_CatalogApi</p>
+<h2>Unit 1.1.1 - Introduction</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/intro-to-azure-cloud-shell/1-introduction</p>
+<h3>Introduction</h3>
+<p>Azure Cloud Shell is a browser-accessible command-line experience for managing Azure resources. It provides the flexibility of choosing the shell experience that best suits the way you work, either Bash or PowerShell. Traditionally, to interact with Azure resources via command-line, you need to install the necessary components into your local computer (PC, Mac, Linux). With Cloud Shell, you have an authenticated, interactive shell that isn't part of a local machine.</p>
+<p>You're an IT admin for Contoso Corporation, responsible for the cloud infrastructure on which the company hosts its applications. These applications use different cloud resources, such as Azure VMs, Azure blob storage, Azure networking, and others. On many occasions, you're asked to perform operations on these cloud resources at moments when you’re not using your work laptop. In some cases, you have a friend’s laptop, a smartphone, or another personal PC.</p>
+<p>This module explains what Azure Cloud Shell does, how it works, and when you should choose to use Cloud Shell as a solution to meet your organization's needs.</p>
+<h3>Learning objectives</h3>
+<p>In this module, you'll:</p>
+<p>- Describe Azure Cloud Shell and the functionality it provides.</p>
+<p>- Determine whether Cloud Shell meets the needs of your organization.</p>
+<p>- Recognize how to use Cloud Shell and persist files for multiple sessions.</p>
+<h2>Unit 1.1.2 - What is Azure Cloud Shell?</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/intro-to-azure-cloud-shell/2-what-is-azure-cloud-shell</p>
+<h3>What is Azure Cloud Shell?</h3>
+<p>Azure Cloud Shell is a command-line environment you can access through your web browser. You can use this environment to manage Azure resources, including VMs, storage, and networking. Just like you do when using the Azure CLI or Azure PowerShell.</p>
+<p>Because Microsoft manages Cloud Shell, you always have access to the most recent versions of the Azure CLI and PowerShell modules right from any browser. You don't have to worry about keeping modules up to date. With Cloud Shell, you just open your browser and sign in. Just like that, you have access to a command-line environment fully connected with your account's permissions and the resources to which you have access. All that works in an infrastructure that's compliant with double encryption at rest by default. You don't need to take any further action!</p>
+<p>Azure Cloud Shell also provides cloud storage to persist files such as SSH keys, scripts, and more. This functionality lets you access important files in between sessions and with different machines. Finally, you can use the Cloud Shell editor to make changes to files, such as scripts, that are saved into this cloud storage directly from the Cloud Shell interface.</p>
+<h2>Unit 1.1.3 - How does Azure Cloud Shell work?</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/intro-to-azure-cloud-shell/3-how-azure-cloud-shell-works</p>
+<h3>How does Azure Cloud Shell work?</h3>
+<p>As an IT admin for Contoso Corporation, you're frequently on-call to perform administrative tasks and resolve workload disruptions to resources in your organization's Azure subscriptions. When visiting a family member during a weekend that you're on call, the development team notifies you of a problem with an Azure virtual machine (VM). The VM became nonresponsive during scheduled maintenance for the upgrade of an application that runs on it. Because the developers weren't granted access to the underlying Azure virtual machine hosting infrastructure, they're only able to remotely access the VM when it's operating normally. So, you're being called to diagnose and remediate the problem.</p>
+<p>Since you're visiting family, you don’t have access to your administrative workstation and diagnostic scripts. You do have access to a laptop with an internet browser. Using the laptop, you browse to the Azure portal, authenticate against your organization’s Azure subscription, open Azure Cloud Shell, mount an Azure File Share, access your diagnostic scripts, and diagnose and remediate the problems with the VM, returning it to operation.</p>
+<h3>Access Cloud Shell</h3>
+<p>You have a few different options for accessing Azure Cloud Shell:</p>
+<p>- From a direct link: https://shell.azure.com</p>
+<p>From a direct link: https://shell.azure.com</p>
+<p>- From the Azure portal</p>
+<p>From the Azure portal</p>
+<p>- From code snippets when accessing Microsoft Learn:</p>
+<p>From code snippets when accessing Microsoft Learn:</p>
+<p>When you open a Cloud Shell session, a temporary host is allocated to your session. This VM is preconfigured with the latest versions of PowerShell and Bash. You can then select the command-line experience you want to use:</p>
+<p>After you select the shell experience you want to use, you can start managing your Azure resources:</p>
+<p>Cloud Shell sessions terminate after 20 minutes of inactivity. When a session terminates, files on your CloudDrive are persisted, but you need to start a new session to access the Cloud Shell environment.</p>
+<h3>Access your own scripts and files</h3>
+<p>When using Cloud Shell, you might also need to run scripts or use files for different actions. You can persist files on Cloud Shell by using the Azure CloudDrive:</p>
+<p>After uploading files, you can interact with them as you would in a regular PowerShell or Bash session:</p>
+<p>Now that your file resides on CloudDrive, you can close the session and open another session on a different device and still access the same file. Cloud Shell also lets you map an Azure Storage File Share, which is tied to a specific region. Access to an Azure File Share lets you work with the contents of that share through Cloud Shell.</p>
+<p>If you need to edit scripts hosted on the CloudDrive or File Share, you can use the Cloud Shell editor. Select the curly brackets {} icon on the browser and open the file you want to edit, or use the command code and specify the filename; for example:</p>
+<p>code</p>
+<p>code temp.txt</p>
+<p>Note</p>
+<p>The code command only works in the Classic mode in Cloud Shell. To enable Classic mode, select the More icon ( ... ), then select Settings &gt; Go to Classic version .</p>
+<p>code</p>
+<h3>Cloud Shell tools</h3>
+<p>If you need to manage resources (such as Docker containers or Kubernetes Clusters) or want to use non-Microsoft tools (such as Ansible and Terraform) in Cloud Shell, the Cloud Shell session comes with these add-ons already preconfigured.</p>
+<p>Here’s a list of all add-ons available to you within a Cloud Shell session:</p>
+<p>Category</p>
+<p>Name</p>
+<p>Linux tools</p>
+<p>bash zsh sh tmux dig</p>
+<p>Azure tools</p>
+<p>Azure CLI AzCopy Azure Functions CLI Service Fabric CLI Batch Shipyard blobxfer</p>
+<p>Text editors</p>
+<p>code (Cloud Shell editor) vim nano emacs</p>
+<p>Source control</p>
+<p>git</p>
+<p>Build tools</p>
+<p>make maven npm pip</p>
+<p>Containers</p>
+<p>Docker Machine Kubectl Helm DC/OS CLI</p>
+<p>Databases</p>
+<p>MySQL client PostgreSql client sqlcmd Utility mssql-scripter</p>
+<p>Other</p>
+<p>iPython Client Cloud Foundry CLI Terraform Ansible Chef InSpec Puppet Bolt HashiCorp Packer Office 365 CLI</p>
+<h2>Unit 1.1.4 - When should you use Azure Cloud Shell?</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/intro-to-azure-cloud-shell/4-when-to-use-azure-cloud-shell</p>
+<h3>When should you use Azure Cloud Shell?</h3>
+<p>As an IT Admin for Contoso Corporation, you need alternatives to interact with Azure resources from the command line even when not using your default administrative device.</p>
+<p>You can use Azure Cloud Shell to:</p>
+<p>- Open a secure command-line session from any browser-based device.</p>
+<p>- Interact with Azure resources without the need to install plug-ins or add-ons to your device.</p>
+<p>- Persist files between sessions for later use.</p>
+<p>- Use either Bash or PowerShell, whichever you prefer, to manage Azure resources.</p>
+<p>- Edit files (such as scripts) via the Cloud Shell editor.</p>
+<p>You shouldn't use Azure Cloud Shell if:</p>
+<p>- You intend to leave a session open for more than 20 minutes for long running scripts or activities. In these cases, your session is disconnected without warning, and the current state is lost.</p>
+<p>- You need admin permissions, such as sudo access, from within the Azure CLI or PowerShell environment.</p>
+<p>- You need to install tools that aren't supported in the limited Cloud Shell environment, but instead require an environment such as a custom virtual machine or container.</p>
+<p>- You need storage from different regions. You might need to back up and synchronize this content since only one region can have the storage allocated to Azure Cloud Shell.</p>
+<p>- You need to open multiple sessions at the same time. Azure Cloud Shell allows only one instance at time and isn't suitable for concurrent work across multiple subscriptions or tenants.</p>
+<h2>Unit 1.1.5 - Module assessment</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/intro-to-azure-cloud-shell/5-knowledge-check</p>
+<h3>Module assessment</h3>
+<h3>Check your knowledge</h3>
+<h2>Unit 1.1.6 - Summary</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/intro-to-azure-cloud-shell/6-summary</p>
+<h3>Summary</h3>
+<p>Azure Cloud Shell is a browser-accessible command-line experience for managing Azure resources. Rather than having to configure an Azure CLI or PowerShell session from your workstation, you can access Cloud Shell on any standard, compliant browser.</p>
+<p>Cloud Shell provides the flexibility of choosing the shell experience that best suits the way you work, allowing you to work either in Bash or PowerShell, right from the browser. Cloud Shell also provides you with the mechanisms to persist files between sessions, and provides access to a minimalist version of the Visual Studio Code editor for more complex operations.</p>
+<h3>Learn more</h3>
+<p>Check out these articles to learn more about Azure Cloud Shell.</p>
+<p>Azure Cloud Shell Overview</p>
+<p>Azure Cloud Shell – Browser-Based Command Line</p></body>
+</html>

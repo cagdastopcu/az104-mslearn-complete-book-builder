@@ -1,0 +1,285 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" epub:prefix="z3998: http://www.daisy.org/z3998/2012/vocab/structure/#" lang="en" xml:lang="en">
+  <head>
+    <title>LP 4 M2 - Configure Azure Blob Storage</title>
+    <link href="style/main.css" rel="stylesheet" type="text/css"/>
+  </head>
+  <body><h1>LP 4 M2 - Configure Azure Blob Storage</h1>
+<p>https://learn.microsoft.com/en-us/training/modules/configure-blob-storage/?WT.mc_id=api_CatalogApi</p>
+<h2>Unit 4.2.1 - Introduction</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/configure-blob-storage/1-introduction</p>
+<h3>Introduction</h3>
+<p>Azure Blob Storage is an AI-ready service for storing large amounts of unstructured object data. Unstructured data is data that doesn't adhere to a particular data model or definition, such as text or binary data.</p>
+<p>In this module, your media company has an extensive library of video clips that are accessed thousands of times a day. The company relies on you to configure Blob Storage for the video data. You plan to use access tiers to reduce cost and improve performance. You're developing a lifecycle management strategy for the older videos. Your plan also includes configuring object replication for failover.</p>
+<h3>Learning objectives</h3>
+<p>In this module, you will:</p>
+<p>- Understand the purpose and benefits of Azure Blob Storage.</p>
+<p>- Create and configure Azure Blob Storage accounts.</p>
+<p>- Manage containers and blobs within Azure Blob Storage.</p>
+<p>- Optimize blob storage performance and scalability.</p>
+<p>- Implement lifecycle management policies to automate data movement and deletion.</p>
+<p>- Determine the best pricing plans for your Azure Blob Storage.</p>
+<h3>Skills measured</h3>
+<p>The content in the module helps you prepare for Exam AZ-104: Microsoft Azure Administrator .</p>
+<h3>Prerequisites</h3>
+<p>Here are some common prerequisites that can be beneficial for understanding and successfully completing this module.</p>
+<p>- Basic understanding of cloud computing: Familiarity with cloud computing concepts, such as virtualization, scalability, and pay-as-you-go pricing models, can provide a foundation for understanding how Azure Blob Storage fits into the broader cloud ecosystem.</p>
+<p>Basic understanding of cloud computing: Familiarity with cloud computing concepts, such as virtualization, scalability, and pay-as-you-go pricing models, can provide a foundation for understanding how Azure Blob Storage fits into the broader cloud ecosystem.</p>
+<p>- Knowledge of Azure fundamentals: Having a basic understanding of Microsoft Azure services and concepts, such as Azure Resource Manager, Azure Storage Accounts, and Azure Virtual Networks, can help you navigate and configure blob storage effectively.</p>
+<p>Knowledge of Azure fundamentals: Having a basic understanding of Microsoft Azure services and concepts, such as Azure Resource Manager, Azure Storage Accounts, and Azure Virtual Networks, can help you navigate and configure blob storage effectively.</p>
+<p>- Understand fundamental storage concepts like file systems, directories, files, and data replication can be beneficial when working with blob storage.</p>
+<p>Understand fundamental storage concepts like file systems, directories, files, and data replication can be beneficial when working with blob storage.</p>
+<p>- Experience with Azure portal or Azure CLI: Familiarity with the Azure portal (web-based management interface) or Azure CLI (command-line interface) can help you navigate and configure blob storage resources efficiently.</p>
+<p>Experience with Azure portal or Azure CLI: Familiarity with the Azure portal (web-based management interface) or Azure CLI (command-line interface) can help you navigate and configure blob storage resources efficiently.</p>
+<p>- Basic programming or scripting skills: While not always required, having some knowledge of programming or scripting languages like PowerShell or Python can be advantageous when automating blob storage configuration tasks.</p>
+<p>Basic programming or scripting skills: While not always required, having some knowledge of programming or scripting languages like PowerShell or Python can be advantageous when automating blob storage configuration tasks.</p>
+<h2>Unit 4.2.2 - Implement Azure Blob Storage</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/configure-blob-storage/2-implement</p>
+<h3>Implement Azure Blob Storage</h3>
+<p>Azure Blob Storage is a service that stores unstructured data in the cloud as objects or blobs. Blob stands for Binary Large Object. Blob Storage is also referred to as object storage or container storage .</p>
+<h4>Things to know about Azure Blob Storage</h4>
+<p>Let's examine some configuration characteristics of Blob Storage.</p>
+<p>- Blob Storage can store any type of text or binary data. Some examples are text documents, images, video files, and application installers.</p>
+<p>Blob Storage can store any type of text or binary data. Some examples are text documents, images, video files, and application installers.</p>
+<p>- Blob Storage uses three resources to store and manage your data: An Azure storage account Containers in an Azure storage account Blobs in a container</p>
+<p>Blob Storage uses three resources to store and manage your data:</p>
+<p>- An Azure storage account</p>
+<p>- Containers in an Azure storage account</p>
+<p>- Blobs in a container</p>
+<p>- To implement Blob Storage, you configure several settings: Blob container options. Blob types and upload options. Blob Storage access tiers. Blob lifecycle rules. Blob object replication options.</p>
+<p>To implement Blob Storage, you configure several settings:</p>
+<p>- Blob container options.</p>
+<p>- Blob types and upload options.</p>
+<p>- Blob Storage access tiers.</p>
+<p>- Blob lifecycle rules.</p>
+<p>- Blob object replication options.</p>
+<h4>Things to consider when implementing Azure Blob Storage</h4>
+<p>There are many common uses for Blob Storage. Consider the following scenarios and think about your own data needs:</p>
+<p>- Consider browser uploads . Use Blob Storage to serve images or documents directly to a browser.</p>
+<p>Consider browser uploads . Use Blob Storage to serve images or documents directly to a browser.</p>
+<p>- Consider distributed access . Blob Storage can store files for distributed access, such as during an installation process.</p>
+<p>Consider distributed access . Blob Storage can store files for distributed access, such as during an installation process.</p>
+<p>- Consider streaming data . Stream video and audio by using Blob Storage.</p>
+<p>Consider streaming data . Stream video and audio by using Blob Storage.</p>
+<p>- Consider archiving and recovery . Blob Storage is a great solution for storing data for backup and restore, disaster recovery, and archiving.</p>
+<p>Consider archiving and recovery . Blob Storage is a great solution for storing data for backup and restore, disaster recovery, and archiving.</p>
+<p>- Consider application access . You can store data in Blob Storage for analysis by an on-premises or Azure-hosted service.</p>
+<p>Consider application access . You can store data in Blob Storage for analysis by an on-premises or Azure-hosted service.</p>
+<h2>Unit 4.2.3 - Create blob containers</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/configure-blob-storage/3-create-blob-containers</p>
+<h3>Create blob containers</h3>
+<p>Azure Blob Storage uses a container resource to group a set of blobs. A blob can't exist by itself in Blob Storage. A blob must be stored in a container resource.</p>
+<h4>Things to know about containers and blobs</h4>
+<p>Let's look at the configuration characteristics of containers and blobs.</p>
+<p>- All blobs must be in a container.</p>
+<p>All blobs must be in a container.</p>
+<p>- Containers organize your blob storage.</p>
+<p>Containers organize your blob storage.</p>
+<p>- A container can store an unlimited number of blobs.</p>
+<p>A container can store an unlimited number of blobs.</p>
+<p>- An Azure storage account can contain an unlimited number of containers.</p>
+<p>An Azure storage account can contain an unlimited number of containers.</p>
+<p>- You must create a storage container before you can begin to upload data.</p>
+<p>You must create a storage container before you can begin to upload data.</p>
+<h4>Configure a container</h4>
+<p>In the Azure portal, you configure settings to create a container for an Azure storage account. As you review these details, consider how you might organize containers in your storage account.</p>
+<p>- Name : Enter a name for your container. The name must be unique within the Azure storage account. The name can contain only lowercase letters, numbers, and hyphens. The name must begin with a letter or a number. The minimum length for the name is three characters. The maximum length for the name is 63 characters.</p>
+<p>Name : Enter a name for your container. The name must be unique within the Azure storage account.</p>
+<p>- The name can contain only lowercase letters, numbers, and hyphens.</p>
+<p>- The name must begin with a letter or a number.</p>
+<p>- The minimum length for the name is three characters.</p>
+<p>- The maximum length for the name is 63 characters.</p>
+<p>- Public access level : The access level specifies whether the container and its blobs can be accessed publicly. By default, container data is private and visible only to the account owner. There are three access level choices: Private : (Default) Prohibit anonymous access to the container and blobs. Blob : Allow anonymous public read access for the blobs only. Container : Allow anonymous public read and list access to the entire container, including the blobs.</p>
+<p>Public access level : The access level specifies whether the container and its blobs can be accessed publicly. By default, container data is private and visible only to the account owner. There are three access level choices:</p>
+<p>- Private : (Default) Prohibit anonymous access to the container and blobs.</p>
+<p>- Blob : Allow anonymous public read access for the blobs only.</p>
+<p>- Container : Allow anonymous public read and list access to the entire container, including the blobs.</p>
+<p>Important</p>
+<p>The Blob and Container access levels have no effect unless the storage account's Allow Blob anonymous access setting is enabled. When disabled, all containers remain private regardless of their individual access level settings. Microsoft recommends keeping anonymous access disabled at the account level unless serving public content scenarios.</p>
+<h2>Unit 4.2.4 - Assign blob access tiers</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/configure-blob-storage/4-create-blob-access-tiers</p>
+<h3>Assign blob access tiers</h3>
+<p>Azure Storage supports several access tiers for blob data. These tiers include Hot, Cool, Cold, and Archive. Each access tier is optimized to support a particular pattern of data usage.</p>
+<h4>Things to know about blob access tiers</h4>
+<p>Let's examine characteristics of the blob access tiers.</p>
+<h4>Hot tier</h4>
+<p>The Hot tier is optimized for frequent reads and writes of objects in the Azure storage account. A good usage case is data that is actively being processed. The hot tier has the highest storage costs, but the lowest access costs.</p>
+<h4>Cool tier</h4>
+<p>The Cool tier is optimized for storing large amounts of infrequently accessed data. This tier is intended for data that remains in the Cool tier for at least 30 days. A usage case for the Cool tier is short-term backup and disaster recovery datasets and older media content. This content shouldn't be viewed frequently, but it needs to be immediately available. Storing data in the Cool tier is more cost-effective. The cool tier has lower storage costs and higher access costs compared to the hot tier.</p>
+<h4>Cold tier</h4>
+<p>The Cold tier is also optimized for storing large amounts of infrequently accessed data. This tier is intended for data that can remain in the tier for at least 90 days. The cold tier has lower storage costs and higher access costs compared to the cool tier.</p>
+<h4>Archive tier</h4>
+<p>The Archive tier is an offline tier that's optimized for data that can tolerate several hours of retrieval latency. Data must remain in the Archive tier for at least 180 days or be subject to an early deletion charge. Data for the Archive tier includes secondary backups, original raw data, and legally required compliance information. This tier is the most cost-effective option for storing data. Accessing data is more expensive in the Archive tier than accessing data in the other tiers.</p>
+<p>To access the blob's content, you can rehydrate it to the hot, cool, or cold tier using two methods: Copy Blob (recommended - creates a new blob in an online tier) or Set Blob Tier (changes tier in place). Both methods support Standard priority (up to 15 hours) or High priority (within 1 hour for objects under 10 GB, at higher cost). Use High priority for urgent data retrieval in disaster recovery scenarios.</p>
+<h4>Compare access tiers</h4>
+<p>The access options for Azure Blob Storage offer a range of features and support levels to help you optimize your storage costs. As you compare the features and support, think about which access options can best support your application needs.</p>
+<p>Comparison</p>
+<p>Hot access tier</p>
+<p>Cool access tier</p>
+<p>Cold access tier</p>
+<p>Archive access tier</p>
+<p>Availability</p>
+<p>99.9%</p>
+<p>99%</p>
+<p>Availability (RA-GRS reads)</p>
+<p>99.99%</p>
+<p>99.9%</p>
+<p>Latency (time to first byte)</p>
+<p>milliseconds</p>
+<p>hours</p>
+<p>Minimum storage duration</p>
+<p>N/A</p>
+<p>30 days</p>
+<p>90 days</p>
+<p>180 days</p>
+<h2>Unit 4.2.5 - Add blob lifecycle management rules</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/configure-blob-storage/5-add-blob-lifecycle-management-rules</p>
+<h3>Add blob lifecycle management rules</h3>
+<p>Every data set has a unique lifecycle. Early in the lifecycle, users tend to access some of the data in the set, but not all of the data. As the data set ages, access to all of the data in the set tends to dramatically reduce. Some data set stays idle in the cloud and is rarely accessed. Some data expires within a few days or months after creation. Other data is actively read and modified throughout the data set lifetime.</p>
+<p>Azure Blob Storage supports lifecycle management for data sets. It offers a rich rule-based policy for GPv2 accounts and Premium block blob accounts. Legacy Blob Storage accounts are also supported, but GPv2 is recommended for new deployments. You can use lifecycle policy rules to transition your data to the appropriate access tiers, and set expiration times for the end of a data set's lifecycle.</p>
+<h4>Things to know about lifecycle management</h4>
+<p>You can use Azure Blob Storage lifecycle management policy rules to accomplish several tasks.</p>
+<p>- Transition blobs to a cooler storage tier (Hot to Cool, Hot to Cold, Hot to Archive, Cool to Cold, Cool to Archive, Cold to Archive) to optimize for performance and cost.</p>
+<p>Transition blobs to a cooler storage tier (Hot to Cool, Hot to Cold, Hot to Archive, Cool to Cold, Cool to Archive, Cold to Archive) to optimize for performance and cost.</p>
+<p>- Delete current versions of a blob, previous versions of a blob, or blob snapshots at the end of their lifecycles.</p>
+<p>Delete current versions of a blob, previous versions of a blob, or blob snapshots at the end of their lifecycles.</p>
+<p>- Automatically transition blobs from Cool back to Hot when accessed. This setting optimizes for unpredictable access patterns without early deletion charges.</p>
+<p>Automatically transition blobs from Cool back to Hot when accessed. This setting optimizes for unpredictable access patterns without early deletion charges.</p>
+<p>- Apply rules to an entire storage account, to select containers, or to a subset of blobs using name prefixes or blob index tags as filters.</p>
+<p>Apply rules to an entire storage account, to select containers, or to a subset of blobs using name prefixes or blob index tags as filters.</p>
+<h4>Business scenario</h4>
+<p>Consider a scenario where data is frequently accessed in the early stages of the lifecycle, but only occasionally after two weeks. After the first month, the data set is rarely accessed. In this scenario, the Hot tier of Blob Storage is best during the early stages. Cool tier storage is most appropriate for occasional access. Archive tier storage is the best option after the data ages over a month. To achieve this transition, lifecycle management policy rules are available to move aging data to cooler tiers.</p>
+<h4>Configure lifecycle management policy rules</h4>
+<p>In the Azure portal, you create lifecycle management policy rules for your Azure storage account by specifying several settings. For each rule, you create If - Then block conditions to transition or expire data based on your specifications. As you review these details, consider how you can set up lifecycle management policy rules for your data sets.</p>
+<p>- If : The If clause sets the evaluation clause for the policy rule. When the If clause evaluates to true, the Then clause is executed. Use the If clause to set the time period to apply to the blob data. The lifecycle management feature checks if the data is accessed or modified according to the specified time. More than (days ago) : The number of days to use in the evaluation condition.</p>
+<p>If : The If clause sets the evaluation clause for the policy rule. When the If clause evaluates to true, the Then clause is executed. Use the If clause to set the time period to apply to the blob data. The lifecycle management feature checks if the data is accessed or modified according to the specified time.</p>
+<p>- More than (days ago) : The number of days to use in the evaluation condition.</p>
+<p>- Then : The Then clause sets the action clause for the policy rule. When the If clause evaluates to true, the Then clause is executed. Use the Then clause to set the transition action for the blob data. The lifecycle management feature transitions the data based on the setting. Move to cool storage : The blob data is transitioned to Cool tier storage. Move to cold storage : The blob data is transitioned to Cold tier storage. Move to archive storage : The blob data is transitioned to Archive tier storage. Delete the blob : The blob data is deleted.</p>
+<p>Then : The Then clause sets the action clause for the policy rule. When the If clause evaluates to true, the Then clause is executed. Use the Then clause to set the transition action for the blob data. The lifecycle management feature transitions the data based on the setting.</p>
+<p>- Move to cool storage : The blob data is transitioned to Cool tier storage.</p>
+<p>- Move to cold storage : The blob data is transitioned to Cold tier storage.</p>
+<p>- Move to archive storage : The blob data is transitioned to Archive tier storage.</p>
+<p>- Delete the blob : The blob data is deleted.</p>
+<p>By designing policy rules to adjust storage tiers in respect to the age of data, you can design the least expensive storage options for your needs.</p>
+<p>Tip</p>
+<p>Expand your knowledge in the Manage the Azure Blob storage lifecycle training module.</p>
+<h2>Unit 4.2.6 - Determine blob object replication</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/configure-blob-storage/6-determine-blob-object-replication</p>
+<h3>Determine blob object replication</h3>
+<p>Object replication copies blobs in a container asynchronously according to policy rules that you configure.</p>
+<p>Replication includes the blob content, metadata properties, and versions. The following illustration shows an example of asynchronous replication of blob containers between regions.</p>
+<h4>Things to know about blob object replication</h4>
+<p>There are several considerations to keep in mind when planning your configuration for blob object replication.</p>
+<p>- Object replication requires that Blob versioning is enabled on both the source and destination accounts. When blob versioning is enabled, you can access earlier versions of a blob. This access lets you recover your modified or deleted data.</p>
+<p>Object replication requires that Blob versioning is enabled on both the source and destination accounts. When blob versioning is enabled, you can access earlier versions of a blob. This access lets you recover your modified or deleted data.</p>
+<p>- Object replication doesn't support blob snapshots. Any snapshots on a blob in the source account aren't replicated to the destination account.</p>
+<p>Object replication doesn't support blob snapshots. Any snapshots on a blob in the source account aren't replicated to the destination account.</p>
+<p>- Object replication is supported when the source and destination accounts are in the Hot, Cool, or Cold tier. The source and destination accounts can be in different tiers.</p>
+<p>Object replication is supported when the source and destination accounts are in the Hot, Cool, or Cold tier. The source and destination accounts can be in different tiers.</p>
+<p>- When you configure object replication, you create a replication policy that specifies the source Azure storage account and the destination storage account.</p>
+<p>When you configure object replication, you create a replication policy that specifies the source Azure storage account and the destination storage account.</p>
+<p>- A replication policy includes one or more rules that specify a source container and a destination container. The policy identifies the blobs in the source container to replicate.</p>
+<p>A replication policy includes one or more rules that specify a source container and a destination container. The policy identifies the blobs in the source container to replicate.</p>
+<h4>Things to consider when configuring blob object replication</h4>
+<p>There are many benefits to using blob object replication. Consider the following scenarios and think about how replication can be a part of your Blob Storage strategy.</p>
+<p>- Consider latency reductions . Minimize latency with blob object replication. You can reduce latency for read requests by enabling clients to consume data from a region that's in closer physical proximity.</p>
+<p>Consider latency reductions . Minimize latency with blob object replication. You can reduce latency for read requests by enabling clients to consume data from a region that's in closer physical proximity.</p>
+<p>- Consider efficiency for compute workloads . Improve efficiency for compute workloads by using blob object replication. With object replication, compute workloads can process the same sets of blobs in different regions.</p>
+<p>Consider efficiency for compute workloads . Improve efficiency for compute workloads by using blob object replication. With object replication, compute workloads can process the same sets of blobs in different regions.</p>
+<p>- Consider data distribution . Optimize your configuration for data distribution. You can process or analyze data in a single location and then replicate only the results to other regions.</p>
+<p>Consider data distribution . Optimize your configuration for data distribution. You can process or analyze data in a single location and then replicate only the results to other regions.</p>
+<p>- Consider costs benefits . Manage your configuration and optimize your storage policies. After your data is replicated, you can reduce costs by moving the data to the Archive tier by using lifecycle management policies.</p>
+<p>Consider costs benefits . Manage your configuration and optimize your storage policies. After your data is replicated, you can reduce costs by moving the data to the Archive tier by using lifecycle management policies.</p>
+<h2>Unit 4.2.7 - Manage blobs</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/configure-blob-storage/7-upload-blobs</p>
+<h3>Manage blobs</h3>
+<p>A blob can be any type of data and any size file. Azure Storage offers three types of blobs: block blob , page blob , and append blob .</p>
+<h4>Things to know about blob types</h4>
+<p>Let's take a closer look at the characteristics of blob types.</p>
+<p>- Block blobs . A block blob consists of blocks of data that are assembled to make a blob. Most Blob Storage scenarios use block blobs. Block blobs are ideal for storing text and binary data in the cloud, like files, images, and videos. The block blob type is the default type for a new blob. When you're creating a new blob, if you don't choose a specific type, the new blob is created as a block blob.</p>
+<p>Block blobs . A block blob consists of blocks of data that are assembled to make a blob. Most Blob Storage scenarios use block blobs. Block blobs are ideal for storing text and binary data in the cloud, like files, images, and videos. The block blob type is the default type for a new blob. When you're creating a new blob, if you don't choose a specific type, the new blob is created as a block blob.</p>
+<p>- Append blobs . An append blob is similar to a block blob because the append blob also consists of blocks of data. The blocks of data in an append blob are optimized for append operations. Append blobs are useful for logging scenarios, where the amount of data can increase as the logging operation continues.</p>
+<p>Append blobs . An append blob is similar to a block blob because the append blob also consists of blocks of data. The blocks of data in an append blob are optimized for append operations. Append blobs are useful for logging scenarios, where the amount of data can increase as the logging operation continues.</p>
+<p>- Page blobs . A page blob can be up to 8 TB in size. Page blobs are more efficient for frequent read/write operations. Azure Virtual Machines uses page blobs for operating system disks and data disks.</p>
+<p>Page blobs . A page blob can be up to 8 TB in size. Page blobs are more efficient for frequent read/write operations. Azure Virtual Machines uses page blobs for operating system disks and data disks.</p>
+<p>Note</p>
+<p>After you create a blob, you can't change its type.</p>
+<h4>Things to consider when managing blob storage</h4>
+<p>You can use the portal to upload and manage blobs. This option is good for a few files. After you identify the files to upload, you choose the blob type and block size, and the container folder. You also set the access tier and the encryption scope.</p>
+<p>For larger numbers of files, it's best to use a tool. Review the following options and consider which tools would suit your configuration needs.</p>
+<p>- Azure Storage Explorer . Upload, download, and manage blobs, files, queues, and tables, as well as Azure Data Lake Storage entities and managed disks. You can also view, edit, and manage resources, preview data, and configure storage permissions and access controls.</p>
+<p>- AzCopy . An easy-to-use command-line tool for Windows and Linux. You can copy data to and from Blob Storage, across containers, and across storage accounts.</p>
+<p>AzCopy . An easy-to-use command-line tool for Windows and Linux. You can copy data to and from Blob Storage, across containers, and across storage accounts.</p>
+<p>- Azure Data Box Disk . A service for transferring on-premises data to Blob Storage when large datasets or network constraints make uploading data over the wire unrealistic. You can use Azure Data Box Disk to request solid-state disks (SSDs) from Microsoft. You can copy your data to those disks and ship them back to Microsoft to be uploaded into Blob Storage.</p>
+<p>Azure Data Box Disk . A service for transferring on-premises data to Blob Storage when large datasets or network constraints make uploading data over the wire unrealistic. You can use Azure Data Box Disk to request solid-state disks (SSDs) from Microsoft. You can copy your data to those disks and ship them back to Microsoft to be uploaded into Blob Storage.</p>
+<h2>Unit 4.2.8 - Determine Blob Storage pricing</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/configure-blob-storage/8-determine-storage-pricing</p>
+<h3>Determine Blob Storage pricing</h3>
+<p>Understanding your access patterns and correlating them with your durability and availability needs helps you to best manage your Azure Blob Storage costs. The primary tool for estimating these costs is the Azure pricing calculator. The pricing tool can calculate migration, monthly estimates, and future pricing estimates based on the workload-driven input that you specify. In general, the cost of block blob storage depends on:</p>
+<p>- Volume of data stored per month.</p>
+<p>- Quantity and types of operations performed, along with any data transfer costs.</p>
+<p>- Data redundancy option selected.</p>
+<p>You can use the Azure Pricing Calculator to estimate your storage costs.</p>
+<h4>Things to know about pricing for Blob Storage</h4>
+<p>Review the following billing considerations for an Azure storage account and Blob Storage.</p>
+<p>- Performance tiers . The Blob Storage tier determines the amount of data stored and the cost for storing that data. As the performance tier gets cooler, the per-gigabyte cost decreases.</p>
+<p>Performance tiers . The Blob Storage tier determines the amount of data stored and the cost for storing that data. As the performance tier gets cooler, the per-gigabyte cost decreases.</p>
+<p>- Data access costs . Data access charges increase as the tier gets cooler. For data in the Cool, Cold, and Archive tiers, you're billed a per-gigabyte data access charge for read actions.</p>
+<p>Data access costs . Data access charges increase as the tier gets cooler. For data in the Cool, Cold, and Archive tiers, you're billed a per-gigabyte data access charge for read actions.</p>
+<p>- Transaction costs . There's a per-transaction charge for all tiers. The charge increases as the tier gets cooler.</p>
+<p>Transaction costs . There's a per-transaction charge for all tiers. The charge increases as the tier gets cooler.</p>
+<p>- Geo-replication data transfer costs . This charge only applies to accounts that have geo-replication configured. Geo-replication data transfer incurs a per-gigabyte charge.</p>
+<p>Geo-replication data transfer costs . This charge only applies to accounts that have geo-replication configured. Geo-replication data transfer incurs a per-gigabyte charge.</p>
+<p>- Outbound data transfer costs . Outbound data transfers incur billing for bandwidth usage on a per-gigabyte basis. This billing is consistent with general-purpose Azure storage accounts.</p>
+<p>Outbound data transfer costs . Outbound data transfers incur billing for bandwidth usage on a per-gigabyte basis. This billing is consistent with general-purpose Azure storage accounts.</p>
+<p>- Changes to the storage tier . If you change the account storage tier from Cool to Hot, you incur a charge equal to reading all the data existing in the storage account. Changing the account storage tier from Hot to Cool incurs a charge equal to writing all the data into the Cool tier (GPv2 accounts only).</p>
+<p>Changes to the storage tier . If you change the account storage tier from Cool to Hot, you incur a charge equal to reading all the data existing in the storage account. Changing the account storage tier from Hot to Cool incurs a charge equal to writing all the data into the Cool tier (GPv2 accounts only).</p>
+<h2>Unit 4.2.9 - Exercise - Provide storage for the public website</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/configure-blob-storage/9-simulation-blobs</p>
+<h3>Exercise - Provide storage for the public website</h3>
+<h3>Exercise scenario</h3>
+<p>The company website supplies product images, videos, marketing literature, and customer success stories. Customers are located worldwide and demand is rapidly expanding. The content is mission-critical and requires low latency load times. It’s important to keep track of the document versions and to quickly restore documents if they’re deleted.</p>
+<h3>Job skills</h3>
+<p>- Create a storage account with high availability.</p>
+<p>- Ensure the storage account has anonymous public access.</p>
+<p>- Create a blob storage container for the website documents.</p>
+<p>- Enable soft delete so files can be easily restored.</p>
+<p>- Enable blob versioning.</p>
+<p>Note</p>
+<p>Estimated time: 30 minutes.</p>
+<p>To complete this exercise, you need an Azure subscription .</p>
+<p>Launch the exercise, and follow the instructions. When finished, be sure to return to this page so you can continue learning.</p>
+<h2>Unit 4.2.10 - Module assessment</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/configure-blob-storage/10-knowledge-check</p>
+<h3>Module assessment</h3>
+<p>Your organization has an extensive video library. Users access the library thousands of times a day. You're configuring Azure Blob Storage for the video data. The admin team asks for guidance about the supported access tiers and object replication for failover. The executive team wants an implementation that can help reduce cost and improve performance.</p>
+<h4>Answer the following questions</h4>
+<p>Choose the best response for each question.</p>
+<h2>Unit 4.2.11 - Summary and resources</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/configure-blob-storage/11-summary-resources</p>
+<h3>Summary and resources</h3>
+<p>In this module, you learned about Azure Blob Storage and how to configure it. You discovered that Blob Storage is Microsoft's object storage solution for the cloud. You learned Azure blob storage is optimized for storing massive amounts of unstructured data like text or binary files. You explored the features of Blob Storage and its use cases. You also learned how to configure Blob Storage, including choosing the appropriate access tiers to reduce cost and improve performance. And, you learned about creating a lifecycle management strategy, and configuring object replication for failover.</p>
+<p>The main takeaways from this module are:</p>
+<p>- Azure Blob Storage is a powerful solution for storing unstructured data in the cloud, such as text documents, images, and videos.</p>
+<p>- Blob Storage offers different access tiers (Hot, Cool, Cold, and Archive) to optimize performance and cost based on the usage patterns of your data.</p>
+<p>- You can configure lifecycle management policies to automatically transition data between access tiers and set expiration times for data.</p>
+<p>- Object replication allows you to asynchronously copy blobs between containers in different regions, providing redundancy and reducing latency for read requests.</p>
+<h3>Learn more with Copilot</h3>
+<p>Copilot can assist you in configuring Azure infrastructure solutions. Copilot can compare, recommend, explain, and research products and services where you need more information. Open a Microsoft Edge browser and choose Copilot (top right) or navigate to copilot.microsoft.com. Take a few minutes to try these prompts and extend your learning with Copilot.</p>
+<p>- What are common administration tasks associated with Azure blob storage?</p>
+<p>What are common administration tasks associated with Azure blob storage?</p>
+<p>- How is Azure blob storage priced?</p>
+<p>How is Azure blob storage priced?</p>
+<h3>Learn more with Azure documentation</h3>
+<p>- Azure Blob Storage documentation - Microsoft Azure's official documentation provides comprehensive information on configuring and managing blob storage. You can find detailed guides, tutorials, and examples to help you navigate through different aspects of blob storage configuration.</p>
+<p>Azure Blob Storage documentation - Microsoft Azure's official documentation provides comprehensive information on configuring and managing blob storage. You can find detailed guides, tutorials, and examples to help you navigate through different aspects of blob storage configuration.</p>
+<p>- Azure Blob Storage Concepts - This article provides an overview of the key concepts related to Azure Blob Storage, including storage accounts, containers, and blobs. It explains how to create and manage these entities and covers various configuration options.</p>
+<p>Azure Blob Storage Concepts - This article provides an overview of the key concepts related to Azure Blob Storage, including storage accounts, containers, and blobs. It explains how to create and manage these entities and covers various configuration options.</p>
+<p>- Azure Blob Storage Security - Understanding the security aspects of blob storage is crucial for proper configuration. This article explores authentication, authorization, and encryption options available in Azure Blob Storage. It also covers best practices for securing your blob storage resources.</p>
+<p>Azure Blob Storage Security - Understanding the security aspects of blob storage is crucial for proper configuration. This article explores authentication, authorization, and encryption options available in Azure Blob Storage. It also covers best practices for securing your blob storage resources.</p>
+<p>- Azure Blob Storage Performance and Scalability - This article delves into performance considerations when configuring blob storage. The module covers the storage account type, and optimizing data transfer.</p>
+<p>Azure Blob Storage Performance and Scalability - This article delves into performance considerations when configuring blob storage. The module covers the storage account type, and optimizing data transfer.</p>
+<p>- Azure Blob Storage Lifecycle Management - Blob storage lifecycle management allows you to automate the movement and deletion of data based on predefined rules. This article explains how to configure and manage lifecycle policies to optimize storage costs and improve data management.</p>
+<p>Azure Blob Storage Lifecycle Management - Blob storage lifecycle management allows you to automate the movement and deletion of data based on predefined rules. This article explains how to configure and manage lifecycle policies to optimize storage costs and improve data management.</p></body>
+</html>

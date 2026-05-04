@@ -1,0 +1,268 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" epub:prefix="z3998: http://www.daisy.org/z3998/2012/vocab/structure/#" lang="en" xml:lang="en">
+  <head>
+    <title>LP 3 M1 - Configure virtual networks</title>
+    <link href="style/main.css" rel="stylesheet" type="text/css"/>
+  </head>
+  <body><h1>LP 3 M1 - Configure virtual networks</h1>
+<p>https://learn.microsoft.com/en-us/training/modules/configure-virtual-networks/?WT.mc_id=api_CatalogApi</p>
+<h2>Unit 3.1.1 - Introduction</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/configure-virtual-networks/1-introduction</p>
+<h3>Introduction</h3>
+<p>Azure virtual networks are an essential component for creating private networks in Azure. They allow different Azure resources to securely communicate with each other, the internet, and on-premises networks.</p>
+<p>Suppose you work for a company in the healthcare industry. Your company is looking to migrate their on-premises infrastructure to Azure. They want to ensure secure communication between their resources in Azure and their on-premises network. The company is also concerned about scalability and availability. By using Azure virtual networks, they can create a private network in Azure and securely connect their resources.</p>
+<p>The topics covered in this module include subnetting, creating virtual networks, and using private and public IP addresses. You also learn about the different scenarios where virtual networks can be used. These scenarios include creating a dedicated private cloud-only network or extending a data center securely. The module provides a detailed explanation of subnets and their benefits, and how to plan IP addressing for Azure resources.</p>
+<p>By the end of this module, you have a clear understanding of how to create and configure AI-ready virtual networks in Azure. You're able to effectively use subnets, assign IP addresses, and ensure secure communication between your Azure resources and on-premises network.</p>
+<h3>Learning objectives</h3>
+<p>In this module, you learn how to:</p>
+<p>- Describe Azure virtual network features and components.</p>
+<p>- Identify features and usage cases for subnets and subnetting.</p>
+<p>- Identify usage cases for private and public IP addresses.</p>
+<p>- Create a virtual network and assign an IP address.</p>
+<h3>Skills measured</h3>
+<p>The content in the module helps you prepare for Exam AZ-104: Microsoft Azure Administrator .</p>
+<h3>Prerequisites</h3>
+<p>- Basic knowledge of virtual networking in cloud environments.</p>
+<p>- Familiarity with IP address formats and subnetting.</p>
+<h2>Unit 3.1.2 - Plan virtual networks</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/configure-virtual-networks/2-plan-virtual-networks</p>
+<h3>Plan virtual networks</h3>
+<p>A major incentive for adopting cloud solutions like Azure is to enable information technology departments to transition server resources to the cloud. Moving resources to the cloud can save money and simplify administrative operations. Relocating resources removes the need to maintain expensive datacenters with uninterruptible power supplies, generators, multiple fail-safes, or clustered database servers. For small and medium-sized companies, which might not have the expertise to maintain their own robust infrastructure, moving to the cloud is particularly appealing.</p>
+<h4>Things to know about Azure virtual networks</h4>
+<p>You can implement Azure Virtual Network to create a virtual representation of your network in the cloud. With some planning , you can deploy virtual networks and connect the resources you need more effectively. Let's examine some characteristics of virtual networks in Azure.</p>
+<p>- An Azure virtual network is a logical isolation of the Azure cloud resources.</p>
+<p>An Azure virtual network is a logical isolation of the Azure cloud resources.</p>
+<p>- You can use virtual networks to provision and manage virtual private networks (VPNs) in Azure.</p>
+<p>You can use virtual networks to provision and manage virtual private networks (VPNs) in Azure.</p>
+<p>- Each virtual network has its own Classless Inter-Domain Routing (CIDR) block and can be linked to other virtual networks and on-premises networks.</p>
+<p>Each virtual network has its own Classless Inter-Domain Routing (CIDR) block and can be linked to other virtual networks and on-premises networks.</p>
+<p>- You can link virtual networks with an on-premises IT infrastructure to create hybrid or cross-premises solutions, when the CIDR blocks of the connecting networks don't overlap.</p>
+<p>You can link virtual networks with an on-premises IT infrastructure to create hybrid or cross-premises solutions, when the CIDR blocks of the connecting networks don't overlap.</p>
+<p>- You control the DNS server settings for virtual networks, and segmentation of the virtual network into subnets.</p>
+<p>You control the DNS server settings for virtual networks, and segmentation of the virtual network into subnets.</p>
+<p>The next illustration depicts a virtual network that has a subnet containing two virtual machines. The virtual network has connections to an on-premises infrastructure and a separate virtual network.</p>
+<h4>Things to consider when using virtual networks</h4>
+<p>Virtual networks can be used in many ways. As you think about the configuration plan for your virtual networks and subnets, consider the following scenarios.</p>
+<p>Scenario</p>
+<p>Description</p>
+<p>Create a dedicated private cloud-only virtual network</p>
+<p>Sometimes you don't require a cross-premises configuration for your solution. When you create a virtual network, your services and virtual machines within your virtual network can communicate directly and securely with each other in the cloud. You can still configure endpoint connections for the virtual machines and services that require internet communication, as part of your solution.</p>
+<p>Securely extend your data center with virtual networks</p>
+<p>You can build traditional site-to-site VPNs to securely scale your datacenter capacity. Site-to-site VPNs use IPSEC to provide a secure connection between your corporate VPN gateway and Azure.</p>
+<p>Enable hybrid cloud scenarios</p>
+<p>Virtual networks give you the flexibility to support a range of hybrid cloud scenarios. You can securely connect cloud-based applications to any type of on-premises system, such as mainframes and Unix systems.</p>
+<h2>Unit 3.1.3 - Create subnets</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/configure-virtual-networks/3-create-subnets</p>
+<h3>Create subnets</h3>
+<p>Azure Subnets provide a way for you to implement logical divisions within your virtual network. Your network can be segmented into subnets to help improve security, increase performance, and make it easier to manage.</p>
+<h4>Things to know about subnets</h4>
+<p>There are certain conditions for the IP addresses in a virtual network when you apply segmentation with subnets.</p>
+<p>- Each subnet contains a range of IP addresses that fall within the virtual network address space.</p>
+<p>Each subnet contains a range of IP addresses that fall within the virtual network address space.</p>
+<p>- The address range for a subnet must be unique within the address space for the virtual network.</p>
+<p>The address range for a subnet must be unique within the address space for the virtual network.</p>
+<p>- The range for one subnet can't overlap with other subnet IP address ranges in the same virtual network.</p>
+<p>The range for one subnet can't overlap with other subnet IP address ranges in the same virtual network.</p>
+<p>- The IP address space for a subnet must be specified by using CIDR notation.</p>
+<p>The IP address space for a subnet must be specified by using CIDR notation.</p>
+<p>- You can segment a virtual network into one or more subnets in the Azure portal. Characteristics about the IP addresses for the subnets are listed.</p>
+<p>You can segment a virtual network into one or more subnets in the Azure portal. Characteristics about the IP addresses for the subnets are listed.</p>
+<h4>Reserved addresses</h4>
+<p>For each subnet, Azure reserves five IP addresses. The first four addresses and the last address are reserved.</p>
+<p>Let's examine the reserved addresses in an IP address range of 192.168.1.0/24 .</p>
+<p>192.168.1.0/24</p>
+<p>Reserved address</p>
+<p>Reason</p>
+<p>192.168.1.0</p>
+<p>This value identifies the virtual network address.</p>
+<p>192.168.1.1</p>
+<p>Azure configures this address as the default gateway.</p>
+<p>192.168.1.2 and 192.168.1.3</p>
+<p>192.168.1.2</p>
+<p>192.168.1.3</p>
+<p>Azure maps these Azure DNS IP addresses to the virtual network space.</p>
+<p>192.168.1.255</p>
+<p>This value supplies the virtual network broadcast address.</p>
+<h4>Things to consider when using subnets</h4>
+<p>When you plan for adding subnet segments within your virtual network, there are several factors to consider.</p>
+<p>- Consider service requirements . Each service directly deployed into a virtual network has specific requirements for routing and the types of traffic that must be allowed into and out of associated subnets. A service might require or create their own subnet. There must be enough unallocated space to meet the service requirements. Suppose you connect a virtual network to an on-premises network by using Azure VPN Gateway. The virtual network must have a dedicated subnet for the gateway.</p>
+<p>Consider service requirements . Each service directly deployed into a virtual network has specific requirements for routing and the types of traffic that must be allowed into and out of associated subnets. A service might require or create their own subnet. There must be enough unallocated space to meet the service requirements. Suppose you connect a virtual network to an on-premises network by using Azure VPN Gateway. The virtual network must have a dedicated subnet for the gateway.</p>
+<p>- Consider network virtual appliances . Azure routes network traffic between all subnets in a virtual network, by default. You can override Azure's default routing to prevent Azure routing between subnets. You can also override the default to route traffic between subnets through a network virtual appliance. If you require traffic between resources in the same virtual network to flow through a network virtual appliance, deploy the resources to different subnets.</p>
+<p>Consider network virtual appliances . Azure routes network traffic between all subnets in a virtual network, by default. You can override Azure's default routing to prevent Azure routing between subnets. You can also override the default to route traffic between subnets through a network virtual appliance. If you require traffic between resources in the same virtual network to flow through a network virtual appliance, deploy the resources to different subnets.</p>
+<p>- Consider network security groups . You can associate zero or one network security group to each subnet in a virtual network. You can associate the same or a different network security group to each subnet. Each network security group contains rules that allow or deny traffic to and from sources and destinations.</p>
+<p>Consider network security groups . You can associate zero or one network security group to each subnet in a virtual network. You can associate the same or a different network security group to each subnet. Each network security group contains rules that allow or deny traffic to and from sources and destinations.</p>
+<p>- Consider private links . Azure Private Link provides private connectivity from a virtual network to Azure platform as a service (PaaS), customer-owned, or Microsoft partner services. Private Link simplifies the network architecture and secures the connection between endpoints in Azure. The service eliminates data exposure to the public internet.</p>
+<p>Consider private links . Azure Private Link provides private connectivity from a virtual network to Azure platform as a service (PaaS), customer-owned, or Microsoft partner services. Private Link simplifies the network architecture and secures the connection between endpoints in Azure. The service eliminates data exposure to the public internet.</p>
+<h2>Unit 3.1.4 - Create virtual networks</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/configure-virtual-networks/4-create-virtual-networks</p>
+<h3>Create virtual networks</h3>
+<p>You can create new virtual networks at any time. You can also add virtual networks when you create a virtual machine.</p>
+<h4>Things to know about creating virtual networks</h4>
+<p>Review these requirements for creating a virtual network.</p>
+<p>- When you create a virtual network, you need to define the IP address space for the network.</p>
+<p>When you create a virtual network, you need to define the IP address space for the network.</p>
+<p>- Plan to use an IP address space that's not already in use in your organization.</p>
+<p>Plan to use an IP address space that's not already in use in your organization.</p>
+<p>- The address space for the virtual network can be either on-premises or in the cloud, but not both.</p>
+<p>The address space for the virtual network can be either on-premises or in the cloud, but not both.</p>
+<p>- To create a virtual network, you need to define at least one subnet. Each subnet contains a range of IP addresses that fall within the virtual network address space. The address range for each subnet must be unique within the address space for the virtual network. The range for one subnet can't overlap with other subnet IP address ranges in the same virtual network.</p>
+<p>To create a virtual network, you need to define at least one subnet.</p>
+<p>- Each subnet contains a range of IP addresses that fall within the virtual network address space.</p>
+<p>Each subnet contains a range of IP addresses that fall within the virtual network address space.</p>
+<p>- The address range for each subnet must be unique within the address space for the virtual network.</p>
+<p>The address range for each subnet must be unique within the address space for the virtual network.</p>
+<p>- The range for one subnet can't overlap with other subnet IP address ranges in the same virtual network.</p>
+<p>The range for one subnet can't overlap with other subnet IP address ranges in the same virtual network.</p>
+<p>- You can create a virtual network in the Azure portal. Provide the Azure subscription, resource group, virtual network name, and service region for the network.</p>
+<p>You can create a virtual network in the Azure portal. Provide the Azure subscription, resource group, virtual network name, and service region for the network.</p>
+<p>Note</p>
+<p>Default limits on Azure networking resources can change periodically. Be sure to consult the Azure networking documentation for the latest information.</p>
+<h2>Unit 3.1.5 - Plan IP addressing</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/configure-virtual-networks/5-plan-addressing</p>
+<h3>Plan IP addressing</h3>
+<p>Let's begin with an overview of IP addressing.</p>
+<p>You can assign IP addresses to Azure resources to communicate with other Azure resources, your on-premises network, and the internet. There are two types of Azure IP addresses: private and public .</p>
+<p>Private IP addresses enable communication within an Azure virtual network and your on-premises network. You create a private IP address for your resource when you use a VPN gateway or Azure ExpressRoute circuit to extend your network to Azure.</p>
+<p>Public IP addresses allow your resource to communicate with the internet. You can create a public IP address to connect with Azure public-facing services.</p>
+<p>The next illustration shows a virtual machine resource that has a private IP address and a public IP address.</p>
+<h4>Things to know about IP addresses</h4>
+<p>Let's take a closer look at the characteristics of IP addresses.</p>
+<p>- IP addresses can be statically assigned or dynamically assigned.</p>
+<p>IP addresses can be statically assigned or dynamically assigned.</p>
+<p>- You can separate dynamically and statically assigned IP resources into different subnets.</p>
+<p>You can separate dynamically and statically assigned IP resources into different subnets.</p>
+<p>- Static IP addresses don't change and are best for certain situations, such as: DNS name resolution, where a change in the IP address requires updating host records. IP address-based security models that require apps or services to have a static IP address. TLS/SSL certificates linked to an IP address. Firewall rules that allow or deny traffic by using IP address ranges. Role-based virtual machines such as Domain Controllers and DNS servers.</p>
+<p>Static IP addresses don't change and are best for certain situations, such as:</p>
+<p>- DNS name resolution, where a change in the IP address requires updating host records.</p>
+<p>- IP address-based security models that require apps or services to have a static IP address.</p>
+<p>- TLS/SSL certificates linked to an IP address.</p>
+<p>- Firewall rules that allow or deny traffic by using IP address ranges.</p>
+<h2>Unit 3.1.6 - Create public IP addressing</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/configure-virtual-networks/6-create-public-ip-addressing</p>
+<h3>Create public IP addressing</h3>
+<p>You can create a public IP address for your resource in the Azure portal. For example, you could create a public IP address for a virtual machine.</p>
+<h4>Things to consider when creating a public IP address</h4>
+<p>To create a public IP address, configure these settings. Notice that public IP addresses are often used with load balancers.</p>
+<p>- IP Version : Public IP addresses can be attached to a load balancer or to a network interface. IPv4 and IPv6 addresses are charged at the same rate.</p>
+<p>IP Version : Public IP addresses can be attached to a load balancer or to a network interface. IPv4 and IPv6 addresses are charged at the same rate.</p>
+<p>- SKU : Select the SKU for the public IP address. A Public IP's SKU must match the SKU of the Load Balancer with which it is used.</p>
+<p>SKU : Select the SKU for the public IP address. A Public IP's SKU must match the SKU of the Load Balancer with which it is used.</p>
+<p>- Tier : Must match the load balancer tier. A cross-region load balancer distributes traffic across regional backends. Regional distributes traffic within a virtual network.</p>
+<p>Tier : Must match the load balancer tier. A cross-region load balancer distributes traffic across regional backends. Regional distributes traffic within a virtual network.</p>
+<p>- IP address assignment : Static addresses are assigned when a public IP address is created. Static addresses aren't released until a public IP address resource is deleted.</p>
+<p>IP address assignment : Static addresses are assigned when a public IP address is created. Static addresses aren't released until a public IP address resource is deleted.</p>
+<h2>Unit 3.1.7 - Associate public IP addresses</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/configure-virtual-networks/7-associate-public-ip-addresses</p>
+<h3>Associate public IP addresses</h3>
+<p>A public IP address resource can be associated with virtual machine network interfaces, internet-facing load balancers, VPN gateways, and application gateways. You can associate your resource with both dynamic and static public IP addresses.</p>
+<h4>Things to consider when associating public IP addresses</h4>
+<p>The next table summarizes how you can associate public IP addresses for different types of resources.</p>
+<p>Top-level resource</p>
+<p>IP address configuration</p>
+<p>Virtual machine</p>
+<p>Network interface configuration</p>
+<p>Virtual Network Gateway (VPN), Virtual Network Gateway (ER), NAT Gateway</p>
+<p>Gateway IP configuration</p>
+<p>Public Load Balancer, Application Gateway, Azure Firewall, Route Server, API Management</p>
+<p>Front-end configuration</p>
+<p>Bastion host</p>
+<p>Public IP configuration</p>
+<h4>Public IP address SKU features</h4>
+<p>The next table summarizes the standard SKU features.</p>
+<p>Public IP address</p>
+<p>Standard SKU</p>
+<p>Allocation method</p>
+<p>Static</p>
+<p>Security</p>
+<p>Secure by default model</p>
+<p>Available zones</p>
+<p>Supported. Standard IPs can be nonzonal, zonal, or zone-redundant.</p>
+<h2>Unit 3.1.8 - Allocate or assign private IP addresses</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/configure-virtual-networks/8-associate-private-ip-addresses</p>
+<h3>Allocate or assign private IP addresses</h3>
+<p>A private IP address resource can be associated with virtual machine network interfaces, internal load balancers, and application gateways. Azure can provide an IP address (dynamic assignment) or you can assign the IP address (static assignment).</p>
+<h4>Things to consider when associating private IP addresses</h4>
+<p>The next table summarizes how you can associate private IP addresses for different types of resources.</p>
+<p>Resource</p>
+<p>Private IP address association</p>
+<p>Dynamic IP address</p>
+<p>Static IP address</p>
+<p>Virtual machine</p>
+<p>NIC</p>
+<p>Yes</p>
+<p>Internal load balancer</p>
+<p>Front-end configuration</p>
+<p>Yes</p>
+<p>Application gateway</p>
+<p>Front-end configuration</p>
+<p>Yes</p>
+<h4>Private IP address assignment</h4>
+<p>A private IP address is allocated from the address range of the virtual network subnet that a resource is deployed in. There are two options: dynamic and static.</p>
+<p>- Dynamic : Azure assigns the next available unassigned or unreserved IP address in the subnet's address range. Dynamic assignment is the default allocation method. Suppose addresses 10.0.0.4 through 10.0.0.9 are already assigned to other resources. In this case, Azure assigns the address 10.0.0.10 to a new resource.</p>
+<p>Dynamic : Azure assigns the next available unassigned or unreserved IP address in the subnet's address range. Dynamic assignment is the default allocation method.</p>
+<p>Suppose addresses 10.0.0.4 through 10.0.0.9 are already assigned to other resources. In this case, Azure assigns the address 10.0.0.10 to a new resource.</p>
+<p>- Static : You select and assign any unassigned or unreserved IP address in the subnet's address range. Suppose a subnet's address range is 10.0.0.0/16, and addresses 10.0.0.4 through 10.0.0.9 are already assigned to other resources. In this scenario, you can assign any address between 10.0.0.10 and 10.0.255.254.</p>
+<p>Static : You select and assign any unassigned or unreserved IP address in the subnet's address range.</p>
+<p>Suppose a subnet's address range is 10.0.0.0/16, and addresses 10.0.0.4 through 10.0.0.9 are already assigned to other resources. In this scenario, you can assign any address between 10.0.0.10 and 10.0.255.254.</p>
+<p>Tip</p>
+<p>For a more complete review of virtual networks, consider the Introduction to Virtual Networks training module.</p>
+<h2>Unit 3.1.9 - Exercise: Create and configure virtual networks</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/configure-virtual-networks/9-simulation-create-networks</p>
+<h3>Exercise: Create and configure virtual networks</h3>
+<h3>Exercise scenario</h3>
+<p>Your organization is migrating a web-based application to Azure. Your first task is to put in place the virtual networks and subnets. You also need to securely peer the virtual networks. You identify these requirements.</p>
+<p>- Two virtual networks are required, app-vnet and hub-vnet. The virtual networks simulate a hub and spoke network architecture.</p>
+<p>- The app-vnet hosts the application. The app-vnet virtual network requires two subnets. The frontend subnet hosts the web servers. The backend subnet hosts the database servers.</p>
+<p>- The hub-vnet only requires a subnet for the firewall.</p>
+<p>- The two virtual networks must be able to communicate with each other securely and privately through virtual network peering.</p>
+<p>- Both virtual networks should be in the same region.</p>
+<h3>Architecture diagram</h3>
+<h3>Job skills</h3>
+<p>- Create a virtual network.</p>
+<p>- Create a subnet.</p>
+<p>- Configure virtual network peering (optional).</p>
+<p>Note</p>
+<p>Estimated time: 30 minutes.</p>
+<p>To complete this exercise, you need an Azure subscription .</p>
+<p>Launch the exercise, and follow the instructions. When finished, be sure to return to this page so you can continue learning.</p>
+<h2>Unit 3.1.10 - Module assessment</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/configure-virtual-networks/10-knowledge-check</p>
+<h3>Module assessment</h3>
+<p>Your company is migrating to Azure and replicating their on-premises network in the cloud. They're developing a plan to use Azure Virtual Network to organize company resources into virtual networks and subnets. You're working on the design for the company IP address schema, mapping out which ranges can be assigned, and which ranges can be denied traffic.</p>
+<h4>Answer these questions</h4>
+<p>Choose the best response for each question.</p>
+<h2>Unit 3.1.11 - Summary and resources</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/configure-virtual-networks/11-summary-resources</p>
+<h3>Summary and resources</h3>
+<p>In this module, you learned about Azure virtual networks and their importance in creating private networks in Azure. You explored the benefits of using virtual networks, such as scalability, availability, and isolation. You learned how to create virtual networks with subnetting and how to determine which resources require public or private IP addresses.</p>
+<p>The main takeaways from this module are:</p>
+<p>- Azure virtual networks allow different Azure resources to securely communicate with each other, the internet, and on-premises networks.</p>
+<p>Azure virtual networks allow different Azure resources to securely communicate with each other, the internet, and on-premises networks.</p>
+<p>- Subnets within virtual networks provide logical divisions, improving security, performance, and management.</p>
+<p>Subnets within virtual networks provide logical divisions, improving security, performance, and management.</p>
+<p>- When creating virtual networks, ensure that the IP address space is unique and doesn't overlap with other subnets.</p>
+<p>When creating virtual networks, ensure that the IP address space is unique and doesn't overlap with other subnets.</p>
+<p>- IP addresses can provide public or private access to resources.</p>
+<p>IP addresses can provide public or private access to resources.</p>
+<h3>Learn more with Copilot</h3>
+<p>Copilot can assist you in designing Azure infrastructure solutions. Copilot can compare, recommend, explain, and research products and services where you need more information. Open a Microsoft Edge browser and choose Copilot (top right) or navigate to copilot.microsoft.com. Take a few minutes to try these prompts and extend your learning with Copilot.</p>
+<p>- Explain CIDR for a nontechnical audience. Provide examples.</p>
+<p>Explain CIDR for a nontechnical audience. Provide examples.</p>
+<p>- What are the basic steps and considerations for creating a virtual network in Azure?</p>
+<p>What are the basic steps and considerations for creating a virtual network in Azure?</p>
+<p>- What types of Azure resources should be assigned a static IP address?</p>
+<p>What types of Azure resources should be assigned a static IP address?</p>
+<h3>Learn more with documentation</h3>
+<p>- What is Azure Virtual Network? . This article is your starting point to learn about virtual networks.</p>
+<p>What is Azure Virtual Network? . This article is your starting point to learn about virtual networks.</p>
+<p>- Public IP addresses . This article reviews the basics of when to use public IP addresses.</p>
+<p>Public IP addresses . This article reviews the basics of when to use public IP addresses.</p>
+<p>- Private IP addresses . This article reviews the basics of when to use private IP addresses.</p>
+<p>Private IP addresses . This article reviews the basics of when to use private IP addresses.</p>
+<h3>Learn more with self-paced training</h3>
+<p>- Introduction to Azure Virtual Networks . Learn how to design and implement core Azure Networking infrastructure.</p>
+<p>Introduction to Azure Virtual Networks . Learn how to design and implement core Azure Networking infrastructure.</p>
+<p>- Implement Windows Server IaaS virtual machine IP addressing and routing . Learn about IP addressing and virtual networks for virtual machines.</p>
+<p>Implement Windows Server IaaS virtual machine IP addressing and routing . Learn about IP addressing and virtual networks for virtual machines.</p></body>
+</html>

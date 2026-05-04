@@ -1,0 +1,237 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" epub:prefix="z3998: http://www.daisy.org/z3998/2012/vocab/structure/#" lang="en" xml:lang="en">
+  <head>
+    <title>LP 5 M5 - Configure Azure Container Instances</title>
+    <link href="style/main.css" rel="stylesheet" type="text/css"/>
+  </head>
+  <body><h1>LP 5 M5 - Configure Azure Container Instances</h1>
+<p>https://learn.microsoft.com/en-us/training/modules/configure-azure-container-instances/?WT.mc_id=api_CatalogApi</p>
+<h2>Unit 5.5.1 - Introduction</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/configure-azure-container-instances/1-introduction</p>
+<h3>Introduction</h3>
+<p>Containers and virtual machines are both forms of virtualization, but there are some key differences between them.</p>
+<p>To provide context, let's consider a scenario: You're an Azure Administrator responsible for deploying and managing applications in a cloud environment. Your organization is looking for a solution that offers fast startup times, easy management, and the ability to run applications in isolated containers. You want to understand the benefits of using Azure Container Instances and how it compares to virtual machines.</p>
+<p>In this module, you learn when to use Azure Container Instances instead of virtual machines. You also get an overview of features and use cases.</p>
+<p>The goal of this module is to introduce you to AI-ready Azure Container Instances.</p>
+<h3>Learning objectives</h3>
+<p>In this module, you learn how to:</p>
+<p>- Identify when to use containers versus virtual machines.</p>
+<p>- Identify the features and usage cases of Azure Container Instances.</p>
+<p>- Implement Azure container groups.</p>
+<h3>Skills measured</h3>
+<p>The content in the module helps you prepare for Exam AZ-104: Microsoft Azure Administrator .</p>
+<h3>Prerequisites</h3>
+<p>- Working knowledge of containerization concepts and terminology.</p>
+<p>- Familiarity with cloud computing and experience with the Azure portal.</p>
+<h2>Unit 5.5.2 - Compare containers to virtual machines</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/configure-azure-container-instances/2-compare-containers-to-virtual-machines</p>
+<h3>Compare containers to virtual machines</h3>
+<p>Hardware virtualization makes it possible to run multiple isolated instances of operating systems concurrently on the same physical hardware. Containers represent the next stage in the virtualization of computing resources.</p>
+<p>Container-based virtualization allows you to virtualize the operating system. This approach lets you run multiple applications within the same instance of an operating system, while maintaining isolation between the applications. The containers within a virtual machine provide functionality similar to that of virtual machines within a physical server.</p>
+<h4>Things to know about containers versus virtual machines</h4>
+<p>To better understand container-based virtualization, let's compare containers and virtual machines .</p>
+<p>Compare</p>
+<p>Containers</p>
+<p>Virtual machines</p>
+<p>Isolation</p>
+<p>A container typically provides lightweight isolation from the host and other containers, but a container doesn't provide as strong a security boundary as a virtual machine.</p>
+<p>A virtual machine provides complete isolation from the host operating system and other virtual machines. This separation is useful when a strong security boundary is critical, such as hosting apps from competing companies on the same server or cluster.</p>
+<p>Operating system</p>
+<p>Containers run the user mode portion of an operating system and can be tailored to contain just the needed services for your app. This approach helps you use fewer system resources.</p>
+<p>Virtual machines run a complete operating system including the kernel, which requires more system resources (CPU, memory, and storage).</p>
+<p>Deployment</p>
+<p>You can deploy individual containers by using Docker via the command line. You can deploy multiple containers by using an orchestrator such as Azure Kubernetes Service.</p>
+<p>You can deploy individual virtual machines by using Windows Admin Center or Hyper-V Manager. You can deploy multiple virtual machines by using PowerShell or System Center Virtual Machine Manager.</p>
+<p>Persistent storage</p>
+<p>Containers use Azure Disks for local storage for a single node, or Azure Files (SMB shares) for storage shared by multiple nodes or servers.</p>
+<p>Virtual machines use a virtual hard disk (VHD) for local storage for a single machine, or an SMB file share for storage shared by multiple servers.</p>
+<p>Fault tolerance</p>
+<p>If a cluster node fails, the orchestrator on another cluster node rapidly recreates any containers running on the node.</p>
+<p>Virtual machines can fail over to another server in a cluster, where the virtual machine's operating system restarts on the new server.</p>
+<h4>Things to consider when using containers</h4>
+<p>Containers offer several advantages over physical and virtual machines. Review the following benefits and consider how you can implement containers for the internal apps for your company.</p>
+<p>- Consider flexibility and speed . Gain increased flexibility and speed when developing and sharing your containerized application code.</p>
+<p>Consider flexibility and speed . Gain increased flexibility and speed when developing and sharing your containerized application code.</p>
+<p>- Consider testing . Choose containers for your configuration to allow for simplified testing of your apps.</p>
+<p>Consider testing . Choose containers for your configuration to allow for simplified testing of your apps.</p>
+<p>- Consider app deployment . Implement containers to gain streamlined and accelerated deployment of your apps.</p>
+<p>Consider app deployment . Implement containers to gain streamlined and accelerated deployment of your apps.</p>
+<p>- Consider workload density . Support higher workload density and improve your resource utilization by working with containers.</p>
+<p>Consider workload density . Support higher workload density and improve your resource utilization by working with containers.</p>
+<h2>Unit 5.5.3 - Review Azure Container Instances</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/configure-azure-container-instances/3-review</p>
+<h3>Review Azure Container Instances</h3>
+<p>Containers are becoming the preferred way to package, deploy, and manage cloud applications. There are many options for teams to build and deploy cloud native and containerized applications on Azure. In this unit, we review Azure Container Instances (ACI).</p>
+<p>Azure Container Instances offers the fastest and simplest way to run a container in Azure, without having to manage any virtual machines and without having to adopt a higher-level service. Azure Container Instances is a great solution for any scenario that can operate in isolated containers.</p>
+<h4>Understand container images</h4>
+<p>All containers are created from container images. A container image is a lightweight, standalone, executable package of software that encapsulates everything needed to run an application. It includes the following components:</p>
+<p>- Code : The application’s source code.</p>
+<p>- Runtime : The environment required to execute the application.</p>
+<p>- System tools : Utilities necessary for the application to function.</p>
+<p>- System libraries : Shared libraries used by the application.</p>
+<p>- Settings : Configuration parameters specific to the application.</p>
+<p>When you create a container image, it becomes a portable unit that can run consistently across different computing environments. These images are the building blocks for containers, which are instances of these images running at runtime.</p>
+<p>The following illustration shows a web server container built with Azure Container Instances. The container is running on a virtual machine in a virtual network.</p>
+<h4>Things to know about Azure Container Instances</h4>
+<p>Let's review some of the benefits of using Azure Container Instances . As you review these points, think about how you can implement Container Instances for your internal applications.</p>
+<p>- Fast startup times . Containers can start in seconds without the need to deploy and manage virtual machines.</p>
+<p>Fast startup times . Containers can start in seconds without the need to deploy and manage virtual machines.</p>
+<p>- Public IP connectivity and DNS names . Containers can be directly exposed to the internet with an IP address and FQDN (fully qualified domain name).</p>
+<p>Public IP connectivity and DNS names . Containers can be directly exposed to the internet with an IP address and FQDN (fully qualified domain name).</p>
+<p>- Custom sizes . You specify CPU cores (from 0.1 to 4 vCPU) and memory (from 0.1 to 16 GB) for each container at deployment time. Resource allocation is fixed for the lifetime of the container group.</p>
+<p>Custom sizes . You specify CPU cores (from 0.1 to 4 vCPU) and memory (from 0.1 to 16 GB) for each container at deployment time. Resource allocation is fixed for the lifetime of the container group.</p>
+<p>- Persistent storage . Containers support direct mounting of Azure Files file shares.</p>
+<p>Persistent storage . Containers support direct mounting of Azure Files file shares.</p>
+<p>- Linux and Windows containers . Container Instances can schedule both Windows and Linux containers. Specify the operating system type when you create your container groups.</p>
+<p>Linux and Windows containers . Container Instances can schedule both Windows and Linux containers. Specify the operating system type when you create your container groups.</p>
+<p>- Coscheduled groups . Container Instances supports scheduling of multi-container groups that share host machine resources.</p>
+<p>Coscheduled groups . Container Instances supports scheduling of multi-container groups that share host machine resources.</p>
+<p>- Virtual network deployment . Linux container groups can be deployed into an Azure virtual network for private communication with other Azure resources. Virtual network deployed containers receive no public IP address and communicate only within the virtual network or peered networks.</p>
+<p>Virtual network deployment . Linux container groups can be deployed into an Azure virtual network for private communication with other Azure resources. Virtual network deployed containers receive no public IP address and communicate only within the virtual network or peered networks.</p>
+<h2>Unit 5.5.4 - Implement container groups</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/configure-azure-container-instances/4-implement-container-groups</p>
+<h3>Implement container groups</h3>
+<p>The top-level resource in Azure Container Instances is the container group . A container group is a collection of containers that get scheduled on the same host machine. The containers share a lifecycle, resources, local network, and storage volumes.</p>
+<h4>Things to know about container groups</h4>
+<p>Let's review some of details about container groups for Azure Container Instances.</p>
+<p>- A container group is similar to a pod in Kubernetes. A pod typically has a 1:1 mapping with a container, but a pod can contain multiple containers. The containers in a multi-container pod can share related resources.</p>
+<p>A container group is similar to a pod in Kubernetes. A pod typically has a 1:1 mapping with a container, but a pod can contain multiple containers. The containers in a multi-container pod can share related resources.</p>
+<p>- Azure Container Instances allocates resources to a multi-container group by adding together the resource requests of all containers in the group. Resources can include items such as CPUs, memory, and GPUs.</p>
+<p>Azure Container Instances allocates resources to a multi-container group by adding together the resource requests of all containers in the group. Resources can include items such as CPUs, memory, and GPUs.</p>
+<p>- There are three common ways to deploy a multi-container group. Azure Resource Manager template . JSON-based infrastructure as code, ideal when deploying alongside other Azure resources. Bicep . Microsoft's recommended infrastructure as code language, more concise than Azure Resource Manager templates. Bicep includes full IntelliSense support. YAML files . Container-focused format, ideal for deployments that include only container instances.</p>
+<p>There are three common ways to deploy a multi-container group.</p>
+<p>- Azure Resource Manager template . JSON-based infrastructure as code, ideal when deploying alongside other Azure resources.</p>
+<p>Azure Resource Manager template . JSON-based infrastructure as code, ideal when deploying alongside other Azure resources.</p>
+<p>- Bicep . Microsoft's recommended infrastructure as code language, more concise than Azure Resource Manager templates. Bicep includes full IntelliSense support.</p>
+<p>Bicep . Microsoft's recommended infrastructure as code language, more concise than Azure Resource Manager templates. Bicep includes full IntelliSense support.</p>
+<p>- YAML files . Container-focused format, ideal for deployments that include only container instances.</p>
+<p>YAML files . Container-focused format, ideal for deployments that include only container instances.</p>
+<p>- Container groups can share an external-facing IP address, one or more ports on the IP address, and a DNS label with an FQDN. External client access . You must expose the port on the IP address and from the container to enable external clients to reach a container in your group. Port mapping . Port mapping isn't supported because containers in a group share a port namespace. Deleted groups . When a container group is deleted, its IP address and FQDN are released.</p>
+<p>Container groups can share an external-facing IP address, one or more ports on the IP address, and a DNS label with an FQDN.</p>
+<p>- External client access . You must expose the port on the IP address and from the container to enable external clients to reach a container in your group.</p>
+<p>External client access . You must expose the port on the IP address and from the container to enable external clients to reach a container in your group.</p>
+<p>- Port mapping . Port mapping isn't supported because containers in a group share a port namespace.</p>
+<p>Port mapping . Port mapping isn't supported because containers in a group share a port namespace.</p>
+<p>- Deleted groups . When a container group is deleted, its IP address and FQDN are released.</p>
+<p>Deleted groups . When a container group is deleted, its IP address and FQDN are released.</p>
+<h4>Configuration example</h4>
+<p>Consider the following example of a multi-container group with two containers.</p>
+<p>The multi-container group has the following characteristics and configuration:</p>
+<p>- The container group is scheduled on a single host machine, and is assigned a DNS name label.</p>
+<p>- The container group exposes a single public IP address with one exposed port.</p>
+<p>- One container in the group listens on port 80. The other container listens on port 1433.</p>
+<p>- The group includes two Azure Files file shares as volume mounts. Each container in the group mounts one of the file shares locally.</p>
+<h4>Things to consider when using container groups</h4>
+<p>Multi-container groups are useful when you want to divide a single functional task into a few container images. Different teams can deliver the images, and the images can have separate resource requirements.</p>
+<p>Consider the following scenarios for working with multi-container groups. Think about what options can support your internal apps for the online retailer.</p>
+<p>- Consider web app updates . Support updates to your web apps by implementing a multi-container group. One container in the group serves the web app and another container pulls the latest content from source control.</p>
+<p>Consider web app updates . Support updates to your web apps by implementing a multi-container group. One container in the group serves the web app and another container pulls the latest content from source control.</p>
+<p>- Consider log data collection . Use a multi-container group to capture logging and metrics data about your app. Your application container outputs logs and metrics. A logging container collects the output data and writes the data to long-term storage.</p>
+<p>Consider log data collection . Use a multi-container group to capture logging and metrics data about your app. Your application container outputs logs and metrics. A logging container collects the output data and writes the data to long-term storage.</p>
+<p>- Consider app monitoring . Enable monitoring for your app with a multi-container group. A monitoring container periodically makes a request to your application container to ensure your app is running and responding correctly. The monitoring container raises an alert if it identifies possible issues with your app.</p>
+<p>Consider app monitoring . Enable monitoring for your app with a multi-container group. A monitoring container periodically makes a request to your application container to ensure your app is running and responding correctly. The monitoring container raises an alert if it identifies possible issues with your app.</p>
+<p>- Consider front-end and back-end support . Create a multi-container group to hold your front-end container and back-end container. The front-end container can serve a web app. The back-end container can run a service to retrieve data.</p>
+<p>Consider front-end and back-end support . Create a multi-container group to hold your front-end container and back-end container. The front-end container can serve a web app. The back-end container can run a service to retrieve data.</p>
+<h2>Unit 5.5.5 - Review Azure Container Apps</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/configure-azure-container-instances/5-review-docker-platform</p>
+<h3>Review Azure Container Apps</h3>
+<p>There are many options for teams to build and deploy cloud native and containerized applications on Azure. Let's understand which scenarios and use cases are best suited for Azure Container Apps and how it compares to other container options on Azure. Listen to a developer's view of Azure Container Instances.</p>
+<h4>Things to know about Azure Container Apps</h4>
+<p>Azure Container Apps is a serverless platform that allows you to maintain less infrastructure and save costs while running containerized applications. Instead of worrying about server configuration, container orchestration, and deployment details, Container Apps provides all the up-to-date server resources required to keep your applications stable and secure.</p>
+<p>Common uses of Azure Container Apps include:</p>
+<p>- Deploying API endpoints</p>
+<p>- Hosting background processing jobs</p>
+<p>- Handling event-driven processing</p>
+<p>- Running microservices</p>
+<p>Applications built on Azure Container Apps can dynamically scale based on the following characteristics:</p>
+<p>- HTTP traffic</p>
+<p>- Event-driven processing</p>
+<p>- CPU or memory load</p>
+<p>- Any KEDA-supported scaler</p>
+<h4>Things to consider when using Azure Container Apps</h4>
+<p>Azure Container Apps enables you to build serverless microservices and jobs based on containers. Distinctive features of Container Apps include:</p>
+<p>- Optimized for running general purpose containers, especially for applications that span many microservices deployed in containers.</p>
+<p>- Powered by Kubernetes and open-source technologies like Dapr, KEDA, and envoy.</p>
+<p>- Supports Kubernetes-style apps and microservices with features like service discovery and traffic splitting.</p>
+<p>- Enables event-driven application architectures by supporting scale based on traffic and pulling from event sources like queues, including scale to zero.</p>
+<p>- Supports running on demand, scheduled, and event-driven jobs.</p>
+<p>Azure Container Apps doesn't provide direct access to the underlying Kubernetes APIs. If you would like to build Kubernetes-style applications and don't require direct access to all the native Kubernetes APIs and cluster management, Container Apps provides a fully managed experience based on best-practices. For these reasons, many teams prefer to start building container microservices with Azure Container Apps.</p>
+<h4>Compare container management solutions</h4>
+<p>Azure offers several container platforms for different scenarios. Azure Container Instances (ACI) is best for isolated, short-lived tasks. Azure Container Apps (ACA) serves serverless microservices. Azure Kubernetes Service (AKS) provides full Kubernetes control for complex orchestration needs.</p>
+<p>Feature</p>
+<p>Azure Container Apps (ACA)</p>
+<p>Azure Kubernetes Service (AKS)</p>
+<p>Overview</p>
+<p>ACA is a serverless container platform that simplifies the deployment and management of microservices-based applications by abstracting away the underlying infrastructure.</p>
+<p>AKS simplifies deploying a managed Kubernetes cluster in Azure by offloading the operational overhead to Azure. It’s suitable for complex applications that require orchestration.</p>
+<p>Deployment</p>
+<p>ACA provides a PaaS experience with quick deployment and management capabilities.</p>
+<p>AKS offers more control and customization options for Kubernetes environments, making it suitable for complex applications and microservices.</p>
+<p>Management</p>
+<p>ACA builds upon AKS and offers a simplified PaaS experience for running containers.</p>
+<p>AKS provides a more granular control over the Kubernetes environment, suitable for teams with Kubernetes expertise.</p>
+<p>Scalability</p>
+<p>ACA supports both HTTP-based autoscaling and event-driven scaling, making it ideal for applications that need to respond quickly to changes in demand.</p>
+<p>AKS offers horizontal pod autoscaling and cluster autoscaling, providing robust scalability options for containerized applications.</p>
+<p>Use Cases</p>
+<p>ACA is designed for microservices and serverless applications that benefit from rapid scaling and simplified management.</p>
+<p>AKS is best for complex, long-running applications. These applications require full Kubernetes features and tight integration with other Azure services.</p>
+<h2>Unit 5.5.6 - Exercise: Implement Container Instances</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/configure-azure-container-instances/6-simulation-containers</p>
+<h3>Exercise: Implement Container Instances</h3>
+<h3>Lab scenario</h3>
+<p>Your organization has a web application that runs on a virtual machine in your on-premises data center. The organization wants to move all applications to the cloud but doesn’t want to have a large number of servers to manage. You decide to evaluate Azure Container Instances and Docker.</p>
+<h3>Architecture diagram</h3>
+<h3>Job skills</h3>
+<p>- Deploy an Azure Container Instance using a Docker image.</p>
+<p>- Test and verify deployment of an Azure Container Instance.</p>
+<p>Note</p>
+<p>Estimated time: 15 minutes.</p>
+<p>To complete this exercise, you need an Azure subscription .</p>
+<p>Launch the exercise, and follow the instructions. When finished, be sure to return to this page so you can continue learning.</p>
+<h2>Unit 5.5.7 - Module assessment</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/configure-azure-container-instances/7-knowledge-check</p>
+<h3>Module assessment</h3>
+<p>You're working on the app deployment and management strategy for your company's online retail site. You're reviewing a few scenarios as part of the implementation planning.</p>
+<p>- The Admin team requested input about where containers on Windows can be more advantageous than virtual machines.</p>
+<p>The Admin team requested input about where containers on Windows can be more advantageous than virtual machines.</p>
+<p>- You're examining features of Azure Container Instances to support site-related apps hosted on-premises in Azure to share hardware resources, network usage, and storage volumes.</p>
+<p>You're examining features of Azure Container Instances to support site-related apps hosted on-premises in Azure to share hardware resources, network usage, and storage volumes.</p>
+<p>- The development team needs a container management solution that simplifies deployment and provides orchestration.</p>
+<p>The development team needs a container management solution that simplifies deployment and provides orchestration.</p>
+<h4>Answer the following questions</h4>
+<p>Choose the best response for each question.</p>
+<h2>Unit 5.5.8 - Summary and resources</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/configure-azure-container-instances/8-summary-resources</p>
+<h3>Summary and resources</h3>
+<p>In this module, you learned how to identify when to use Azure Container Instances versus Azure virtual machines. You explored the features and usage cases of Azure Container Instances. You discovered how to implement Azure container groups.</p>
+<p>The main takeaways from this module are:</p>
+<p>- Containers provide lightweight isolation and use fewer system resources compared to virtual machines.</p>
+<p>- Containers can be deployed individually using Docker or with an orchestrator like Azure Container Apps.</p>
+<p>- Containers use Azure Disks or Azure Files for storage.</p>
+<p>- A container group is a collection of containers that get scheduled on the same host machine.</p>
+<p>- Containers can be rapidly recreated on another cluster node if a node fails.</p>
+<h3>Learn more with Copilot</h3>
+<p>Copilot can assist you in configuring Azure infrastructure solutions. Copilot can compare, recommend, explain, and research products and services where you need more information. Open a Microsoft Edge browser and choose Copilot (top right) or navigate to copilot.microsoft.com. Take a few minutes to try these prompts and extend your learning with Copilot.</p>
+<p>- Compare benefits and usage cases for containers and virtual machines.</p>
+<p>Compare benefits and usage cases for containers and virtual machines.</p>
+<p>- What are the best practices for configuring Azure Container Instances for task-based workloads? Explain the restart policies.</p>
+<p>What are the best practices for configuring Azure Container Instances for task-based workloads? Explain the restart policies.</p>
+<p>- How do I deploy a multi-container group in Azure Container Instances using Bicep? Show an example with environment variables.</p>
+<p>How do I deploy a multi-container group in Azure Container Instances using Bicep? Show an example with environment variables.</p>
+<h3>Learn more with documentation</h3>
+<p>- Containers versus virtual machines . This article reviews the key similarities and differences between containers and virtual machines (VMs), and when you might want to use each.</p>
+<p>Containers versus virtual machines . This article reviews the key similarities and differences between containers and virtual machines (VMs), and when you might want to use each.</p>
+<p>- Quickstart: Deploy a container instance in Azure using the Azure portal . In this quickstart, you use the Azure portal to deploy an isolated Docker container and make its application available with a fully qualified domain name (FQDN). After configuring a few settings and deploying the container, you can browse to the running application:</p>
+<p>Quickstart: Deploy a container instance in Azure using the Azure portal . In this quickstart, you use the Azure portal to deploy an isolated Docker container and make its application available with a fully qualified domain name (FQDN). After configuring a few settings and deploying the container, you can browse to the running application:</p>
+<p>- Container groups in Azure Container Instances . This article describes what container groups are and the types of scenarios they enable.</p>
+<p>Container groups in Azure Container Instances . This article describes what container groups are and the types of scenarios they enable.</p>
+<h3>Learn more with self-paced training</h3>
+<p>- Run container images in Azure Container Instances . Learn how Azure Container Instances can help you quickly deploy containers, how to set environment variables, and specify container restart policies.</p>
+<p>Run container images in Azure Container Instances . Learn how Azure Container Instances can help you quickly deploy containers, how to set environment variables, and specify container restart policies.</p>
+<p>- Implement Azure Container Apps . Learn how Azure Container Apps can help you deploy and manage microservices and containerized apps on a serverless platform that runs on top of Azure Kubernetes Service.</p>
+<p>Implement Azure Container Apps . Learn how Azure Container Apps can help you deploy and manage microservices and containerized apps on a serverless platform that runs on top of Azure Kubernetes Service.</p>
+<p>- Introduction to Docker containers . Learn the benefits of using Docker containers as a containerization platform. Discuss the infrastructure provided by the Docker platform.</p>
+<p>Introduction to Docker containers . Learn the benefits of using Docker containers as a containerization platform. Discuss the infrastructure provided by the Docker platform.</p></body>
+</html>

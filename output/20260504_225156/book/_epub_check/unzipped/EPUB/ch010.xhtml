@@ -1,0 +1,254 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" epub:prefix="z3998: http://www.daisy.org/z3998/2012/vocab/structure/#" lang="en" xml:lang="en">
+  <head>
+    <title>LP 3 M2 - Configure network security groups</title>
+    <link href="style/main.css" rel="stylesheet" type="text/css"/>
+  </head>
+  <body><h1>LP 3 M2 - Configure network security groups</h1>
+<p>https://learn.microsoft.com/en-us/training/modules/configure-network-security-groups/?WT.mc_id=api_CatalogApi</p>
+<h2>Unit 3.2.1 - Introduction</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/configure-network-security-groups/1-introduction</p>
+<h3>Introduction</h3>
+<p>Network security groups are a way to limit network traffic to resources in your virtual network. Network security groups contain a list of security rules that allow or deny inbound or outbound network traffic.</p>
+<p>Suppose your company has several locations and wants to migrate to a cloud based solution. The company only considers moving key systems onto the cloud platform if stringent security requirements can be met. These requirements include tight control over which computers have network access to the app servers. You need to secure both virtual machine networking and Azure services networking. Your goal is to prevent unwanted or unsecured network traffic from being able to reach key systems.</p>
+<p>In this module, you learn how to create an AI-ready network security group, configure inbound and outbound port rules, and verify secure connectivity. The goal of this module is to teach you how to control network traffic with network security groups.</p>
+<h3>Learning objectives</h3>
+<p>In this module, you learn how to:</p>
+<p>- Determine when to use network security groups.</p>
+<p>- Create network security groups.</p>
+<p>- Implement and evaluate network security group rules.</p>
+<p>- Describe the function of application security groups.</p>
+<h3>Skills measured</h3>
+<p>The content in the module helps you prepare for Exam AZ-104: Microsoft Azure Administrator .</p>
+<h3>Prerequisites</h3>
+<p>- Familiarity with Azure virtual networks and resources such as virtual machines.</p>
+<p>- Working knowledge of the Azure portal so you can configure the network security groups.</p>
+<p>- Basic understanding of traffic routing and traffic control strategies.</p>
+<h2>Unit 3.2.2 - Implement network security groups</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/configure-network-security-groups/2-implement-network-security-groups</p>
+<h3>Implement network security groups</h3>
+<p>You can limit network traffic to resources in your virtual network by using a network security group . You can assign a network security group to a subnet or a network interface, and define security rules in the group to control network traffic.</p>
+<h4>Things to know about network security groups</h4>
+<p>Let's look at the characteristics of network security groups.</p>
+<p>- A network security group contains a list of security rules that allow or deny inbound or outbound network traffic.</p>
+<p>A network security group contains a list of security rules that allow or deny inbound or outbound network traffic.</p>
+<p>- A network security group can be associated to a subnet or a network interface.</p>
+<p>A network security group can be associated to a subnet or a network interface.</p>
+<p>- A network security group can be associated multiple times.</p>
+<p>A network security group can be associated multiple times.</p>
+<p>- You create a network security group and define security rules in the Azure portal.</p>
+<p>You create a network security group and define security rules in the Azure portal.</p>
+<p>- The Overview page for a virtual machine provides information about the associated network security groups. You can see details such as the assigned subnets, assigned network interfaces, and the defined security rules.</p>
+<p>The Overview page for a virtual machine provides information about the associated network security groups. You can see details such as the assigned subnets, assigned network interfaces, and the defined security rules.</p>
+<h4>Network security groups and subnets</h4>
+<p>You can assign network security groups to a subnet and create a protected screened subnet (also referred to as a demilitarized zone or DMZ ). A DMZ acts as a buffer between resources within your virtual network and the internet.</p>
+<p>- Use the network security group to restrict traffic flow to all machines that reside within the subnet.</p>
+<p>Use the network security group to restrict traffic flow to all machines that reside within the subnet.</p>
+<p>- Each subnet can have a maximum of one associated network security group.</p>
+<p>Each subnet can have a maximum of one associated network security group.</p>
+<h4>Network security groups and network interfaces</h4>
+<p>You can assign network security groups to a network interface card (NIC).</p>
+<p>- Define network security group rules to control all traffic that flows through a network interface.</p>
+<p>Define network security group rules to control all traffic that flows through a network interface.</p>
+<p>- Each network interface that exists in a subnet can have zero, or one, associated network security groups.</p>
+<p>Each network interface that exists in a subnet can have zero, or one, associated network security groups.</p>
+<h2>Unit 3.2.3 - Determine network security group rules</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/configure-network-security-groups/3-determine-network-security-groups-rules</p>
+<h3>Determine network security group rules</h3>
+<p>Security rules in network security groups enable you to filter network traffic. You can define rules to control the traffic flow in and out of virtual network subnets and network interfaces.</p>
+<h4>Things to know about security rules</h4>
+<p>Let's review the characteristics of security rules in network security groups.</p>
+<p>- Azure creates several default security rules within each network security group, including inbound traffic and outbound traffic. Examples of default rules include DenyAllInbound traffic and AllowInternetOutbound traffic.</p>
+<p>Azure creates several default security rules within each network security group, including inbound traffic and outbound traffic. Examples of default rules include DenyAllInbound traffic and AllowInternetOutbound traffic.</p>
+<p>DenyAllInbound</p>
+<p>AllowInternetOutbound</p>
+<p>- Azure creates the default security rules in each network security group that you create.</p>
+<p>Azure creates the default security rules in each network security group that you create.</p>
+<p>- You can add more security rules to a network security group by specifying conditions . Here's a list of the most common conditions. Setting Value Source Any, IP Addresses, My IP address, Service Tag, or Application security group Source port ranges Specify the ports on which the rule allows or denies traffic Destination Any, IP Addresses, Service Tag, or Application security group Protocol Restrict the rule to Transmission Control Protocol (TCP), User Datagram Protocol (UDP), Internet Control Message Protocol (ICMP), Encapsulating Security Payload (ESP), or Authentication Header (AH). ESP and AH protocols are only available via JSON templates and PowerShell. The default is for the rule to apply to all protocols (Any). Action Allow or Deny Priority A value between 100 and 4,096 that's unique for all security rules within the NSG</p>
+<p>You can add more security rules to a network security group by specifying conditions . Here's a list of the most common conditions.</p>
+<p>Setting</p>
+<p>Value</p>
+<p>Source</p>
+<p>Any, IP Addresses, My IP address, Service Tag, or Application security group</p>
+<p>Source port ranges</p>
+<p>Specify the ports on which the rule allows or denies traffic</p>
+<p>Destination</p>
+<p>Any, IP Addresses, Service Tag, or Application security group</p>
+<p>Protocol</p>
+<p>Restrict the rule to Transmission Control Protocol (TCP), User Datagram Protocol (UDP), Internet Control Message Protocol (ICMP), Encapsulating Security Payload (ESP), or Authentication Header (AH). ESP and AH protocols are only available via JSON templates and PowerShell. The default is for the rule to apply to all protocols (Any).</p>
+<p>Action</p>
+<p>Allow or Deny</p>
+<p>Priority</p>
+<p>A value between 100 and 4,096 that's unique for all security rules within the NSG</p>
+<p>- Each security rule is assigned a Priority value. All security rules for a network security group are processed in priority order. When a rule has a low Priority value, the rule has a higher priority or precedence in terms of order processing.</p>
+<p>Each security rule is assigned a Priority value. All security rules for a network security group are processed in priority order. When a rule has a low Priority value, the rule has a higher priority or precedence in terms of order processing.</p>
+<p>- You can't remove the default security rules.</p>
+<p>You can't remove the default security rules.</p>
+<p>- You can override a default security rule by creating another security rule that has a higher Priority setting for your network security group.</p>
+<p>You can override a default security rule by creating another security rule that has a higher Priority setting for your network security group.</p>
+<h4>Inbound traffic rules</h4>
+<p>Azure defines three default inbound security rules for your network security group. These rules deny all inbound traffic except traffic from your virtual network and Azure load balancers. The next image shows the default inbound security rules for a network security group in the Azure portal.</p>
+<h4>Outbound traffic rules</h4>
+<p>Azure defines three default outbound security rules for your network security group. These rules only allow outbound traffic to the internet and your virtual network. The next image shows the default outbound security rules for a network security group in the Azure portal.</p>
+<h2>Unit 3.2.4 - Determine network security group effective rules</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/configure-network-security-groups/4-determine-network-security-groups-effective-rules</p>
+<h3>Determine network security group effective rules</h3>
+<p>Each network security group and its defined security rules are evaluated independently. Azure processes the conditions in each rule defined for each virtual machine in your configuration.</p>
+<p>- For inbound traffic, Azure first processes network security group security rules for any associated subnets and then any associated network interfaces.</p>
+<p>- For outbound traffic, the process is reversed. Azure first evaluates network security group security rules for any associated network interfaces followed by any associated subnets.</p>
+<p>- For both the inbound and outbound evaluation process, Azure also checks how to apply the rules for intra-subnet traffic. Intra-subnet traffic refers to virtual machines in the same subnet.</p>
+<p>How Azure ends up applying your defined security rules for a virtual machine determines the overall effectiveness of your rules.</p>
+<h4>Network security group evaluation</h4>
+<p>When you apply network security groups to both a subnet and a network interface, each network security group is evaluated independently. Both inbound and outbound rules are considered based on the priority and processing order.</p>
+<h4>Things to consider when creating effective rules</h4>
+<p>Review the following considerations regarding creating effective security rules for machines in your virtual network.</p>
+<p>- Consider allowing all traffic . If you place your virtual machine within a subnet or utilize a network interface, you don't have to associate the subnet or NIC with a network security group. This approach allows all network traffic through the subnet or NIC according to the default Azure security rules. If you're not concerned about controlling traffic to your resource at a specific level, then don't associate your resource at that level to a network security group.</p>
+<p>Consider allowing all traffic . If you place your virtual machine within a subnet or utilize a network interface, you don't have to associate the subnet or NIC with a network security group. This approach allows all network traffic through the subnet or NIC according to the default Azure security rules. If you're not concerned about controlling traffic to your resource at a specific level, then don't associate your resource at that level to a network security group.</p>
+<p>- Consider importance of allow rules . When you create a network security group, you must define an allow rule for both the subnet and network interface in the group to ensure traffic can get through. If you have a subnet or NIC in your network security group, you must define an allow rule at each level. Otherwise, the traffic is denied for any level that doesn't provide an allow rule definition.</p>
+<p>Consider importance of allow rules . When you create a network security group, you must define an allow rule for both the subnet and network interface in the group to ensure traffic can get through. If you have a subnet or NIC in your network security group, you must define an allow rule at each level. Otherwise, the traffic is denied for any level that doesn't provide an allow rule definition.</p>
+<p>- Consider intra-subnet traffic . The security rules for a network security group associated to a subnet can affect traffic between all virtual machines in the subnet. You can prohibit intra-subnet traffic by defining a rule in the network security group to deny all inbound and outbound traffic. This rule prevents all virtual machines in your subnet from communicating with each other.</p>
+<p>Consider intra-subnet traffic . The security rules for a network security group associated to a subnet can affect traffic between all virtual machines in the subnet. You can prohibit intra-subnet traffic by defining a rule in the network security group to deny all inbound and outbound traffic. This rule prevents all virtual machines in your subnet from communicating with each other.</p>
+<p>- Consider rule priority . The security rules for a network security group are processed in priority order. To ensure a particular security rule is always processed, assign the lowest possible priority value to the rule. It's a good practice to leave gaps in your priority numbering, such as 100, 200, 300, and so. The gaps in the numbering allow you to add new rules without having to edit existing rules.</p>
+<p>Consider rule priority . The security rules for a network security group are processed in priority order. To ensure a particular security rule is always processed, assign the lowest possible priority value to the rule. It's a good practice to leave gaps in your priority numbering, such as 100, 200, 300, and so. The gaps in the numbering allow you to add new rules without having to edit existing rules.</p>
+<h4>View effective security rules</h4>
+<p>If you have several network security groups and aren't sure which security rules are being applied, you can use the Effective security rules link in the Azure portal. You can use the link to verify which security rules are applied to your machines, subnets, and network interfaces.</p>
+<p>Note</p>
+<p>Network Watcher provides a consolidated view of your infrastructure rules, including both NSG rules and Azure Virtual Network Manager security admin rules. The IP flow verify feature evaluates traffic against both NSG rules and any security admin rules that may be in effect.</p>
+<h2>Unit 3.2.5 - Create network security group rules</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/configure-network-security-groups/5-create-network-security-groups-rules</p>
+<h3>Create network security group rules</h3>
+<p>It's easy to add security rules to control inbound and outbound traffic in the Azure portal. You can configure your virtual network security group rule settings, and select from a large variety of communication services, including HTTPS, RDP, FTP, and DNS.</p>
+<h4>Things to know about configuring security rules</h4>
+<p>Let's look at some of the properties you need to specify to create your security rules. As you review these settings, think about the traffic rules you need to create and what services can fulfill your network requirements.</p>
+<p>- Source : Identifies how the security rule controls inbound traffic. The value specifies a specific source IP address range to allow or deny. The source filter can be any resource, an IP address range, an application security group, or a default tag.</p>
+<p>Source : Identifies how the security rule controls inbound traffic. The value specifies a specific source IP address range to allow or deny. The source filter can be any resource, an IP address range, an application security group, or a default tag.</p>
+<p>- Destination : Identifies how the security rule controls outbound traffic. The value specifies a specific destination IP address range to allow or deny. The destination filter value is similar to the source filter. The value can be any resource, an IP address range, an application security group, or a default tag.</p>
+<p>Destination : Identifies how the security rule controls outbound traffic. The value specifies a specific destination IP address range to allow or deny. The destination filter value is similar to the source filter. The value can be any resource, an IP address range, an application security group, or a default tag.</p>
+<p>- Service : Specifies the destination protocol and port range for the security rule. You can choose a predefined service like RDP or SSH or provide a custom port range. There are a large number of services to select from.</p>
+<p>Service : Specifies the destination protocol and port range for the security rule. You can choose a predefined service like RDP or SSH or provide a custom port range. There are a large number of services to select from.</p>
+<p>- Priority : Assigns the priority order value for the security rule. Rules are processed according to the priority order of all rules for a network security group, including a subnet and network interface. The lower the priority value, the higher priority for the rule.</p>
+<p>Priority : Assigns the priority order value for the security rule. Rules are processed according to the priority order of all rules for a network security group, including a subnet and network interface. The lower the priority value, the higher priority for the rule.</p>
+<h4>When to use augmented security rules</h4>
+<p>A single network security group rule can contain multiple values in the Source, Destination, and Service fields. This approach, called augmented security rules, reduces the total number of rules needed and simplifies NSG management.</p>
+<p>Things to know about augments security rules</p>
+<p>- Multiple IP addresses : Combine multiple IP addresses into one rule.</p>
+<p>Multiple IP addresses : Combine multiple IP addresses into one rule.</p>
+<p>- Multiple port ranges : Specify multiple ports and ranges in the Service field.</p>
+<p>Multiple port ranges : Specify multiple ports and ranges in the Service field.</p>
+<p>- Service tags and ASGs : Mix service tags, application security groups, and IP addresses within the same rule.</p>
+<p>Service tags and ASGs : Mix service tags, application security groups, and IP addresses within the same rule.</p>
+<p>- Reduced rule count : Instead of creating separate rules for each IP range or port, combine them into fewer, more manageable rules.</p>
+<p>Reduced rule count : Instead of creating separate rules for each IP range or port, combine them into fewer, more manageable rules.</p>
+<p>In enterprise environments with many IP ranges or services, augmented rules prevent NSG rule sprawl. For example, instead of creating four separate rules for ports 80, 443, 8080, and 8090, create one rule with all the ports.</p>
+<p>Tip</p>
+<p>Expand your learning with the Secure and isolate access to Azure resources by using network security groups and service endpoints training module. This module includes a sandbox where you can practice.</p>
+<h2>Unit 3.2.6 - Implement application security groups</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/configure-network-security-groups/6-implement-asgs</p>
+<h3>Implement application security groups</h3>
+<p>You can implement application security groups (ASGs) in your Azure virtual network to logically group your virtual machines by workload. You can then define your network security group rules based on your application security groups.</p>
+<h4>Things to know about using application security groups</h4>
+<p>Application security groups provide an application-centric way of looking at your infrastructure. You join your virtual machines to an application security group. Then you use the application security group as a source or destination in the network security group rules.</p>
+<p>Let's examine how to implement application security groups by creating a configuration for an online retailer. In our example scenario, we need to control network traffic to virtual machines in application security groups.</p>
+<p>Note</p>
+<p>In the diagram, the application servers are handing SQL Server requests.</p>
+<h4>Scenario requirements</h4>
+<p>Here are the scenario requirements for our example configuration:</p>
+<p>- In this scenario, there are two tiers: web servers and application servers.</p>
+<p>- The web servers handle HTTP and HTTPS internet traffic.</p>
+<p>- The application servers process SQL requests from the web servers.</p>
+<h4>Solution</h4>
+<p>For our scenario, we need to build the following configuration:</p>
+<p>- Create application security groups for each tier.</p>
+<p>Create application security groups for each tier.</p>
+<p>- For each virtual machine server, assign its network interface to the appropriate application security group.</p>
+<p>For each virtual machine server, assign its network interface to the appropriate application security group.</p>
+<p>- Create the network security group and security rules. Rule 1 : Set Priority to 100. Allow access from the internet to the web servers machines from HTTP port 80 and HTTPS port 443. Rule 1 has the lowest priority value, so it has precedence over the other rules in the group. Customer access to our online catalog is paramount in our design. Rule 2 : Set Priority to 110. Allow access from the web servers to application servers over SQL port 1433. Rule 3 : Set Priority to 120. Deny access from anywhere to application server machines on the HTTP and HTTPS ports. The combination of Rule 2 and Rule 3 ensures that only our web servers can access our database servers. This security configuration protects our inventory databases from outside attack.</p>
+<p>Create the network security group and security rules.</p>
+<p>- Rule 1 : Set Priority to 100. Allow access from the internet to the web servers machines from HTTP port 80 and HTTPS port 443. Rule 1 has the lowest priority value, so it has precedence over the other rules in the group. Customer access to our online catalog is paramount in our design.</p>
+<p>Rule 1 : Set Priority to 100. Allow access from the internet to the web servers machines from HTTP port 80 and HTTPS port 443.</p>
+<p>Rule 1 has the lowest priority value, so it has precedence over the other rules in the group. Customer access to our online catalog is paramount in our design.</p>
+<p>- Rule 2 : Set Priority to 110. Allow access from the web servers to application servers over SQL port 1433.</p>
+<p>Rule 2 : Set Priority to 110. Allow access from the web servers to application servers over SQL port 1433.</p>
+<p>- Rule 3 : Set Priority to 120. Deny access from anywhere to application server machines on the HTTP and HTTPS ports. The combination of Rule 2 and Rule 3 ensures that only our web servers can access our database servers. This security configuration protects our inventory databases from outside attack.</p>
+<p>Rule 3 : Set Priority to 120. Deny access from anywhere to application server machines on the HTTP and HTTPS ports.</p>
+<p>The combination of Rule 2 and Rule 3 ensures that only our web servers can access our database servers. This security configuration protects our inventory databases from outside attack.</p>
+<h4>Things to consider when using application security groups</h4>
+<p>There are several advantages to implementing application security groups in your virtual networks.</p>
+<p>- Consider IP address maintenance . When you control network traffic by using application security groups, you don't need to configure inbound and outbound traffic for specific IP addresses. If you have many virtual machines in your configuration, it can be difficult to specify all of the affected IP addresses. As you maintain your configuration, the number of your servers can change. These changes can require you to modify how you support different IP addresses in your security rules.</p>
+<p>Consider IP address maintenance . When you control network traffic by using application security groups, you don't need to configure inbound and outbound traffic for specific IP addresses. If you have many virtual machines in your configuration, it can be difficult to specify all of the affected IP addresses. As you maintain your configuration, the number of your servers can change. These changes can require you to modify how you support different IP addresses in your security rules.</p>
+<p>- Consider no subnets . By organizing your virtual machines into application security groups, you don't need to also distribute your servers across specific subnets. You can arrange your servers by application and purpose to achieve logical groupings.</p>
+<p>Consider no subnets . By organizing your virtual machines into application security groups, you don't need to also distribute your servers across specific subnets. You can arrange your servers by application and purpose to achieve logical groupings.</p>
+<p>- Consider simplified rules . Application security groups help to eliminate the need for multiple rule sets. You don't need to create a separate rule for each virtual machine. You can dynamically apply new rules to designated application security groups. New security rules are automatically applied to all the virtual machines in the specified application security group.</p>
+<p>Consider simplified rules . Application security groups help to eliminate the need for multiple rule sets. You don't need to create a separate rule for each virtual machine. You can dynamically apply new rules to designated application security groups. New security rules are automatically applied to all the virtual machines in the specified application security group.</p>
+<p>- Consider workload support . A configuration that implements application security groups is easy to maintain and understand because the organization is based on workload usage. Application security groups provide logical arrangements for your applications, services, data storage, and workloads.</p>
+<p>Consider workload support . A configuration that implements application security groups is easy to maintain and understand because the organization is based on workload usage. Application security groups provide logical arrangements for your applications, services, data storage, and workloads.</p>
+<p>- Consider service tags . Service Tags represent a group of IP address prefixes from a specific Azure service. They help minimize the complexity of frequent updates on network security rules. While service tags are used to simplify the management of IP addresses for Azure services, ASGs are used to group VMs and manage network security policies based on those groups.</p>
+<p>Consider service tags . Service Tags represent a group of IP address prefixes from a specific Azure service. They help minimize the complexity of frequent updates on network security rules. While service tags are used to simplify the management of IP addresses for Azure services, ASGs are used to group VMs and manage network security policies based on those groups.</p>
+<h2>Unit 3.2.7 - Exercise - Implement virtual networking</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/configure-network-security-groups/7-simulation-create-network-groups</p>
+<h3>Exercise - Implement virtual networking</h3>
+<h3>Lab scenario</h3>
+<p>Your organization wants to ensure that access to virtual machines is restricted. As the Azure Administrator, you need to:</p>
+<p>- Create and configure network security groups.</p>
+<p>- Associate network security groups to virtual machines.</p>
+<p>- Deny and allow access to the virtual machines by using network security groups.</p>
+<h3>Architecture diagram</h3>
+<h3>Job skills</h3>
+<p>- Create a virtual network with subnets using the portal.</p>
+<p>- Create a virtual network and subnets using a template.</p>
+<p>- Create and configure communication between an Application Security Group and a Network Security Group.</p>
+<p>- Configure public and private Azure DNS zones. (optional)</p>
+<p>Important</p>
+<p>Estimated time: 50 minutes.</p>
+<p>To complete this exercise, you need an Azure subscription .</p>
+<p>Launch the exercise, and follow the instructions. When finished, be sure to return to this page so you can continue learning.</p>
+<h2>Unit 3.2.8 - Module assessment</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/configure-network-security-groups/8-knowledge-check</p>
+<h3>Module assessment</h3>
+<p>Your company is migrating several sites to Azure. You're responsible for implementing network security groups and designing effective security rules to control network traffic. You need to ensure that virtual machine networking and Azure services networking are both secure.</p>
+<p>- The infrastructure team has two network security group security rules for inbound traffic to the back-end web servers. There's an allow rule with a priority of 200, and a deny rule with a priority of 150.</p>
+<p>The infrastructure team has two network security group security rules for inbound traffic to the back-end web servers. There's an allow rule with a priority of 200, and a deny rule with a priority of 150.</p>
+<p>- The IT team wants to apply service tags for the virtual machine IP addresses.</p>
+<p>The IT team wants to apply service tags for the virtual machine IP addresses.</p>
+<p>- You're exploring how to use default rules to apply security to inbound traffic from virtual machines within your virtual network.</p>
+<p>You're exploring how to use default rules to apply security to inbound traffic from virtual machines within your virtual network.</p>
+<h4>Answer the following questions</h4>
+<p>Choose the best response for each question.</p>
+<h2>Unit 3.2.9 - Summary and resources</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/configure-network-security-groups/9-summary-resources</p>
+<h3>Summary and resources</h3>
+<p>In this module, you learned about network security groups (NSGs) in Azure. NSGs are used to limit network traffic to resources in your virtual network by containing a list of security rules. You can associate NSGs with subnets or network interfaces and define rules to control inbound and outbound traffic.</p>
+<p>You also learned how NSG rules are evaluated and processed. Lastly, you learned how application security groups, allow for grouping virtual machines based on workload.</p>
+<p>The main takeaways from this module are:</p>
+<p>- Network security groups are essential for controlling network traffic in Azure virtual networks.</p>
+<p>Network security groups are essential for controlling network traffic in Azure virtual networks.</p>
+<p>- NSG rules are evaluated and processed based on priority and can be created for subnets and network interfaces.</p>
+<p>NSG rules are evaluated and processed based on priority and can be created for subnets and network interfaces.</p>
+<p>- Effective NSG rules can be achieved by considering rule precedence, intra-subnet traffic, and managing rule priority.</p>
+<p>Effective NSG rules can be achieved by considering rule precedence, intra-subnet traffic, and managing rule priority.</p>
+<p>- Application security groups provide an application-centric view of infrastructure and simplify rule management.</p>
+<p>Application security groups provide an application-centric view of infrastructure and simplify rule management.</p>
+<h3>Learn more with Copilot</h3>
+<p>Copilot can assist you in designing Azure infrastructure solutions. Copilot can compare, recommend, explain, and research products and services where you need more information. Open a Microsoft Edge browser and choose Copilot (top right) or navigate to copilot.microsoft.com. Take a few minutes to try these prompts and extend your learning with Copilot.</p>
+<p>- What is the difference between an Azure network security group and an application security group? Provide usage examples.</p>
+<p>What is the difference between an Azure network security group and an application security group? Provide usage examples.</p>
+<p>- Can you explain NSG rules in detail?</p>
+<p>Can you explain NSG rules in detail?</p>
+<p>- How can I troubleshoot network security group rules?</p>
+<p>How can I troubleshoot network security group rules?</p>
+<h3>Learn more with documentation</h3>
+<p>- Read about network security groups . This article describes the properties of a network security group rule, the default security rules that are applied, and the rule properties that you can modify.</p>
+<p>Read about network security groups . This article describes the properties of a network security group rule, the default security rules that are applied, and the rule properties that you can modify.</p>
+<p>- Filter network traffic with network security groups in the Azure portal . Learn how to create a network security group and an application security group.</p>
+<p>Filter network traffic with network security groups in the Azure portal . Learn how to create a network security group and an application security group.</p>
+<p>- Create, change, or delete a network security group . Learn how to work with network and application security groups.</p>
+<p>Create, change, or delete a network security group . Learn how to work with network and application security groups.</p>
+<p>- Application security groups . Learn about application security groups and traffic control with rules.</p>
+<p>Application security groups . Learn about application security groups and traffic control with rules.</p>
+<h3>Learn more with self-paced training</h3>
+<p>- Secure and isolate access to Azure resources with network security groups and service endpoints (sandbox) . Learn how to secure your virtual machines and Azure services from unauthorized network access.</p>
+<p>Secure and isolate access to Azure resources with network security groups and service endpoints (sandbox) . Learn how to secure your virtual machines and Azure services from unauthorized network access.</p>
+<p>- Filter network traffic with a network security group using the Azure portal . Learn how to create, configure, and apply NSGs for improved network security.</p>
+<p>Filter network traffic with a network security group using the Azure portal . Learn how to create, configure, and apply NSGs for improved network security.</p></body>
+</html>

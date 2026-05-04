@@ -1,0 +1,2164 @@
+{
+  "source_url": "https://learn.microsoft.com/en-us/training/courses/az-104t00",
+  "source_uid": "course.az-104t00",
+  "source_type": "course",
+  "locale": "en-us",
+  "generated_at_utc": "2026-05-04T19:52:35Z",
+  "course_title": "Microsoft Azure Administrator",
+  "learning_paths": [
+    {
+      "index": 1,
+      "uid": "learn.az104-admin-prerequisites",
+      "title": "AZ-104: Prerequisites for Azure administrators",
+      "url": "https://learn.microsoft.com/en-us/training/paths/az-104-administrator-prerequisites/?WT.mc_id=api_CatalogApi",
+      "duration_minutes": 63,
+      "modules": [
+        {
+          "index": 1,
+          "uid": "learn.intro-to-azure-cloud-shell",
+          "title": "Introduction to Azure Cloud Shell",
+          "url": "https://learn.microsoft.com/en-us/training/modules/intro-to-azure-cloud-shell/?WT.mc_id=api_CatalogApi",
+          "duration_minutes": 20,
+          "units": [
+            {
+              "index": 1,
+              "uid": "learn.intro-to-azure-cloud-shell.introduction",
+              "title": "Introduction",
+              "url": "https://learn.microsoft.com/en-us/training/modules/intro-to-azure-cloud-shell/1-introduction",
+              "duration_minutes": 3,
+              "kind": "introduction"
+            },
+            {
+              "index": 2,
+              "uid": "learn.intro-to-azure-cloud-shell.what-is-azure-cloud-shell",
+              "title": "What is Azure Cloud Shell?",
+              "url": "https://learn.microsoft.com/en-us/training/modules/intro-to-azure-cloud-shell/2-what-is-azure-cloud-shell",
+              "duration_minutes": 2,
+              "kind": "content"
+            },
+            {
+              "index": 3,
+              "uid": "learn.intro-to-azure-cloud-shell.how-azure-cloud-shell-works",
+              "title": "How does Azure Cloud Shell work?",
+              "url": "https://learn.microsoft.com/en-us/training/modules/intro-to-azure-cloud-shell/3-how-azure-cloud-shell-works",
+              "duration_minutes": 6,
+              "kind": "content"
+            },
+            {
+              "index": 4,
+              "uid": "learn.intro-to-azure-cloud-shell.when-to-use-azure-cloud-shell",
+              "title": "When should you use Azure Cloud Shell?",
+              "url": "https://learn.microsoft.com/en-us/training/modules/intro-to-azure-cloud-shell/4-when-to-use-azure-cloud-shell",
+              "duration_minutes": 3,
+              "kind": "content"
+            },
+            {
+              "index": 5,
+              "uid": "learn.intro-to-azure-cloud-shell.knowledge-check",
+              "title": "Module assessment",
+              "url": "https://learn.microsoft.com/en-us/training/modules/intro-to-azure-cloud-shell/5-knowledge-check",
+              "duration_minutes": 4,
+              "kind": "content"
+            },
+            {
+              "index": 6,
+              "uid": "learn.intro-to-azure-cloud-shell.summary",
+              "title": "Summary",
+              "url": "https://learn.microsoft.com/en-us/training/modules/intro-to-azure-cloud-shell/6-summary",
+              "duration_minutes": 2,
+              "kind": "summary"
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "uid": "learn.azure.create-resource-manager-template-vs-code",
+          "title": "Deploy Azure infrastructure by using JSON ARM templates",
+          "url": "https://learn.microsoft.com/en-us/training/modules/create-azure-resource-manager-template-vs-code/?WT.mc_id=api_CatalogApi",
+          "duration_minutes": 43,
+          "units": [
+            {
+              "index": 1,
+              "uid": "learn.azure.create-resource-manager-template-vs-code.1-introduction",
+              "title": "Introduction",
+              "url": "https://learn.microsoft.com/en-us/training/modules/create-azure-resource-manager-template-vs-code/1-introduction",
+              "duration_minutes": 2,
+              "kind": "introduction"
+            },
+            {
+              "index": 2,
+              "uid": "learn.azure.create-resource-manager-template-vs-code.2-explore-template-structure",
+              "title": "Explore Azure Resource Manager template structure",
+              "url": "https://learn.microsoft.com/en-us/training/modules/create-azure-resource-manager-template-vs-code/2-explore-template-structure",
+              "duration_minutes": 7,
+              "kind": "content"
+            },
+            {
+              "index": 3,
+              "uid": "learn.azure.create-resource-manager-template-vs-code.3-exercise-create-and-deploy-template",
+              "title": "Exercise - Create and deploy an Azure Resource Manager template",
+              "url": "https://learn.microsoft.com/en-us/training/modules/create-azure-resource-manager-template-vs-code/3-exercise-create-and-deploy-template",
+              "duration_minutes": 10,
+              "kind": "exercise"
+            },
+            {
+              "index": 4,
+              "uid": "learn.azure.create-resource-manager-template-vs-code.4-add-flexibility-arm-template",
+              "title": "Add flexibility to your Azure Resource Manager template by using parameters and outputs",
+              "url": "https://learn.microsoft.com/en-us/training/modules/create-azure-resource-manager-template-vs-code/4-add-flexibility-arm-template",
+              "duration_minutes": 8,
+              "kind": "content"
+            },
+            {
+              "index": 5,
+              "uid": "learn.azure.create-resource-manager-template-vs-code.5-exercise-parameters-output",
+              "title": "Exercise - Add parameters and outputs to your Azure Resource Manager template",
+              "url": "https://learn.microsoft.com/en-us/training/modules/create-azure-resource-manager-template-vs-code/5-exercise-parameters-output",
+              "duration_minutes": 12,
+              "kind": "exercise"
+            },
+            {
+              "index": 6,
+              "uid": "learn.azure.create-resource-manager-template-vs-code.6-knowledge-check",
+              "title": "Module assessment",
+              "url": "https://learn.microsoft.com/en-us/training/modules/create-azure-resource-manager-template-vs-code/6-knowledge-check",
+              "duration_minutes": 3,
+              "kind": "content"
+            },
+            {
+              "index": 7,
+              "uid": "learn.azure.create-resource-manager-template-vs-code.7-summary",
+              "title": "Summary",
+              "url": "https://learn.microsoft.com/en-us/training/modules/create-azure-resource-manager-template-vs-code/7-summary",
+              "duration_minutes": 1,
+              "kind": "summary"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "uid": "learn.az-104-manage-identities-governance",
+      "title": "AZ-104: Manage identities and governance in Azure",
+      "url": "https://learn.microsoft.com/en-us/training/paths/az-104-manage-identities-governance/?WT.mc_id=api_CatalogApi",
+      "duration_minutes": 264,
+      "modules": [
+        {
+          "index": 1,
+          "uid": "learn.wwl.understand-azure-active-directory",
+          "title": "Understand Microsoft Entra ID",
+          "url": "https://learn.microsoft.com/en-us/training/modules/understand-azure-active-directory/?WT.mc_id=api_CatalogApi",
+          "duration_minutes": 31,
+          "units": [
+            {
+              "index": 1,
+              "uid": "learn.wwl.understand-azure-active-directory.introduction",
+              "title": "Introduction",
+              "url": "https://learn.microsoft.com/en-us/training/modules/understand-azure-active-directory/1-introduction",
+              "duration_minutes": 1,
+              "kind": "introduction"
+            },
+            {
+              "index": 2,
+              "uid": "learn.wwl.understand-azure-active-directory.examine-azure-active-directory",
+              "title": "Examine Microsoft Entra ID",
+              "url": "https://learn.microsoft.com/en-us/training/modules/understand-azure-active-directory/2-examine-azure-active-directory",
+              "duration_minutes": 7,
+              "kind": "content"
+            },
+            {
+              "index": 3,
+              "uid": "learn.wwl.understand-azure-active-directory.compare-azure-active-directory-domain-services",
+              "title": "Compare Microsoft Entra ID and Active Directory Domain Services",
+              "url": "https://learn.microsoft.com/en-us/training/modules/understand-azure-active-directory/3-compare-azure-active-directory-domain-services",
+              "duration_minutes": 2,
+              "kind": "content"
+            },
+            {
+              "index": 4,
+              "uid": "learn.wwl.understand-azure-active-directory.examine-azure-directory-service-cloud-apps",
+              "title": "Examine Microsoft Entra ID as a directory service for cloud apps",
+              "url": "https://learn.microsoft.com/en-us/training/modules/understand-azure-active-directory/4-examine-azure-directory-service-cloud-apps",
+              "duration_minutes": 2,
+              "kind": "content"
+            },
+            {
+              "index": 5,
+              "uid": "learn.wwl.understand-azure-active-directory.compare-azure-premium-p1-p2-plans",
+              "title": "Compare Microsoft Entra ID P1 and P2 plans",
+              "url": "https://learn.microsoft.com/en-us/training/modules/understand-azure-active-directory/5-compare-azure-premium-p1-p2-plans",
+              "duration_minutes": 4,
+              "kind": "content"
+            },
+            {
+              "index": 6,
+              "uid": "learn.wwl.understand-azure-active-directory.examine-azure-domain-services",
+              "title": "Examine Microsoft Entra Domain Services",
+              "url": "https://learn.microsoft.com/en-us/training/modules/understand-azure-active-directory/6-examine-azure-domain-services",
+              "duration_minutes": 4,
+              "kind": "content"
+            },
+            {
+              "index": 7,
+              "uid": "learn.wwl.understand-azure-active-directory.knowledge-check",
+              "title": "Module assessment",
+              "url": "https://learn.microsoft.com/en-us/training/modules/understand-azure-active-directory/7-knowledge-check",
+              "duration_minutes": 10,
+              "kind": "content"
+            },
+            {
+              "index": 8,
+              "uid": "learn.wwl.understand-azure-active-directory.summary",
+              "title": "Summary",
+              "url": "https://learn.microsoft.com/en-us/training/modules/understand-azure-active-directory/8-summary",
+              "duration_minutes": 1,
+              "kind": "summary"
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "uid": "learn.wwl.create-configure-manage-identities",
+          "title": "Create, configure, and manage identities",
+          "url": "https://learn.microsoft.com/en-us/training/modules/create-configure-manage-identities/?WT.mc_id=api_CatalogApi",
+          "duration_minutes": 64,
+          "units": [
+            {
+              "index": 1,
+              "uid": "learn.wwl.create-configure-manage-identities.introduction",
+              "title": "Introduction",
+              "url": "https://learn.microsoft.com/en-us/training/modules/create-configure-manage-identities/1-introduction",
+              "duration_minutes": 1,
+              "kind": "introduction"
+            },
+            {
+              "index": 2,
+              "uid": "learn.wwl.create-configure-manage-identities.users",
+              "title": "Create, configure, and manage users",
+              "url": "https://learn.microsoft.com/en-us/training/modules/create-configure-manage-identities/2-users",
+              "duration_minutes": 2,
+              "kind": "content"
+            },
+            {
+              "index": 3,
+              "uid": "learn.wwl.create-configure-manage-identities.exercise-assign-licenses-users",
+              "title": "Exercise - assign licenses to users",
+              "url": "https://learn.microsoft.com/en-us/training/modules/create-configure-manage-identities/3-exercise-assign-licenses-users",
+              "duration_minutes": 5,
+              "kind": "exercise"
+            },
+            {
+              "index": 4,
+              "uid": "learn.wwl.create-configure-manage-identities.exercise-restore-remove-deleted-users",
+              "title": "Exercise - restore or remove deleted users",
+              "url": "https://learn.microsoft.com/en-us/training/modules/create-configure-manage-identities/4-exercise-restore-remove-deleted-users",
+              "duration_minutes": 5,
+              "kind": "exercise"
+            },
+            {
+              "index": 5,
+              "uid": "learn.wwl.create-configure-manage-identities.groups",
+              "title": "Create, configure, and manage groups",
+              "url": "https://learn.microsoft.com/en-us/training/modules/create-configure-manage-identities/5-groups",
+              "duration_minutes": 3,
+              "kind": "content"
+            },
+            {
+              "index": 6,
+              "uid": "learn.wwl.create-configure-manage-identities.exercise-add-groups-azure-active-directory",
+              "title": "Exercise - add groups in Microsoft Entra ID",
+              "url": "https://learn.microsoft.com/en-us/training/modules/create-configure-manage-identities/6-exercise-add-groups-azure-active-directory",
+              "duration_minutes": 2,
+              "kind": "exercise"
+            },
+            {
+              "index": 7,
+              "uid": "learn.wwl.create-configure-manage-identities.configure-manage-device-registration",
+              "title": "Configure and manage device registration",
+              "url": "https://learn.microsoft.com/en-us/training/modules/create-configure-manage-identities/7-configure-manage-device-registration",
+              "duration_minutes": 9,
+              "kind": "content"
+            },
+            {
+              "index": 8,
+              "uid": "learn.wwl.create-configure-manage-identities.manage-licenses",
+              "title": "Manage licenses",
+              "url": "https://learn.microsoft.com/en-us/training/modules/create-configure-manage-identities/8-manage-licenses",
+              "duration_minutes": 5,
+              "kind": "content"
+            },
+            {
+              "index": 9,
+              "uid": "learn.wwl.create-configure-manage-identities.exercise-change-group-license-assignments",
+              "title": "Exercise - change group license assignments",
+              "url": "https://learn.microsoft.com/en-us/training/modules/create-configure-manage-identities/9-exercise-change-group-license-assignments",
+              "duration_minutes": 10,
+              "kind": "exercise"
+            },
+            {
+              "index": 10,
+              "uid": "learn.wwl.create-configure-manage-identities.exercise-change-user-license-assignments",
+              "title": "Exercise - change user license assignments",
+              "url": "https://learn.microsoft.com/en-us/training/modules/create-configure-manage-identities/10-exercise-change-user-license-assignments",
+              "duration_minutes": 5,
+              "kind": "exercise"
+            },
+            {
+              "index": 11,
+              "uid": "learn.wwl.create-configure-manage-identities.create-custom-security-attributes",
+              "title": "Create custom security attributes",
+              "url": "https://learn.microsoft.com/en-us/training/modules/create-configure-manage-identities/11-create-custom-security-attributes",
+              "duration_minutes": 4,
+              "kind": "content"
+            },
+            {
+              "index": 12,
+              "uid": "learn.wwl.create-configure-manage-identities.explore-automatic-user-creation",
+              "title": "Explore automatic user creation",
+              "url": "https://learn.microsoft.com/en-us/training/modules/create-configure-manage-identities/12-explore-automatic-user-creation",
+              "duration_minutes": 2,
+              "kind": "content"
+            },
+            {
+              "index": 13,
+              "uid": "learn.wwl.create-configure-manage-identities.knowledge-check",
+              "title": "Module assessment",
+              "url": "https://learn.microsoft.com/en-us/training/modules/create-configure-manage-identities/13-knowledge-check",
+              "duration_minutes": 10,
+              "kind": "content"
+            },
+            {
+              "index": 14,
+              "uid": "learn.wwl.create-configure-manage-identities.summary-resources",
+              "title": "Summary and resources",
+              "url": "https://learn.microsoft.com/en-us/training/modules/create-configure-manage-identities/14-summary-resources",
+              "duration_minutes": 1,
+              "kind": "summary"
+            }
+          ]
+        },
+        {
+          "index": 3,
+          "uid": "learn.wwl.describe-core-architectural-components-of-azure",
+          "title": "Describe the core architectural components of Azure",
+          "url": "https://learn.microsoft.com/en-us/training/modules/describe-core-architectural-components-of-azure/?WT.mc_id=api_CatalogApi",
+          "duration_minutes": 28,
+          "units": [
+            {
+              "index": 1,
+              "uid": "learn.wwl.describe-core-architectural-components-of-azure.introduction",
+              "title": "Introduction",
+              "url": "https://learn.microsoft.com/en-us/training/modules/describe-core-architectural-components-of-azure/1-introduction",
+              "duration_minutes": 1,
+              "kind": "introduction"
+            },
+            {
+              "index": 2,
+              "uid": "learn.wwl.describe-core-architectural-components-of-azure.what-microsoft-azure",
+              "title": "What is Microsoft Azure",
+              "url": "https://learn.microsoft.com/en-us/training/modules/describe-core-architectural-components-of-azure/2-what-microsoft-azure",
+              "duration_minutes": 4,
+              "kind": "content"
+            },
+            {
+              "index": 3,
+              "uid": "learn.wwl.describe-core-architectural-components-of-azure.get-started-azure-accounts",
+              "title": "Get started with Azure accounts",
+              "url": "https://learn.microsoft.com/en-us/training/modules/describe-core-architectural-components-of-azure/3-get-started-azure-accounts",
+              "duration_minutes": 4,
+              "kind": "content"
+            },
+            {
+              "index": 4,
+              "uid": "learn.wwl.describe-core-architectural-components-of-azure.describe-azure-physical-infrastructure",
+              "title": "Describe Azure physical infrastructure",
+              "url": "https://learn.microsoft.com/en-us/training/modules/describe-core-architectural-components-of-azure/5-describe-azure-physical-infrastructure",
+              "duration_minutes": 6,
+              "kind": "content"
+            },
+            {
+              "index": 5,
+              "uid": "learn.wwl.describe-core-architectural-components-of-azure.describe-azure-management-infrastructure",
+              "title": "Describe Azure management infrastructure",
+              "url": "https://learn.microsoft.com/en-us/training/modules/describe-core-architectural-components-of-azure/6-describe-azure-management-infrastructure",
+              "duration_minutes": 7,
+              "kind": "content"
+            },
+            {
+              "index": 6,
+              "uid": "learn.wwl.describe-core-architectural-components-of-azure.knowledge-check",
+              "title": "Module assessment",
+              "url": "https://learn.microsoft.com/en-us/training/modules/describe-core-architectural-components-of-azure/8-knowledge-check",
+              "duration_minutes": 4,
+              "kind": "content"
+            },
+            {
+              "index": 7,
+              "uid": "learn.wwl.describe-core-architectural-components-of-azure.summary",
+              "title": "Summary",
+              "url": "https://learn.microsoft.com/en-us/training/modules/describe-core-architectural-components-of-azure/9-summary",
+              "duration_minutes": 2,
+              "kind": "summary"
+            }
+          ]
+        },
+        {
+          "index": 4,
+          "uid": "learn-bizapps.sovereignty-policy-initiatives",
+          "title": "Azure Policy initiatives",
+          "url": "https://learn.microsoft.com/en-us/training/modules/sovereignty-policy-initiatives/?WT.mc_id=api_CatalogApi",
+          "duration_minutes": 73,
+          "units": [
+            {
+              "index": 1,
+              "uid": "learn-bizapps.sovereignty-policy-initiatives.overview",
+              "title": "Introduction",
+              "url": "https://learn.microsoft.com/en-us/training/modules/sovereignty-policy-initiatives/overview",
+              "duration_minutes": 5,
+              "kind": "introduction"
+            },
+            {
+              "index": 2,
+              "uid": "learn-bizapps.sovereignty-policy-initiatives.cloud-adoption-framework",
+              "title": "Cloud Adoption Framework for Azure",
+              "url": "https://learn.microsoft.com/en-us/training/modules/sovereignty-policy-initiatives/cloud-adoption-framework",
+              "duration_minutes": 10,
+              "kind": "content"
+            },
+            {
+              "index": 3,
+              "uid": "learn-bizapps.sovereignty-policy-initiatives.azure-policy-design-principles",
+              "title": "Azure Policy design principles",
+              "url": "https://learn.microsoft.com/en-us/training/modules/sovereignty-policy-initiatives/azure-policy-design-principles",
+              "duration_minutes": 10,
+              "kind": "content"
+            },
+            {
+              "index": 4,
+              "uid": "learn-bizapps.sovereignty-policy-initiatives.azure-policy-resources",
+              "title": "Azure Policy resources",
+              "url": "https://learn.microsoft.com/en-us/training/modules/sovereignty-policy-initiatives/azure-policy-resources",
+              "duration_minutes": 10,
+              "kind": "content"
+            },
+            {
+              "index": 5,
+              "uid": "learn-bizapps.sovereignty-policy-initiatives.azure-policy-definitions",
+              "title": "Azure Policy definitions",
+              "url": "https://learn.microsoft.com/en-us/training/modules/sovereignty-policy-initiatives/azure-policy-definitions",
+              "duration_minutes": 20,
+              "kind": "content"
+            },
+            {
+              "index": 6,
+              "uid": "learn-bizapps.sovereignty-policy-initiatives.azure-policies-evaluation-resources",
+              "title": "Evaluation of resources through Azure Policy",
+              "url": "https://learn.microsoft.com/en-us/training/modules/sovereignty-policy-initiatives/azure-policies-evaluation-resources",
+              "duration_minutes": 10,
+              "kind": "content"
+            },
+            {
+              "index": 7,
+              "uid": "learn-bizapps.sovereignty-policy-initiatives.check",
+              "title": "Check your knowledge",
+              "url": "https://learn.microsoft.com/en-us/training/modules/sovereignty-policy-initiatives/check",
+              "duration_minutes": 5,
+              "kind": "content"
+            },
+            {
+              "index": 8,
+              "uid": "learn-bizapps.sovereignty-policy-initiatives.summary",
+              "title": "Summary",
+              "url": "https://learn.microsoft.com/en-us/training/modules/sovereignty-policy-initiatives/summary",
+              "duration_minutes": 3,
+              "kind": "summary"
+            }
+          ]
+        },
+        {
+          "index": 5,
+          "uid": "learn.secure-azure-resources-with-rbac",
+          "title": "Secure your Azure resources with Azure role-based access control (Azure RBAC)",
+          "url": "https://learn.microsoft.com/en-us/training/modules/secure-azure-resources-with-rbac/?WT.mc_id=api_CatalogApi",
+          "duration_minutes": 37,
+          "units": [
+            {
+              "index": 1,
+              "uid": "learn.secure-azure-resources-with-rbac.1-introduction",
+              "title": "Introduction",
+              "url": "https://learn.microsoft.com/en-us/training/modules/secure-azure-resources-with-rbac/1-introduction",
+              "duration_minutes": 2,
+              "kind": "introduction"
+            },
+            {
+              "index": 2,
+              "uid": "learn.secure-azure-resources-with-rbac.2-rbac-overview",
+              "title": "What is Azure RBAC?",
+              "url": "https://learn.microsoft.com/en-us/training/modules/secure-azure-resources-with-rbac/2-rbac-overview",
+              "duration_minutes": 8,
+              "kind": "content"
+            },
+            {
+              "index": 3,
+              "uid": "learn.secure-azure-resources-with-rbac.3-knowledge-check-rbac-overview",
+              "title": "Knowledge check - What is Azure RBAC?",
+              "url": "https://learn.microsoft.com/en-us/training/modules/secure-azure-resources-with-rbac/3-knowledge-check-rbac-overview",
+              "duration_minutes": 2,
+              "kind": "knowledge-check"
+            },
+            {
+              "index": 4,
+              "uid": "learn.secure-azure-resources-with-rbac.4-list-access",
+              "title": "Exercise - List access using Azure RBAC and the Azure portal",
+              "url": "https://learn.microsoft.com/en-us/training/modules/secure-azure-resources-with-rbac/4-list-access",
+              "duration_minutes": 8,
+              "kind": "exercise"
+            },
+            {
+              "index": 5,
+              "uid": "learn.secure-azure-resources-with-rbac.5-grant-access",
+              "title": "Exercise - Grant access using Azure RBAC and the Azure portal",
+              "url": "https://learn.microsoft.com/en-us/training/modules/secure-azure-resources-with-rbac/5-grant-access",
+              "duration_minutes": 8,
+              "kind": "exercise"
+            },
+            {
+              "index": 6,
+              "uid": "learn.secure-azure-resources-with-rbac.6-view-activity-logs",
+              "title": "Exercise - View activity logs for Azure RBAC changes",
+              "url": "https://learn.microsoft.com/en-us/training/modules/secure-azure-resources-with-rbac/6-view-activity-logs",
+              "duration_minutes": 4,
+              "kind": "exercise"
+            },
+            {
+              "index": 7,
+              "uid": "learn.secure-azure-resources-with-rbac.7-knowledge-check-rbac",
+              "title": "Module assessment",
+              "url": "https://learn.microsoft.com/en-us/training/modules/secure-azure-resources-with-rbac/7-knowledge-check-rbac",
+              "duration_minutes": 3,
+              "kind": "content"
+            },
+            {
+              "index": 8,
+              "uid": "learn.secure-azure-resources-with-rbac.8-summary",
+              "title": "Summary",
+              "url": "https://learn.microsoft.com/en-us/training/modules/secure-azure-resources-with-rbac/8-summary",
+              "duration_minutes": 2,
+              "kind": "summary"
+            }
+          ]
+        },
+        {
+          "index": 6,
+          "uid": "learn.azure.allow-users-to-reset-their-password",
+          "title": "Allow users to reset their password with Microsoft Entra self-service password reset",
+          "url": "https://learn.microsoft.com/en-us/training/modules/allow-users-reset-their-password/?WT.mc_id=api_CatalogApi",
+          "duration_minutes": 31,
+          "units": [
+            {
+              "index": 1,
+              "uid": "learn.azure.allow-users-to-reset-their-password.introduction",
+              "title": "Introduction",
+              "url": "https://learn.microsoft.com/en-us/training/modules/allow-users-reset-their-password/1-introduction",
+              "duration_minutes": 2,
+              "kind": "introduction"
+            },
+            {
+              "index": 2,
+              "uid": "learn.azure.allow-users-to-reset-their-password.what-is-self-service-password-reset",
+              "title": "What is self-service password reset in Microsoft Entra ID?",
+              "url": "https://learn.microsoft.com/en-us/training/modules/allow-users-reset-their-password/2-self-service-password-reset",
+              "duration_minutes": 7,
+              "kind": "content"
+            },
+            {
+              "index": 3,
+              "uid": "learn.azure.allow-users-to-reset-their-password.implement-azure-ad-self-service-password-reset",
+              "title": "Implement Microsoft Entra self-service password reset",
+              "url": "https://learn.microsoft.com/en-us/training/modules/allow-users-reset-their-password/3-implement-azure-ad-self-service-password-reset",
+              "duration_minutes": 5,
+              "kind": "content"
+            },
+            {
+              "index": 4,
+              "uid": "learn.azure.allow-users-to-reset-their-password.exercise-set-up-self-service-password-reset",
+              "title": "Exercise - Set up self-service password reset",
+              "url": "https://learn.microsoft.com/en-us/training/modules/allow-users-reset-their-password/4-exercise-set-up-self-service-password-reset",
+              "duration_minutes": 10,
+              "kind": "exercise"
+            },
+            {
+              "index": 5,
+              "uid": "learn.azure.allow-users-to-reset-their-password.exercise-customize-directory-branding",
+              "title": "Exercise - Customize directory branding",
+              "url": "https://learn.microsoft.com/en-us/training/modules/allow-users-reset-their-password/5-exercise-customize-directory-branding",
+              "duration_minutes": 5,
+              "kind": "exercise"
+            },
+            {
+              "index": 6,
+              "uid": "learn.azure.allow-users-to-reset-their-password.summary",
+              "title": "Summary",
+              "url": "https://learn.microsoft.com/en-us/training/modules/allow-users-reset-their-password/6-summary",
+              "duration_minutes": 2,
+              "kind": "summary"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "uid": "learn.az-104-manage-virtual-networks",
+      "title": "AZ-104: Configure and manage virtual networks for Azure administrators",
+      "url": "https://learn.microsoft.com/en-us/training/paths/az-104-manage-virtual-networks/?WT.mc_id=api_CatalogApi",
+      "duration_minutes": 270,
+      "modules": [
+        {
+          "index": 1,
+          "uid": "learn.wwl.configure-virtual-networks",
+          "title": "Configure virtual networks",
+          "url": "https://learn.microsoft.com/en-us/training/modules/configure-virtual-networks/?WT.mc_id=api_CatalogApi",
+          "duration_minutes": 42,
+          "units": [
+            {
+              "index": 1,
+              "uid": "learn.wwl.configure-virtual-networks.introduction",
+              "title": "Introduction",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-virtual-networks/1-introduction",
+              "duration_minutes": 1,
+              "kind": "introduction"
+            },
+            {
+              "index": 2,
+              "uid": "learn.wwl.configure-virtual-networks.plan",
+              "title": "Plan virtual networks",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-virtual-networks/2-plan-virtual-networks",
+              "duration_minutes": 5,
+              "kind": "content"
+            },
+            {
+              "index": 3,
+              "uid": "learn.wwl.configure-virtual-networks.create-subnets",
+              "title": "Create subnets",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-virtual-networks/3-create-subnets",
+              "duration_minutes": 6,
+              "kind": "content"
+            },
+            {
+              "index": 4,
+              "uid": "learn.wwl.configure-virtual-networks.create",
+              "title": "Create virtual networks",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-virtual-networks/4-create-virtual-networks",
+              "duration_minutes": 2,
+              "kind": "content"
+            },
+            {
+              "index": 5,
+              "uid": "learn.wwl.configure-virtual-networks.plan-ip-addressing",
+              "title": "Plan IP addressing",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-virtual-networks/5-plan-addressing",
+              "duration_minutes": 4,
+              "kind": "content"
+            },
+            {
+              "index": 6,
+              "uid": "learn.wwl.configure-virtual-networks.create-public-ip-addressing",
+              "title": "Create public IP addressing",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-virtual-networks/6-create-public-ip-addressing",
+              "duration_minutes": 2,
+              "kind": "content"
+            },
+            {
+              "index": 7,
+              "uid": "learn.wwl.configure-virtual-networks.associate-public-ip-addresses",
+              "title": "Associate public IP addresses",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-virtual-networks/7-associate-public-ip-addresses",
+              "duration_minutes": 4,
+              "kind": "content"
+            },
+            {
+              "index": 8,
+              "uid": "learn.wwl.configure-virtual-networks.associate-private-ip-addresses",
+              "title": "Allocate or assign private IP addresses",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-virtual-networks/8-associate-private-ip-addresses",
+              "duration_minutes": 2,
+              "kind": "content"
+            },
+            {
+              "index": 9,
+              "uid": "learn.wwl.configure-virtual-networks.lab-simulation-create-networks",
+              "title": "Exercise: Create and configure virtual networks",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-virtual-networks/9-simulation-create-networks",
+              "duration_minutes": 5,
+              "kind": "exercise"
+            },
+            {
+              "index": 10,
+              "uid": "learn.wwl.configure-virtual-networks.knowledge-check",
+              "title": "Module assessment",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-virtual-networks/10-knowledge-check",
+              "duration_minutes": 10,
+              "kind": "content"
+            },
+            {
+              "index": 11,
+              "uid": "learn.wwl.configure-virtual-networks.summary-resources",
+              "title": "Summary and resources",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-virtual-networks/11-summary-resources",
+              "duration_minutes": 1,
+              "kind": "summary"
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "uid": "learn.wwl.configure-network-security-groups",
+          "title": "Configure network security groups",
+          "url": "https://learn.microsoft.com/en-us/training/modules/configure-network-security-groups/?WT.mc_id=api_CatalogApi",
+          "duration_minutes": 43,
+          "units": [
+            {
+              "index": 1,
+              "uid": "learn.wwl.configure-network-security-groups.introduction",
+              "title": "Introduction",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-network-security-groups/1-introduction",
+              "duration_minutes": 2,
+              "kind": "introduction"
+            },
+            {
+              "index": 2,
+              "uid": "learn.wwl.configure-network-security-groups.implement",
+              "title": "Implement network security groups",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-network-security-groups/2-implement-network-security-groups",
+              "duration_minutes": 4,
+              "kind": "content"
+            },
+            {
+              "index": 3,
+              "uid": "learn.wwl.configure-network-security-groups.determine-nsg-rules",
+              "title": "Determine network security group rules",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-network-security-groups/3-determine-network-security-groups-rules",
+              "duration_minutes": 4,
+              "kind": "content"
+            },
+            {
+              "index": 4,
+              "uid": "learn.wwl.configure-network-security-groups.determine-nsg-effective-rules",
+              "title": "Determine network security group effective rules",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-network-security-groups/4-determine-network-security-groups-effective-rules",
+              "duration_minutes": 6,
+              "kind": "content"
+            },
+            {
+              "index": 5,
+              "uid": "learn.wwl.configure-network-security-groups.create-nsg-rules",
+              "title": "Create network security group rules",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-network-security-groups/5-create-network-security-groups-rules",
+              "duration_minutes": 3,
+              "kind": "content"
+            },
+            {
+              "index": 6,
+              "uid": "learn.wwl.configure-network-security-groups.implement-asgs-new",
+              "title": "Implement application security groups",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-network-security-groups/6-implement-asgs",
+              "duration_minutes": 6,
+              "kind": "content"
+            },
+            {
+              "index": 7,
+              "uid": "learn.wwl.configure-network-security-groups.interactive-lab-simulation-network-groups",
+              "title": "Exercise - Implement virtual networking",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-network-security-groups/7-simulation-create-network-groups",
+              "duration_minutes": 5,
+              "kind": "exercise"
+            },
+            {
+              "index": 8,
+              "uid": "learn.wwl.configure-network-security-groups.knowledge-check",
+              "title": "Module assessment",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-network-security-groups/8-knowledge-check",
+              "duration_minutes": 10,
+              "kind": "content"
+            },
+            {
+              "index": 9,
+              "uid": "learn.wwl.configure-network-security-groups.summary-resources",
+              "title": "Summary and resources",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-network-security-groups/9-summary-resources",
+              "duration_minutes": 3,
+              "kind": "summary"
+            }
+          ]
+        },
+        {
+          "index": 3,
+          "uid": "learn.azure.host-domain-azure-dns",
+          "title": "Host your domain on Azure DNS",
+          "url": "https://learn.microsoft.com/en-us/training/modules/host-domain-azure-dns/?WT.mc_id=api_CatalogApi",
+          "duration_minutes": 43,
+          "units": [
+            {
+              "index": 1,
+              "uid": "learn.azure.host-domain-azure-dns.introduction",
+              "title": "Introduction",
+              "url": "https://learn.microsoft.com/en-us/training/modules/host-domain-azure-dns/1-introduction",
+              "duration_minutes": 2,
+              "kind": "introduction"
+            },
+            {
+              "index": 2,
+              "uid": "learn.azure.host-domain-azure-dns.what-is-azure-dns",
+              "title": "What is Azure DNS?",
+              "url": "https://learn.microsoft.com/en-us/training/modules/host-domain-azure-dns/2-what-is-azure-dns",
+              "duration_minutes": 7,
+              "kind": "content"
+            },
+            {
+              "index": 3,
+              "uid": "learn.azure.host-domain-azure-dns.configure-azure-dns-host-domain",
+              "title": "Configure Azure DNS to host your domain",
+              "url": "https://learn.microsoft.com/en-us/training/modules/host-domain-azure-dns/3-configure-azure-dns-host-domain",
+              "duration_minutes": 5,
+              "kind": "content"
+            },
+            {
+              "index": 4,
+              "uid": "learn.azure.host-domain-azure-dns.exercise-create-dns-zone-a-record",
+              "title": "Exercise - Create a DNS zone and an A record by using Azure DNS",
+              "url": "https://learn.microsoft.com/en-us/training/modules/host-domain-azure-dns/4-exercise-create-dns-zone-a-record",
+              "duration_minutes": 12,
+              "kind": "exercise"
+            },
+            {
+              "index": 5,
+              "uid": "learn.azure.host-domain-azure-dns.resolve-name-alias-record",
+              "title": "Dynamically resolve resource name by using alias record",
+              "url": "https://learn.microsoft.com/en-us/training/modules/host-domain-azure-dns/5-resolve-name-alias-record",
+              "duration_minutes": 3,
+              "kind": "content"
+            },
+            {
+              "index": 6,
+              "uid": "learn.azure.host-domain-azure-dns.exercise-create-alias-records",
+              "title": "Exercise - Create alias records for Azure DNS",
+              "url": "https://learn.microsoft.com/en-us/training/modules/host-domain-azure-dns/6-exercise-create-alias-records",
+              "duration_minutes": 12,
+              "kind": "exercise"
+            },
+            {
+              "index": 7,
+              "uid": "learn.azure.host-domain-azure-dns.summary",
+              "title": "Summary",
+              "url": "https://learn.microsoft.com/en-us/training/modules/host-domain-azure-dns/7-summary",
+              "duration_minutes": 2,
+              "kind": "summary"
+            }
+          ]
+        },
+        {
+          "index": 4,
+          "uid": "learn.wwl.configure-vnet-peering",
+          "title": "Configure Azure Virtual Network peering",
+          "url": "https://learn.microsoft.com/en-us/training/modules/configure-vnet-peering/?WT.mc_id=api_CatalogApi",
+          "duration_minutes": 38,
+          "units": [
+            {
+              "index": 1,
+              "uid": "learn.wwl.configure-vnet-peering.introduction",
+              "title": "Introduction",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-vnet-peering/1-introduction",
+              "duration_minutes": 2,
+              "kind": "introduction"
+            },
+            {
+              "index": 2,
+              "uid": "learn.wwl.configure-vnet-peering.determine-uses",
+              "title": "Determine Azure Virtual Network peering uses",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-vnet-peering/2-determine-uses",
+              "duration_minutes": 5,
+              "kind": "content"
+            },
+            {
+              "index": 3,
+              "uid": "learn.wwl.configure-vnet-peering.determine-gateway-transit-connectivity",
+              "title": "Determine gateway transit and connectivity",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-vnet-peering/3-determine-gateway-transit-connectivity",
+              "duration_minutes": 6,
+              "kind": "content"
+            },
+            {
+              "index": 4,
+              "uid": "learn.wwl.configure-vnet-peering.create",
+              "title": "Create virtual network peering",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-vnet-peering/4-create",
+              "duration_minutes": 10,
+              "kind": "content"
+            },
+            {
+              "index": 5,
+              "uid": "learn.wwl.configure-vnet-peering.determine-service-chaining-uses",
+              "title": "Extend peering with user-defined routes and service chaining",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-vnet-peering/5-determine-service-chaining-uses",
+              "duration_minutes": 5,
+              "kind": "content"
+            },
+            {
+              "index": 6,
+              "uid": "learn.wwl.configure-vnet-peering.interactive-simulation-peering",
+              "title": "Exercise - Implement Intersite Connectivity",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-vnet-peering/6-simulation-peering",
+              "duration_minutes": 5,
+              "kind": "exercise"
+            },
+            {
+              "index": 7,
+              "uid": "learn.wwl.configure-vnet-peering.knowledge-check",
+              "title": "Module assessment",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-vnet-peering/7-knowledge-check",
+              "duration_minutes": 3,
+              "kind": "content"
+            },
+            {
+              "index": 8,
+              "uid": "learn.wwl.configure-vnet-peering.summary-resources",
+              "title": "Summary and resources",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-vnet-peering/8-summary-resources",
+              "duration_minutes": 2,
+              "kind": "summary"
+            }
+          ]
+        },
+        {
+          "index": 5,
+          "uid": "learn.control-network-traffic-flow-with-routes",
+          "title": "Manage and control traffic flow in your Azure deployment with routes",
+          "url": "https://learn.microsoft.com/en-us/training/modules/control-network-traffic-flow-with-routes/?WT.mc_id=api_CatalogApi",
+          "duration_minutes": 50,
+          "units": [
+            {
+              "index": 1,
+              "uid": "learn.control-network-traffic-flow-with-routes.1-introduction",
+              "title": "Introduction",
+              "url": "https://learn.microsoft.com/en-us/training/modules/control-network-traffic-flow-with-routes/1-introduction",
+              "duration_minutes": 2,
+              "kind": "introduction"
+            },
+            {
+              "index": 2,
+              "uid": "learn.control-network-traffic-flow-with-routes.2-azure-virtual-network-route",
+              "title": "Identify routing capabilities of an Azure virtual network",
+              "url": "https://learn.microsoft.com/en-us/training/modules/control-network-traffic-flow-with-routes/2-azure-virtual-network-route",
+              "duration_minutes": 10,
+              "kind": "content"
+            },
+            {
+              "index": 3,
+              "uid": "learn.control-network-traffic-flow-with-routes.3-exercise-create-custom-routes",
+              "title": "Exercise - Create custom routes",
+              "url": "https://learn.microsoft.com/en-us/training/modules/control-network-traffic-flow-with-routes/3-exercise-create-custom-routes",
+              "duration_minutes": 10,
+              "kind": "exercise"
+            },
+            {
+              "index": 4,
+              "uid": "learn.control-network-traffic-flow-with-routes.4-network-virtual-appliances",
+              "title": "What is an NVA?",
+              "url": "https://learn.microsoft.com/en-us/training/modules/control-network-traffic-flow-with-routes/4-network-virtual-appliances",
+              "duration_minutes": 7,
+              "kind": "content"
+            },
+            {
+              "index": 5,
+              "uid": "learn.control-network-traffic-flow-with-routes.5-exercise-create-nva-vm",
+              "title": "Exercise - Create an NVA and virtual machines",
+              "url": "https://learn.microsoft.com/en-us/training/modules/control-network-traffic-flow-with-routes/5-exercise-create-nva-vm",
+              "duration_minutes": 10,
+              "kind": "exercise"
+            },
+            {
+              "index": 6,
+              "uid": "learn.control-network-traffic-flow-with-routes.6-exercise-route-traffic-through-nva",
+              "title": "Exercise - Route traffic through the NVA",
+              "url": "https://learn.microsoft.com/en-us/training/modules/control-network-traffic-flow-with-routes/6-exercise-route-traffic-through-nva",
+              "duration_minutes": 10,
+              "kind": "exercise"
+            },
+            {
+              "index": 7,
+              "uid": "learn.control-network-traffic-flow-with-routes.7-summary",
+              "title": "Summary",
+              "url": "https://learn.microsoft.com/en-us/training/modules/control-network-traffic-flow-with-routes/7-summary",
+              "duration_minutes": 1,
+              "kind": "summary"
+            }
+          ]
+        },
+        {
+          "index": 6,
+          "uid": "learn.azure.intro-to-azure-load-balancer",
+          "title": "Introduction to Azure Load Balancer",
+          "url": "https://learn.microsoft.com/en-us/training/modules/intro-to-azure-load-balancer/?WT.mc_id=api_CatalogApi",
+          "duration_minutes": 18,
+          "units": [
+            {
+              "index": 1,
+              "uid": "learn.azure.intro-to-azure-load-balancer.introduction",
+              "title": "Introduction",
+              "url": "https://learn.microsoft.com/en-us/training/modules/intro-to-azure-load-balancer/1-introduction",
+              "duration_minutes": 2,
+              "kind": "introduction"
+            },
+            {
+              "index": 2,
+              "uid": "learn.azure.intro-to-azure-load-balancer.what-is-azure-load-balancer",
+              "title": "What is Azure Load Balancer?",
+              "url": "https://learn.microsoft.com/en-us/training/modules/intro-to-azure-load-balancer/2-what-is-azure-load-balancer",
+              "duration_minutes": 2,
+              "kind": "content"
+            },
+            {
+              "index": 3,
+              "uid": "learn.azure.intro-to-azure-load-balancer.how-azure-load-balancer-works",
+              "title": "How Azure Load Balancer works",
+              "url": "https://learn.microsoft.com/en-us/training/modules/intro-to-azure-load-balancer/3-how-azure-load-balancer-works",
+              "duration_minutes": 5,
+              "kind": "content"
+            },
+            {
+              "index": 4,
+              "uid": "learn.azure.intro-to-azure-load-balancer.when-to-use-azure-load-balancer",
+              "title": "When to use Azure Load Balancer",
+              "url": "https://learn.microsoft.com/en-us/training/modules/intro-to-azure-load-balancer/4-when-to-use-azure-load-balancer",
+              "duration_minutes": 3,
+              "kind": "content"
+            },
+            {
+              "index": 5,
+              "uid": "learn.azure.intro-to-azure-load-balancer.knowledge-check",
+              "title": "Module assessment",
+              "url": "https://learn.microsoft.com/en-us/training/modules/intro-to-azure-load-balancer/5-knowledge-check",
+              "duration_minutes": 4,
+              "kind": "content"
+            },
+            {
+              "index": 6,
+              "uid": "learn.azure.intro-to-azure-load-balancer.summary",
+              "title": "Summary",
+              "url": "https://learn.microsoft.com/en-us/training/modules/intro-to-azure-load-balancer/6-summary",
+              "duration_minutes": 2,
+              "kind": "summary"
+            }
+          ]
+        },
+        {
+          "index": 7,
+          "uid": "learn.azure.intro-to-azure-application-gateway",
+          "title": "Introduction to Azure Application Gateway",
+          "url": "https://learn.microsoft.com/en-us/training/modules/intro-to-azure-application-gateway/?WT.mc_id=api_CatalogApi",
+          "duration_minutes": 18,
+          "units": [
+            {
+              "index": 1,
+              "uid": "learn.azure.intro-to-azure-application-gateway.introduction",
+              "title": "Introduction",
+              "url": "https://learn.microsoft.com/en-us/training/modules/intro-to-azure-application-gateway/1-introduction",
+              "duration_minutes": 2,
+              "kind": "introduction"
+            },
+            {
+              "index": 2,
+              "uid": "learn.azure.intro-to-azure-application-gateway.what-is-azure-application-gateway",
+              "title": "What is Azure Application Gateway?",
+              "url": "https://learn.microsoft.com/en-us/training/modules/intro-to-azure-application-gateway/2-what-is-azure-application-gateway",
+              "duration_minutes": 2,
+              "kind": "content"
+            },
+            {
+              "index": 3,
+              "uid": "learn.azure.intro-to-azure-application-gateway.how-azure-application-gateway-works",
+              "title": "How Azure Application Gateway works",
+              "url": "https://learn.microsoft.com/en-us/training/modules/intro-to-azure-application-gateway/3-how-azure-application-gateway-works",
+              "duration_minutes": 5,
+              "kind": "content"
+            },
+            {
+              "index": 4,
+              "uid": "learn.azure.intro-to-azure-application-gateway.when-to-use-azure-application-gateway",
+              "title": "When to use Azure Application Gateway",
+              "url": "https://learn.microsoft.com/en-us/training/modules/intro-to-azure-application-gateway/4-when-to-use-azure-application-gateway",
+              "duration_minutes": 3,
+              "kind": "content"
+            },
+            {
+              "index": 5,
+              "uid": "learn.azure.intro-to-azure-application-gateway.knowledge-check",
+              "title": "Module assessment",
+              "url": "https://learn.microsoft.com/en-us/training/modules/intro-to-azure-application-gateway/5-knowledge-check",
+              "duration_minutes": 4,
+              "kind": "content"
+            },
+            {
+              "index": 6,
+              "uid": "learn.azure.intro-to-azure-application-gateway.summary",
+              "title": "Summary",
+              "url": "https://learn.microsoft.com/en-us/training/modules/intro-to-azure-application-gateway/6-summary",
+              "duration_minutes": 2,
+              "kind": "summary"
+            }
+          ]
+        },
+        {
+          "index": 8,
+          "uid": "learn.azure.intro-to-azure-network-watcher",
+          "title": "Introduction to Azure Network Watcher",
+          "url": "https://learn.microsoft.com/en-us/training/modules/intro-to-azure-network-watcher/?WT.mc_id=api_CatalogApi",
+          "duration_minutes": 18,
+          "units": [
+            {
+              "index": 1,
+              "uid": "learn.azure.intro-to-azure-network-watcher.introduction",
+              "title": "Introduction",
+              "url": "https://learn.microsoft.com/en-us/training/modules/intro-to-azure-network-watcher/1-introduction",
+              "duration_minutes": 2,
+              "kind": "introduction"
+            },
+            {
+              "index": 2,
+              "uid": "learn.azure.intro-to-azure-network-watcher.what-is-azure-network-watcher",
+              "title": "What is Azure Network Watcher?",
+              "url": "https://learn.microsoft.com/en-us/training/modules/intro-to-azure-network-watcher/2-what-is-azure-network-watcher",
+              "duration_minutes": 2,
+              "kind": "content"
+            },
+            {
+              "index": 3,
+              "uid": "learn.azure.intro-to-azure-network-watcher.how-azure-network-watcher-works",
+              "title": "How Azure Network Watcher works",
+              "url": "https://learn.microsoft.com/en-us/training/modules/intro-to-azure-network-watcher/3-how-azure-network-watcher-works",
+              "duration_minutes": 5,
+              "kind": "content"
+            },
+            {
+              "index": 4,
+              "uid": "learn.azure.intro-to-azure-network-watcher.when-to-use-azure-network-watcher",
+              "title": "When to use Azure Network Watcher",
+              "url": "https://learn.microsoft.com/en-us/training/modules/intro-to-azure-network-watcher/4-when-to-use-azure-network-watcher",
+              "duration_minutes": 3,
+              "kind": "content"
+            },
+            {
+              "index": 5,
+              "uid": "learn.azure.intro-to-azure-network-watcher.knowledge-check",
+              "title": "Module assessment",
+              "url": "https://learn.microsoft.com/en-us/training/modules/intro-to-azure-network-watcher/5-knowledge-check",
+              "duration_minutes": 4,
+              "kind": "content"
+            },
+            {
+              "index": 6,
+              "uid": "learn.azure.intro-to-azure-network-watcher.summary",
+              "title": "Summary",
+              "url": "https://learn.microsoft.com/en-us/training/modules/intro-to-azure-network-watcher/6-summary",
+              "duration_minutes": 2,
+              "kind": "summary"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "index": 4,
+      "uid": "learn.az-104-manage-storage",
+      "title": "AZ-104: Implement and manage storage in Azure",
+      "url": "https://learn.microsoft.com/en-us/training/paths/az-104-manage-storage/?WT.mc_id=api_CatalogApi",
+      "duration_minutes": 187,
+      "modules": [
+        {
+          "index": 1,
+          "uid": "learn.wwl.configure-storage-accounts",
+          "title": "Configure storage accounts",
+          "url": "https://learn.microsoft.com/en-us/training/modules/configure-storage-accounts/?WT.mc_id=api_CatalogApi",
+          "duration_minutes": 47,
+          "units": [
+            {
+              "index": 1,
+              "uid": "learn.wwl.configure-storage-accounts.introduction",
+              "title": "Introduction",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-storage-accounts/1-introduction",
+              "duration_minutes": 1,
+              "kind": "introduction"
+            },
+            {
+              "index": 2,
+              "uid": "learn.wwl.configure-storage-accounts.implement-azure-storage",
+              "title": "Implement Azure Storage",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-storage-accounts/2-implement-azure-storage",
+              "duration_minutes": 6,
+              "kind": "content"
+            },
+            {
+              "index": 3,
+              "uid": "learn.wwl.configure-storage-accounts.explore-azure-storage-services",
+              "title": "Explore Azure Storage services",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-storage-accounts/3-explore-azure-storage-services",
+              "duration_minutes": 8,
+              "kind": "content"
+            },
+            {
+              "index": 4,
+              "uid": "learn.wwl.configure-storage-accounts.determine-storage-account-kinds",
+              "title": "Determine storage account types",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-storage-accounts/4-determine-storage-account-kinds",
+              "duration_minutes": 5,
+              "kind": "content"
+            },
+            {
+              "index": 5,
+              "uid": "learn.wwl.configure-storage-accounts.determine-replication-strategies",
+              "title": "Determine replication strategies",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-storage-accounts/5-determine-replication-strategies",
+              "duration_minutes": 10,
+              "kind": "content"
+            },
+            {
+              "index": 6,
+              "uid": "learn.wwl.configure-storage-accounts.access-storage",
+              "title": "Access storage",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-storage-accounts/6-access-storage",
+              "duration_minutes": 2,
+              "kind": "content"
+            },
+            {
+              "index": 7,
+              "uid": "learn.wwl.configure-storage-accounts.secure-storage-endpoints",
+              "title": "Secure storage endpoints",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-storage-accounts/7-secure-storage-endpoints",
+              "duration_minutes": 4,
+              "kind": "content"
+            },
+            {
+              "index": 8,
+              "uid": "learn.wwl.configure-storage-accounts.knowledge-check",
+              "title": "Module assessment",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-storage-accounts/8-knowledge-check",
+              "duration_minutes": 10,
+              "kind": "content"
+            },
+            {
+              "index": 9,
+              "uid": "learn.wwl.configure-storage-accounts.summary-resources",
+              "title": "Summary and resources",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-storage-accounts/9-summary-resources",
+              "duration_minutes": 1,
+              "kind": "summary"
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "uid": "learn.wwl.configure-blob-storage",
+          "title": "Configure Azure Blob Storage",
+          "url": "https://learn.microsoft.com/en-us/training/modules/configure-blob-storage/?WT.mc_id=api_CatalogApi",
+          "duration_minutes": 70,
+          "units": [
+            {
+              "index": 1,
+              "uid": "learn.wwl.configure-blob-storage.introduction",
+              "title": "Introduction",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-blob-storage/1-introduction",
+              "duration_minutes": 2,
+              "kind": "introduction"
+            },
+            {
+              "index": 2,
+              "uid": "learn.wwl.configure-blob-storage.implement",
+              "title": "Implement Azure Blob Storage",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-blob-storage/2-implement",
+              "duration_minutes": 4,
+              "kind": "content"
+            },
+            {
+              "index": 3,
+              "uid": "learn.wwl.configure-blob-storage.create-blob-containers",
+              "title": "Create blob containers",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-blob-storage/3-create-blob-containers",
+              "duration_minutes": 2,
+              "kind": "content"
+            },
+            {
+              "index": 4,
+              "uid": "learn.wwl.configure-blob-storage.create-blob-access-tiers",
+              "title": "Assign blob access tiers",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-blob-storage/4-create-blob-access-tiers",
+              "duration_minutes": 6,
+              "kind": "content"
+            },
+            {
+              "index": 5,
+              "uid": "learn.wwl.configure-blob-storage.add-blob-lifecycle-management-rules",
+              "title": "Add blob lifecycle management rules",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-blob-storage/5-add-blob-lifecycle-management-rules",
+              "duration_minutes": 7,
+              "kind": "content"
+            },
+            {
+              "index": 6,
+              "uid": "learn.wwl.configure-blob-storage.determine-blob-object-replication",
+              "title": "Determine blob object replication",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-blob-storage/6-determine-blob-object-replication",
+              "duration_minutes": 4,
+              "kind": "content"
+            },
+            {
+              "index": 7,
+              "uid": "learn.wwl.configure-blob-storage.upload-blobs",
+              "title": "Manage blobs",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-blob-storage/7-upload-blobs",
+              "duration_minutes": 5,
+              "kind": "content"
+            },
+            {
+              "index": 8,
+              "uid": "learn.wwl.configure-blob-storage.determine-storage-pricing",
+              "title": "Determine Blob Storage pricing",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-blob-storage/8-determine-storage-pricing",
+              "duration_minutes": 2,
+              "kind": "content"
+            },
+            {
+              "index": 9,
+              "uid": "learn.wwl.configure-blob-storage.simulation-blob-storage",
+              "title": "Exercise - Provide storage for the public website",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-blob-storage/9-simulation-blobs",
+              "duration_minutes": 5,
+              "kind": "exercise"
+            },
+            {
+              "index": 10,
+              "uid": "learn.wwl.configure-blob-storage.knowledge-check",
+              "title": "Module assessment",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-blob-storage/10-knowledge-check",
+              "duration_minutes": 10,
+              "kind": "content"
+            },
+            {
+              "index": 11,
+              "uid": "learn.wwl.configure-blob-storage.summary-resources",
+              "title": "Summary and resources",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-blob-storage/11-summary-resources",
+              "duration_minutes": 23,
+              "kind": "summary"
+            }
+          ]
+        },
+        {
+          "index": 3,
+          "uid": "learn.wwl.configure-storage-security",
+          "title": "Configure Azure Storage security",
+          "url": "https://learn.microsoft.com/en-us/training/modules/configure-storage-security/?WT.mc_id=api_CatalogApi",
+          "duration_minutes": 34,
+          "units": [
+            {
+              "index": 1,
+              "uid": "learn.wwl.configure-storage-security.introduction",
+              "title": "Introduction",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-storage-security/1-introduction",
+              "duration_minutes": 1,
+              "kind": "introduction"
+            },
+            {
+              "index": 2,
+              "uid": "learn.wwl.configure-storage-security.review-strategies",
+              "title": "Review Azure Storage security strategies",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-storage-security/2-review-strategies",
+              "duration_minutes": 3,
+              "kind": "content"
+            },
+            {
+              "index": 3,
+              "uid": "learn.wwl.configure-storage-security.create-shared-access-signatures",
+              "title": "Create shared access signatures",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-storage-security/3-create-shared-access-signatures",
+              "duration_minutes": 5,
+              "kind": "content"
+            },
+            {
+              "index": 4,
+              "uid": "learn.wwl.configure-storage-security.identify-uri-sas-parameters",
+              "title": "Identify URI and SAS parameters",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-storage-security/4-identify-uri-sas-parameters",
+              "duration_minutes": 5,
+              "kind": "content"
+            },
+            {
+              "index": 5,
+              "uid": "learn.wwl.configure-storage-security.determine-storage-service-encryption",
+              "title": "Determine Azure Storage encryption",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-storage-security/5-determine-storage-service-encryption",
+              "duration_minutes": 4,
+              "kind": "content"
+            },
+            {
+              "index": 6,
+              "uid": "learn.wwl.configure-storage-security.create-customer-managed-keys",
+              "title": "Create customer-managed keys",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-storage-security/6-create-customer-managed-keys",
+              "duration_minutes": 3,
+              "kind": "content"
+            },
+            {
+              "index": 7,
+              "uid": "learn.wwl.configure-storage-security.apply-best-practices",
+              "title": "Apply Azure Storage security best practices",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-storage-security/7-apply-best-practices",
+              "duration_minutes": 3,
+              "kind": "content"
+            },
+            {
+              "index": 8,
+              "uid": "learn.wwl.configure-storage-security.interactive-lab-simulation-storage",
+              "title": "Exercise: Manage Azure Storage",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-storage-security/8-simulation-storage",
+              "duration_minutes": 5,
+              "kind": "exercise"
+            },
+            {
+              "index": 9,
+              "uid": "learn.wwl.configure-storage-security.knowledge-check",
+              "title": "Module assessment",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-storage-security/9-knowledge-check",
+              "duration_minutes": 3,
+              "kind": "content"
+            },
+            {
+              "index": 10,
+              "uid": "learn.wwl.configure-storage-security.summary-resources",
+              "title": "Summary and resources",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-storage-security/10-summary-resources",
+              "duration_minutes": 2,
+              "kind": "summary"
+            }
+          ]
+        },
+        {
+          "index": 4,
+          "uid": "learn.wwl.configure-azure-files-file-sync",
+          "title": "Configure Azure Files",
+          "url": "https://learn.microsoft.com/en-us/training/modules/configure-azure-files-file-sync/?WT.mc_id=api_CatalogApi",
+          "duration_minutes": 36,
+          "units": [
+            {
+              "index": 1,
+              "uid": "learn.wwl.configure-azure-files-file-sync.introduction",
+              "title": "Introduction",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-azure-files-file-sync/1-introduction",
+              "duration_minutes": 1,
+              "kind": "introduction"
+            },
+            {
+              "index": 2,
+              "uid": "learn.wwl.configure-azure-files-file-sync.compare-files-to-blobs",
+              "title": "Compare storage for file shares and blob data",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-azure-files-file-sync/2-compare-files-to-blobs",
+              "duration_minutes": 5,
+              "kind": "content"
+            },
+            {
+              "index": 3,
+              "uid": "learn.wwl.configure-azure-files-file-sync.manage-file-shares",
+              "title": "Manage Azure file shares",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-azure-files-file-sync/3-manage-file-shares",
+              "duration_minutes": 5,
+              "kind": "content"
+            },
+            {
+              "index": 4,
+              "uid": "learn.wwl.configure-azure-files-file-sync.create-file-share-snapshots",
+              "title": "Create file share snapshots",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-azure-files-file-sync/4-create-file-share-snapshots",
+              "duration_minutes": 3,
+              "kind": "content"
+            },
+            {
+              "index": 5,
+              "uid": "learn.wwl.configure-azure-files-file-sync.implement-soft-delete",
+              "title": "Implement soft delete for Azure Files",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-azure-files-file-sync/5-implement-file-sync",
+              "duration_minutes": 2,
+              "kind": "content"
+            },
+            {
+              "index": 6,
+              "uid": "learn.wwl.configure-storage-tools.use-storage-explorer1",
+              "title": "Use Azure Storage Explorer",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-azure-files-file-sync/6-identify-components",
+              "duration_minutes": 4,
+              "kind": "content"
+            },
+            {
+              "index": 7,
+              "uid": "learn.wwl.configure-azure-files-file-sync.setup",
+              "title": "Consider Azure File Sync",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-azure-files-file-sync/7-deploy-azure-file-sync",
+              "duration_minutes": 4,
+              "kind": "content"
+            },
+            {
+              "index": 8,
+              "uid": "learn.wwl.configure-azure-files-file-sync.knowledge-check",
+              "title": "Knowledge check",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-azure-files-file-sync/8-knowledge-check",
+              "duration_minutes": 10,
+              "kind": "knowledge-check"
+            },
+            {
+              "index": 9,
+              "uid": "learn.wwl.configure-azure-files-file-sync.summary-resources",
+              "title": "Summary and resources",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-azure-files-file-sync/9-summary-resources",
+              "duration_minutes": 2,
+              "kind": "summary"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "index": 5,
+      "uid": "learn.az-104-manage-compute-resources",
+      "title": "AZ-104: Deploy and manage Azure compute resources",
+      "url": "https://learn.microsoft.com/en-us/training/paths/az-104-manage-compute-resources/?WT.mc_id=api_CatalogApi",
+      "duration_minutes": 213,
+      "modules": [
+        {
+          "index": 1,
+          "uid": "learn.introduction-to-azure-virtual-machines",
+          "title": "Introduction to Azure virtual machines",
+          "url": "https://learn.microsoft.com/en-us/training/modules/intro-to-azure-virtual-machines/?WT.mc_id=api_CatalogApi",
+          "duration_minutes": 67,
+          "units": [
+            {
+              "index": 1,
+              "uid": "learn.introduction-to-azure-virtual-machines.1-introduction",
+              "title": "Introduction",
+              "url": "https://learn.microsoft.com/en-us/training/modules/intro-to-azure-virtual-machines/1-introduction",
+              "duration_minutes": 2,
+              "kind": "introduction"
+            },
+            {
+              "index": 2,
+              "uid": "learn.introduction-to-azure-virtual-machines.2-compile-a-checklist-for-creating-a-vm",
+              "title": "Compile a checklist for creating an Azure Virtual Machine",
+              "url": "https://learn.microsoft.com/en-us/training/modules/intro-to-azure-virtual-machines/2-compile-a-checklist-for-creating-a-vm",
+              "duration_minutes": 15,
+              "kind": "content"
+            },
+            {
+              "index": 3,
+              "uid": "learn.introduction-to-azure-virtual-machines.3-create-a-vm",
+              "title": "Exercise - Create a VM using the Azure portal",
+              "url": "https://learn.microsoft.com/en-us/training/modules/intro-to-azure-virtual-machines/3-create-a-vm",
+              "duration_minutes": 15,
+              "kind": "exercise"
+            },
+            {
+              "index": 4,
+              "uid": "learn.introduction-to-azure-virtual-machines.4-describe-other-create-vm-options",
+              "title": "Describe the options available to create and manage an Azure Virtual Machine",
+              "url": "https://learn.microsoft.com/en-us/training/modules/intro-to-azure-virtual-machines/4-describe-other-create-vm-options",
+              "duration_minutes": 15,
+              "kind": "exercise"
+            },
+            {
+              "index": 5,
+              "uid": "learn.introduction-to-azure-virtual-machines.5-high-availability",
+              "title": "Manage the availability of your Azure VMs",
+              "url": "https://learn.microsoft.com/en-us/training/modules/intro-to-azure-virtual-machines/5-high-availability",
+              "duration_minutes": 10,
+              "kind": "exercise"
+            },
+            {
+              "index": 6,
+              "uid": "learn.introduction-to-azure-virtual-machines.6-backup-services",
+              "title": "Back up your virtual machines",
+              "url": "https://learn.microsoft.com/en-us/training/modules/intro-to-azure-virtual-machines/6-backup-services",
+              "duration_minutes": 7,
+              "kind": "content"
+            },
+            {
+              "index": 7,
+              "uid": "learn.introduction-to-azure-virtual-machines.7-knowledge-check",
+              "title": "Module assessment",
+              "url": "https://learn.microsoft.com/en-us/training/modules/intro-to-azure-virtual-machines/7-knowledge-check",
+              "duration_minutes": 1,
+              "kind": "content"
+            },
+            {
+              "index": 8,
+              "uid": "learn.introduction-to-azure-virtual-machines.8-summary",
+              "title": "Summary",
+              "url": "https://learn.microsoft.com/en-us/training/modules/intro-to-azure-virtual-machines/8-summary",
+              "duration_minutes": 2,
+              "kind": "summary"
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "uid": "learn.wwl.configure-virtual-machine-availability",
+          "title": "Configure virtual machine availability",
+          "url": "https://learn.microsoft.com/en-us/training/modules/configure-virtual-machine-availability/?WT.mc_id=api_CatalogApi",
+          "duration_minutes": 41,
+          "units": [
+            {
+              "index": 1,
+              "uid": "learn.wwl.configure-virtual-machine-availability.introduction",
+              "title": "Introduction",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-virtual-machine-availability/1-introduction",
+              "duration_minutes": 1,
+              "kind": "introduction"
+            },
+            {
+              "index": 2,
+              "uid": "learn.wwl.configure-virtual-machine-availability.plan-for-maintenance-downtime",
+              "title": "Plan for maintenance and downtime",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-virtual-machine-availability/2-plan-for-maintenance-downtime",
+              "duration_minutes": 2,
+              "kind": "content"
+            },
+            {
+              "index": 3,
+              "uid": "learn.wwl.configure-virtual-machine-availability.setup-availability-sets",
+              "title": "Create availability sets",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-virtual-machine-availability/3-setup-availability-sets",
+              "duration_minutes": 2,
+              "kind": "exercise"
+            },
+            {
+              "index": 4,
+              "uid": "learn.wwl.configure-virtual-machine-availability.review-update-fault-domains",
+              "title": "Review update domains and fault domains",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-virtual-machine-availability/4-review-update-fault-domains",
+              "duration_minutes": 3,
+              "kind": "content"
+            },
+            {
+              "index": 5,
+              "uid": "learn.wwl.configure-virtual-machine-availability.review-availability-zones",
+              "title": "Review availability zones",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-virtual-machine-availability/5-review-availability-zones",
+              "duration_minutes": 2,
+              "kind": "exercise"
+            },
+            {
+              "index": 6,
+              "uid": "learn.wwl.configure-virtual-machine-availability.compare-vertical-horizontal-scaling",
+              "title": "Compare vertical and horizontal scaling",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-virtual-machine-availability/6-compare-vertical-horizontal-scaling",
+              "duration_minutes": 2,
+              "kind": "content"
+            },
+            {
+              "index": 7,
+              "uid": "learn.wwl.configure-virtual-machine-availability.implement-scale-sets",
+              "title": "Implement Azure Virtual Machine Scale Sets",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-virtual-machine-availability/7-implement-scale-sets",
+              "duration_minutes": 9,
+              "kind": "content"
+            },
+            {
+              "index": 8,
+              "uid": "learn.wwl.configure-virtual-machine-availability.create-scale-sets",
+              "title": "Create Virtual Machine Scale Sets",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-virtual-machine-availability/8-create-scale-sets",
+              "duration_minutes": 2,
+              "kind": "content"
+            },
+            {
+              "index": 9,
+              "uid": "learn.wwl.configure-virtual-machine-availability.implement-autoscale",
+              "title": "Implement autoscale",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-virtual-machine-availability/9-implement-autoscale",
+              "duration_minutes": 3,
+              "kind": "content"
+            },
+            {
+              "index": 10,
+              "uid": "learn.wwl.configure-virtual-machine-availability.configure-autoscale",
+              "title": "Configure autoscale",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-virtual-machine-availability/10-configure-autoscale",
+              "duration_minutes": 3,
+              "kind": "content"
+            },
+            {
+              "index": 11,
+              "uid": "learn.wwl.configure-virtual-machine-availability.knowledge-check",
+              "title": "Module assessment",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-virtual-machine-availability/11-knowledge-check",
+              "duration_minutes": 10,
+              "kind": "content"
+            },
+            {
+              "index": 12,
+              "uid": "learn.wwl.configure-virtual-machine-availability.summary-resources",
+              "title": "Summary and resources",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-virtual-machine-availability/12-summary-resources",
+              "duration_minutes": 2,
+              "kind": "summary"
+            }
+          ]
+        },
+        {
+          "index": 3,
+          "uid": "learn.wwl.configure-app-service-plans",
+          "title": "Configure Azure App Service plans",
+          "url": "https://learn.microsoft.com/en-us/training/modules/configure-app-service-plans/?WT.mc_id=api_CatalogApi",
+          "duration_minutes": 24,
+          "units": [
+            {
+              "index": 1,
+              "uid": "learn.wwl.configure-app-service-plans.introduction",
+              "title": "Introduction",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-app-service-plans/1-introduction",
+              "duration_minutes": 2,
+              "kind": "introduction"
+            },
+            {
+              "index": 2,
+              "uid": "learn.wwl.configure-app-service-plans.implement-azure",
+              "title": "Implement Azure App Service plans",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-app-service-plans/2-implement-azure",
+              "duration_minutes": 3,
+              "kind": "content"
+            },
+            {
+              "index": 3,
+              "uid": "learn.wwl.configure-app-service-plans.determine-plan-pricing",
+              "title": "Determine Azure App Service plan pricing",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-app-service-plans/3-determine-plan-pricing",
+              "duration_minutes": 5,
+              "kind": "content"
+            },
+            {
+              "index": 4,
+              "uid": "learn.wwl.configure-app-service-plans.scale-up-scale-out",
+              "title": "Scale up and scale out Azure App Service",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-app-service-plans/4-scale-up-scale-out",
+              "duration_minutes": 6,
+              "kind": "content"
+            },
+            {
+              "index": 5,
+              "uid": "learn.wwl.configure-app-service-plans.plan-scaling",
+              "title": "Configure Azure App Service autoscale",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-app-service-plans/5-plan-scaling",
+              "duration_minutes": 4,
+              "kind": "content"
+            },
+            {
+              "index": 6,
+              "uid": "learn.wwl.configure-app-service-plans.knowledge-check",
+              "title": "Module assessment",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-app-service-plans/6-knowledge-check",
+              "duration_minutes": 3,
+              "kind": "content"
+            },
+            {
+              "index": 7,
+              "uid": "learn.wwl.configure-app-service-plans.summary-resources",
+              "title": "Summary and resources",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-app-service-plans/7-summary-resources",
+              "duration_minutes": 1,
+              "kind": "summary"
+            }
+          ]
+        },
+        {
+          "index": 4,
+          "uid": "learn.wwl.configure-azure-app-services",
+          "title": "Configure Azure App Service",
+          "url": "https://learn.microsoft.com/en-us/training/modules/configure-azure-app-services/?WT.mc_id=api_CatalogApi",
+          "duration_minutes": 44,
+          "units": [
+            {
+              "index": 1,
+              "uid": "learn.wwl.configure-azure-app-services.introduction",
+              "title": "Introduction",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-azure-app-services/1-introduction",
+              "duration_minutes": 2,
+              "kind": "introduction"
+            },
+            {
+              "index": 2,
+              "uid": "learn.wwl.configure-azure-app-services.implement",
+              "title": "Implement Azure App Service",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-azure-app-services/2-implement",
+              "duration_minutes": 3,
+              "kind": "content"
+            },
+            {
+              "index": 3,
+              "uid": "learn.wwl.configure-azure-app-services.create-app-service",
+              "title": "Create an app with App Service",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-azure-app-services/3-create-app-service",
+              "duration_minutes": 5,
+              "kind": "content"
+            },
+            {
+              "index": 4,
+              "uid": "learn.wwl.configure-azure-app-services.explore-continuous-integration-deployment",
+              "title": "Explore continuous integration and deployment",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-azure-app-services/4-explore-continuous-integration-deployment",
+              "duration_minutes": 3,
+              "kind": "content"
+            },
+            {
+              "index": 5,
+              "uid": "learn.wwl.configure-azure-app-services.create-deployment-slots",
+              "title": "Create deployment slots",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-azure-app-services/5-create-deployment-slots",
+              "duration_minutes": 3,
+              "kind": "content"
+            },
+            {
+              "index": 6,
+              "uid": "learn.wwl.configure-azure-app-services.add-deployment-slots",
+              "title": "Add deployment slots",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-azure-app-services/6-add-deployment-slots",
+              "duration_minutes": 5,
+              "kind": "content"
+            },
+            {
+              "index": 7,
+              "uid": "learn.wwl.configure-azure-app-services.secure-app-service",
+              "title": "Secure your App Service app",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-azure-app-services/7-secure-app-service",
+              "duration_minutes": 3,
+              "kind": "content"
+            },
+            {
+              "index": 8,
+              "uid": "learn.wwl.configure-azure-app-services.create-custom-domain-names",
+              "title": "Create custom domain names",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-azure-app-services/8-create-custom-domain-names",
+              "duration_minutes": 3,
+              "kind": "content"
+            },
+            {
+              "index": 9,
+              "uid": "learn.wwl.configure-azure-app-services.backup-app-service",
+              "title": "Back up and restore your App Service app",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-azure-app-services/9-backup-app-service",
+              "duration_minutes": 4,
+              "kind": "content"
+            },
+            {
+              "index": 10,
+              "uid": "learn.wwl.configure-azure-app-services.use-application-insights",
+              "title": "Use Azure Application Insights",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-azure-app-services/10-use-application-insights",
+              "duration_minutes": 3,
+              "kind": "content"
+            },
+            {
+              "index": 11,
+              "uid": "learn.wwl.configure-azure-app-services.interactive-simulation-web-apps",
+              "title": "Exercise: Implement Web Apps",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-azure-app-services/11-simulation-web-apps",
+              "duration_minutes": 5,
+              "kind": "exercise"
+            },
+            {
+              "index": 12,
+              "uid": "learn.wwl.configure-azure-app-services.knowledge-check",
+              "title": "Module assessment",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-azure-app-services/12-knowledge-check",
+              "duration_minutes": 3,
+              "kind": "content"
+            },
+            {
+              "index": 13,
+              "uid": "learn.wwl.configure-azure-app-services.summary-resources",
+              "title": "Summary and resources",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-azure-app-services/13-summary-resources",
+              "duration_minutes": 2,
+              "kind": "summary"
+            }
+          ]
+        },
+        {
+          "index": 5,
+          "uid": "learn.wwl.configure-azure-container-instances",
+          "title": "Configure Azure Container Instances",
+          "url": "https://learn.microsoft.com/en-us/training/modules/configure-azure-container-instances/?WT.mc_id=api_CatalogApi",
+          "duration_minutes": 37,
+          "units": [
+            {
+              "index": 1,
+              "uid": "learn.wwl.configure-azure-container-instances.introduction",
+              "title": "Introduction",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-azure-container-instances/1-introduction",
+              "duration_minutes": 1,
+              "kind": "introduction"
+            },
+            {
+              "index": 2,
+              "uid": "learn.wwl.configure-azure-container-instances.compare-containers-to-virtual-machines",
+              "title": "Compare containers to virtual machines",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-azure-container-instances/2-compare-containers-to-virtual-machines",
+              "duration_minutes": 5,
+              "kind": "content"
+            },
+            {
+              "index": 3,
+              "uid": "learn.wwl.configure-azure-container-instances.review",
+              "title": "Review Azure Container Instances",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-azure-container-instances/3-review",
+              "duration_minutes": 3,
+              "kind": "content"
+            },
+            {
+              "index": 4,
+              "uid": "learn.wwl.configure-azure-container-instances.implement-container-groups",
+              "title": "Implement container groups",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-azure-container-instances/4-implement-container-groups",
+              "duration_minutes": 5,
+              "kind": "content"
+            },
+            {
+              "index": 5,
+              "uid": "learn.wwl.configure-azure-container-instances.review-docker-platform",
+              "title": "Review Azure Container Apps",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-azure-container-instances/5-review-docker-platform",
+              "duration_minutes": 6,
+              "kind": "content"
+            },
+            {
+              "index": 6,
+              "uid": "learn.wwl.configure-azure-container-instances.interactive-lab-simulation-containers",
+              "title": "Exercise: Implement Container Instances",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-azure-container-instances/6-simulation-containers",
+              "duration_minutes": 5,
+              "kind": "exercise"
+            },
+            {
+              "index": 7,
+              "uid": "learn.wwl.configure-azure-container-instances.knowledge-check",
+              "title": "Module assessment",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-azure-container-instances/7-knowledge-check",
+              "duration_minutes": 10,
+              "kind": "content"
+            },
+            {
+              "index": 8,
+              "uid": "learn.wwl.configure-azure-container-instances.summary-resources",
+              "title": "Summary and resources",
+              "url": "https://learn.microsoft.com/en-us/training/modules/configure-azure-container-instances/8-summary-resources",
+              "duration_minutes": 2,
+              "kind": "summary"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "index": 6,
+      "uid": "learn.az-104-monitor-backup-resources",
+      "title": "AZ-104: Monitor and back up Azure resources",
+      "url": "https://learn.microsoft.com/en-us/training/paths/az-104-monitor-backup-resources/?WT.mc_id=api_CatalogApi",
+      "duration_minutes": 88,
+      "modules": [
+        {
+          "index": 1,
+          "uid": "learn.introduction-to-azure-backup",
+          "title": "Introduction to Azure Backup",
+          "url": "https://learn.microsoft.com/en-us/training/modules/intro-to-azure-backup/?WT.mc_id=api_CatalogApi",
+          "duration_minutes": 18,
+          "units": [
+            {
+              "index": 1,
+              "uid": "learn.azure.intro-to-azure-backup.introduction",
+              "title": "Introduction",
+              "url": "https://learn.microsoft.com/en-us/training/modules/intro-to-azure-backup/1-introduction",
+              "duration_minutes": 2,
+              "kind": "introduction"
+            },
+            {
+              "index": 2,
+              "uid": "learn.azure.intro-to-azure-backup.what-is-azure-backup",
+              "title": "What is Azure Backup?",
+              "url": "https://learn.microsoft.com/en-us/training/modules/intro-to-azure-backup/2-what-is-azure-backup",
+              "duration_minutes": 3,
+              "kind": "content"
+            },
+            {
+              "index": 3,
+              "uid": "learn.azure.intro-to-azure-backup.how-azure-backup-works",
+              "title": "How Azure Backup works",
+              "url": "https://learn.microsoft.com/en-us/training/modules/intro-to-azure-backup/3-how-azure-backup-works",
+              "duration_minutes": 5,
+              "kind": "content"
+            },
+            {
+              "index": 4,
+              "uid": "learn.azure.intro-to-azure-backup.when-to-use-azure-backup",
+              "title": "When to use Azure Backup",
+              "url": "https://learn.microsoft.com/en-us/training/modules/intro-to-azure-backup/4-when-to-use-azure-backup",
+              "duration_minutes": 4,
+              "kind": "content"
+            },
+            {
+              "index": 5,
+              "uid": "learn.azure.intro-to-azure-backup.knowledge-check",
+              "title": "Module assessment",
+              "url": "https://learn.microsoft.com/en-us/training/modules/intro-to-azure-backup/5-knowledge-check",
+              "duration_minutes": 2,
+              "kind": "content"
+            },
+            {
+              "index": 6,
+              "uid": "learn.azure.intro-to-azure-backup.summary",
+              "title": "Summary",
+              "url": "https://learn.microsoft.com/en-us/training/modules/intro-to-azure-backup/6-summary",
+              "duration_minutes": 2,
+              "kind": "summary"
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "uid": "learn.protect-virtual-machines-with-azure-backup",
+          "title": "Protect your virtual machines by using Azure Backup",
+          "url": "https://learn.microsoft.com/en-us/training/modules/protect-virtual-machines-with-azure-backup/?WT.mc_id=api_CatalogApi",
+          "duration_minutes": 35,
+          "units": [
+            {
+              "index": 1,
+              "uid": "learn.protect-virtual-machines-with-azure-backup.1-introduction",
+              "title": "Introduction",
+              "url": "https://learn.microsoft.com/en-us/training/modules/protect-virtual-machines-with-azure-backup/1-introduction",
+              "duration_minutes": 2,
+              "kind": "introduction"
+            },
+            {
+              "index": 2,
+              "uid": "learn.protect-virtual-machines-with-azure-backup.2-azure-backup-features-scenarios",
+              "title": "Azure Backup features and scenarios",
+              "url": "https://learn.microsoft.com/en-us/training/modules/protect-virtual-machines-with-azure-backup/2-azure-backup-features-scenarios",
+              "duration_minutes": 5,
+              "kind": "content"
+            },
+            {
+              "index": 3,
+              "uid": "learn.protect-virtual-machines-with-azure-backup.3-back-up-azure-virtual-machine",
+              "title": "Back up an Azure virtual machine by using Azure Backup",
+              "url": "https://learn.microsoft.com/en-us/training/modules/protect-virtual-machines-with-azure-backup/3-back-up-azure-virtual-machine",
+              "duration_minutes": 5,
+              "kind": "content"
+            },
+            {
+              "index": 4,
+              "uid": "learn.protect-virtual-machines-with-azure-backup.4-exercise-back-up-azure-virtual-machine",
+              "title": "Exercise - Back up an Azure virtual machine",
+              "url": "https://learn.microsoft.com/en-us/training/modules/protect-virtual-machines-with-azure-backup/4-exercise-back-up-azure-virtual-machine",
+              "duration_minutes": 10,
+              "kind": "exercise"
+            },
+            {
+              "index": 5,
+              "uid": "learn.protect-virtual-machines-with-azure-backup.5-restore-virtual-machine-data",
+              "title": "Restore virtual machine data",
+              "url": "https://learn.microsoft.com/en-us/training/modules/protect-virtual-machines-with-azure-backup/5-restore-virtual-machine-data",
+              "duration_minutes": 5,
+              "kind": "content"
+            },
+            {
+              "index": 6,
+              "uid": "learn.protect-virtual-machines-with-azure-backup.6-exercise-restore-virtual-machine-data",
+              "title": "Exercise - Restore Azure virtual machine data",
+              "url": "https://learn.microsoft.com/en-us/training/modules/protect-virtual-machines-with-azure-backup/6-exercise-restore-virtual-machine-data",
+              "duration_minutes": 6,
+              "kind": "exercise"
+            },
+            {
+              "index": 7,
+              "uid": "learn.protect-virtual-machines-with-azure-backup.7-summary",
+              "title": "Summary",
+              "url": "https://learn.microsoft.com/en-us/training/modules/protect-virtual-machines-with-azure-backup/7-summary",
+              "duration_minutes": 2,
+              "kind": "summary"
+            }
+          ]
+        },
+        {
+          "index": 3,
+          "uid": "learn.azure.monitor-azure-vm-using-diagnostic-data",
+          "title": "Monitor your Azure virtual machines with Azure Monitor",
+          "url": "https://learn.microsoft.com/en-us/training/modules/monitor-azure-vm-using-diagnostic-data/?WT.mc_id=api_CatalogApi",
+          "duration_minutes": 35,
+          "units": [
+            {
+              "index": 1,
+              "uid": "learn.azure.monitor-azure-vm-using-diagnostic-data.introduction",
+              "title": "Introduction",
+              "url": "https://learn.microsoft.com/en-us/training/modules/monitor-azure-vm-using-diagnostic-data/1-introduction",
+              "duration_minutes": 2,
+              "kind": "introduction"
+            },
+            {
+              "index": 2,
+              "uid": "learn.azure.monitor-azure-vm-using-diagnostic-data.monitor-vm-health",
+              "title": "Monitoring for Azure VMs",
+              "url": "https://learn.microsoft.com/en-us/training/modules/monitor-azure-vm-using-diagnostic-data/2-monitor-vm-health",
+              "duration_minutes": 8,
+              "kind": "content"
+            },
+            {
+              "index": 3,
+              "uid": "learn.azure.monitor-azure-vm-using-diagnostic-data.exercise-create-virtual-machine",
+              "title": "Monitor VM host data",
+              "url": "https://learn.microsoft.com/en-us/training/modules/monitor-azure-vm-using-diagnostic-data/3-exercise-create-virtual-machine",
+              "duration_minutes": 6,
+              "kind": "content"
+            },
+            {
+              "index": 4,
+              "uid": "learn.azure.monitor-azure-vm-using-diagnostic-data.view-host-metrics",
+              "title": "Use Metrics Explorer to view detailed host metrics",
+              "url": "https://learn.microsoft.com/en-us/training/modules/monitor-azure-vm-using-diagnostic-data/4-view-host-metrics",
+              "duration_minutes": 5,
+              "kind": "content"
+            },
+            {
+              "index": 5,
+              "uid": "learn.azure.monitor-azure-vm-using-diagnostic-data.enable-vm-insights",
+              "title": "Collect client performance counters by using VM insights",
+              "url": "https://learn.microsoft.com/en-us/training/modules/monitor-azure-vm-using-diagnostic-data/5-enable-vm-insights",
+              "duration_minutes": 5,
+              "kind": "content"
+            },
+            {
+              "index": 6,
+              "uid": "learn.azure.monitor-azure-vm-using-diagnostic-data.collect-log-data",
+              "title": "Collect VM client event logs",
+              "url": "https://learn.microsoft.com/en-us/training/modules/monitor-azure-vm-using-diagnostic-data/6-collect-log-data",
+              "duration_minutes": 7,
+              "kind": "content"
+            },
+            {
+              "index": 7,
+              "uid": "learn.azure.monitor-azure-vm-using-diagnostic-data.summary",
+              "title": "Summary",
+              "url": "https://learn.microsoft.com/en-us/training/modules/monitor-azure-vm-using-diagnostic-data/7-summary",
+              "duration_minutes": 2,
+              "kind": "summary"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

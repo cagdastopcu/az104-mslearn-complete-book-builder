@@ -1,0 +1,453 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" epub:prefix="z3998: http://www.daisy.org/z3998/2012/vocab/structure/#" lang="en" xml:lang="en">
+  <head>
+    <title>LP 6 M2 - Protect your virtual machines by using Azure Backup</title>
+    <link href="style/main.css" rel="stylesheet" type="text/css"/>
+  </head>
+  <body><h1>LP 6 M2 - Protect your virtual machines by using Azure Backup</h1>
+<p>https://learn.microsoft.com/en-us/training/modules/protect-virtual-machines-with-azure-backup/?WT.mc_id=api_CatalogApi</p>
+<h2>Unit 6.2.1 - Introduction</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/protect-virtual-machines-with-azure-backup/1-introduction</p>
+<h3>Introduction</h3>
+<p>Your company has several critical virtual machine (VM) workloads running on Azure. As the lead solution architect, you're asked to ensure that the company can recover these VMs if there's data loss or corruption. You're asked to use the built-in capabilities of Azure Backup to help protect these VMs.</p>
+<p>Azure Backup is a service that allows you to back up Azure virtual machines, on-premises servers, Azure file shares, and SQL Server or SAP HANA (High-performance Analytic Appliance) running on Azure VMs, and other application workloads.</p>
+<p>In this module, you learn about Azure Backup and you see how you can use the Azure portal to back up and restore a VM.</p>
+<h3>Learning objectives</h3>
+<p>In this module, you:</p>
+<p>- Identify the scenarios for which Azure Backup provides backup and restore capabilities.</p>
+<p>- Back up and restore an Azure virtual machine.</p>
+<h3>Prerequisites</h3>
+<p>- Basic knowledge of Azure virtual machines.</p>
+<p>- Basic knowledge of disk storage for virtual machines.</p>
+<p>Note</p>
+<p>For this module, you need use your own subscription to complete the optional exercises. A trial subscription or a subscription that you already have access to works for these exercises.</p>
+<h2>Unit 6.2.2 - Azure Backup features and scenarios</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/protect-virtual-machines-with-azure-backup/2-azure-backup-features-scenarios</p>
+<h3>Azure Backup features and scenarios</h3>
+<p>Your company's business continuity and disaster recovery (BCDR) plan requires a full backup and restore capability for all of your high-risk servers. You're asked to enable and test the backup and restore functionality for these critical Windows and Linux assets.</p>
+<p>In this unit, you look at how Azure Backup works, and study some of the supported use cases for Azure Backup.</p>
+<h3>What is Azure Backup?</h3>
+<p>Azure Backup is a built-in Azure service that provides secure backup for all Azure-managed data assets. It uses zero-infrastructure solutions to enable self-service backups and restores, with at-scale management at a lower and predictable cost. Azure Backup currently offers specialized backup solutions for Azure and on-premises virtual machines (VMs). Azure Backup also gives workloads like SQL Server or SAP HANA (High-performance Analytic Appliance) running in Azure VMs enterprise-class backup and restore options.</p>
+<p>In contrast to traditional backup solutions that can take considerable effort to set up, Azure Backup is easily managed through the Azure portal.</p>
+<h4>Azure Backup versus Azure Site Recovery</h4>
+<p>Both Azure Backup and Azure Site Recovery aim to make the system more resilient to faults and failures, but they use two different approaches. The primary goal of Backup is to maintain copies of stateful data that allow you to go back in time. Site Recovery, however, replicates the data in almost real time and allows for a failover.</p>
+<p>In that sense, if there are issues like network or power outages, you can use availability zones. For a region-wide disaster (such as natural disasters), Site Recovery is used. Backups are used in cases of accidental data loss, data corruption, or ransomware attacks.</p>
+<p>Additionally, the choice of a recovery approach depends on the criticality of the application, recovery point objective (RPO) and recovery time objective (RTO) requirements, and the cost implications.</p>
+<h4>Why use Azure Backup?</h4>
+<p>Traditional backup solutions, such as disk and tape, don't offer the highest level of integration with cloud-based solutions. Azure Backup has several benefits over more traditional backup solutions:</p>
+<p>Zero-infrastructure backup : Azure Backup eliminates the need to deploy and manage any backup infrastructure or storage. There's no overhead in maintaining backup servers or scaling the storage up or down as the needs vary.</p>
+<p>Long-term retention : Meet rigorous compliance and audit needs by retaining backups for many years, after which the built-in lifecycle management capability prunes the recovery points automatically.</p>
+<p>Security : Azure Backup provides security to your backup environment, both when your data is in transit and at rest:</p>
+<p>- Azure role-based access control : Role-based access control allows you to segregate duties within your team and grant only the amount of access to users necessary to do their jobs.</p>
+<p>Azure role-based access control : Role-based access control allows you to segregate duties within your team and grant only the amount of access to users necessary to do their jobs.</p>
+<p>- Encryption of backups : Backup data is automatically encrypted using Microsoft-managed keys. Alternatively, you can encrypt your backed-up data using customer-managed keys stored in the Azure Key Vault.</p>
+<p>Encryption of backups : Backup data is automatically encrypted using Microsoft-managed keys. Alternatively, you can encrypt your backed-up data using customer-managed keys stored in the Azure Key Vault.</p>
+<p>- No internet connectivity required : When you use Azure VMs, all the data transfer happens only on the Azure backbone network without needing to access your virtual network. So no access to any IPs or fully qualified domain names (FQDNs) is required.</p>
+<p>No internet connectivity required : When you use Azure VMs, all the data transfer happens only on the Azure backbone network without needing to access your virtual network. So no access to any IPs or fully qualified domain names (FQDNs) is required.</p>
+<p>- Soft delete : With soft delete, the backup data is retained for 14 more days even after the deletion of the backup item. This retention protects against accidental deletion or malicious deletion scenarios, allowing the recovery of those backups with no data loss. Azure Backup also provides Enhanced soft delete that enables you to retain a deleted item in the soft deleted state for a longer duration.</p>
+<p>Soft delete : With soft delete, the backup data is retained for 14 more days even after the deletion of the backup item. This retention protects against accidental deletion or malicious deletion scenarios, allowing the recovery of those backups with no data loss. Azure Backup also provides Enhanced soft delete that enables you to retain a deleted item in the soft deleted state for a longer duration.</p>
+<p>Azure Backup also offers the ability to back up VMs encrypted with Azure Disk Encryption.</p>
+<p>High availability : Azure Backup offers three types of replication:</p>
+<p>- Locally redundant storage (LRS) : The lowest-cost option with basic protection against server rack and drive failures. We recommend it for noncritical scenarios.</p>
+<p>Locally redundant storage (LRS) : The lowest-cost option with basic protection against server rack and drive failures. We recommend it for noncritical scenarios.</p>
+<p>- Geo-redundant storage (GRS) : The intermediate option has failover capabilities in a secondary region. We recommend it for backup scenarios.</p>
+<p>Geo-redundant storage (GRS) : The intermediate option has failover capabilities in a secondary region. We recommend it for backup scenarios.</p>
+<p>- Zone-redundant storage (ZRS) : This option protects against datacenter-level failures by replicating your storage account synchronously across three Azure availability zones. We recommend it for high-availability scenarios.</p>
+<p>Zone-redundant storage (ZRS) : This option protects against datacenter-level failures by replicating your storage account synchronously across three Azure availability zones. We recommend it for high-availability scenarios.</p>
+<p>Centralized monitoring and management : Azure Backup provides built-in monitoring and alerting capabilities in a Recovery Services vault. These capabilities are available without any other management infrastructure.</p>
+<h4>Azure Backup supported scenarios</h4>
+<p>Azure Backup supports the following scenarios:</p>
+<p>- Azure VMs - Back up Windows or Linux Azure VMs Azure Backup provides independent and isolated backups to guard against unintended destruction of the data on your VMs. Backups are stored in a Recovery Services vault with built-in management of recovery points. Configuration and scaling are simple, backups are optimized, and you can easily restore as needed.</p>
+<p>- On-premises - Back up files, folders, and system state using the Microsoft Azure Recovery Services (MARS) agent . Or use Microsoft Azure Backup Server (MABS) or Data Protection Manager (DPM) server to protect on-premises VMs (Hyper-V and VMware) and other on-premises workloads.</p>
+<p>- Azure Files shares - Azure Files provides snapshot management by Azure Backup.</p>
+<p>- SQL Server in Azure VMs and SAP HANA databases in Azure VMs - Azure Backup offers stream-based, specialized solutions to back up SQL Server, or SAP HANA running in Azure VMs. These solutions take workload-aware backups that support different backup types such as full, differential and log, 15-minute RPO, and point-in-time recovery.</p>
+<h2>Unit 6.2.3 - Back up an Azure virtual machine by using Azure Backup</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/protect-virtual-machines-with-azure-backup/3-back-up-azure-virtual-machine</p>
+<h3>Back up an Azure virtual machine by using Azure Backup</h3>
+<p>You want to ensure that the backup and restore jobs you put in place offer a way to recover your company's servers. With this requirement in mind, you want to investigate the best way to implement backup for your virtual machines (VMs).</p>
+<p>VMs that are hosted on Azure can take advantage of Azure Backup. You can easily back up and restore machines without installing extra software.</p>
+<p>In this unit, you explore all the methods of backing up Azure VMs provided by Azure Backup and make a decision on which to implement.</p>
+<p>Azure VMs are backed up by taking snapshots of the underlying disks at user-defined intervals and transferring those snapshots to the Recovery Services vault as per the customer-defined policy.</p>
+<h3>Recovery Services vault</h3>
+<p>Azure Backup uses a Recovery Services vault to manage and store the backup data. A vault is a storage-management entity, which provides a simple experience to carry out and monitor backup and restore operations. With Azure Backup, you don't need to worry about deploying or managing storage accounts. In fact, all you need to specify is the vault that you want to back up the virtual machine (VM) to. The backup data is transferred to the Azure Backup storage accounts (in a separate fault domain) in the background. The vault also acts as a role-based access control boundary to allow secure access to the data.</p>
+<h3>Snapshots</h3>
+<p>A snapshot is a point-in-time backup of all disks on the VM. For Azure VMs, Azure Backup uses different extensions for each supporting operating system:</p>
+<p>Extension</p>
+<p>OS</p>
+<p>Description</p>
+<p>VM Snapshot</p>
+<p>Windows</p>
+<p>The extension works with Volume Shadow Copy Service (VSS) to take a copy of the data on disk and in memory.</p>
+<p>VM SnapshotLinux</p>
+<p>Linux</p>
+<p>The snapshot is a copy of the disk.</p>
+<p>Depending on how the snapshot is taken and what it includes, you can achieve different levels of consistency:</p>
+<p>- Application consistent The snapshot captures the VM as a whole. It uses VSS writers to capture the content of the machine memory and any pending I/O operations. For Linux machines, you need to write custom pre or post scripts per app to capture the application state. You can get complete consistency for the VM and all running applications.</p>
+<p>- The snapshot captures the VM as a whole. It uses VSS writers to capture the content of the machine memory and any pending I/O operations.</p>
+<p>- For Linux machines, you need to write custom pre or post scripts per app to capture the application state.</p>
+<p>- You can get complete consistency for the VM and all running applications.</p>
+<p>- File system consistent If VSS fails on Windows, or the pre and post scripts fail on Linux, Azure Backup still creates a file-system-consistent snapshot. During a recovery, no corruption occurs within the machine. But installed applications need to do their own cleanup during startup to become consistent.</p>
+<p>- If VSS fails on Windows, or the pre and post scripts fail on Linux, Azure Backup still creates a file-system-consistent snapshot.</p>
+<p>- During a recovery, no corruption occurs within the machine. But installed applications need to do their own cleanup during startup to become consistent.</p>
+<p>- Crash consistent This level of consistency typically occurs if the VM is shut down at the time of the backup. No I/O operations or memory contents are captured during this type of backup. This method doesn't guarantee data consistency for the OS or app.</p>
+<p>- This level of consistency typically occurs if the VM is shut down at the time of the backup.</p>
+<p>- No I/O operations or memory contents are captured during this type of backup. This method doesn't guarantee data consistency for the OS or app.</p>
+<h3>Backup policy</h3>
+<p>You can define the backup frequency and retention duration for your backups. Currently, the VM backup can be triggered daily or weekly, and can be stored for multiple years. The backup policy supports two access tiers: snapshot tier and the vault tier . By using the Enhanced policy, you can trigger hourly backups.</p>
+<p>Selective disk backup : Azure Backup provides Selective Disk backup and restore capability using Enhanced policy . By using this capability, you can selectively back up a subset of the data disks that are attached to your VM. Then, you can restore a subset of the disks that are available in a recovery point, both from instant restore and vault tier. It helps you manage critical data in a subset of the VM disks and use database backup solutions when you want to back up only their OS disk to reduce cost.</p>
+<p>Snapshot tier : All the snapshots are stored locally for a maximum period of five days, in what is called the snapshot tier. For all types of operation recoveries, we recommended that you restore from the snapshots because it's faster to do so. This capability is called instant restore .</p>
+<p>Vault tier : All snapshots are additionally transferred to the vault for more security and longer retention. At this point, the recovery point type changes to "snapshot and vault."</p>
+<h3>Backup process for an Azure virtual machine</h3>
+<p>Here's how Azure Backup completes a backup for Azure VMs:</p>
+<p>- For Azure VMs that are selected for backup, Azure Backup starts a backup job according to the backup frequency you specify in the backup policy.</p>
+<p>For Azure VMs that are selected for backup, Azure Backup starts a backup job according to the backup frequency you specify in the backup policy.</p>
+<p>- During the first backup, a backup extension is installed on the VM, if the VM is running: For Windows VMs, the VM Snapshot extension is installed. For Linux VMs, the VM SnapshotLinux extension is installed.</p>
+<p>During the first backup, a backup extension is installed on the VM, if the VM is running:</p>
+<p>- For Windows VMs, the VM Snapshot extension is installed.</p>
+<p>- For Linux VMs, the VM SnapshotLinux extension is installed.</p>
+<p>- After the snapshot is taken, the data is stored locally and transferred to the vault. The backup is optimized by backing up each VM disk in parallel. For each disk that's being backed up, Azure Backup reads the blocks on the disk and identifies and transfers only the data blocks that changed (the delta) since the previous backup. Snapshot data might not be immediately copied to the vault. It might take several hours at peak times. Total backup time for a VM is less than 24 hours for daily backup policies.</p>
+<p>After the snapshot is taken, the data is stored locally and transferred to the vault.</p>
+<p>- The backup is optimized by backing up each VM disk in parallel.</p>
+<p>- For each disk that's being backed up, Azure Backup reads the blocks on the disk and identifies and transfers only the data blocks that changed (the delta) since the previous backup.</p>
+<p>- Snapshot data might not be immediately copied to the vault. It might take several hours at peak times. Total backup time for a VM is less than 24 hours for daily backup policies.</p>
+<p>You can additionally enable vault encryption with customer-managed keys (CMK) . By using Enhanced soft delete for a Recovery Services vault, you can protect backups from deletion. You can also keep Enhanced soft delete always on to prevent turning it off, thus protecting your backups from accidental deletion or from malware attacks.</p>
+<h2>Unit 6.2.4 - Exercise - Back up an Azure virtual machine</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/protect-virtual-machines-with-azure-backup/4-exercise-back-up-azure-virtual-machine</p>
+<h3>Exercise - Back up an Azure virtual machine</h3>
+<p>Your company runs a combination of Windows and Linux workloads. You're asked to prove that Azure Backup is a good fit for both kinds of virtual machines (VMs). By using a combination of the Azure CLI and the Azure portal, you help protect both kinds of virtual machines with Azure Backup.</p>
+<p>Azure Backup can be quickly enabled for virtual machines in Azure. You can enable Azure Backup from the portal, from the Azure CLI, or by using PowerShell commands.</p>
+<p>In this exercise, you create a virtual machine (VM), set up a backup, and start a backup.</p>
+<p>Note</p>
+<p>This exercise is optional. If you don't have an Azure account, you can read through the instructions so you understand how to back up virtual machines by using Azure Backup.</p>
+<p>If you want to complete this exercise, but you don't have an Azure subscription or you prefer not to use your own account, create a free account before you begin.</p>
+<h3>Create a backup for Azure virtual machines</h3>
+<h4>Set up the environment</h4>
+<p>- Sign in to the Azure portal , and select the icon to open Azure Cloud Shell.</p>
+<p>Sign in to the Azure portal , and select the icon to open Azure Cloud Shell.</p>
+<p>- Create a resource group to contain all the resources for this exercise. RGROUP=$(az group create --name vmbackups --location westus2 --output tsv --query name)</p>
+<p>Create a resource group to contain all the resources for this exercise.</p>
+<p>RGROUP=$(az group create --name vmbackups --location westus2 --output tsv --query name)</p>
+<p>- Use Cloud Shell to create the NorthwindInternal virtual network and the NorthwindInternal1 subnet. az network vnet create \</p>
+<p>--resource-group $RGROUP \</p>
+<p>--name NorthwindInternal \</p>
+<p>--address-prefixes 10.0.0.0/16 \</p>
+<p>--subnet-name NorthwindInternal1 \</p>
+<p>--subnet-prefixes 10.0.0.0/24</p>
+<p>Use Cloud Shell to create the NorthwindInternal virtual network and the NorthwindInternal1 subnet.</p>
+<p>az network vnet create \</p>
+<p>--resource-group $RGROUP \</p>
+<p>--name NorthwindInternal \</p>
+<p>--address-prefixes 10.0.0.0/16 \</p>
+<p>--subnet-name NorthwindInternal1 \</p>
+<p>--subnet-prefixes 10.0.0.0/24</p>
+<p>az network vnet create \</p>
+<p>--resource-group $RGROUP \</p>
+<p>--name NorthwindInternal \</p>
+<p>--address-prefixes 10.0.0.0/16 \</p>
+<p>--subnet-name NorthwindInternal1 \</p>
+<p>--subnet-prefixes 10.0.0.0/24</p>
+<h4>Create a Windows virtual machine by using the Azure CLI</h4>
+<p>Create the NW-APP01 virtual machine by running the following command. Replace &lt;password&gt; with a password of your choice, enclosed in double quotes. For example, --admin-password "PassWord123!" .</p>
+<p>&lt;password&gt;</p>
+<p>--admin-password "PassWord123!"</p>
+<p>az vm create \</p>
+<p>--resource-group $RGROUP \</p>
+<p>--name NW-APP01 \</p>
+<p>--size Standard_DS1_v2 \</p>
+<p>--public-ip-sku Standard \</p>
+<p>--vnet-name NorthwindInternal \</p>
+<p>--subnet NorthwindInternal1 \</p>
+<p>--image Win2016Datacenter \</p>
+<p>--admin-username admin123 \</p>
+<p>--no-wait \</p>
+<p>--admin-password &lt;password&gt;</p>
+<p>az vm create \</p>
+<p>--resource-group $RGROUP \</p>
+<p>--name NW-APP01 \</p>
+<p>--size Standard_DS1_v2 \</p>
+<p>--public-ip-sku Standard \</p>
+<p>--vnet-name NorthwindInternal \</p>
+<p>--subnet NorthwindInternal1 \</p>
+<p>--image Win2016Datacenter \</p>
+<p>--admin-username admin123 \</p>
+<p>--no-wait \</p>
+<p>--admin-password &lt;password&gt;</p>
+<h4>Create a Linux virtual machine by using the Azure CLI</h4>
+<p>Create the NW-RHEL01 virtual machine by running the following command.</p>
+<p>az vm create \</p>
+<p>--resource-group $RGROUP \</p>
+<p>--name NW-RHEL01 \</p>
+<p>--size Standard_DS1_v2 \</p>
+<p>--image RedHat:RHEL:8-gen2:latest \</p>
+<p>--authentication-type ssh \</p>
+<p>--generate-ssh-keys \</p>
+<p>--vnet-name NorthwindInternal \</p>
+<p>--subnet NorthwindInternal1</p>
+<p>az vm create \</p>
+<p>--resource-group $RGROUP \</p>
+<p>--name NW-RHEL01 \</p>
+<p>--size Standard_DS1_v2 \</p>
+<p>--image RedHat:RHEL:8-gen2:latest \</p>
+<p>--authentication-type ssh \</p>
+<p>--generate-ssh-keys \</p>
+<p>--vnet-name NorthwindInternal \</p>
+<p>--subnet NorthwindInternal1</p>
+<p>Note</p>
+<p>If you get a securityProfile.securityType is invalid error running the preceding command, run the following commands to register UseStandardSecurityType , then re-run the preceding command.</p>
+<p>securityProfile.securityType is invalid</p>
+<p>UseStandardSecurityType</p>
+<p>az feature register --name UseStandardSecurityType --namespace Microsoft.Compute</p>
+<p>az feature show --name UseStandardSecurityType --namespace Microsoft.Compute</p>
+<p>az feature register --name UseStandardSecurityType --namespace Microsoft.Compute</p>
+<p>az feature show --name UseStandardSecurityType --namespace Microsoft.Compute</p>
+<p>The command can take a few minutes to complete. Wait for it to finish before moving on to the next step.</p>
+<h4>Enable backup for a virtual machine by using the Azure portal</h4>
+<p>- In the Azure portal, search for and select Virtual machines . The Virtual machines pane appears.</p>
+<p>In the Azure portal, search for and select Virtual machines .</p>
+<p>The Virtual machines pane appears.</p>
+<p>- From the list, select the NW-RHEL01 virtual machine that you created. The NW-RHEL01 virtual machine pane appears.</p>
+<p>From the list, select the NW-RHEL01 virtual machine that you created.</p>
+<p>The NW-RHEL01 virtual machine pane appears.</p>
+<p>- In the middle menu pane, select the Capabilities tab, then scroll down to and select Backup . The Backup pane for the NW-RHEL01 virtual machine appears.</p>
+<p>In the middle menu pane, select the Capabilities tab, then scroll down to and select Backup . The Backup pane for the NW-RHEL01 virtual machine appears.</p>
+<p>- Select the radio button for Standard . You can accept the defaults for the following options: Backup vault : vaultXXX for the name. Backup policy : DailyPolicy-xxxxxxxx , which creates a daily backup at 12:00 PM UTC with a retention range of 180 days.</p>
+<p>Select the radio button for Standard . You can accept the defaults for the following options:</p>
+<p>- Backup vault : vaultXXX for the name.</p>
+<p>- Backup policy : DailyPolicy-xxxxxxxx , which creates a daily backup at 12:00 PM UTC with a retention range of 180 days.</p>
+<p>- Select the Enable backup button.</p>
+<p>Select the Enable backup button.</p>
+<p>- Once deployment completes, go back to the NW-RHEL01 virtual machine, select the Capabilities tab, then scroll down to and select Backup . The Backup pane for the NW-RHEL01 virtual machine appears.</p>
+<p>Once deployment completes, go back to the NW-RHEL01 virtual machine, select the Capabilities tab, then scroll down to and select Backup . The Backup pane for the NW-RHEL01 virtual machine appears.</p>
+<p>- To perform the first backup for this server, in the top menu bar, select Backup now . The Backup Now pane for NW-RHEL01 appears.</p>
+<p>To perform the first backup for this server, in the top menu bar, select Backup now .</p>
+<p>The Backup Now pane for NW-RHEL01 appears.</p>
+<p>- Select OK .</p>
+<p>Select OK .</p>
+<h4>Enable a backup by using the Azure CLI</h4>
+<p>- First, create the azure-backup vault by using Cloud Shell: az backup vault create \</p>
+<p>--resource-group vmbackups \</p>
+<p>--location westus2 \</p>
+<p>--name azure-backup</p>
+<p>First, create the azure-backup vault by using Cloud Shell:</p>
+<p>az backup vault create \</p>
+<p>--resource-group vmbackups \</p>
+<p>--location westus2 \</p>
+<p>--name azure-backup</p>
+<p>az backup vault create \</p>
+<p>--resource-group vmbackups \</p>
+<p>--location westus2 \</p>
+<p>--name azure-backup</p>
+<p>- Using Cloud Shell, enable a backup for the NW-APP01 virtual machine. az backup protection enable-for-vm \</p>
+<p>--resource-group vmbackups \</p>
+<p>--vault-name azure-backup \</p>
+<p>--vm NW-APP01 \</p>
+<p>--policy-name EnhancedPolicy</p>
+<p>Using Cloud Shell, enable a backup for the NW-APP01 virtual machine.</p>
+<p>az backup protection enable-for-vm \</p>
+<p>--resource-group vmbackups \</p>
+<p>--vault-name azure-backup \</p>
+<p>--vm NW-APP01 \</p>
+<p>--policy-name EnhancedPolicy</p>
+<p>az backup protection enable-for-vm \</p>
+<p>--resource-group vmbackups \</p>
+<p>--vault-name azure-backup \</p>
+<p>--vm NW-APP01 \</p>
+<p>--policy-name EnhancedPolicy</p>
+<p>- Monitor the progress of the setup using the Azure CLI. az backup job list \</p>
+<p>--resource-group vmbackups \</p>
+<p>--vault-name azure-backup \</p>
+<p>--output table Keep running the preceding command until you see that ConfigureBackup is finished. Name Operation Status Item Name Start Time UTC Duration</p>
+<p>------------------------------------ --------------- ---------- ----------- -------------------------------- --------------</p>
+<p>a3df79b4-be4f-4cc9-8b2c-a5ead44a6a12 ConfigureBackup Completed NW-APP01 2019-08-01T06:19:12.101048+00:00 0:00:31.305975</p>
+<p>5e1531a9-8b3d-4983-a642-86ee982f7036 Backup InProgress NW-RHEL01 2019-08-01T06:18:35.955118+00:00 0:01:22.734182</p>
+<p>860d4dca-9603-4a4e-9f3b-93f242a0a64d ConfigureBackup Completed NW-RHEL01 2019-08-01T06:13:33.860598+00:00 0:00:31.256773</p>
+<p>Monitor the progress of the setup using the Azure CLI.</p>
+<p>az backup job list \</p>
+<p>--resource-group vmbackups \</p>
+<p>--vault-name azure-backup \</p>
+<p>--output table</p>
+<p>az backup job list \</p>
+<p>--resource-group vmbackups \</p>
+<p>--vault-name azure-backup \</p>
+<p>--output table</p>
+<p>Keep running the preceding command until you see that ConfigureBackup is finished.</p>
+<p>ConfigureBackup</p>
+<p>Name Operation Status Item Name Start Time UTC Duration</p>
+<p>------------------------------------ --------------- ---------- ----------- -------------------------------- --------------</p>
+<p>a3df79b4-be4f-4cc9-8b2c-a5ead44a6a12 ConfigureBackup Completed NW-APP01 2019-08-01T06:19:12.101048+00:00 0:00:31.305975</p>
+<p>5e1531a9-8b3d-4983-a642-86ee982f7036 Backup InProgress NW-RHEL01 2019-08-01T06:18:35.955118+00:00 0:01:22.734182</p>
+<p>860d4dca-9603-4a4e-9f3b-93f242a0a64d ConfigureBackup Completed NW-RHEL01 2019-08-01T06:13:33.860598+00:00 0:00:31.256773</p>
+<p>Name Operation Status Item Name Start Time UTC Duration</p>
+<p>------------------------------------ --------------- ---------- ----------- -------------------------------- --------------</p>
+<p>a3df79b4-be4f-4cc9-8b2c-a5ead44a6a12 ConfigureBackup Completed NW-APP01 2019-08-01T06:19:12.101048+00:00 0:00:31.305975</p>
+<p>5e1531a9-8b3d-4983-a642-86ee982f7036 Backup InProgress NW-RHEL01 2019-08-01T06:18:35.955118+00:00 0:01:22.734182</p>
+<p>860d4dca-9603-4a4e-9f3b-93f242a0a64d ConfigureBackup Completed NW-RHEL01 2019-08-01T06:13:33.860598+00:00 0:00:31.256773</p>
+<p>- Do an initial backup of the virtual machine, instead of waiting for the schedule to run it. az backup protection backup-now \</p>
+<p>--resource-group vmbackups \</p>
+<p>--vault-name azure-backup \</p>
+<p>--container-name NW-APP01 \</p>
+<p>--item-name NW-APP01 \</p>
+<p>--retain-until 18-10-2030 \</p>
+<p>--backup-management-type AzureIaasVM There's no need to wait for the backup to finish, because the next section shows you how to monitor the progress in the portal.</p>
+<p>Do an initial backup of the virtual machine, instead of waiting for the schedule to run it.</p>
+<p>az backup protection backup-now \</p>
+<p>--resource-group vmbackups \</p>
+<p>--vault-name azure-backup \</p>
+<p>--container-name NW-APP01 \</p>
+<p>--item-name NW-APP01 \</p>
+<p>--retain-until 18-10-2030 \</p>
+<p>--backup-management-type AzureIaasVM</p>
+<p>az backup protection backup-now \</p>
+<p>--resource-group vmbackups \</p>
+<p>--vault-name azure-backup \</p>
+<p>--container-name NW-APP01 \</p>
+<p>--item-name NW-APP01 \</p>
+<p>--retain-until 18-10-2030 \</p>
+<p>--backup-management-type AzureIaasVM</p>
+<p>There's no need to wait for the backup to finish, because the next section shows you how to monitor the progress in the portal.</p>
+<h3>Monitor backups in the portal</h3>
+<h4>View the status of a backup for a single virtual machine</h4>
+<p>- On the Azure portal menu or from the Home page, select All resources .</p>
+<p>On the Azure portal menu or from the Home page, select All resources .</p>
+<p>- Enter Virtual machines in the search field at the top of the page and select Virtual machines from the results.</p>
+<p>Enter Virtual machines in the search field at the top of the page and select Virtual machines from the results.</p>
+<p>- Select the NW-APP01 virtual machine. The NW-APP01 virtual machine pane appears.</p>
+<p>Select the NW-APP01 virtual machine. The NW-APP01 virtual machine pane appears.</p>
+<p>- In the middle menu pane, select the Capabilities tab, then scroll to and select Backup . The Backup pane for the NW-APP01 virtual machine appears. Under the Backup status section, the Last backup status field displays the current status of the backup.</p>
+<p>In the middle menu pane, select the Capabilities tab, then scroll to and select Backup . The Backup pane for the NW-APP01 virtual machine appears.</p>
+<p>Under the Backup status section, the Last backup status field displays the current status of the backup.</p>
+<h4>View the status of backups in the Recovery Services vault</h4>
+<p>- On the Azure portal menu or from the Home page, select All resources .</p>
+<p>On the Azure portal menu or from the Home page, select All resources .</p>
+<p>- Sort the list by Type , and then select the azure-backup Recovery Services vault. The Azure-backup recovery services vault pane appears.</p>
+<p>Sort the list by Type , and then select the azure-backup Recovery Services vault. The Azure-backup recovery services vault pane appears.</p>
+<p>- On the Overview pane, select the interior Backup tab to display a summary of all the backup items, the storage being used, and the current status of any backup jobs.</p>
+<p>On the Overview pane, select the interior Backup tab to display a summary of all the backup items, the storage being used, and the current status of any backup jobs.</p>
+<h2>Unit 6.2.5 - Restore virtual machine data</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/protect-virtual-machines-with-azure-backup/5-restore-virtual-machine-data</p>
+<h3>Restore virtual machine data</h3>
+<p>Companies that have a business continuity and disaster recovery (BCDR) plan typically schedule test runs to ensure that the business can successfully recover from disasters. Now that you successfully backed up your virtual machines, you want to explore the options available for restoring them as part of your BCDR testing.</p>
+<p>In this unit, you learn about the options for restoring an Azure virtual machine (VM) from a previous backup.</p>
+<h3>Restore types</h3>
+<p>Azure Backup provides many ways to restore a VM. As explained earlier, you can either instantly restore from the snapshot tier (optimal for operational recoveries) or from the vault tier.</p>
+<p>Restore option</p>
+<p>Details</p>
+<p>Create a new VM</p>
+<p>Quickly creates and gets a basic VM up and running from a restore point. The new VM must be created in the same region as the source VM.</p>
+<p>Restore disk</p>
+<p>Restores a VM disk, which can then be used to create a new VM. The disks are copied to the resource group you specify. Azure Backup provides a template to help you customize and create a VM. Alternatively, you can attach the disk to an existing VM, or create a new VM. This option is useful if you want to customize the VM, add configuration settings that weren't there at the time of backup. Or, add settings that must be configured using the template or PowerShell.</p>
+<p>Replace existing</p>
+<p>You can restore a disk and use it to replace a disk on the existing VM. Azure Backup takes a snapshot of the existing VM before replacing the disk and stores it in the staging location you specify. Existing disks connected to the VM are replaced with the selected restore point. The current VM must exist. You can't use this option if the VM is deleted.</p>
+<p>Cross region (secondary region)</p>
+<p>Cross region restore can be used to restore Azure VMs in the secondary region, which is an Azure paired region. This feature is available for the following options: Create a VM Restore Disks We don't currently support the Replace existing disks option.</p>
+<p>- Create a VM</p>
+<p>- Restore Disks We don't currently support the Replace existing disks option.</p>
+<p>Cross Subscription Restore</p>
+<p>Backup Admins and App admins can perform the restore operation on secondary regions. Cross Subscription Restore: - Allows you to restore Azure Virtual Machines or disks to a different subscription within the same tenant as the source subscription. As per the Azure role-based access control capabilities from restore points. - Allowed only if the Cross Subscription Restore property is enabled for your Recovery Services vault. - Works with Cross Region Restore and Cross Zonal Restore. - You can trigger Cross Subscription Restore for managed virtual machines only. - Cross Subscription Restore is supported for Restore with Managed System Identities (MSI). - It's unsupported for snapshots tier recovery points. - It's unsupported for unmanaged VMs and VMs encrypted with Advanced Digital Encryption (ADE).</p>
+<p>Cross Zonal Restore</p>
+<p>Allows you to restore Azure Virtual Machines or disks pinned to any zone to different available zones (as per the Azure Role-based access control capabilities) from restore points. When you select a zone to restore, it selects the logical zone (and not the physical zone) as per the Azure subscription you use to restore to. - You can trigger Cross Zonal Restore for managed virtual machines only. - Cross Zonal Restore is supported for Restore with Managed System Identities (MSI). - Cross Zonal Restore supports restore of an Azure zone pinned/non-zone pinned VM from a vault with Zone-redundant storage (ZRS) enabled. Learn how to set Storage Redundancy. - You can only use Cross Zonal Restore to restore a VM pinned to an Azure zone from a vault with Cross Region Restore (CRR) under these conditions: The secondary region supports zones, or Zone Redundant Storage (ZRS) is enabled. - Cross Zonal Restore is supported from secondary regions. - It's unsupported from snapshots restore point. - It's unsupported for Encrypted Azure VMs.</p>
+<p>Selective disk backup</p>
+<p>Allows you to back up and restore selective VM disks through Enhanced policy. Using this capability, you can selectively back up a subset of the data disks that are attached to your VM. Then, you can restore a subset of the disks that are available in a recovery point, both from instant restore and vault tier. Selective disk backup is useful when you: - Manage critical data in a subset of the VM disks. - Use database backup solutions and want to back up only their OS disk to reduce cost.</p>
+<h3>Recover files from a backup</h3>
+<p>You can also recover individual files from a recovery point by mounting the snapshot on the target machine using the iSCSI initiator in the machine. To learn more, see Recover files from Azure virtual machine backup .</p>
+<h3>Restore an encrypted virtual machine</h3>
+<p>Azure Backup supports the backup and restore of machines encrypted through Azure Disk Encryption. Disk Encryption works with Azure Key Vault to manage the relevant secrets that are associated with the encrypted disk. For an extra layer of security, you can use key vault encryption keys (KEKs) to encrypt the secrets before they're written to the key vault.</p>
+<p>Certain limitations apply when you restore encrypted VMs:</p>
+<p>- Azure Backup supports only standalone key encryption. Any key that's part of a certificate isn't currently supported.</p>
+<p>- File-level or folder-level restores aren't supported with encrypted VMs. To restore to that level of granularity, the entire VM has to be restored. You can then manually copy the file or folders.</p>
+<p>- The Replace existing VM option isn't available for encrypted VMs.</p>
+<h3>Check your knowledge</h3>
+<h2>Unit 6.2.6 - Exercise - Restore Azure virtual machine data</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/protect-virtual-machines-with-azure-backup/6-exercise-restore-virtual-machine-data</p>
+<h3>Exercise - Restore Azure virtual machine data</h3>
+<p>A few days after you backed up your first Azure virtual machine (VM), the server had issues. The VM needs to be restored from a backup. You want to restore the VM's disk and attach it to the problematic live server, and then track the restore to ensure that it finished successfully.</p>
+<p>In this exercise, you see how to restore a successful backup to replace a VM that became corrupted, and monitor its progress.</p>
+<h3>Restore a virtual machine in the Azure portal</h3>
+<h4>Create a storage account to use as a staging location</h4>
+<p>- If you closed Azure, sign in to the Azure portal by using the same account that you used in the previous exercise.</p>
+<p>If you closed Azure, sign in to the Azure portal by using the same account that you used in the previous exercise.</p>
+<p>- In the Azure portal, enter Storage accounts in the top search bar, and then select it. The Storage accounts pane appears.</p>
+<p>In the Azure portal, enter Storage accounts in the top search bar, and then select it.</p>
+<p>The Storage accounts pane appears.</p>
+<p>- In the menu bar, select Create . The Create a storage account pane appears.</p>
+<p>In the menu bar, select Create . The Create a storage account pane appears.</p>
+<p>- On the Basics tab, enter the following values for each setting to create a storage account. Setting Value Resource group From the dropdown list, select vmbackups . Instance details Storage account name Enter a unique name like restorestagingYYYYMMDD , where YYYYMMDD is replaced with today's date. Region From the dropdown list, select (US) West US 2 .</p>
+<p>On the Basics tab, enter the following values for each setting to create a storage account.</p>
+<p>Setting</p>
+<p>Value</p>
+<p>Resource group</p>
+<p>From the dropdown list, select vmbackups .</p>
+<p>Instance details</p>
+<p>Storage account name</p>
+<p>Enter a unique name like restorestagingYYYYMMDD , where YYYYMMDD is replaced with today's date.</p>
+<p>Region</p>
+<p>From the dropdown list, select (US) West US 2 .</p>
+<p>- Select Review + create .</p>
+<p>Select Review + create .</p>
+<p>- After validation passes, select Create . Wait for the storage account to be deployed.</p>
+<p>After validation passes, select Create .</p>
+<p>Wait for the storage account to be deployed.</p>
+<h4>Stop the virtual machine</h4>
+<p>A backup can't be restored if the VM is allocated and running. If you forget to stop the VM and attempt to restore it, you see an error that's similar to the following example.</p>
+<p>To prevent this error, follow these steps:</p>
+<p>- In the top left of the Azure portal, select Home , select Virtual Machines , and then select NW-APP01 . The NW-APP01 virtual machine pane appears.</p>
+<p>In the top left of the Azure portal, select Home , select Virtual Machines , and then select NW-APP01 .</p>
+<p>The NW-APP01 virtual machine pane appears.</p>
+<p>- In the menu bar, select Stop .</p>
+<p>In the menu bar, select Stop .</p>
+<p>- In the Stop this virtual machine dialog box, select OK .</p>
+<p>In the Stop this virtual machine dialog box, select OK .</p>
+<h4>Restore the virtual machine</h4>
+<p>The Recovery Services vaults are accessible at the subscription level. When you're viewing the VM, Azure provides a quick link to the specific vault under Operations .</p>
+<p>- In the menu pane, scroll to Operations , and select Backup .</p>
+<p>In the menu pane, scroll to Operations , and select Backup .</p>
+<p>- To restore the virtual machine, in the menu bar, select Restore VM . The Restore Virtual Machine pane for NW-APP01 appears.</p>
+<p>To restore the virtual machine, in the menu bar, select Restore VM . The Restore Virtual Machine pane for NW-APP01 appears.</p>
+<p>- Under the Restore point text box, choose Select . The Select restore point pane appears.</p>
+<p>Under the Restore point text box, choose Select . The Select restore point pane appears.</p>
+<p>- By default, the start and end date are set for a two week range. Set the Start date to an appropriate date for our restore points ( 07/05/2021 ), select the restore point to use for the recovery, and then select OK . The Restore Virtual Machine pane for NW-APP01 appears.</p>
+<p>By default, the start and end date are set for a two week range. Set the Start date to an appropriate date for our restore points ( 07/05/2021 ), select the restore point to use for the recovery, and then select OK .</p>
+<p>The Restore Virtual Machine pane for NW-APP01 appears.</p>
+<p>- Configure the restore point using the following values for each setting. Setting Value Restore Configuration Replace existing Select this option. Staging Location From the dropdown list, select the storage account that you previously created.</p>
+<p>Configure the restore point using the following values for each setting.</p>
+<p>Setting</p>
+<p>Value</p>
+<p>Restore Configuration</p>
+<p>Replace existing</p>
+<p>Select this option.</p>
+<p>Staging Location</p>
+<p>From the dropdown list, select the storage account that you previously created.</p>
+<p>- Select Restore . The Backup pane for the NW-APP01 virtual machine appears. Notice the notifications in the top right of the toolbar. The latest notification shows Triggering restore for NW-APP01</p>
+<p>Select Restore . The Backup pane for the NW-APP01 virtual machine appears. Notice the notifications in the top right of the toolbar. The latest notification shows Triggering restore for NW-APP01</p>
+<h3>Track a restore</h3>
+<p>- In the Alerts and Jobs section, select View all Jobs . The Backup Jobs pane appears.</p>
+<p>In the Alerts and Jobs section, select View all Jobs . The Backup Jobs pane appears.</p>
+<p>- In the Details column, select View details for the Restore job. The Restore pane appears for NW-APP01 .</p>
+<p>In the Details column, select View details for the Restore job.</p>
+<p>The Restore pane appears for NW-APP01 .</p>
+<p>- You can monitor the progress of the VM restore job: Job details : Details about the restore job you launched for this VM. Job status : Real-time progress of the restore job. Sub tasks : Name and status of the tasks within the job.</p>
+<p>You can monitor the progress of the VM restore job:</p>
+<p>- Job details : Details about the restore job you launched for this VM.</p>
+<p>- Job status : Real-time progress of the restore job.</p>
+<p>- Sub tasks : Name and status of the tasks within the job.</p>
+<h2>Unit 6.2.7 - Summary</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/protect-virtual-machines-with-azure-backup/7-summary</p>
+<h3>Summary</h3>
+<p>In this module, you learned the importance of having a tested backup and recovery strategy for your organization. You learned about the different types of Azure backups, and the reasons why you would choose one backup type versus another depending on your scenario.</p>
+<p>You learned that you can back up Azure virtual machines or on-premises machines. In addition, you learned how to back up an Azure virtual machine (VM). You then restored it by using the various options available to you, and you were able to monitor the progress.</p>
+<p>You can now use Azure Backup to help protect your environment against data loss or disk corruption. You can restore services according to your business continuity and disaster recovery plan.</p>
+<p>Important</p>
+<p>In this module you created resources using your Azure subscription. You want to clean up these resources so that you will not continue to be charged for them. You can delete resources individually or delete the resource group to delete the entire set of resources.</p>
+<h3>Learn more</h3>
+<p>For more information about Azure Backup, see the following articles:</p>
+<p>- Latest Azure Backup pricing and availability</p>
+<p>- Documentation for the Azure Backup service</p>
+<p>- Support matrix for Azure VM backup</p>
+<p>- Security features in Azure Backup</p>
+<p>- Built-in monitoring and alerting capabilities</p>
+<p>- Azure Files - Snapshot management by Azure Backup</p>
+<p>- Back up SQL Server databases running on Azure VMs</p>
+<p>- Backup SAP HANA (High-performance Analytic Appliance) databases running on Azure VMs</p>
+<p>- Azure Data Protection Manager (DPM) and Azure Backup Server (MABS)</p></body>
+</html>

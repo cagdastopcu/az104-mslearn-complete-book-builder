@@ -1,0 +1,242 @@
+{
+  "chapters_written": 29,
+  "total_facts_extracted": 2946,
+  "total_questions_generated": 2946,
+  "total_case_studies_generated": 604,
+  "case_question_count_target": 5,
+  "all_chapters_cover_all_facts": true,
+  "chapters": [
+    {
+      "chapter_index": 1,
+      "chapter_title": "Module 1.1: Introduction to Azure Cloud Shell",
+      "facts_extracted": 15,
+      "questions_generated": 15,
+      "case_studies_generated": 3,
+      "all_facts_covered": true
+    },
+    {
+      "chapter_index": 2,
+      "chapter_title": "Module 1.2: Deploy Azure infrastructure by using JSON ARM templates",
+      "facts_extracted": 88,
+      "questions_generated": 88,
+      "case_studies_generated": 18,
+      "all_facts_covered": true
+    },
+    {
+      "chapter_index": 3,
+      "chapter_title": "Module 2.1: Understand Microsoft Entra ID",
+      "facts_extracted": 63,
+      "questions_generated": 63,
+      "case_studies_generated": 13,
+      "all_facts_covered": true
+    },
+    {
+      "chapter_index": 4,
+      "chapter_title": "Module 2.2: Create, configure, and manage identities",
+      "facts_extracted": 66,
+      "questions_generated": 66,
+      "case_studies_generated": 14,
+      "all_facts_covered": true
+    },
+    {
+      "chapter_index": 5,
+      "chapter_title": "Module 2.3: Describe the core architectural components of Azure",
+      "facts_extracted": 64,
+      "questions_generated": 64,
+      "case_studies_generated": 13,
+      "all_facts_covered": true
+    },
+    {
+      "chapter_index": 6,
+      "chapter_title": "Module 2.4: Azure Policy initiatives",
+      "facts_extracted": 190,
+      "questions_generated": 190,
+      "case_studies_generated": 38,
+      "all_facts_covered": true
+    },
+    {
+      "chapter_index": 7,
+      "chapter_title": "Module 2.5: Secure your Azure resources with Azure role-based access control (Azure RBAC)",
+      "facts_extracted": 56,
+      "questions_generated": 56,
+      "case_studies_generated": 12,
+      "all_facts_covered": true
+    },
+    {
+      "chapter_index": 8,
+      "chapter_title": "Module 2.6: Allow users to reset their password with Microsoft Entra self-service password reset",
+      "facts_extracted": 36,
+      "questions_generated": 36,
+      "case_studies_generated": 8,
+      "all_facts_covered": true
+    },
+    {
+      "chapter_index": 9,
+      "chapter_title": "Module 3.1: Configure virtual networks",
+      "facts_extracted": 92,
+      "questions_generated": 92,
+      "case_studies_generated": 19,
+      "all_facts_covered": true
+    },
+    {
+      "chapter_index": 10,
+      "chapter_title": "Module 3.2: Configure network security groups",
+      "facts_extracted": 78,
+      "questions_generated": 78,
+      "case_studies_generated": 16,
+      "all_facts_covered": true
+    },
+    {
+      "chapter_index": 11,
+      "chapter_title": "Module 3.3: Host your domain on Azure DNS",
+      "facts_extracted": 106,
+      "questions_generated": 106,
+      "case_studies_generated": 22,
+      "all_facts_covered": true
+    },
+    {
+      "chapter_index": 12,
+      "chapter_title": "Module 3.4: Configure Azure Virtual Network peering",
+      "facts_extracted": 82,
+      "questions_generated": 82,
+      "case_studies_generated": 17,
+      "all_facts_covered": true
+    },
+    {
+      "chapter_index": 13,
+      "chapter_title": "Module 3.5: Manage and control traffic flow in your Azure deployment with routes",
+      "facts_extracted": 86,
+      "questions_generated": 86,
+      "case_studies_generated": 18,
+      "all_facts_covered": true
+    },
+    {
+      "chapter_index": 14,
+      "chapter_title": "Module 3.6: Introduction to Azure Load Balancer",
+      "facts_extracted": 39,
+      "questions_generated": 39,
+      "case_studies_generated": 8,
+      "all_facts_covered": true
+    },
+    {
+      "chapter_index": 15,
+      "chapter_title": "Module 3.7: Introduction to Azure Application Gateway",
+      "facts_extracted": 25,
+      "questions_generated": 25,
+      "case_studies_generated": 5,
+      "all_facts_covered": true
+    },
+    {
+      "chapter_index": 16,
+      "chapter_title": "Module 3.8: Introduction to Azure Network Watcher",
+      "facts_extracted": 66,
+      "questions_generated": 66,
+      "case_studies_generated": 14,
+      "all_facts_covered": true
+    },
+    {
+      "chapter_index": 17,
+      "chapter_title": "Module 4.1: Configure storage accounts",
+      "facts_extracted": 116,
+      "questions_generated": 116,
+      "case_studies_generated": 24,
+      "all_facts_covered": true
+    },
+    {
+      "chapter_index": 18,
+      "chapter_title": "Module 4.2: Configure Azure Blob Storage",
+      "facts_extracted": 106,
+      "questions_generated": 106,
+      "case_studies_generated": 22,
+      "all_facts_covered": true
+    },
+    {
+      "chapter_index": 19,
+      "chapter_title": "Module 4.3: Configure Azure Storage security",
+      "facts_extracted": 91,
+      "questions_generated": 91,
+      "case_studies_generated": 19,
+      "all_facts_covered": true
+    },
+    {
+      "chapter_index": 20,
+      "chapter_title": "Module 4.4: Configure Azure Files",
+      "facts_extracted": 116,
+      "questions_generated": 116,
+      "case_studies_generated": 24,
+      "all_facts_covered": true
+    },
+    {
+      "chapter_index": 21,
+      "chapter_title": "Module 5.1: Introduction to Azure virtual machines",
+      "facts_extracted": 189,
+      "questions_generated": 189,
+      "case_studies_generated": 38,
+      "all_facts_covered": true
+    },
+    {
+      "chapter_index": 22,
+      "chapter_title": "Module 5.2: Configure virtual machine availability",
+      "facts_extracted": 93,
+      "questions_generated": 93,
+      "case_studies_generated": 19,
+      "all_facts_covered": true
+    },
+    {
+      "chapter_index": 23,
+      "chapter_title": "Module 5.3: Configure Azure App Service plans",
+      "facts_extracted": 59,
+      "questions_generated": 59,
+      "case_studies_generated": 12,
+      "all_facts_covered": true
+    },
+    {
+      "chapter_index": 24,
+      "chapter_title": "Module 5.4: Configure Azure App Service",
+      "facts_extracted": 111,
+      "questions_generated": 111,
+      "case_studies_generated": 23,
+      "all_facts_covered": true
+    },
+    {
+      "chapter_index": 25,
+      "chapter_title": "Module 5.5: Configure Azure Container Instances",
+      "facts_extracted": 96,
+      "questions_generated": 96,
+      "case_studies_generated": 20,
+      "all_facts_covered": true
+    },
+    {
+      "chapter_index": 26,
+      "chapter_title": "Module 6.1: Introduction to Azure Backup",
+      "facts_extracted": 122,
+      "questions_generated": 122,
+      "case_studies_generated": 25,
+      "all_facts_covered": true
+    },
+    {
+      "chapter_index": 27,
+      "chapter_title": "Module 6.2: Protect your virtual machines by using Azure Backup",
+      "facts_extracted": 172,
+      "questions_generated": 172,
+      "case_studies_generated": 35,
+      "all_facts_covered": true
+    },
+    {
+      "chapter_index": 28,
+      "chapter_title": "Module 6.3: Monitor your Azure virtual machines with Azure Monitor",
+      "facts_extracted": 105,
+      "questions_generated": 105,
+      "case_studies_generated": 21,
+      "all_facts_covered": true
+    },
+    {
+      "chapter_index": 29,
+      "chapter_title": "AZ-104 Official Pages",
+      "facts_extracted": 418,
+      "questions_generated": 418,
+      "case_studies_generated": 84,
+      "all_facts_covered": true
+    }
+  ]
+}

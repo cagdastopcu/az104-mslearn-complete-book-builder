@@ -1,0 +1,12 @@
+{
+  "source_url": "https://learn.microsoft.com/en-us/training/courses/az-104t00",
+  "course_title": "Microsoft Azure Administrator",
+  "expected_units": 231,
+  "fetched_unit_rows": 231,
+  "successful_unit_rows": 231,
+  "official_pages_expected": 60,
+  "official_pages_fetched": 60,
+  "official_pages_successful": 60,
+  "official_link_jumps": 2,
+  "official_max_connected_pages": 150
+}

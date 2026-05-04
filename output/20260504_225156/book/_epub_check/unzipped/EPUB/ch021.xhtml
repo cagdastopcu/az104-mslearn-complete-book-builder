@@ -1,0 +1,540 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" epub:prefix="z3998: http://www.daisy.org/z3998/2012/vocab/structure/#" lang="en" xml:lang="en">
+  <head>
+    <title>LP 5 M1 - Introduction to Azure virtual machines</title>
+    <link href="style/main.css" rel="stylesheet" type="text/css"/>
+  </head>
+  <body><h1>LP 5 M1 - Introduction to Azure virtual machines</h1>
+<p>https://learn.microsoft.com/en-us/training/modules/intro-to-azure-virtual-machines/?WT.mc_id=api_CatalogApi</p>
+<h2>Unit 5.1.1 - Introduction</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/intro-to-azure-virtual-machines/1-introduction</p>
+<h3>Introduction</h3>
+<p>Suppose you work for a company doing medical research and you're responsible for managing the on-premises servers. The servers you administer run all the company infrastructure, from web servers to databases. However, the hardware is aging and starting to struggle to keep up with some of the new data analysis applications being deployed to it.</p>
+<p>You could upgrade all the hardware, but that's not appealing for several reasons:</p>
+<p>- The servers are physically scattered all around the world with minimal staff in each location. We'd like to centralize the upgrade to our home office.</p>
+<p>The servers are physically scattered all around the world with minimal staff in each location. We'd like to centralize the upgrade to our home office.</p>
+<p>- The company runs custom data analysis software on several versions and flavors of Windows and Linux, sometimes set up with odd configurations that aren't entirely understood. We need a way to test our deployments completely and try different configurations to make sure everything is working before we transition the work.</p>
+<p>The company runs custom data analysis software on several versions and flavors of Windows and Linux, sometimes set up with odd configurations that aren't entirely understood. We need a way to test our deployments completely and try different configurations to make sure everything is working before we transition the work.</p>
+<p>- Business is booming, and the company is growing fast. It's likely that the load on the internal servers, particularly the databases, will continue to grow. This growth requires us to either buy for the future or come up with a scaling plan to handle the growth.</p>
+<p>Business is booming, and the company is growing fast. It's likely that the load on the internal servers, particularly the databases, will continue to grow. This growth requires us to either buy for the future or come up with a scaling plan to handle the growth.</p>
+<p>For these reasons, you decide that it's time to explore the cloud to see if it can help solve the load and scale problem. Since you have a bunch of mixed servers and custom software, it makes sense to look at trying to move servers one at a time into Azure using Azure Virtual Machines (VMs).</p>
+<p>Azure VMs are one of several types of on-demand, scalable computing resources that Azure offers. With VMs, you have total control over the configuration and can install anything you need to perform the work. You don't need to purchase physical hardware when you need to scale or extend your datacenter. Finally, Azure provides other services to monitor, secure, and manage updates and patches to the OS.</p>
+<p>We're going to look at the decisions made before creating a VM, the options to create and manage the VM, and the extensions and services you use to manage your VM.</p>
+<h3>Learning objectives</h3>
+<p>In this module, you learn how to:</p>
+<p>- Compile a checklist for creating a virtual machine</p>
+<p>- Describe the options to create and manage virtual machines</p>
+<p>- Describe the other services available to administer virtual machines</p>
+<h2>Unit 5.1.2 - Compile a checklist for creating an Azure Virtual Machine</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/intro-to-azure-virtual-machines/2-compile-a-checklist-for-creating-a-vm</p>
+<h3>Compile a checklist for creating an Azure Virtual Machine</h3>
+<p>Performing a migration of on-premises servers to Azure requires planning and care. You can move them all at once, or more likely, in small batches or even individually. Before you create a single VM, you should sit down and sketch out your current infrastructure model and see how it might map to the cloud.</p>
+<h3>What is an Azure resource?</h3>
+<p>An Azure resource is a manageable item in Azure. Just like a physical computer in your datacenter, VMs have several elements that are needed to do their job:</p>
+<p>- The VM itself</p>
+<p>- Disks for storage</p>
+<p>- Virtual network</p>
+<p>- Network interface to communicate on the network</p>
+<p>- Network Security Group (NSG) to secure the network traffic</p>
+<p>- An IP address (public, private, or both)</p>
+<p>Azure creates all of these resources if necessary, or you can supply existing ones as part of the deployment process. Each resource needs a name that's used to identify it. If Azure creates the resource, it uses the VM name to generate a resource name - another reason to be consistent with your VM names!</p>
+<h3>Required resources for IaaS Virtual Machines</h3>
+<p>Let's walk through a checklist of things to think about.</p>
+<p>- The network</p>
+<p>- VM name</p>
+<p>- Location</p>
+<p>- The VM size</p>
+<p>- Disks</p>
+<p>- Operating system</p>
+<h3>The network</h3>
+<p>The first thing you should think about isn't the virtual machine at all - it's the network. Take a look at one of your on-premises servers:</p>
+<p>- What does the server communicate with?</p>
+<p>- Which ports are open?</p>
+<p>Virtual networks (VNets) are used in Azure to provide private connectivity between Azure Virtual Machines and other Azure services. VMs and services that are part of the same virtual network can access one another. By default, services outside the virtual network can't connect to services within the virtual network. You can, however, configure the network to allow access to the external service, including your on-premises servers.</p>
+<p>This latter point is why you should spend some time thinking about your network configuration. Network addresses and subnets aren't trivial to change once you have them set up. If you plan to connect your private company network to the Azure services, you want to make sure you consider the topology before putting any VMs into place.</p>
+<p>When you set up a virtual network, you specify the available address spaces, subnets, and security. If the VNet is connected to other VNets, you must select address ranges that aren't overlapping. This is the range of private addresses that the VMs and services in your network can use. You can use unroutable IP addresses such as 10.0.0.0/8, 172.16.0.0/12, or 192.168.0.0/16, or define your own range. Azure treats any address range as part of the private VNet IP address space if it's only reachable within the VNet, within interconnected VNets, and from your on-premises location. If someone else is responsible for the internal networks, you should work with that person before selecting your address space to make sure there's no overlap. Let them know what space you want to use, so they don’t try to use the same range of IP addresses.</p>
+<h4>Segregate your network</h4>
+<p>After deciding the virtual network address space(s), you can create one or more subnets for your virtual network. You create these subnets to break up your network into more manageable sections. For example, you might assign 10.1.0.0 to VMs, 10.2.0.0 to back-end services, and 10.3.0.0 to SQL Server VMs.</p>
+<p>Note</p>
+<p>Azure reserves the first four addresses and the last address in each subnet for its use.</p>
+<h4>Secure the network</h4>
+<p>By default, there's no security boundary between subnets, so services in each of these subnets can talk to one another. However, you can set up Network Security Groups (NSGs), which allow you to control the traffic flow to and from subnets and to and from VMs. NSGs act as software firewalls, applying custom rules to each inbound or outbound request at the network interface and subnet level. This way, you can fully control every network request coming in or out of the VM.</p>
+<h3>Plan each VM deployment</h3>
+<p>Once you have mapped out your communication and network requirements, you can start thinking about the VMs you want to create. A good plan is to select a server and take an inventory:</p>
+<p>- Which OS is used?</p>
+<p>- How much disk space is in use?</p>
+<p>- What kind of data does this use? Are there restrictions (legal or otherwise) around how it's stored or where it's physically located?</p>
+<p>- What sort of CPU, memory, and disk I/O load does the server have? Is there burst traffic to account for?</p>
+<p>We can then start to answer some of the questions Azure has for a new virtual machine.</p>
+<h4>VM name</h4>
+<p>The VM name is used as the computer name, which is configured as part of the operating system. You can specify a name of up to 64 characters on a Linux VM and 15 characters on a Windows VM.</p>
+<p>This name also defines a manageable Azure resource , and it's not trivial to change later. That means you should choose names that are meaningful and consistent, so you can easily identify what the VM does. A good convention is to include the following information in the name:</p>
+<p>Element</p>
+<p>Example</p>
+<p>Notes</p>
+<p>Environment</p>
+<p>dev, prod, QA</p>
+<p>Identifies the environment for the resource</p>
+<p>Location</p>
+<p>eus for East US, jw for Japan West</p>
+<p>eus</p>
+<p>jw</p>
+<p>Identifies the region into which the resource is deployed</p>
+<p>Instance</p>
+<p>01, 02</p>
+<p>For resources that have more than one named instance (web servers, etc.)</p>
+<p>Product or Service</p>
+<p>service</p>
+<p>Identifies the product, application, or service that the resource supports</p>
+<p>Role</p>
+<p>sql, web, messaging</p>
+<p>Identifies the role of the associated resource</p>
+<p>For example, deveus-webvm01 might represent the first development web server hosted in the East US location.</p>
+<p>deveus-webvm01</p>
+<h4>Decide the location for the VM</h4>
+<p>Azure has datacenters all over the world filled with servers and disks. These datacenters are grouped into geographic regions ('West US', 'North Europe', 'Southeast Asia', etc.) to provide redundancy and availability.</p>
+<p>When you create and deploy a virtual machine, you must select a region where you want to allocate the resources. You can place your VMs as close as possible to your users to improve performance and to meet any legal, compliance, or tax requirements.</p>
+<p>Two other things to think about regarding the location choice. First, the location can limit your available options. Each region has different hardware available and some configurations aren't available in all regions. Second, there are price differences between locations. If your workload isn't bound to a specific location, it can be very cost effective to check your required configuration in multiple regions to find the lowest price.</p>
+<h4>Determine the size of the VM</h4>
+<p>Once you have the name and location set, you need to decide on the size of your VM . Rather than specify processing power, memory, and storage capacity independently, Azure provides different VM sizes that offer variations of these elements in different sizes. Azure provides a wide range of VM size options allowing you to select the appropriate mix of compute, memory, and storage for what you want to do.</p>
+<p>The best way to determine the appropriate VM size is to consider the type of workload your VM needs to run. Based on the workload, you're able to choose from a subset of available VM sizes. Workload options are classified as follows on Azure:</p>
+<p>Option</p>
+<p>Description</p>
+<p>General purpose</p>
+<p>General-purpose VMs are designed to have a balanced CPU-to-memory ratio. Ideal for testing and development, small to medium databases, and low to medium traffic web servers.</p>
+<p>Compute optimized</p>
+<p>Compute optimized VMs are designed to have a high CPU-to-memory ratio. Suitable for medium traffic web servers, network appliances, batch processes, and application servers.</p>
+<p>Memory optimized</p>
+<p>Memory optimized VMs are designed to have a high memory-to-CPU ratio. Great for relational database servers, medium to large caches, and in-memory analytics.</p>
+<p>Storage optimized</p>
+<p>Storage optimized VMs are designed to have high disk throughput and IO. Ideal for VMs running databases.</p>
+<p>GPU</p>
+<p>GPU VMs are specialized virtual machines targeted for heavy graphics rendering and video editing. These VMs are ideal options for model training and inferencing with deep learning.</p>
+<p>High performance compute</p>
+<p>High performance compute is the fastest and most powerful CPU virtual machines with optional high-throughput network interfaces.</p>
+<p>You're able to filter on the workload type when you configure the VM size in the Azure. The size you choose directly affects the cost of your service. The more CPU, memory, and GPU you need, the higher the price point.</p>
+<h4>What if my size needs change?</h4>
+<p>Azure allows you to change the VM size when the existing size no longer meets your needs. You can upgrade or downgrade the VM, as long as your current hardware configuration is allowed in the new size. The ability to change VM size provides a fully agile and scalable approach to VM management.</p>
+<p>The VM size can be changed while the VM is running, as long as the new size is available in the current hardware cluster the VM is running on. The Azure portal makes the size options obvious by only showing you available size choices. The command line tools report an error if you attempt to resize a VM to an unavailable size. Changing a running VM size automatically reboots the machine to complete the request.</p>
+<p>If you stop and deallocate the VM, you can then select any size available in your region since deallocation removes your VM from the cluster it was running on.</p>
+<p>Warning</p>
+<p>Be careful about resizing production VMs - they will be rebooted automatically which can cause a temporary outage and change some configuration settings such as the IP address.</p>
+<h4>Parts of a VM and how they're billed</h4>
+<p>When you create a virtual machine, you're also creating resources that support the virtual machine. These resources come with their own costs that should be considered.</p>
+<p>The default resources supporting a virtual machine and how they're billed are detailed in the following table:</p>
+<p>Resource</p>
+<p>Description</p>
+<p>Cost</p>
+<p>Virtual network</p>
+<p>For giving your virtual machine the ability to communicate with other resources</p>
+<p>Virtual Network pricing</p>
+<p>A virtual Network Interface Card (NIC)</p>
+<p>For connecting to the virtual network</p>
+<p>There is no separate cost for NICs. However, there is a limit to how many NICs you can use based on your VM's size . Size your VM accordingly and reference Virtual Machine pricing .</p>
+<p>A private IP address and sometimes a public IP address.</p>
+<p>For communication and data exchange on your network and with external networks</p>
+<p>IP Addresses pricing</p>
+<p>Network security group (NSG)</p>
+<p>For managing the network traffic too and from your VM. For example, you might need to open port 22 for SSH access, but you might want to block traffic to port 80. Blocking and allowing port access is done through the NSG.</p>
+<p>There are no additional charges for network security groups in Azure.</p>
+<p>OS Disk and possibly separate disks for data.</p>
+<p>It's a best practice to keep your data on a separate disk from your operating system, in case you ever have a VM fail, you can simply detach the data disk, and attach it to a new VM.</p>
+<p>All new virtual machines have an operating system disk and a local disk. Azure doesn't charge for local disk storage. The operating system disk, which is usually 127GiB but is smaller for some images, is charged at the regular rate for disks . You can see the cost for attach Premium (SSD based) and Standard (HDD) based disks to your virtual machines on the Managed Disks pricing page .</p>
+<p>In some cases, a license for the OS</p>
+<p>For providing your virtual machine runs to run the OS</p>
+<p>The cost varies based on the number of cores on your VM, so size your VM accordingly . The cost can be reduced through the Azure Hybrid Benefit .</p>
+<h4>Understanding the pricing model</h4>
+<p>There are two separate costs the subscription is charged for every VM: compute and storage. By separating these costs, you scale them independently and only pay for what you need.</p>
+<p>Compute costs - Compute expenses are priced on a per-hour basis but billed on a per-minute basis. For example, you're only charged for 55 minutes of usage if the VM is deployed for 55 minutes. You're not charged for compute capacity if you stop and deallocate the VM since deallocation releases the hardware. The hourly price varies based on the VM size and OS you select. Linux-based instances are cheaper because there's no operating system license charge. For Windows, the cost for a VM includes the charge for the operating system.</p>
+<p>Tip</p>
+<p>You might be able to save money by reusing existing licenses with the Azure Hybrid benefit for Linux or Windows .</p>
+<p>You're able to choose from two payment options for compute costs.</p>
+<p>Option</p>
+<p>Description</p>
+<p>Pay as you go</p>
+<p>With the pay-as-you-go option, you pay for compute capacity by the second, with no long-term commitment or upfront payments. You're able to increase or decrease compute capacity on demand and start or stop at any time. Select this option if you run applications with short-term or unpredictable workloads that can't be interrupted. For example, if you're doing a quick test, or developing an app in a VM, pay-as-you-go is the appropriate option.</p>
+<p>Reserved Virtual Machine Instances</p>
+<p>The Reserved Virtual Machine Instances (RI) option is an advance purchase of a virtual machine for one or three years in a specified region. The commitment is made up front, and in return, you get up to 72% price savings compared to pay-as-you-go pricing. RIs are flexible and can easily be exchanged or returned for an early termination fee. Select this option if the VM has to run continuously, or you need budget predictability, and you can commit to using the VM for at least a year.</p>
+<p>Storage costs - You're charged separately for the storage the VM uses. The status of the VM has no relation to the storage charges that are incurred. If the VM is stopped/deallocated and you aren’t billed for the running VM, you're still charged for the storage used by the disks.</p>
+<h4>Storage for the VM</h4>
+<p>All Azure virtual machines have at least two virtual hard disks (VHDs). The first disk stores the operating system, and the second is used as temporary storage. You should add more data disks to store application data. Separating out the data to different disks allows you to manage the disks independently. The VM size determines the maximum number of data disks you can attach to your VM, typically two per vCPU.</p>
+<p>There are five disk types, each intended to address a specific customer scenario:</p>
+<p>- Ultra disks</p>
+<p>- Premium SSD v2 (preview)</p>
+<p>- Premium SSDs (solid-state drives)</p>
+<p>- Standard SSDs</p>
+<p>- Standard HDDs (hard disk drives)</p>
+<p>The following table provides a comparison of the five disk types to help you decide which to use.</p>
+<p>Ultra disk</p>
+<p>Premium SSD v2</p>
+<p>Premium SSD</p>
+<p>Standard SSD</p>
+<p>Standard HDD</p>
+<p>Disk type</p>
+<p>SSD</p>
+<p>HDD</p>
+<p>Scenario</p>
+<p>IO-intensive workloads such as SAP HANA , top tier databases (for example, SQL, Oracle), and other transaction-heavy workloads.</p>
+<p>Production and performance-sensitive workloads that consistently require low latency and high IOPS and throughput</p>
+<p>Production and performance sensitive workloads</p>
+<p>Web servers, lightly used enterprise applications and dev/test</p>
+<p>Backup, noncritical, infrequent access</p>
+<p>Max disk size</p>
+<p>65,536 gibibytes (GiB)</p>
+<p>65,536 GiB</p>
+<p>32,767 GiB</p>
+<p>Max throughput</p>
+<p>4,000 MB/s</p>
+<p>1,200 MB/s</p>
+<p>900 MB/s</p>
+<p>750 MB/s</p>
+<p>500 MB/s</p>
+<p>Max IOPS</p>
+<p>160,000</p>
+<p>80,000</p>
+<p>20,000</p>
+<p>6,000</p>
+<p>2,000</p>
+<p>Usable as OS Disk?</p>
+<p>No</p>
+<p>Yes</p>
+<h4>Select an operating system</h4>
+<p>Azure provides various OS images that you can install into the VM, including many Linux distributions. The choice of OS might influence your hourly compute pricing as Azure bundles the cost of the OS license into the price.</p>
+<p>If you're looking for more than just base OS images, you can search the Azure Marketplace for more sophisticated images that include the OS and popular software tools for specific scenarios. For example, if you needed a new WordPress site, the standard technology stack would consist of a Linux server, Apache web server, a MySQL database, and PHP. Instead of setting up and configuring each component, you can use a Marketplace image and install the entire stack all at once.</p>
+<p>Finally, if you can't find a suitable OS image, you can create your own image with what you need, and use them to create VMs. You can create individual images for use in development and test. Or, you can create an Azure Compute Gallery to manage multiple images and replicate them to the regions where they're needed.</p>
+<h2>Unit 5.1.3 - Exercise - Create a VM using the Azure portal</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/intro-to-azure-virtual-machines/3-create-a-vm</p>
+<h3>Exercise - Create a VM using the Azure portal</h3>
+<p>You've planned out the network infrastructure and identified a few VMs to migrate to the cloud. You have several choices for creating your VMs. The choice you make depends on the environment you're comfortable with. Azure supports a web-based portal for creating and administering resources. You can also choose to use command-line tools that run on Linux, macOS, and Windows.</p>
+<p>Note</p>
+<p>This exercise is optional. If you want to complete this exercise, you'll need to create an Azure subscription before you begin. If you don't have an Azure account or you don't want to create one at this time, you can read through the instructions so you understand the information that's being presented.</p>
+<p>Note</p>
+<p>You need to use a resource group to complete the steps in this exercise. You can use a resource group that you already created, or you can create a new resource group specifically for this exercise. If you choose to create a new resource group, that will make it easier to clean up any resources that you create as you complete the exercise. If you don't have an existing resource group or you want to create a new one specifically for this exercise, you can follow the steps in Use the Azure portal and Azure Resource Manager to manage resource groups to create a resource group by using the Azure portal, or you can follow the steps in Manage Azure resource groups by using Azure CLI to create a resource group by using the the Azure CLI.</p>
+<p>Note</p>
+<p>Throughout this exercise, replace myResourceGroupName in the examples with the name of an existing resource group, or the name of the resource group that you created for this exercise.</p>
+<h4>Options to create and manage VMs</h4>
+<p>Let's explore the Azure portal first - it's the easiest way to start with Azure.</p>
+<h3>Azure portal</h3>
+<p>The Azure portal provides an easy-to-use browser-based user interface that enables you to create and manage all your Azure resources. For example, you can set up a new database, increase the compute power of your virtual machines, and monitor your monthly costs. It's also a great learning tool, because you can survey all available resources and use guided wizards to create the ones you need.</p>
+<h4>Create an Azure VM with the Azure portal</h4>
+<p>Let's assume you want to create a VM running a web server on Ubuntu. Setting up a site isn't difficult, but there are a couple of things to keep in mind. You need to install and configure an operating system, configure a website, install a database, and worry about things like firewalls. We're going to cover creating VMs in the next few modules, but let's create one here to see how easy it is. We don't go through all the options - check out one of the Create a VM modules to get complete details on each option.</p>
+<p>- Sign in to the Azure portal .</p>
+<p>Sign in to the Azure portal .</p>
+<p>- On the Azure home page, under Azure services , select Create a resource . The Create a resource pane appears, displaying popular products for Azure services.</p>
+<p>On the Azure home page, under Azure services , select Create a resource . The Create a resource pane appears, displaying popular products for Azure services.</p>
+<p>- We want to create a VM, so select Virtual machine .</p>
+<p>We want to create a VM, so select Virtual machine .</p>
+<p>- The Create virtual machine pane appears.</p>
+<p>The Create virtual machine pane appears.</p>
+<h4>Configure the VM</h4>
+<p>You need to configure the basic parameters of your virtual machine. If some of the options at this point are unfamiliar to you, that's OK. We're going to describe all of these options in a future module. You're welcome to copy the values used here.</p>
+<p>- On the Basics tab, enter the following values for each setting. Setting Value Project details Subscription Select your subscription Resource group Select myResourceGroupName from the drop-down Instance details Virtual machine name Enter test-ubuntu-cus-vm Region From the dropdown list, select a geographical location close to you. Availability options No infrastructure redundancy required Security type Standard Image Ubuntu Server 24.04 LTS - Gen2 VM architecture x64 Run with Azure Spot discount Unchecked Size Standard D2s V3 Administrator account Authentication type SSH public key Username Enter a username SSH public key source Generate a new key pair Key pair name test-ubuntu-cus-vm_key Inbound port rules Public inbound ports Allow selected ports Select inbound ports SSH (22)</p>
+<p>On the Basics tab, enter the following values for each setting.</p>
+<p>Setting</p>
+<p>Value</p>
+<p>Project details</p>
+<p>Subscription</p>
+<p>Select your subscription</p>
+<p>Resource group</p>
+<p>Select myResourceGroupName from the drop-down</p>
+<p>Instance details</p>
+<p>Virtual machine name</p>
+<p>Enter test-ubuntu-cus-vm</p>
+<p>Region</p>
+<p>From the dropdown list, select a geographical location close to you.</p>
+<p>Availability options</p>
+<p>No infrastructure redundancy required</p>
+<p>Security type</p>
+<p>Standard</p>
+<p>Image</p>
+<p>Ubuntu Server 24.04 LTS - Gen2</p>
+<p>VM architecture</p>
+<p>x64</p>
+<p>Run with Azure Spot discount</p>
+<p>Unchecked</p>
+<p>Size</p>
+<p>Standard D2s V3</p>
+<p>Administrator account</p>
+<p>Authentication type</p>
+<p>SSH public key</p>
+<p>Username</p>
+<p>Enter a username</p>
+<p>SSH public key source</p>
+<p>Generate a new key pair</p>
+<p>Key pair name</p>
+<p>test-ubuntu-cus-vm_key</p>
+<p>Inbound port rules</p>
+<p>Public inbound ports</p>
+<p>Allow selected ports</p>
+<p>Select inbound ports</p>
+<p>SSH (22)</p>
+<p>- There are several other tabs you can explore to see the settings you can influence during the VM creation. After you're finished exploring, select Review + create to review and validate the settings.</p>
+<p>There are several other tabs you can explore to see the settings you can influence during the VM creation. After you're finished exploring, select Review + create to review and validate the settings.</p>
+<p>- Azure validates your configuration settings for a resource before it creates it. You might need to supply some additional information based on the requirements of the image creator built into Azure. It's simple; just open the tab that has an error. Verify all the settings are set the way you want, and then select Create to deploy and create the VM.</p>
+<p>Azure validates your configuration settings for a resource before it creates it. You might need to supply some additional information based on the requirements of the image creator built into Azure. It's simple; just open the tab that has an error. Verify all the settings are set the way you want, and then select Create to deploy and create the VM.</p>
+<p>- The Generate new key pair window opens. Select Download private key and create resource .</p>
+<p>The Generate new key pair window opens. Select Download private key and create resource .</p>
+<p>- You can monitor the deployment in the Deployment details on the Overview pane or through the Notifications pane. Select the notifications icon in the top right toolbar to show or hide the Notifications pane. The VM deployment process takes a few minutes to complete. You receive a notification informing you that the deployment succeeded.</p>
+<p>You can monitor the deployment in the Deployment details on the Overview pane or through the Notifications pane. Select the notifications icon in the top right toolbar to show or hide the Notifications pane.</p>
+<p>The VM deployment process takes a few minutes to complete. You receive a notification informing you that the deployment succeeded.</p>
+<p>- Select Go to resource . The Overview page of your VM appears. Here, you can see all the information and configuration options for your newly created Ubuntu VM. One of the pieces of information is the Public IP address . When you enabled SSH public key authentication in an earlier step, the user interface also gave an option to enable SSH. SSH allows you to connect to your VM via the public IP using any SSH client.</p>
+<p>Select Go to resource . The Overview page of your VM appears.</p>
+<p>Here, you can see all the information and configuration options for your newly created Ubuntu VM. One of the pieces of information is the Public IP address .</p>
+<p>When you enabled SSH public key authentication in an earlier step, the user interface also gave an option to enable SSH. SSH allows you to connect to your VM via the public IP using any SSH client.</p>
+<p>Congratulations! With a few steps, you deployed a VM that runs Linux. Let's explore some other ways we could have created a VM.</p>
+<h2>Unit 5.1.4 - Describe the options available to create and manage an Azure Virtual Machine</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/intro-to-azure-virtual-machines/4-describe-other-create-vm-options</p>
+<h3>Describe the options available to create and manage an Azure Virtual Machine</h3>
+<p>The Azure portal is the easiest way to create resources such as VMs when you're getting started. However, it's not necessarily the most efficient or quickest way to work with Azure, particularly if you need to create several resources together. In our case, we eventually create dozens of VMs to handle different tasks. Creating them manually in the Azure portal wouldn't be a fun task!</p>
+<p>Let's look at some other ways to create and administer resources in Azure:</p>
+<p>- Azure Resource Manager templates</p>
+<p>- Azure PowerShell</p>
+<p>- Azure CLI</p>
+<p>- Azure REST API</p>
+<p>- Azure Client SDK</p>
+<p>- Azure VM Extensions</p>
+<p>- Azure Automation Services</p>
+<h3>Resource Manager templates</h3>
+<p>Let's assume you want to create a copy of a VM with the same settings. You could create a VM image, upload it to Azure, and reference it as the basis for your new VM. This process is inefficient and time-consuming. Azure provides you with the option to create a template from which to create an exact copy of a VM.</p>
+<p>Resource Manager templates are JSON files that define the resources you need to deploy for your solution.</p>
+<p>You can create a resource template for your VM. From the VM menu, under Automation select Export template .</p>
+<p>Note</p>
+<p>The policies for the resources included in the sandbox for this Learn module prevent you from being able to export the VM you just created; that said, an exported template is an easy-to-edit JSON file.</p>
+<p>You have the option to download or save a template for later use, or immediately deploy a new VM based on the template. For example, you might create a VM from a template in a test environment, and find it doesn’t quite work to replace your on-premises machine. You can delete the resource group, which deletes all of the resources, tweak the template, and try again. If you only want to make changes to the existing deployed resources, you can change the template used to create it, and redeploy it. Resource Manager will change the resources to match the new template.</p>
+<p>After you have it working the way you want it, you can use that template to easily replicate multiple versions of your infrastructure, such as staging and production. You can parameterize fields such as the VM name, network name, storage account name, and so on, and load the template repeatedly, using different parameters to customize each environment.</p>
+<p>For more information about using templates, see Quickstart: Create an Ubuntu Linux virtual machine using an ARM template .</p>
+<h3>Azure CLI</h3>
+<p>An option for scripting and command-line Azure interaction is the Azure CLI .</p>
+<p>The Azure CLI is Microsoft's cross-platform command-line tool for managing Azure resources such as virtual machines and disks from the command line. It's available for Linux, macOS, Windows, or in a browser using the Cloud Shell.</p>
+<p>For example, from the CLI, you can create an Azure VM with the az vm create command.</p>
+<p>az vm create</p>
+<p>az vm create \</p>
+<p>--resource-group TestResourceGroup \</p>
+<p>--name test-wp1-eus-vm \</p>
+<p>--image Ubuntu2204 \</p>
+<p>--admin-username azureuser \</p>
+<p>--generate-ssh-keys</p>
+<p>az vm create \</p>
+<p>--resource-group TestResourceGroup \</p>
+<p>--name test-wp1-eus-vm \</p>
+<p>--image Ubuntu2204 \</p>
+<p>--admin-username azureuser \</p>
+<p>--generate-ssh-keys</p>
+<p>The Azure CLI can be used with other scripting languages, like Ruby and Python.</p>
+<p>Learn more about creating and managing VMs in the Manage virtual machines with the Azure CLI tool module.</p>
+<p>For more information about using the Azure CLI to create VMs, see Quickstart: Create a Linux virtual machine using the CLI .</p>
+<h3>Azure PowerShell</h3>
+<p>Azure PowerShell is ideal for one-off interactive tasks and/or the automation of repeated tasks.</p>
+<p>Note</p>
+<p>PowerShell is a cross-platform shell that provides services like the shell window and command parsing. Azure PowerShell is an optional add-on package that adds the Azure-specific commands (referred to as cmdlets ). You can learn more about installing and using Azure PowerShell in a separate training module.</p>
+<p>For example, you can use the New-AzVM cmdlet to create a new Debian-based Azure virtual machine.</p>
+<p>New-AzVM</p>
+<p>New-AzVm `</p>
+<p>-ResourceGroupName "TestResourceGroup" `</p>
+<p>-Name "test-wp1-eus-vm" `</p>
+<p>-Location "East US" `</p>
+<p>-Image Debian11 `</p>
+<p>-VirtualNetworkName "test-wp1-eus-network" `</p>
+<p>-SubnetName "default" `</p>
+<p>-SecurityGroupName "test-wp1-eus-nsg" `</p>
+<p>-PublicIpAddressName "test-wp1-eus-pubip" `</p>
+<p>-GenerateSshKey `</p>
+<p>-SshKeyName myPSKey</p>
+<p>-OpenPorts 22</p>
+<p>New-AzVm `</p>
+<p>-ResourceGroupName "TestResourceGroup" `</p>
+<p>-Name "test-wp1-eus-vm" `</p>
+<p>-Location "East US" `</p>
+<p>-Image Debian11 `</p>
+<p>-VirtualNetworkName "test-wp1-eus-network" `</p>
+<p>-SubnetName "default" `</p>
+<p>-SecurityGroupName "test-wp1-eus-nsg" `</p>
+<p>-PublicIpAddressName "test-wp1-eus-pubip" `</p>
+<p>-GenerateSshKey `</p>
+<p>-SshKeyName myPSKey</p>
+<p>-OpenPorts 22</p>
+<p>As shown here, you supply various parameters to handle the large number of VM configuration settings available. Most of the parameters have reasonable values; you only need to specify the required parameters. Learn more about creating and managing VMs with Azure PowerShell in the Automate Azure tasks using scripts with PowerShell module.</p>
+<p>For more information about using PowerShell to create VMs, see Quickstart: Create a Linux virtual machine using PowerShell .</p>
+<h3>Terraform</h3>
+<p>Azure also has a Terraform provider, so you can easily use Terraform to create and manage your VMs. Terraform enables the definition, preview, and deployment of cloud infrastructure. Using Terraform, you create configuration files using HCL syntax. The HCL syntax allows you to specify the cloud provider - such as Azure - and the elements that make up your cloud infrastructure. After you create your configuration files, you create an execution plan that allows you to preview your infrastructure changes before they're deployed. Once you verify the changes, you apply the execution plan to deploy the infrastructure.</p>
+<p>For more information, see the Azure Terraform Provider and Quickstart: Use Terraform to create a VM .</p>
+<h3>Programmatic (APIs)</h3>
+<p>Generally speaking, both Azure PowerShell and Azure CLI are good options if you have simple scripts to run and want to stick to command-line tools. When it comes to more complex scenarios, where the creation and management of VMs form part of a larger application with complex logic, another approach is needed.</p>
+<p>You can interact with every type of resource in Azure programmatically.</p>
+<h4>Azure REST API</h4>
+<p>The Azure REST API provides developers with operations categorized by resource and the ability to create and manage VMs. Operations are exposed as URIs with corresponding HTTP methods ( GET , PUT , POST , DELETE , and PATCH ) and a corresponding response.</p>
+<p>GET</p>
+<p>PUT</p>
+<p>POST</p>
+<p>DELETE</p>
+<p>PATCH</p>
+<p>The Azure Compute APIs give you programmatic access to virtual machines and their supporting resources.</p>
+<p>For more information, see the Virtual Machines REST API reference .</p>
+<h4>Azure Client SDK</h4>
+<p>Even though the REST API is platform and language agnostic, most often developers look toward a higher level of abstraction. The Azure Client SDK encapsulates the Azure REST API, making it much easier for developers to interact with Azure.</p>
+<p>The Azure Client SDKs are available for various languages and frameworks, including .NET-based languages such as C#, Java, Node.js, PHP, Python, Ruby, and Go.</p>
+<p>Here's an example snippet of C# code to create an Azure VM using the Microsoft.Azure.Management.Fluent NuGet package.</p>
+<p>Microsoft.Azure.Management.Fluent</p>
+<p>var azure = Azure</p>
+<p>.Configure()</p>
+<p>.WithLogLevel(HttpLoggingDelegatingHandler.Level.Basic)</p>
+<p>.Authenticate(credentials)</p>
+<p>.WithDefaultSubscription();</p>
+<p>// ...</p>
+<p>var vmName = "test-wp1-eus-vm";</p>
+<p>azure.VirtualMachines.Define(vmName)</p>
+<p>.WithRegion(Region.USEast)</p>
+<p>.WithExistingResourceGroup("TestResourceGroup")</p>
+<p>.WithExistingPrimaryNetworkInterface(networkInterface)</p>
+<p>.WithLatestWindowsImage("MicrosoftWindowsServer", "WindowsServer", "2012-R2-Datacenter")</p>
+<p>.WithAdminUsername("jonc")</p>
+<p>.WithAdminPassword("aReallyGoodPasswordHere")</p>
+<p>.WithComputerName(vmName)</p>
+<p>.WithSize(VirtualMachineSizeTypes.StandardDS1)</p>
+<p>.Create();</p>
+<p>var azure = Azure</p>
+<p>.Configure()</p>
+<p>.WithLogLevel(HttpLoggingDelegatingHandler.Level.Basic)</p>
+<p>.Authenticate(credentials)</p>
+<p>.WithDefaultSubscription();</p>
+<p>// ...</p>
+<p>var vmName = "test-wp1-eus-vm";</p>
+<p>azure.VirtualMachines.Define(vmName)</p>
+<p>.WithRegion(Region.USEast)</p>
+<p>.WithExistingResourceGroup("TestResourceGroup")</p>
+<p>.WithExistingPrimaryNetworkInterface(networkInterface)</p>
+<p>.WithLatestWindowsImage("MicrosoftWindowsServer", "WindowsServer", "2012-R2-Datacenter")</p>
+<p>.WithAdminUsername("jonc")</p>
+<p>.WithAdminPassword("aReallyGoodPasswordHere")</p>
+<p>.WithComputerName(vmName)</p>
+<p>.WithSize(VirtualMachineSizeTypes.StandardDS1)</p>
+<p>.Create();</p>
+<p>Here's the same snippet in Java using the Azure Java SDK .</p>
+<p>String vmName = "test-wp1-eus-vm";</p>
+<p>// ...</p>
+<p>VirtualMachine virtualMachine = azure.virtualMachines()</p>
+<p>.define(vmName)</p>
+<p>.withRegion(Region.US_EAST)</p>
+<p>.withExistingResourceGroup("TestResourceGroup")</p>
+<p>.withExistingPrimaryNetworkInterface(networkInterface)</p>
+<p>.withLatestWindowsImage("MicrosoftWindowsServer", "WindowsServer", "2012-R2-Datacenter")</p>
+<p>.withAdminUsername("jonc")</p>
+<p>.withAdminPassword("aReallyGoodPasswordHere")</p>
+<p>.withComputerName(vmName)</p>
+<p>.withSize("Standard_DS1")</p>
+<p>.create();</p>
+<p>String vmName = "test-wp1-eus-vm";</p>
+<p>// ...</p>
+<p>VirtualMachine virtualMachine = azure.virtualMachines()</p>
+<p>.define(vmName)</p>
+<p>.withRegion(Region.US_EAST)</p>
+<p>.withExistingResourceGroup("TestResourceGroup")</p>
+<p>.withExistingPrimaryNetworkInterface(networkInterface)</p>
+<p>.withLatestWindowsImage("MicrosoftWindowsServer", "WindowsServer", "2012-R2-Datacenter")</p>
+<p>.withAdminUsername("jonc")</p>
+<p>.withAdminPassword("aReallyGoodPasswordHere")</p>
+<p>.withComputerName(vmName)</p>
+<p>.withSize("Standard_DS1")</p>
+<p>.create();</p>
+<h3>Azure VM extensions</h3>
+<p>Let's assume you want to configure and install more software on your virtual machine after the initial deployment. You want this task to use a specific configuration, monitored and executed automatically.</p>
+<p>Azure VM extensions are small applications that enable you to configure and automate tasks on Azure VMs after initial deployment.</p>
+<p>For more information, see Azure virtual machine extensions and features .</p>
+<h3>Azure Automation services</h3>
+<p>Saving time, reducing errors, and increasing efficiency are some of the most significant operational management challenges faced when managing remote infrastructure. If you have numerous infrastructure services, you might want to consider using higher-level services in Azure to help you operate from a higher level.</p>
+<p>Azure Automation enables you to integrate services that allow you to automate frequent, time-consuming, and error-prone management tasks with ease. These services include process automation , configuration management , and update management .</p>
+<p>- Process Automation . Let's assume you have a VM that is monitored for a specific error event. You want to take action, and fix the problem as soon as it's reported. Process automation enables you to set up watcher tasks that can respond to events that may occur in your datacenter.</p>
+<p>Process Automation . Let's assume you have a VM that is monitored for a specific error event. You want to take action, and fix the problem as soon as it's reported. Process automation enables you to set up watcher tasks that can respond to events that may occur in your datacenter.</p>
+<p>- Configuration Management . Perhaps you want to track software updates that become available for the operating system that runs on your VM. There are specific updates you may want to include or exclude. Configuration management enables you to track these updates, and take action as required. You use Microsoft Endpoint Configuration Manager to manage your company's PC, servers, and mobile devices. You can extend this support to your Azure VMs with Configuration Manager.</p>
+<p>Configuration Management . Perhaps you want to track software updates that become available for the operating system that runs on your VM. There are specific updates you may want to include or exclude. Configuration management enables you to track these updates, and take action as required. You use Microsoft Endpoint Configuration Manager to manage your company's PC, servers, and mobile devices. You can extend this support to your Azure VMs with Configuration Manager.</p>
+<p>- Update Management . Use this service to manage updates and patches for your VMs. With this service, you're able to assess the status of available updates, schedule installation, and review deployment results to verify updates applied successfully. Update management incorporates services that provide process and configuration management. You enable update management for a VM directly from your Azure Automation account. You can also enable update management for a single virtual machine from the virtual machine pane in the portal.</p>
+<p>Update Management . Use this service to manage updates and patches for your VMs. With this service, you're able to assess the status of available updates, schedule installation, and review deployment results to verify updates applied successfully. Update management incorporates services that provide process and configuration management. You enable update management for a VM directly from your Azure Automation account. You can also enable update management for a single virtual machine from the virtual machine pane in the portal.</p>
+<h3>Auto-shutdown</h3>
+<p>Auto-shutdown is a feature in Azure that allows you to automatically shut down your VMs on a schedule. Use Auto-shutdown to save costs by ensuring that your VMs are not running when they aren't needed. You can set the schedule for auto-shutdown to occur daily or weekly, and you can also specify the time zone for the schedule.</p>
+<p>To navigate to the Auto-shutdown feature in a VM in the Azure portal, go to the VM's blade in the portal, click on "Auto-shutdown" under the "Operations" section, and then configure the auto-shutdown settings according to your preferences.</p>
+<p>For more information, see Auto-shutdown .</p>
+<p>As you can see, Azure provides various tools to create and administer resources so that you can integrate management operations into a process that works for you . Let's examine some of the other Azure services to make sure your infrastructure resources are running smoothly.</p>
+<h2>Unit 5.1.5 - Manage the availability of your Azure VMs</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/intro-to-azure-virtual-machines/5-high-availability</p>
+<h3>Manage the availability of your Azure VMs</h3>
+<p>Frequently, the success of a services company is directly related to the service level agreements (SLA) the company has with its customers. Your customers expect the services you provide always to be available, and their data kept safe. This security is something that Microsoft takes seriously. Azure provides tools you can use to manage availability, data security, and monitoring, so you know your services are always available for your customers.</p>
+<p>Administration of an Azure VM isn't limited to managing the operating system, or software that runs on the VM. It helps to know which services Azure provides that ensure service availability and support automation. These services help you to plan your organization's business continuity and disaster recovery strategy.</p>
+<p>Here, we cover an Azure service that helps you improve VM availability, streamlines VM management tasks, and keeps your VM data backed up and safe. Let's start by defining availability.</p>
+<h3>What is availability?</h3>
+<p>Availability is the percentage of time a service is available for use.</p>
+<p>Let's assume you have a website, and you want your customers to be able to always access information. Your expectation is 100% availability concerning website access.</p>
+<h4>Why do I need to think about availability when using Azure?</h4>
+<p>Azure VMs run on physical servers hosted within the Azure datacenter. As with most physical devices, there's a chance that there could be a failure. If the physical server fails, the virtual machines hosted on that server also fail. If a failure happens, Azure moves the VM to a healthy host server automatically. However, this self-healing migration could take several minutes, during which the application(s) hosted on that VM aren't available.</p>
+<p>Periodic updates initiated by Azure itself can also affect the VMs. These maintenance events range from software updates to hardware upgrades and are required to improve platform reliability and performance. These events usually are performed without impacting any guest VMs, but sometimes the virtual machines reboot to complete an update or upgrade.</p>
+<h3>Availability zones</h3>
+<p>Availability zones expands the level of control you have to maintain the availability of the applications and data on your VMs. An Availability Zone is a physically separate zone, within an Azure region. There are three Availability Zones per supported Azure region.</p>
+<p>Each Availability Zone has a distinct power source, network, and cooling. By designing your solutions to use replicated VMs in zones, you can protect your apps and data from the loss of a data center. If one zone is compromised, then replicated apps and data are instantly available in another zone.</p>
+<h3>Virtual Machines Scale Sets</h3>
+<p>Azure virtual machine scale sets let you create and manage a group of load balanced VMs. The number of VM instances can automatically increase or decrease in response to demand or a defined schedule. Scale sets provide high availability to your applications, and allow you to centrally manage, configure, and update many VMs. There's no cost for the scale set itself, you only pay for each VM instance that you create.</p>
+<p>Virtual machines in a scale set can also be deployed into multiple availability zones, a single availability zone, or regionally. Availability zone deployment options may differ based on the orchestration mode .</p>
+<h3>Load balancer</h3>
+<p>Combine the Azure Load Balancer with an availability zone or availability set to get the most application resiliency. The Azure Load Balancer distributes traffic between multiple virtual machines. For our Standard tier virtual machines, the Azure Load Balancer is included. Not all virtual machine tiers include the Azure Load Balancer. For more information about load balancing your virtual machines, see Load Balancing virtual machines for Linux or Windows .</p>
+<h3>Azure Storage redundancy</h3>
+<p>Azure Storage always stores multiple copies of your data so that it's protected from planned and unplanned events, including transient hardware failures, network or power outages, and massive natural disasters. Redundancy ensures that your storage account meets its availability and durability targets even in the face of failures.</p>
+<p>When deciding which redundancy option is best for your scenario, consider the tradeoffs between lower costs and higher availability. The factors that help determine which redundancy option you should choose include:</p>
+<p>- How your data is replicated in the primary region</p>
+<p>- Whether your data is replicated to a second region that is geographically distant to the primary region, to protect against regional disasters</p>
+<p>- Whether your application requires read access to the replicated data in the secondary region if the primary region becomes unavailable for any reason</p>
+<p>For more information, see Azure Storage redundancy .</p>
+<h3>Failover across locations</h3>
+<p>You can also replicate your infrastructure across sites to handle regional failover. Azure Site Recovery replicates workloads from a primary site to a secondary location. If an outage happens at your primary site, you can fail over to a secondary location. This failover enables users to continue to access your applications without interruption. You can then fail back to the primary location after it's up and running again. Azure Site Recovery is about replication of virtual or physical machines; it keeps your workloads available in an outage.</p>
+<p>While there are many attractive technical features to Site Recovery, there are at least two significant business advantages:</p>
+<p>- Site Recovery enables the use of Azure as a destination for recovery, thus eliminating the cost and complexity of maintaining a secondary physical datacenter.</p>
+<p>Site Recovery enables the use of Azure as a destination for recovery, thus eliminating the cost and complexity of maintaining a secondary physical datacenter.</p>
+<p>- Site Recovery makes it incredibly simple to test failovers for recovery drills without impacting production environments. This feature makes it easy to test your planned or unplanned failovers. After all, you don’t have a good disaster recovery plan if you’ve never tried to fail over.</p>
+<p>Site Recovery makes it incredibly simple to test failovers for recovery drills without impacting production environments. This feature makes it easy to test your planned or unplanned failovers. After all, you don’t have a good disaster recovery plan if you’ve never tried to fail over.</p>
+<p>The recovery plans you create with Site Recovery can be as simple or as complex as your scenario requires. They can include custom PowerShell scripts, Azure Automation runbooks, or manual intervention steps. You can use the recovery plans to replicate workloads to Azure, easily enabling new opportunities for migration, temporary bursts during surge periods, or development and testing of new applications.</p>
+<p>Azure Site Recovery works with Azure resources, or Hyper-V, VMware, and physical servers in your on-premises infrastructure. It can be a key part of your organization’s business continuity and disaster recovery (BCDR) strategy by orchestrating the replication, failover, and recovery of workloads and applications if the primary location fails.</p>
+<h2>Unit 5.1.6 - Back up your virtual machines</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/intro-to-azure-virtual-machines/6-backup-services</p>
+<h3>Back up your virtual machines</h3>
+<p>Data backup and recovery is a necessary piece of the planning for any good infrastructure. Assume a bug erases some company data, or maybe you need to retrieve some archived data for auditing purposes. Maintaining a good backup strategy ensures that you aren't scrambling when data or software needs to be restored.</p>
+<p>Azure Backup is a backup as a service offering that protects physical or virtual machines no matter where they reside: on-premises or in the cloud.</p>
+<p>Azure Backup can be used for a wide range of data backup scenarios, such as:</p>
+<p>- Files and folders on Windows OS machines (physical or virtual, local or cloud)</p>
+<p>- Application-aware snapshots (Volume Shadow Copy Service)</p>
+<p>- Popular Microsoft server workloads such as Microsoft SQL Server, Microsoft SharePoint, and Microsoft Exchange</p>
+<p>- Native support for Azure Virtual Machines, both Windows, and Linux</p>
+<p>- Linux and Windows 10 client machines</p>
+<h3>Advantages of using Azure Backup</h3>
+<p>Traditional backup solutions don't always take full advantage of the underlying Azure platform. The result is a solution that tends to be expensive or inefficient. The solution either offers too much or too little storage, doesn't offer the correct types of storage, or has cumbersome and long-winded administrative tasks. Azure Backup was designed to work in tandem with other Azure services and provides several distinct benefits.</p>
+<p>- Automatic storage management . Azure Backup automatically allocates and manages backup storage and uses a pay-as-you-use model. You only pay for what you use.</p>
+<p>Automatic storage management . Azure Backup automatically allocates and manages backup storage and uses a pay-as-you-use model. You only pay for what you use.</p>
+<p>- Unlimited scaling . Azure Backup uses the power and scalability of Azure to deliver high availability.</p>
+<p>Unlimited scaling . Azure Backup uses the power and scalability of Azure to deliver high availability.</p>
+<p>- Multiple storage options . Azure Backup offers locally redundant storage where all copies of the data exist within the same region and geo-redundant storage where your data is replicated to a secondary region.</p>
+<p>Multiple storage options . Azure Backup offers locally redundant storage where all copies of the data exist within the same region and geo-redundant storage where your data is replicated to a secondary region.</p>
+<p>- Unlimited data transfer . Azure Backup doesn't limit the amount of inbound or outbound data you transfer. Azure Backup also doesn't charge for the data that is transferred.</p>
+<p>Unlimited data transfer . Azure Backup doesn't limit the amount of inbound or outbound data you transfer. Azure Backup also doesn't charge for the data that is transferred.</p>
+<p>- Data encryption . Data encryption allows for secure transmission and storage of your data in Azure.</p>
+<p>Data encryption . Data encryption allows for secure transmission and storage of your data in Azure.</p>
+<p>- Application-consistent backup . An application-consistent backup means that a recovery point has all required data to restore the backup copy. Azure Backup provides application-consistent backups.</p>
+<p>Application-consistent backup . An application-consistent backup means that a recovery point has all required data to restore the backup copy. Azure Backup provides application-consistent backups.</p>
+<p>- Long-term retention . Azure doesn't limit the length of time you keep the backup data.</p>
+<p>Long-term retention . Azure doesn't limit the length of time you keep the backup data.</p>
+<h3>Use Azure Backup</h3>
+<p>Azure Backup uses several components that you download and deploy to each computer you want to back up. The component that you deploy depends on what you want to protect.</p>
+<p>- Azure Backup agent</p>
+<p>- System Center Data Protection Manager</p>
+<p>- Azure Backup Server</p>
+<p>- Azure Backup VM extension</p>
+<p>Azure Backup uses a Recovery Services vault for storing the backup data. Azure Storage blobs back up a vault, making it an efficient and economical long-term storage medium. With the vault in place, you can select the machines to back up, and define a backup policy (when snapshots are taken and for how long they’re stored).</p>
+<h2>Unit 5.1.7 - Module assessment</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/intro-to-azure-virtual-machines/7-knowledge-check</p>
+<h3>Module assessment</h3>
+<h3>Check your knowledge</h3>
+<h2>Unit 5.1.8 - Summary</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/intro-to-azure-virtual-machines/8-summary</p>
+<h3>Summary</h3>
+<p>In this module, you looked at the decisions you need to make before creating a virtual machine. These decisions include aspects such as the VM size, types of disks used, operating system image selected, and the types of resources created.</p>
+<p>You also looked at the options to create and manage virtual machines in Azure. You saw how easy it is to create and manage VMs using the portal. You also learned when to use Resource Manager templates, PowerShell, the Azure CLI, and the Azure Client SDK.</p>
+<p>Finally, you looked at the extensions and services available to more easily administer your VMs.</p>
+<p>Important</p>
+<p>In the optional exercises for this module, you created resources by using your own Azure subscription. Clean up these resources so that you won't continue to be charged for them.</p></body>
+</html>

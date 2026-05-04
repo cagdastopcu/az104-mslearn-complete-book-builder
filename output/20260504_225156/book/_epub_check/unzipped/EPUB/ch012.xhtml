@@ -1,0 +1,206 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" epub:prefix="z3998: http://www.daisy.org/z3998/2012/vocab/structure/#" lang="en" xml:lang="en">
+  <head>
+    <title>LP 3 M4 - Configure Azure Virtual Network peering</title>
+    <link href="style/main.css" rel="stylesheet" type="text/css"/>
+  </head>
+  <body><h1>LP 3 M4 - Configure Azure Virtual Network peering</h1>
+<p>https://learn.microsoft.com/en-us/training/modules/configure-vnet-peering/?WT.mc_id=api_CatalogApi</p>
+<h2>Unit 3.4.1 - Introduction</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/configure-vnet-peering/1-introduction</p>
+<h3>Introduction</h3>
+<p>Azure Virtual Network peering lets you connect virtual networks in the same or different regions. Azure Virtual Network peering provides secure communication between resources in the peered networks.</p>
+<p>Suppose your engineering company is migrating services to Azure. The company is deploying services into separate Azure virtual networks. Private connectivity between the virtual networks isn't yet configured. Several business units identified services in the virtual networks that need to communicate with each other.</p>
+<p>You're responsible for implementing an Azure Virtual Network peering solution and enabling connectivity between the virtual networks. Two of your strategy goals include preventing exposure of the services to the internet, and keeping the integration as simple as possible. Your solution should address transit and connectivity concerns.</p>
+<p>The goal of this module is to successfully implement Azure Virtual Network peering.</p>
+<h3>Learning objectives</h3>
+<p>In this module, you learn how to:</p>
+<p>- Identify usage cases and product features of Azure Virtual Network peering.</p>
+<p>- Configure your network to implement Azure VPN Gateway for transit connectivity.</p>
+<p>- Extend peering by using a hub and spoke network with user-defined routes and service chaining.</p>
+<h3>Skills measured</h3>
+<p>The content in the module helps you prepare for Exam AZ-104: Microsoft Azure Administrator .</p>
+<h3>Prerequisites</h3>
+<p>- Basic understanding of cloud networking including virtual networks and virtual machines.</p>
+<p>Basic understanding of cloud networking including virtual networks and virtual machines.</p>
+<p>- Familiarity with the command line connectivity testing tools.</p>
+<p>Familiarity with the command line connectivity testing tools.</p>
+<h2>Unit 3.4.2 - Determine Azure Virtual Network peering uses</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/configure-vnet-peering/2-determine-uses</p>
+<h3>Determine Azure Virtual Network peering uses</h3>
+<p>Perhaps the simplest and quickest way to connect your virtual networks is to use Azure Virtual Network peering. Virtual Network peering enables you to seamlessly connect two Azure virtual networks. After the networks are peered, the two virtual networks operate as a single network, for connectivity purposes.</p>
+<h4>Things to know about Azure Virtual Network peering</h4>
+<p>Let's examine some prominent characteristics of Azure Virtual Network peering.</p>
+<p>- There are two types of Azure Virtual Network peering: regional and global .</p>
+<p>There are two types of Azure Virtual Network peering: regional and global .</p>
+<p>- Regional virtual network peering connects Azure virtual networks that exist in the same region.</p>
+<p>Regional virtual network peering connects Azure virtual networks that exist in the same region.</p>
+<p>- Global virtual network peering connects Azure virtual networks that exist in different regions.</p>
+<p>Global virtual network peering connects Azure virtual networks that exist in different regions.</p>
+<p>- You can create a regional peering of virtual networks in the same Azure public cloud region, or in the same China cloud region, or in the same Microsoft Azure Government cloud region.</p>
+<p>You can create a regional peering of virtual networks in the same Azure public cloud region, or in the same China cloud region, or in the same Microsoft Azure Government cloud region.</p>
+<p>- You can create a global peering of virtual networks in any Azure public cloud region, or in any China cloud region.</p>
+<p>You can create a global peering of virtual networks in any Azure public cloud region, or in any China cloud region.</p>
+<p>- Global peering of virtual networks in different Azure Government cloud regions isn't permitted.</p>
+<p>Global peering of virtual networks in different Azure Government cloud regions isn't permitted.</p>
+<p>- After you create a peering between virtual networks, the individual virtual networks are still managed as separate resources.</p>
+<p>After you create a peering between virtual networks, the individual virtual networks are still managed as separate resources.</p>
+<p>- Virtual networks can be peered across subscriptions and tenants.</p>
+<p>Virtual networks can be peered across subscriptions and tenants.</p>
+<h4>Things to consider when using Azure Virtual Network peering</h4>
+<p>Consider the benefits of using Azure Virtual Network peering.</p>
+<p>Benefit</p>
+<p>Description</p>
+<p>Private network connections</p>
+<p>When you implement Azure Virtual Network peering, network traffic between peered virtual networks is private. Traffic between the virtual networks is kept on the Microsoft Azure backbone network. No public internet, gateways, or encryption is required in the communication between the virtual networks.</p>
+<p>Strong performance</p>
+<p>Because Azure Virtual Network peering utilizes the Azure infrastructure, you gain a low-latency, high-bandwidth connection between resources in different virtual networks.</p>
+<p>Simplified communication</p>
+<p>Azure Virtual Network peering lets resources in one virtual network communicate with resources in a different virtual network, after the virtual networks are peered.</p>
+<p>Seamless data transfer</p>
+<p>You can create an Azure Virtual Network peering configuration to transfer data across Azure subscriptions, deployment models, and across Azure regions.</p>
+<p>No resource disruptions</p>
+<p>Azure Virtual Network peering doesn't require downtime for resources in either virtual network when creating the peering, or after the peering is created.</p>
+<h4>Things to know about peering requirements and limitations</h4>
+<p>While VNet peering provides many benefits, there are important constraints to understand.</p>
+<p>Requirements/Limitations</p>
+<p>Description</p>
+<p>Nonoverlapping address spaces</p>
+<p>Peered virtual networks must have non-overlapping IP address spaces. Peering creation fails if address ranges overlap.</p>
+<p>Address space modification restrictions</p>
+<p>If you want to change a VNet's address range, you need to delete the peering first, update the address space, and then set up the peering again.</p>
+<p>Basic Load Balancer limitations</p>
+<p>Resources in one VNet can’t communicate with Basic Internal Load Balancer IPs in VNets peered across regions. Use the Standard Load Balancer for cross-region connections.</p>
+<p>DNS resolution boundaries</p>
+<p>Azure's built-in name resolution does not work across peered VNets. Configure Azure Private DNS zones or custom DNS servers for cross-VNet name resolution.</p>
+<h2>Unit 3.4.3 - Determine gateway transit and connectivity</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/configure-vnet-peering/3-determine-gateway-transit-connectivity</p>
+<h3>Determine gateway transit and connectivity</h3>
+<p>When virtual networks are peered, you can configure Azure VPN Gateway in the peered virtual network as a transit point . In this scenario, a peered virtual network uses the remote VPN gateway to gain access to other resources.</p>
+<h4>Transit and connectivity use</h4>
+<p>Consider a scenario where three virtual networks in the same region are connected by virtual network peering. Virtual network A and virtual network B are each peered with a hub virtual network. The hub virtual network contains several resources, including a gateway subnet and an Azure VPN gateway. The VPN gateway is configured to allow VPN gateway transit. Virtual network B accesses resources in the hub, including the gateway subnet, by using a remote VPN gateway.</p>
+<p>The Azure portal provides four key settings when configuring virtual network peering.</p>
+<p>- Traffic to remote virtual network . Controls whether traffic flows from this VNet to the remote VNet.</p>
+<p>Traffic to remote virtual network . Controls whether traffic flows from this VNet to the remote VNet.</p>
+<p>- Traffic forwarded from remote virtual network . Controls whether forwarded (non-originating) traffic is accepted from the peered VNet.</p>
+<p>Traffic forwarded from remote virtual network . Controls whether forwarded (non-originating) traffic is accepted from the peered VNet.</p>
+<p>- Virtual network gateway or Route Server . Enables gateway transit. Lets peered VNets use this VNet's VPN Gateway or Azure Route Server.</p>
+<p>Virtual network gateway or Route Server . Enables gateway transit. Lets peered VNets use this VNet's VPN Gateway or Azure Route Server.</p>
+<p>- Remote virtual network gateway or Route Server . Enables this VNet to use the remote VNet's VPN Gateway or Route Server.</p>
+<p>Remote virtual network gateway or Route Server . Enables this VNet to use the remote VNet's VPN Gateway or Route Server.</p>
+<h4>Things to know about Azure VPN Gateway</h4>
+<p>Let's take a closer look at how Azure VPN Gateway is implemented with Azure Virtual Network peering.</p>
+<p>- A virtual network can have only one VPN gateway.</p>
+<p>A virtual network can have only one VPN gateway.</p>
+<p>- Gateway transit is supported for both regional and global virtual network peering.</p>
+<p>Gateway transit is supported for both regional and global virtual network peering.</p>
+<p>- When you allow VPN gateway transit, the virtual network can communicate to resources outside the peering. In our sample illustration, the gateway subnet gateway within the hub virtual network can complete tasks such as: Use a site-to-site VPN to connect to an on-premises network. Use a vnet-to-vnet connection to another virtual network. Use a point-to-site VPN to connect to a client.</p>
+<p>When you allow VPN gateway transit, the virtual network can communicate to resources outside the peering. In our sample illustration, the gateway subnet gateway within the hub virtual network can complete tasks such as:</p>
+<p>- Use a site-to-site VPN to connect to an on-premises network.</p>
+<p>- Use a vnet-to-vnet connection to another virtual network.</p>
+<p>- Use a point-to-site VPN to connect to a client.</p>
+<p>- Gateway transit allows peered virtual networks to share the gateway and get access to external resources. With this implementation, you don't need to deploy a VPN gateway in the peered virtual network.</p>
+<p>Gateway transit allows peered virtual networks to share the gateway and get access to external resources. With this implementation, you don't need to deploy a VPN gateway in the peered virtual network.</p>
+<p>- You can apply network security groups in a virtual network to block or allow access to other virtual networks or subnets. When you configure virtual network peering, you can choose to open or close the network security group rules between the virtual networks.</p>
+<p>You can apply network security groups in a virtual network to block or allow access to other virtual networks or subnets. When you configure virtual network peering, you can choose to open or close the network security group rules between the virtual networks.</p>
+<h2>Unit 3.4.4 - Create virtual network peering</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/configure-vnet-peering/4-create</p>
+<h3>Create virtual network peering</h3>
+<p>Azure Virtual Network peering can be configured for virtual networks by using PowerShell, the Azure CLI, and in the Azure portal. In this module, we review the steps to create the peering in the Azure portal for virtual networks deployed through Azure Resource Manager.</p>
+<h4>Things to know about creating virtual network peering</h4>
+<p>There are a few points to review before we look at how to create the peering in the Azure portal.</p>
+<p>- To implement virtual network peering, your Azure account must be assigned to the Network Contributor role. Alternatively, your Azure account can be assigned to a custom role that can complete the necessary peering actions. For details, see Permissions .</p>
+<p>To implement virtual network peering, your Azure account must be assigned to the Network Contributor role. Alternatively, your Azure account can be assigned to a custom role that can complete the necessary peering actions. For details, see Permissions .</p>
+<p>Network Contributor</p>
+<p>- To create a peering, you need two virtual networks.</p>
+<p>To create a peering, you need two virtual networks.</p>
+<p>- The second virtual network in the peering is referred to as the remote network .</p>
+<p>The second virtual network in the peering is referred to as the remote network .</p>
+<p>- Initially, the virtual machines in your virtual networks can't communicate with each other. After the peering is established, the machines can communicate within the peered network based on your configuration settings.</p>
+<p>Initially, the virtual machines in your virtual networks can't communicate with each other. After the peering is established, the machines can communicate within the peered network based on your configuration settings.</p>
+<h3>How to connect virtual networks across Azure regions with Azure Global virtual network peering</h3>
+<h3>How to check your peering status</h3>
+<p>In the Azure portal, you can check the connectivity status of the virtual networks in your virtual network peering. The status conditions depend on how your virtual networks are deployed.</p>
+<p>Important</p>
+<p>Your peering isn't successfully established until both virtual networks in the peering have a status of Connected .</p>
+<p>- The two peering status conditions are Initiated and Connected .</p>
+<p>The two peering status conditions are Initiated and Connected .</p>
+<p>- When you create the initial peering to the second (remote) virtual network from the first virtual network, the peering status for the first virtual network is Initiated .</p>
+<p>When you create the initial peering to the second (remote) virtual network from the first virtual network, the peering status for the first virtual network is Initiated .</p>
+<h2>Unit 3.4.5 - Extend peering with user-defined routes and service chaining</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/configure-vnet-peering/5-determine-service-chaining-uses</p>
+<h3>Extend peering with user-defined routes and service chaining</h3>
+<p>Virtual network peering is nontransitive. The communication capabilities in a peering are available to only the virtual networks and resources in the peering. Other mechanisms have to be used to enable traffic to and from resources and networks outside the private peering network.</p>
+<p>Suppose you have three virtual networks: A, B, and C. You establish virtual network peering between networks A and B, and also between networks B and C. You don't set up peering between networks A and C. The virtual network peering capabilities that you set up between networks B and C don't automatically enable peering communication capabilities between networks A and C.</p>
+<h4>Things to know about extending peering</h4>
+<p>There are a few ways to extend the capabilities of your peering for resources and virtual networks outside your peering network.</p>
+<p>Mechanism</p>
+<p>Description</p>
+<p>Hub and spoke network</p>
+<p>When you deploy a hub-and-spoke network, the hub virtual network can host infrastructure components like a network virtual appliance (NVA) or Azure VPN gateway. All the spoke virtual networks can then peer with the hub virtual network. Traffic can flow through NVAs or VPN gateways in the hub virtual network.</p>
+<p>User-defined route (UDR)</p>
+<p>Virtual network peering enables the next hop in a user-defined route to be the IP address of a virtual machine in the peered virtual network, or a VPN gateway.</p>
+<p>Service chaining</p>
+<p>Service chaining is used to direct traffic from one virtual network to a virtual appliance or gateway. To enable service chaining, configure UDRs that point to virtual machines in peered virtual networks as the next hop IP address. UDRs could also point to virtual network gateways to enable service chaining.</p>
+<p>Azure Virtual Network Manager</p>
+<p>Centrally manages hub-and-spoke or mesh peering topologies at scale. Automates peering creation without manual per-VNet configuration.</p>
+<p>The following diagram shows a hub and spoke virtual network with an NVA and VPN gateway. The hub and spoke network is accessible to other virtual networks via user-defined routes and service chaining.</p>
+<p>Tip</p>
+<p>Use the Ask Learn icon (top right) to learn more about service chaining and user-defined routes .</p>
+<h2>Unit 3.4.6 - Exercise - Implement Intersite Connectivity</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/configure-vnet-peering/6-simulation-peering</p>
+<h3>Exercise - Implement Intersite Connectivity</h3>
+<h3>Lab scenario</h3>
+<p>Your organization segments core IT apps and services (such as DNS and security services) from other parts of the business, including your manufacturing department. However, in some scenarios, apps and services in the core area need to communicate with apps and services in the manufacturing area. In this lab, you configure connectivity between the segmented areas. Separating production from development or separating one subsidiary from another is a common networking scenario.</p>
+<h3>Architecture diagram</h3>
+<h3>Job skills</h3>
+<p>- Create a virtual machine in a virtual network.</p>
+<p>- Create a virtual machine in a different virtual network.</p>
+<p>- Use Network Watcher to test the connection between virtual machines.</p>
+<p>- Configure virtual network peerings between different virtual networks.</p>
+<p>- Use Azure PowerShell to test the connection between virtual machines.</p>
+<p>- Create a custom route. (optional)</p>
+<p>Important</p>
+<p>Estimated time: 50 minutes.</p>
+<p>To complete the exercise, you need an Azure subscription .</p>
+<p>Launch the exercise, and follow the instructions. When finished, be sure to return to this page so you can continue learning.</p>
+<h2>Unit 3.4.7 - Module assessment</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/configure-vnet-peering/7-knowledge-check</p>
+<h3>Module assessment</h3>
+<p>Your company is implementing an Azure Virtual Network peering solution to enable connectivity between virtual networks. You're working on the plan to support shared access to gateways and resources, and to control internet communication. A few teams submitted questions and configuration requests for your input.</p>
+<p>- The IT team needs information about how to check virtual network peering status and verify peered connections.</p>
+<p>The IT team needs information about how to check virtual network peering status and verify peered connections.</p>
+<p>- The Marketing department has resources in virtual networks in different regions.</p>
+<p>The Marketing department has resources in virtual networks in different regions.</p>
+<h4>Answer the following questions</h4>
+<p>Choose the best response for each question.</p>
+<h2>Unit 3.4.8 - Summary and resources</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/configure-vnet-peering/8-summary-resources</p>
+<h3>Summary and resources</h3>
+<p>In this module, you learned Azure Virtual Network peering lets you connect virtual networks in a hub and spoke topology. You learned how to configure your virtual networks with Azure VPN Gateway for transit connectivity. You explored how to extend peering with user-defined routes and service chaining.</p>
+<p>The main takeaways from this module are:</p>
+<p>- Azure Virtual Network peering allows for the connection of virtual networks in a hub and spoke topology.</p>
+<p>Azure Virtual Network peering allows for the connection of virtual networks in a hub and spoke topology.</p>
+<p>- There are two types of peering: regional and global. Regional peering connects virtual networks in the same region. Global peering connects virtual networks in different regions.</p>
+<p>There are two types of peering: regional and global. Regional peering connects virtual networks in the same region. Global peering connects virtual networks in different regions.</p>
+<p>- Network traffic between peered virtual networks is private and kept on the Azure backbone network.</p>
+<p>Network traffic between peered virtual networks is private and kept on the Azure backbone network.</p>
+<p>- You can configure Azure VPN Gateway in the peered virtual network as a transit point to access resources in another network.</p>
+<p>You can configure Azure VPN Gateway in the peered virtual network as a transit point to access resources in another network.</p>
+<p>- Network security groups can be applied to block or allow access between virtual networks when configuring virtual network peering.</p>
+<p>Network security groups can be applied to block or allow access between virtual networks when configuring virtual network peering.</p>
+<h3>Learn more with Copilot</h3>
+<p>Copilot can assist you in designing Azure infrastructure solutions. Copilot can compare, recommend, explain, and research products and services where you need more information. Open a Microsoft Edge browser and choose Copilot (top right) or navigate to copilot.microsoft.com. Take a few minutes to try these prompts and extend your learning with Copilot.</p>
+<p>- What is Azure virtual network peering and what are the advantages of this feature?</p>
+<p>What is Azure virtual network peering and what are the advantages of this feature?</p>
+<p>- What are some of the configurations settings for Azure virtual network peering?</p>
+<p>What are some of the configurations settings for Azure virtual network peering?</p>
+<h3>Learn more with documentation</h3>
+<p>- Azure Virtual Network peering . This article is your starting point for learning about virtual network peering.</p>
+<p>Azure Virtual Network peering . This article is your starting point for learning about virtual network peering.</p>
+<p>- Create, change, or delete a virtual network peering . This article reviews how to create a virtual network peering and what each setting means.</p>
+<p>Create, change, or delete a virtual network peering . This article reviews how to create a virtual network peering and what each setting means.</p>
+<h3>Learn more with self-paced training</h3>
+<p>- Introduction to Azure Virtual Networks . Learn how to design and implement core Azure networking infrastructure such as virtual networks, and virtual network peering.</p></body>
+</html>

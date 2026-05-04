@@ -1,0 +1,197 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" epub:prefix="z3998: http://www.daisy.org/z3998/2012/vocab/structure/#" lang="en" xml:lang="en">
+  <head>
+    <title>LP 2 M5 - Secure your Azure resources with Azure role-based access control (Azure RBAC)</title>
+    <link href="style/main.css" rel="stylesheet" type="text/css"/>
+  </head>
+  <body><h1>LP 2 M5 - Secure your Azure resources with Azure role-based access control (Azure RBAC)</h1>
+<p>https://learn.microsoft.com/en-us/training/modules/secure-azure-resources-with-rbac/?WT.mc_id=api_CatalogApi</p>
+<h2>Unit 2.5.1 - Introduction</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/secure-azure-resources-with-rbac/1-introduction</p>
+<h3>Introduction</h3>
+<p>For any organization using the cloud, securing your Azure resources such as virtual machines, websites, networks, and storage is a critical function. You want to ensure that your data and assets are protected, but still grant your employees and partners the access they need to perform their jobs. Azure RBAC is an authorization system in Azure that helps you manage who has access to Azure resources, what they can do with those resources, and where they have access.</p>
+<p>Suppose you work for First Up Consultants, which is an engineering firm that specializes in circuit and electrical design. They've moved their workloads and assets to Azure to make collaboration easier across several offices and other companies. You work in the IT department at First Up Consultants. You're responsible for keeping the company's assets secure, but still allowing users to access the resources they need. You've heard that Azure RBAC can help you manage resources in Azure.</p>
+<p>In this module, you'll learn how to use Azure RBAC to manage access to resources in Azure.</p>
+<h3>Learning objectives</h3>
+<p>In this module, you'll:</p>
+<p>- Verify access to resources for yourself and others.</p>
+<p>- Grant access to resources.</p>
+<p>- View activity logs of Azure RBAC changes.</p>
+<h2>Unit 2.5.2 - What is Azure RBAC?</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/secure-azure-resources-with-rbac/2-rbac-overview</p>
+<h3>What is Azure RBAC?</h3>
+<p>When it comes to identity and access, most organizations that are considering using the public cloud are concerned about two things:</p>
+<p>- Ensuring that when people leave the organization, they lose access to resources in the cloud.</p>
+<p>- Striking the right balance between autonomy and central governance. For example, giving project teams the ability to create and manage virtual machines in the cloud, while centrally controlling the networks those VMs use to communicate with other resources.</p>
+<p>Microsoft Entra ID and Azure RBAC work together to make it simple to carry out these goals.</p>
+<h3>Azure subscriptions</h3>
+<p>First, remember that each Azure subscription is associated with a single Microsoft Entra directory. Users, groups, and applications in that directory can manage resources in the Azure subscription. The subscriptions use Microsoft Entra ID for single sign-on (SSO) and access management. You can extend your on-premises Active Directory to the cloud by using Microsoft Entra Connect . This feature allows your employees to manage their Azure subscriptions by using their existing work identities. When you disable an on-premises Active Directory account, it automatically loses access to all Azure subscriptions connected with Microsoft Entra ID.</p>
+<h3>What's Azure RBAC?</h3>
+<p>Azure RBAC is an authorization system built on Azure Resource Manager that provides fine-grained access management for resources in Azure. With Azure RBAC, you can grant the exact access that users need to do their jobs. For example, you can use Azure RBAC to let one employee manage virtual machines in a subscription, while another manages SQL databases within the same subscription.</p>
+<p>The following video describes Azure RBAC in detail:</p>
+<p>You can grant access by assigning the appropriate Azure role to users, groups, and applications at a certain scope. The scope of a role assignment can be a management group, subscription, a resource group, or a single resource. A role assigned at a parent scope also grants access to the child scopes contained within it. For example, a user with access to a resource group can manage all the resources it contains like websites, virtual machines, and subnets. The Azure role that you assign dictates what resources the user, group, or application can manage within that scope.</p>
+<p>The following diagram depicts how the classic subscription administrator roles, Azure roles, and Microsoft Entra roles are related at a high level. Child scopes, such as service instances, inherit roles assigned at a higher scope, like an entire subscription.</p>
+<p>In the preceding diagram, a subscription is associated with only one Microsoft Entra tenant. Also note that a resource group can have multiple resources, but it's associated with only one subscription. Although it's not obvious from the diagram, a resource can be bound to only one resource group.</p>
+<h3>What can I do with Azure RBAC?</h3>
+<p>Azure RBAC allows you to grant access to Azure resources that you control. Suppose you need to manage access to resources in Azure for the development, engineering, and marketing teams. You’ve started to receive access requests, and you need to quickly learn how access management works for Azure resources.</p>
+<p>Here are some scenarios you can implement with Azure RBAC:</p>
+<p>- Allow one user to manage virtual machines in a subscription and another user to manage virtual networks.</p>
+<p>- Allow a database administrator group to manage SQL databases in a subscription.</p>
+<p>- Allow a user to manage all resources in a resource group, such as virtual machines, websites, and subnets.</p>
+<p>- Allow an application to access all resources in a resource group.</p>
+<h3>Azure RBAC in the Azure portal</h3>
+<p>In several areas in the Azure portal, you'll see a pane named Access control (IAM) , also known as identity and access management . On this pane, you can see who has access to that area and their role. Using this same pane, you can grant or remove access.</p>
+<p>The following shows an example of the Access control (IAM) pane for a resource group. In this example, Alain has been assigned the Backup Operator role for this resource group.</p>
+<h3>How does Azure RBAC work?</h3>
+<p>You can control access to resources using Azure RBAC by creating role assignments, which control how permissions are enforced. To create a role assignment, you need three elements: a security principal, a role definition, and a scope. You can think of these elements as who , what , and where .</p>
+<h4>1. Security principal (who)</h4>
+<p>A security principal is just a fancy name for a user, group, or application to which you want to grant access.</p>
+<h4>2. Role definition (what)</h4>
+<p>A role definition is a collection of permissions. It's sometimes just called a role. A role definition lists the permissions the role can perform such as read, write, and delete. Roles can be high-level, like Owner, or specific, like Virtual Machine Contributor.</p>
+<p>Azure includes several built-in roles that you can use. The following lists four fundamental built-in roles:</p>
+<p>- Owner : Has full access to all resources, including the right to delegate access to others.</p>
+<p>- Contributor : Can create and manage all types of Azure resources, but can’t grant access to others.</p>
+<p>- Reader : Can view existing Azure resources.</p>
+<p>- User Access Administrator : Lets you manage user access to Azure resources.</p>
+<p>If the built-in roles don't meet the specific needs of your organization, you can create your own custom roles.</p>
+<h4>3. Scope (where)</h4>
+<p>Scope is the level where the access applies. This is helpful if you want to make someone a Website Contributor but only for one resource group.</p>
+<p>In Azure, you can specify a scope at multiple levels: management group, subscription, resource group, or resource. Scopes are structured in a parent-child relationship. When you grant access at a parent scope, the child scopes automatically inherit those permissions. For example, if a group is assigned the Contributor role at the subscription scope, it will inherit the role for all resource groups and resources within the subscription.</p>
+<h4>Role assignment</h4>
+<p>Once you have determined the who, what, and where, you can combine those elements to grant access. A role assignment is the process of binding a role to a security principal at a particular scope for the purpose of granting access. To grant access, you'll create a role assignment. To revoke access, you'll remove a role assignment.</p>
+<p>The following example shows how the Marketing group has been assigned the Contributor role at the sales resource group scope.</p>
+<h3>Azure RBAC is an allow model</h3>
+<p>Azure RBAC is an allow model. This means that when you're assigned a role, Azure RBAC allows you to perform certain actions such as read, write, or delete. If one role assignment grants you read permissions to a resource group, and a different role assignment grants you write permissions to the same resource group, then you'll have read and write permissions on that resource group.</p>
+<p>Azure RBAC has something called NotActions permissions. You can use NotActions to create a set of not allowed permissions. The access a role grants—the effective permissions —is computed by subtracting the NotActions operations from the Actions operations. For example, the Contributor role has both Actions and NotActions . The wildcard (*) in Actions indicates that it can perform all operations on the control plane. You'd then subtract the following operations in NotActions to compute the effective permissions:</p>
+<p>NotActions</p>
+<p>Actions</p>
+<p>NotActions</p>
+<p>Actions</p>
+<p>NotActions</p>
+<p>- Delete roles and role assignments</p>
+<p>- Create roles and role assignments</p>
+<p>- Grant the caller User Access Administrator access at the tenant scope</p>
+<p>- Create or update any blueprint artifacts</p>
+<p>- Delete any blueprint artifacts</p>
+<h2>Unit 2.5.3 - Knowledge check - What is Azure RBAC?</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/secure-azure-resources-with-rbac/3-knowledge-check-rbac-overview</p>
+<h3>Knowledge check - What is Azure RBAC?</h3>
+<h3>Check your knowledge</h3>
+<h2>Unit 2.5.4 - Exercise - List access using Azure RBAC and the Azure portal</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/secure-azure-resources-with-rbac/4-list-access</p>
+<h3>Exercise - List access using Azure RBAC and the Azure portal</h3>
+<p>At First Up Consultants, you've been granted access to a resource group for the marketing team. You want to familiarize yourself with the Azure portal and see what roles are currently assigned.</p>
+<p>You need an Azure subscription to complete the exercises. If you don't have an Azure subscription, create a free account and add a subscription before you begin. If you're a student, you can take advantage of the Azure for students offer.</p>
+<h3>List role assignments for yourself</h3>
+<p>Follow these steps to see what roles are currently assigned to you.</p>
+<p>- Sign in to the Azure portal .</p>
+<p>Sign in to the Azure portal .</p>
+<p>- On the Profile menu, select the ellipsis ( ... ) to see more links.</p>
+<p>On the Profile menu, select the ellipsis ( ... ) to see more links.</p>
+<p>- Select My permissions to open the My permissions pane. You'll find the roles that you've been assigned and the scope. Your list will look different.</p>
+<p>Select My permissions to open the My permissions pane.</p>
+<p>You'll find the roles that you've been assigned and the scope. Your list will look different.</p>
+<h3>List role assignments for a resource group</h3>
+<p>Follow these steps to see what roles are assigned at the resource group scope.</p>
+<p>- In the Search box at the top, search for and select Resource groups .</p>
+<p>In the Search box at the top, search for and select Resource groups .</p>
+<p>- In the list of resource groups, select a resource group. These steps use a resource group named example-group , but your resource group's name will be different.</p>
+<p>In the list of resource groups, select a resource group.</p>
+<p>These steps use a resource group named example-group , but your resource group's name will be different.</p>
+<p>- On the left menu pane, select Access control (IAM) .</p>
+<p>On the left menu pane, select Access control (IAM) .</p>
+<p>- Select the Role assignments tab. This tab shows who has access to the resource group. Notice that some roles are scoped to This resource , while others are (Inherited) from a parent scope.</p>
+<p>Select the Role assignments tab.</p>
+<p>This tab shows who has access to the resource group. Notice that some roles are scoped to This resource , while others are (Inherited) from a parent scope.</p>
+<h3>List roles</h3>
+<p>As you learned in the previous unit, a role is a collection of permissions. Azure has more than 70 built-in roles that you can use in your role assignments. To list the roles:</p>
+<p>- In the menu bar at the top of the pane, select the Roles tab to list of all the built-in and custom roles. Select a role's View link in the Details column, then select the Assignments tab to display the number of users and groups assigned to that role.</p>
+<p>In the menu bar at the top of the pane, select the Roles tab to list of all the built-in and custom roles.</p>
+<p>Select a role's View link in the Details column, then select the Assignments tab to display the number of users and groups assigned to that role.</p>
+<p>In this unit, you learned how to list the role assignments for yourself in the Azure portal. You also learned how to list the role assignments for a resource group.</p>
+<h2>Unit 2.5.5 - Exercise - Grant access using Azure RBAC and the Azure portal</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/secure-azure-resources-with-rbac/5-grant-access</p>
+<h3>Exercise - Grant access using Azure RBAC and the Azure portal</h3>
+<p>A coworker named Alain at First Up Consultants needs permission to create and manage virtual machines for a project on which they're working. Your manager has asked that you handle this request. Using the best practice to grant users the least privileges to get their work done, you decide to assign Alain the Virtual Machine Contributor role for a resource group.</p>
+<h3>Grant access</h3>
+<p>Follow this procedure to assign the Virtual Machine Contributor role to a user at the resource group scope.</p>
+<p>- Sign in to the Azure portal as an administrator that has permissions to assign roles, such as User Access Administrator or Owner .</p>
+<p>Sign in to the Azure portal as an administrator that has permissions to assign roles, such as User Access Administrator or Owner .</p>
+<p>- In the Search box at the top, search for Resource groups .</p>
+<p>In the Search box at the top, search for Resource groups .</p>
+<p>- In the list of resource groups, select a resource group. These steps use a resource group named example-group , but your resource group's name will be different.</p>
+<p>In the list of resource groups, select a resource group.</p>
+<p>These steps use a resource group named example-group , but your resource group's name will be different.</p>
+<p>- On the left menu pane, select Access control (IAM) .</p>
+<p>On the left menu pane, select Access control (IAM) .</p>
+<p>- Select the Role assignments tab to display the current list of role assignments at this scope.</p>
+<p>Select the Role assignments tab to display the current list of role assignments at this scope.</p>
+<p>- Select Add &gt; Add role assignment . If you don't have permissions to assign roles, the Add role assignment option will be disabled. The Add role assignment page opens.</p>
+<p>Select Add &gt; Add role assignment .</p>
+<p>If you don't have permissions to assign roles, the Add role assignment option will be disabled.</p>
+<p>The Add role assignment page opens.</p>
+<p>- On the Role tab, search for and select Virtual Machine Contributor .</p>
+<p>On the Role tab, search for and select Virtual Machine Contributor .</p>
+<p>- Select Next .</p>
+<p>Select Next .</p>
+<p>- On the Members tab, select Select members .</p>
+<p>On the Members tab, select Select members .</p>
+<p>- Search for and select a user.</p>
+<p>Search for and select a user.</p>
+<p>- Select Select to add the user to the Members list.</p>
+<p>Select Select to add the user to the Members list.</p>
+<p>- Select Next .</p>
+<p>Select Next .</p>
+<p>- On the Review + assign tab, review the role assignment settings.</p>
+<p>On the Review + assign tab, review the role assignment settings.</p>
+<p>- Select Review + assign to assign the role. After a few moments, the user is assigned the Virtual Machine Contributor role at the resource group scope. The user can now create and manage virtual machines just within this resource group.</p>
+<p>Select Review + assign to assign the role.</p>
+<p>After a few moments, the user is assigned the Virtual Machine Contributor role at the resource group scope. The user can now create and manage virtual machines just within this resource group.</p>
+<h3>Remove access</h3>
+<p>In Azure RBAC, you can remove a role assignment to remove access.</p>
+<p>- In the list of role assignments, select View Assignments .</p>
+<p>In the list of role assignments, select View Assignments .</p>
+<p>- Search for and check the box for the user with the Virtual Machine Contributor role.</p>
+<p>Search for and check the box for the user with the Virtual Machine Contributor role.</p>
+<p>- Select Delete .</p>
+<p>Select Delete .</p>
+<p>- In the Remove role assignments message that appears, select Yes .</p>
+<p>In the Remove role assignments message that appears, select Yes .</p>
+<p>In this unit, you learned how to grant a user access to create and manage virtual machines in a resource group using the Azure portal.</p>
+<h2>Unit 2.5.6 - Exercise - View activity logs for Azure RBAC changes</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/secure-azure-resources-with-rbac/6-view-activity-logs</p>
+<h3>Exercise - View activity logs for Azure RBAC changes</h3>
+<p>First Up Consultants reviews Azure RBAC changes quarterly for auditing and troubleshooting purposes. You know that changes get logged in the Azure Activity Log . Your manager has asked if you can generate a report of the role assignment and custom role changes for the last month.</p>
+<h3>View activity logs</h3>
+<p>The easiest way to get started is to view the activity logs with the Azure portal.</p>
+<p>- Select All services , then search for Activity log .</p>
+<p>Select All services , then search for Activity log .</p>
+<p>- Select Activity log to open the activity log.</p>
+<p>Select Activity log to open the activity log.</p>
+<p>- Set the Timespan filter to Last month .</p>
+<p>Set the Timespan filter to Last month .</p>
+<p>- Add an Operation filter and type role to filter the list.</p>
+<p>Add an Operation filter and type role to filter the list.</p>
+<p>- Select the following Azure RBAC operations: Create role assignment (roleAssignments) Delete role assignment (roleAssignments) Create or update custom role definition (roleDefinitions) Delete custom role definition (roleDefinitions) After a moment, you'll get a list of all the role assignment and role definition operations for the last month. There's also a button at the top of the screen to download the activity log as a CSV file.</p>
+<p>Select the following Azure RBAC operations:</p>
+<p>- Create role assignment (roleAssignments)</p>
+<p>- Delete role assignment (roleAssignments)</p>
+<p>- Create or update custom role definition (roleDefinitions)</p>
+<p>- Delete custom role definition (roleDefinitions)</p>
+<p>After a moment, you'll get a list of all the role assignment and role definition operations for the last month. There's also a button at the top of the screen to download the activity log as a CSV file.</p>
+<p>- Select one of the operations to get the activity log details.</p>
+<p>Select one of the operations to get the activity log details.</p>
+<p>In this unit, you learned how to use Azure Activity Log to list Azure RBAC changes in the portal and generate a simple report.</p>
+<h2>Unit 2.5.7 - Module assessment</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/secure-azure-resources-with-rbac/7-knowledge-check-rbac</p>
+<h3>Module assessment</h3>
+<h3>Check your knowledge</h3>
+<h2>Unit 2.5.8 - Summary</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/secure-azure-resources-with-rbac/8-summary</p>
+<h3>Summary</h3>
+<p>In this module, you learned about Azure RBAC, and how you can use it to secure your Azure resources. To grant access, you assign users a role at a particular scope. Using Azure RBAC, you can grant only the amount of access to users that they need to perform their jobs.</p>
+<p>Azure RBAC has more than 200 built-in roles. However, if your organization needs specific permissions, you can create your own custom roles. Azure keeps track of your Azure RBAC changes in case you need to see what changes were made in the past.</p>
+<h3>Further reading</h3>
+<p>To continue learning about Azure RBAC, check out What is Azure role-based access control (Azure RBAC)? .</p></body>
+</html>

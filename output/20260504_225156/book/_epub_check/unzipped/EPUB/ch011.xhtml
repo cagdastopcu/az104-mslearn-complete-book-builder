@@ -1,0 +1,380 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" epub:prefix="z3998: http://www.daisy.org/z3998/2012/vocab/structure/#" lang="en" xml:lang="en">
+  <head>
+    <title>LP 3 M3 - Host your domain on Azure DNS</title>
+    <link href="style/main.css" rel="stylesheet" type="text/css"/>
+  </head>
+  <body><h1>LP 3 M3 - Host your domain on Azure DNS</h1>
+<p>https://learn.microsoft.com/en-us/training/modules/host-domain-azure-dns/?WT.mc_id=api_CatalogApi</p>
+<h2>Unit 3.3.1 - Introduction</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/host-domain-azure-dns/1-introduction</p>
+<h3>Introduction</h3>
+<p>Azure DNS lets you host your Domain Name System (DNS) records for your domains on Azure infrastructure. With Azure DNS, you can use the same credentials, APIs, tools, and billing as your other Azure services.</p>
+<p>Let's say that your company recently bought the custom domain name wideworldimporters.com from a third-party domain-name registrar. The domain name is for a new website that your organization plans to launch. You need a hosting service for DNS domains. This hosting service would resolve the wideworldimporters.com domain to your web server's IP address.</p>
+<p>You're already using Azure to build your website, so you decide to use Azure DNS to manage your domain.</p>
+<p>This module shows you how to configure Azure DNS to host your domain. You also see how to add an alias and other DNS records to resolve your domain name to a website.</p>
+<h3>Learning objectives</h3>
+<p>In this module, you will:</p>
+<p>- Configure Azure DNS to host your domain.</p>
+<h3>Prerequisites</h3>
+<p>- Knowledge of networking concepts like name resolution and IP addresses.</p>
+<h2>Unit 3.3.2 - What is Azure DNS?</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/host-domain-azure-dns/2-what-is-azure-dns</p>
+<h3>What is Azure DNS?</h3>
+<p>Azure DNS is a hosting service for Domain Name System (DNS) domains that provides name resolution by using Microsoft Azure infrastructure.</p>
+<p>In this unit, you learn what DNS is and how it works. You also learn about Azure DNS and why you'd use it.</p>
+<h3>What is DNS?</h3>
+<p>DNS, or the Domain Name System, is a protocol within the TCP/IP standard. DNS serves an essential role of translating the human-readable domain names—for example: www.wideworldimports.com —into a known IP address. IP addresses enable computers and network devices to identify and route requests among themselves.</p>
+<p>www.wideworldimports.com</p>
+<p>DNS uses a global directory hosted on servers around the world. Microsoft is part of the network that provides a DNS service through Azure DNS.</p>
+<p>A DNS server is also known as a DNS name server, or just a name server.</p>
+<h3>How does DNS work?</h3>
+<p>A DNS server carries out one of two primary functions:</p>
+<p>- Maintains a local cache of recently accessed or used domain names and their IP addresses. This cache provides a faster response to a local domain lookup request. If the DNS server can't find the requested domain, it passes the request to another DNS server. This process repeats at each DNS server until either a match is made or the search times out.</p>
+<p>- Maintains the key-value pair database of IP addresses and any host or subdomain over which the DNS server has authority. This function is often associated with mail, web, and other internet domain services.</p>
+<h4>DNS server assignment</h4>
+<p>In order for a computer, server, or other network-enabled device to access web-based resources, it must reference a DNS server.</p>
+<p>When you connect by using your on-premises network, the DNS settings come from your server. When you connect by using an external location like a hotel, the DNS settings come from the internet service provider (ISP).</p>
+<h4>Domain lookup requests</h4>
+<p>Here's a simplified overview of the process a DNS server uses when it resolves a domain-name lookup request:</p>
+<p>- If the domain name is stored in the short-term cache, the DNS server resolves the domain request.</p>
+<p>- If the domain isn't in the cache, it contacts one or more DNS servers on the web to see if they have a match. When a match is found, the DNS server updates the local cache and resolves the request.</p>
+<p>- If the domain isn't found after a reasonable number of DNS checks, the DNS server responds with a domain cannot be found error.</p>
+<h4>IPv4 and IPv6</h4>
+<p>Every computer, server, or network-enabled device on your network has an IP address. An IP address is unique within your domain. There are two standards of IP address: IPv4 and IPv6.</p>
+<p>- IPv4 is composed of four sets of numbers, in the range 0 to 255, each separated by a dot; for example: 127.0.0.1. Today, IPv4 is the most commonly used standard. Yet, with the increase in IoT devices, the IPv4 standard will eventually be unable to keep up.</p>
+<p>IPv4 is composed of four sets of numbers, in the range 0 to 255, each separated by a dot; for example: 127.0.0.1. Today, IPv4 is the most commonly used standard. Yet, with the increase in IoT devices, the IPv4 standard will eventually be unable to keep up.</p>
+<p>- IPv6 is a relatively new standard and is intended to eventually replace IPv4. It consists of eight groups of hexadecimal numbers, each separated by a colon; for example: fe80:11a1:ac15:e9gf:e884:edb0:ddee:fea3.</p>
+<p>IPv6 is a relatively new standard and is intended to eventually replace IPv4. It consists of eight groups of hexadecimal numbers, each separated by a colon; for example: fe80:11a1:ac15:e9gf:e884:edb0:ddee:fea3.</p>
+<p>Many network devices are now provisioned with both an IPv4 and an IPv6 address. The DNS name server can resolve domain names to both IPv4 and IPv6 addresses.</p>
+<h4>DNS settings for your domain</h4>
+<p>Whether a third-party host your DNS server or you manage it in-house, you need to configure it for each host type you're using. Host types include web, email, or other services you're using.</p>
+<p>As the administrator for your company, you want to set up a DNS server by using Azure DNS. In this instance, the DNS server acts as a start of authority (SOA) for your domain.</p>
+<h4>DNS record types</h4>
+<p>Configuration information for your DNS server is stored as a file within a zone on your DNS server. Each file is called a record. The following record types are the most commonly created and used:</p>
+<p>- A is the host record, and is the most common type of DNS record. It maps the domain or host name to the IP address.</p>
+<p>- CNAME is a Canonical Name record that's used to create an alias from one domain name to another domain name. If you had different domain names that all accessed the same website, you'd use CNAME.</p>
+<p>- MX is the mail exchange record. It maps mail requests to your mail server, whether hosted on-premises or in the cloud.</p>
+<p>- TXT is the text record. It's used to associate text strings with a domain name. Azure and Microsoft 365 use TXT records to verify domain ownership.</p>
+<p>Additionally, there are the following record types:</p>
+<p>- Wildcards</p>
+<p>- CAA (certificate authority)</p>
+<p>- NS (name server)</p>
+<p>- SOA (start of authority)</p>
+<p>- SPF (sender policy framework)</p>
+<p>- SRV (server locations)</p>
+<p>The SOA and NS records are created automatically when you create a DNS zone by using Azure DNS.</p>
+<h4>Record sets</h4>
+<p>Some record types support the concept of record sets, or resource record sets. A record set allows for multiple resources to be defined in a single record. For example, here's an A record that has one domain with two IP addresses:</p>
+<p>www.wideworldimports.com. 3600 IN A 127.0.0.1</p>
+<p>www.wideworldimports.com. 3600 IN A 127.0.0.2</p>
+<p>www.wideworldimports.com. 3600 IN A 127.0.0.1</p>
+<p>www.wideworldimports.com. 3600 IN A 127.0.0.2</p>
+<p>SOA and CNAME records can't contain record sets.</p>
+<h3>What is Azure DNS?</h3>
+<p>Azure DNS allows you to host and manage your domains by using a globally distributed name-server infrastructure. It allows you to manage all of your domains by using your existing Azure credentials.</p>
+<p>Azure DNS acts as the SOA for the domain.</p>
+<p>You can't use Azure DNS to register a domain name; you need to register it by using a third-party domain registrar.</p>
+<h3>Why use Azure DNS to host your domain?</h3>
+<p>Azure DNS is built on the Azure Resource Manager service, which offers the following benefits:</p>
+<p>- Improved security</p>
+<p>- Ease of use</p>
+<p>- Private DNS domains</p>
+<p>- Alias record sets</p>
+<p>At this time, Azure DNS doesn't support Domain Name System Security Extensions. If you require this security extension, you should host those portions of your domain with a third-party provider.</p>
+<h4>Security features</h4>
+<p>Azure DNS provides the following security features:</p>
+<p>- Activity logs, which let you track changes to a resource and pinpoint where faults occurred.</p>
+<p>- Resource locking, which gives you a greater level of control to restrict or remove access to resource groups, subscriptions, or any Azure resources.</p>
+<h4>Ease of use</h4>
+<p>Azure DNS can manage DNS records for your Azure services and provide DNS for your external resources. Azure DNS uses the same Azure credentials, support contract, and billing as your other Azure services.</p>
+<p>You can manage your domains and records by using the Azure portal, Azure PowerShell cmdlets, or the Azure CLI. Applications that require automated DNS management can integrate with the service by using the REST API and software development kit (SDKs).</p>
+<h4>Private domains</h4>
+<p>Azure DNS handles translating external domain names to IP addresses. Azure DNS lets you create private zones. These zones provide name resolution for virtual machines (VMs) within a virtual network and between virtual networks without having to create a custom DNS solution. Private zones allow you to use your own custom domain names rather than the Azure-provided names.</p>
+<p>To publish a private DNS zone to your virtual network, you specify the list of virtual networks that are allowed to resolve records within the zone.</p>
+<p>Private DNS zones have the following benefits:</p>
+<p>- DNS zones are supported as part of the Azure infrastructure, so there's no need to invest in a DNS solution.</p>
+<p>- All DNS record types are supported: A, CNAME, TXT, MX, SOA, AAAA, PTR, and SRV.</p>
+<p>- Host names for VMs in your virtual network are automatically maintained.</p>
+<p>- Split-horizon DNS support allows the same domain name to exist in both private and public zones. It resolves to the correct one based on the originating request location.</p>
+<h4>Alias record sets</h4>
+<p>Alias records sets can point to an Azure resource. For example, you can set up an alias record to direct traffic to an Azure public IP address, an Azure Traffic Manager profile, or an Azure Content Delivery Network endpoint.</p>
+<p>The alias record set is supported in the following DNS record types:</p>
+<p>- A</p>
+<p>- AAAA</p>
+<p>- CNAME</p>
+<h3>Check your knowledge</h3>
+<h2>Unit 3.3.3 - Configure Azure DNS to host your domain</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/host-domain-azure-dns/3-configure-azure-dns-host-domain</p>
+<h3>Configure Azure DNS to host your domain</h3>
+<p>The new company website is in final testing. You're working on the plan to deploy the wideworldimports.com domain by using Azure DNS. You need to understand what steps are involved.</p>
+<p>In this unit, you learn how to:</p>
+<p>- Create and configure a DNS zone for your domain by using Azure DNS.</p>
+<p>- Understand how to link your domain to an Azure DNS zone.</p>
+<p>- Create and configure a private DNS zone.</p>
+<h3>Configure a public DNS zone</h3>
+<p>You use a DNS zone to host the DNS records for a domain, such as wideworldimports.com.</p>
+<h4>Step 1: Create a DNS zone in Azure</h4>
+<p>You used a third-party domain-name registrar to register the wideworldimports.com domain. The domain doesn't point to your organization's website yet.</p>
+<p>To host the domain name with Azure DNS, you first need to create a DNS zone for that domain. A DNS zone holds all the DNS entries for your domain.</p>
+<p>When creating a DNS zone, you need to supply the following details:</p>
+<p>- Subscription : The subscription to be used.</p>
+<p>Subscription : The subscription to be used.</p>
+<p>- Resource group : The name of the resource group to hold your domains. If one doesn't exist, create one to allow for better control and management.</p>
+<p>Resource group : The name of the resource group to hold your domains. If one doesn't exist, create one to allow for better control and management.</p>
+<p>- Name : Your domain name, which in this case is wideworldimports.com.</p>
+<p>Name : Your domain name, which in this case is wideworldimports.com.</p>
+<p>- Resource group location : The location defaults to the location of the resource group.</p>
+<p>Resource group location : The location defaults to the location of the resource group.</p>
+<h4>Step 2: Get your Azure DNS name servers</h4>
+<p>After you create a DNS zone for the domain, you need to get the name server details from the name servers (NS) record. You use these details to update your domain registrar's information and point to the Azure DNS zone.</p>
+<h4>Step 3: Update the domain registrar setting</h4>
+<p>As the domain owner, you need to sign in to the domain-management application provided by your domain registrar. In the management application, edit the NS record and change the NS details to match your Azure DNS name server details.</p>
+<p>Changing the NS details is called domain delegation . When you delegate the domain, you must use all four name servers provided by Azure DNS.</p>
+<h4>Step 4: Verify delegation of domain name services</h4>
+<p>The next step is to verify that the delegated domain now points to the Azure DNS zone you created for the domain. This process can take as few as 10 minutes, but might take longer.</p>
+<p>To verify the success of the domain delegation, query the start of authority (SOA) record. The SOA record is automatically created when the Azure DNS zone is set up. You can verify the SOA record using a tool like nslookup.</p>
+<p>The SOA record represents your domain and becomes the reference point when other DNS servers are searching for your domain on the internet.</p>
+<p>To verify the delegation, use nslookup like this:</p>
+<p>nslookup -type=SOA wideworldimports.com</p>
+<h4>Step 5: Configure your custom DNS settings</h4>
+<p>The domain name is wideworldimports.com. When it's used in a browser, the domain resolves to your website. But what if you want to add in web servers or load balancers? These resources need to have their own custom settings in the DNS zone, either as an A record or a CNAME.</p>
+<h4>A record</h4>
+<p>Each A record requires the following details:</p>
+<p>- Name : The name of the custom domain, for example webserver1 .</p>
+<p>- Type : In this instance, it's A.</p>
+<p>- TTL : Represents the "time-to-live" as a whole unit, where 1 is one second. This value indicates how long the A record lives in a DNS cache before it expires.</p>
+<p>- IP address : The IP address of the server to which this A record should resolve.</p>
+<h4>CNAME record</h4>
+<p>The CNAME is the canonical name, or the alias for an A record. Use CNAME when you have different domain names that all access the same website. For example, you might need a CNAME in the wideworldimports zone if you want both www.wideworldimports.com and wideworldimports.com to resolve to the same IP address.</p>
+<p>You'd create the CNAME record in the wideworldimports zone with the following information:</p>
+<p>- NAME: www</p>
+<p>- TTL: 600 seconds</p>
+<p>- Record type: CNAME</p>
+<p>If you exposed a web function, you'd create a CNAME record that resolves to the Azure function.</p>
+<h3>Configure a private DNS zone</h3>
+<p>Another type of DNS zone that you can configure and host in Azure is a private DNS zone. Private DNS zones aren't visible on the Internet, and don't require that you use a domain registrar. You can use private DNS zones to assign DNS names to virtual machines (VMs) in your Azure virtual networks.</p>
+<h4>Step 1: Create a private DNS zone</h4>
+<p>In the Azure portal, search for private DNS zones . To create the private zone, you need enter a resource group and the name of the zone. For example, the name might be something like private.wideworldimports.com.</p>
+<h4>Step 2: Identify virtual networks</h4>
+<p>Let's assume that your organization already created your VMs and virtual networks in a production environment. Identify the virtual networks associated with VMs that need name-resolution support. To link the virtual networks to the private zone, you need the virtual network names.</p>
+<h4>Step 3: Link your virtual network to a private DNS zone</h4>
+<p>To link the private DNS zone to a virtual network, you create a virtual network link. In the Azure portal, go to the private zone, and select Virtual network links .</p>
+<p>Select Add to pick the virtual network you want to link to the private zone.</p>
+<p>You add a virtual network link record for each virtual network that needs private name-resolution support.</p>
+<p>In the next unit, you learn how to create a public DNS zone.</p>
+<h2>Unit 3.3.4 - Exercise - Create a DNS zone and an A record by using Azure DNS</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/host-domain-azure-dns/4-exercise-create-dns-zone-a-record</p>
+<h3>Exercise - Create a DNS zone and an A record by using Azure DNS</h3>
+<p>In the previous unit, we described setting up and configuring the wideworldimports.com domain to point to your Azure hosting on Azure DNS.</p>
+<p>In this unit, you'll:</p>
+<p>- Set up an Azure DNS and create a public DNS zone.</p>
+<p>- Create an A record.</p>
+<p>- Verify that the A record resolves to an IP address.</p>
+<p>Note</p>
+<p>This exercise is optional. If you want to complete this exercise, you'll need to create an Azure subscription before you begin. If you don't have an Azure account or you don't want to create one at this time, you can read through the instructions so you understand the information that's being presented.</p>
+<p>Note</p>
+<p>You need to use a resource group to complete the steps in this exercise. You can use a resource group that you already created, or you can create a new resource group specifically for this exercise. If you choose to create a new resource group, that will make it easier to clean up any resources that you create as you complete the exercise. If you don't have an existing resource group or you want to create a new one specifically for this exercise, you can follow the steps in Use the Azure portal and Azure Resource Manager to manage resource groups to create a resource group by using the Azure portal, or you can follow the steps in Manage Azure resource groups by using Azure CLI to create a resource group by using the the Azure CLI.</p>
+<h3>Create a DNS zone in Azure DNS</h3>
+<p>Before you can host the wideworldimports.com domain on your servers, you need to create a DNS zone. The DNS zone holds all the configuration records associated with your domain.</p>
+<p>To create your DNS zone:</p>
+<p>- Sign in to the Azure portal with the account you used to activate the sandbox.</p>
+<p>Sign in to the Azure portal with the account you used to activate the sandbox.</p>
+<p>- On the Azure home page, under Azure services , select Create a resource . The Create a resource pane appears.</p>
+<p>On the Azure home page, under Azure services , select Create a resource . The Create a resource pane appears.</p>
+<p>- In the Search services and marketplace search box, search for and select DNS zone by Microsoft. The DNS zone pane appears.</p>
+<p>In the Search services and marketplace search box, search for and select DNS zone by Microsoft. The DNS zone pane appears.</p>
+<p>- Select Create &gt; DNS zone . The Create DNS zone pane appears.</p>
+<p>Select Create &gt; DNS zone .</p>
+<p>The Create DNS zone pane appears.</p>
+<p>- On the Basics tab, enter the following values for each setting. Setting Value Project details Subscription Choose your subscription Resource group From the dropdown list, select the resource group you want to use for this exercise. Instance details Name The name needs to be unique in the sandbox. Use wideworldimportsXXXX.com , and replace the "Xs" with letters or numbers.</p>
+<p>On the Basics tab, enter the following values for each setting.</p>
+<p>Setting</p>
+<p>Value</p>
+<p>Project details</p>
+<p>Subscription</p>
+<p>Choose your subscription</p>
+<p>Resource group</p>
+<p>From the dropdown list, select the resource group you want to use for this exercise.</p>
+<p>Instance details</p>
+<p>Name</p>
+<p>The name needs to be unique in the sandbox. Use wideworldimportsXXXX.com , and replace the "Xs" with letters or numbers.</p>
+<p>wideworldimportsXXXX.com</p>
+<p>- Select Review + create .</p>
+<p>Select Review + create .</p>
+<p>- After validation passes, select Create . It takes a few minutes to create the DNS zone.</p>
+<p>After validation passes, select Create . It takes a few minutes to create the DNS zone.</p>
+<p>- When deployment is complete, select Go to resource . The Overview pane for your DNS zone appears.</p>
+<p>When deployment is complete, select Go to resource . The Overview pane for your DNS zone appears.</p>
+<p>- Select Record Sets from the top menu bar. By default, the NS and SOA record sets are automatically created whenever a DNS zone is created, and automatically deleted whenever a DNS zone deleted. The NS record set defines the Azure DNS namespaces and contains the four Azure DNS records. You use all four records when you update the registrar. The SOA record represents your domain, and is used when other DNS servers are searching for your domain.</p>
+<p>Select Record Sets from the top menu bar.</p>
+<p>By default, the NS and SOA record sets are automatically created whenever a DNS zone is created, and automatically deleted whenever a DNS zone deleted. The NS record set defines the Azure DNS namespaces and contains the four Azure DNS records. You use all four records when you update the registrar.</p>
+<p>The SOA record represents your domain, and is used when other DNS servers are searching for your domain.</p>
+<p>- Make a note of the NS record values. You need them in the next section.</p>
+<p>Make a note of the NS record values. You need them in the next section.</p>
+<h3>Create a DNS record</h3>
+<p>Now that the DNS zone exists, you need to create the necessary records to support the domain.</p>
+<p>The primary record set to create is the A record. The A record set is used to point traffic from a logical domain name to the hosting server's IP address. An A record set can have multiple records. In a record set, the domain name remains constant, while the IP addresses differ.</p>
+<p>- If you're not already on the Record Sets screen, then open the DNS zone pane for wideworldimportsXXXX.com . In the top menu bar, select Record sets .</p>
+<p>If you're not already on the Record Sets screen, then open the DNS zone pane for wideworldimportsXXXX.com . In the top menu bar, select Record sets .</p>
+<p>- On the Record Sets pane, select + Add in the top menu bar.</p>
+<p>On the Record Sets pane, select + Add in the top menu bar.</p>
+<p>- Select Add at the top of the Record sets page. The Add record set pane appears.</p>
+<p>Select Add at the top of the Record sets page.</p>
+<p>The Add record set pane appears.</p>
+<p>- Enter the following values for each setting. Setting Value Description Name www The host name that you want to resolve to an IP address. Type A The A record is the most commonly used. If you're using IPv6, select the AAAA type. Alias record set No This setting can only be applied to A, AAAA, and CNAME record types. TTL 1 The time to live, which specifies the period of time each DNS server caches the resolution before being purged. TTL unit Hours This value can be seconds, minutes, hours, days, or weeks. Here, you're selecting hours. IP Address 10.10.10.10 The IP address the record name resolves to. In a real-world scenario, you'd enter the public IP address for your web server.</p>
+<p>Enter the following values for each setting.</p>
+<p>Setting</p>
+<p>Value</p>
+<p>Description</p>
+<p>Name</p>
+<p>www</p>
+<p>The host name that you want to resolve to an IP address.</p>
+<p>Type</p>
+<p>A</p>
+<p>The A record is the most commonly used. If you're using IPv6, select the AAAA type.</p>
+<p>Alias record set</p>
+<p>No</p>
+<p>This setting can only be applied to A, AAAA, and CNAME record types.</p>
+<p>TTL</p>
+<p>1</p>
+<p>The time to live, which specifies the period of time each DNS server caches the resolution before being purged.</p>
+<p>TTL unit</p>
+<p>Hours</p>
+<p>This value can be seconds, minutes, hours, days, or weeks. Here, you're selecting hours.</p>
+<p>IP Address</p>
+<p>10.10.10.10</p>
+<p>The IP address the record name resolves to. In a real-world scenario, you'd enter the public IP address for your web server.</p>
+<p>- Select Add to add the record to your zone.</p>
+<p>Select Add to add the record to your zone.</p>
+<p>It's possible to have more than one IP address set up for your web server. In that case, you add all the associated IP addresses as records in the A record set. After the record set is created, you can update it with more IP addresses.</p>
+<h3>Verify your global Azure DNS</h3>
+<p>In a real-world scenario, after you create the public DNS zone, you update the NS records of the domain-name registrar to delegate the domain to Azure.</p>
+<p>Even though we don't have a registered domain, it's still possible to verify that the DNS zone works as expected by using the nslookup tool.</p>
+<p>nslookup</p>
+<h4>Use nslookup to verify the configuration</h4>
+<p>Here's how to use nslookup to verify the DNS zone configuration.</p>
+<p>nslookup</p>
+<p>- Use Cloud Shell to run the following command. Replace the DNS zone name with the zone you created, and replace &lt;name server address&gt; with one of the NS values you copied after you created the DNS zone. nslookup www.wideworldimportsXXXX.com &lt;name server address&gt; The command should look something like the following example: nslookup www.wideworldimportsXXXX.com ns1-04.azure-dns.com</p>
+<p>Use Cloud Shell to run the following command. Replace the DNS zone name with the zone you created, and replace &lt;name server address&gt; with one of the NS values you copied after you created the DNS zone.</p>
+<p>&lt;name server address&gt;</p>
+<p>nslookup www.wideworldimportsXXXX.com &lt;name server address&gt;</p>
+<p>The command should look something like the following example:</p>
+<p>nslookup www.wideworldimportsXXXX.com ns1-04.azure-dns.com</p>
+<p>- You should see that your host name www.wideworldimportsXXXX.com resolves to 10.10.10.10.</p>
+<p>You should see that your host name www.wideworldimportsXXXX.com resolves to 10.10.10.10.</p>
+<p>www.wideworldimportsXXXX.com</p>
+<p>Congratulations! You successfully set up a DNS zone and created an A record.</p>
+<h2>Unit 3.3.5 - Dynamically resolve resource name by using alias record</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/host-domain-azure-dns/5-resolve-name-alias-record</p>
+<h3>Dynamically resolve resource name by using alias record</h3>
+<p>In the previous exercise, you successfully delegated the domain from the domain registrar to your Azure DNS and configured an A record to link the domain to your web server.</p>
+<p>The next phase of the deployment is to improve resiliency by using a load balancer. Load balancers distribute inbound data requests and traffic across one or more servers. They reduce the load on any one server and improve performance. This technology is well established. You can use it throughout your on-premises network.</p>
+<p>You know that the A record and CNAME record don't support direct connection to Azure resources like your load balancers. You're tasked with finding out how to link the apex domain with a load balancer.</p>
+<h3>What is an apex domain?</h3>
+<p>The apex domain is your domain's highest level. In our case, that's wideworldimports.com. The apex domain is also sometimes referred to as the zone apex or root apex .</p>
+<p>The @ symbol often represents the apex domain in your DNS zone records.</p>
+<p>If you check the DNS zone for wideworldimports.com, you see that there are two apex domain records: NS and SOA. The NS and SOA records are automatically created when you created the DNS zone.</p>
+<p>CNAME records that you might need for an Azure Traffic Manager profile or Azure Content Delivery Network endpoints aren't supported at the zone apex level. However, other alias records are supported at the zone apex level.</p>
+<h3>What are alias records?</h3>
+<p>Azure alias records enable a zone apex domain to reference other Azure resources from the DNS zone. You don't need to create complex redirection policies. You can also use an Azure alias to route all traffic through Traffic Manager.</p>
+<p>The Azure alias record can point to the following Azure resources:</p>
+<p>- A Traffic Manager profile</p>
+<p>- Azure Content Delivery Network endpoints</p>
+<p>- A public IP resource</p>
+<p>- A front-door profile</p>
+<p>Alias records provide lifecycle tracking of target resources, ensuring that changes to any target resource are automatically applied to the DNS zone. Alias records also provide support for load-balanced applications in the zone apex.</p>
+<p>The alias record set supports the following DNS zone record types:</p>
+<p>- A : The IPv4 domain name-mapping record.</p>
+<p>- AAAA : The IPv6 domain name-mapping record.</p>
+<p>- CNAME : The alias for your domain, which links to the A record.</p>
+<h3>Uses for alias records</h3>
+<p>The following are some of the advantages of using alias records:</p>
+<p>- Prevents dangling DNS records : A dangling DNS record occurs when the DNS zone records aren't up to date with changes to IP addresses. Alias records prevent dangling references by tightly coupling the lifecycle of a DNS record with an Azure resource.</p>
+<p>- Updates DNS record set automatically when IP addresses change : When the underlying IP address of a resource, service, or application is changed, the alias record ensures that any associated DNS records are automatically refreshed.</p>
+<p>- Hosts load-balanced applications at the zone apex : Alias records allow for zone apex resource routing to Traffic Manager.</p>
+<p>- Points zone apex to Azure Content Delivery Network endpoints : With alias records, you can now directly reference your Azure Content Delivery Network instance.</p>
+<p>An alias record allows you to link the zone apex (wideworldimports.com) to a load balancer. It creates a link to the Azure resource rather than a direct IP-based connection. So, if the IP address of your load balancer changes, the zone apex record continues to work.</p>
+<h2>Unit 3.3.6 - Exercise - Create alias records for Azure DNS</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/host-domain-azure-dns/6-exercise-create-alias-records</p>
+<h3>Exercise - Create alias records for Azure DNS</h3>
+<p>Your new website's deployment was a huge success. Usage volumes are higher than anticipated. The single web server on which the website runs is showing signs of strain. Your organization wants to increase the number of servers and distribute the load using a load balancer.</p>
+<p>You now know you can use an Azure alias record to provide a dynamic, automatically refreshing link between the zone apex and the load balancer.</p>
+<p>In this unit, you'll:</p>
+<p>- Set up a virtual network with two VMs and a load balancer.</p>
+<p>- Learn how to configure an Azure alias at the zone apex to direct to the load balancer.</p>
+<p>- Verify that the domain name resolves to one or either of the VMs on your virtual network.</p>
+<p>Note</p>
+<p>This exercise is optional. If you want to complete this exercise, you'll need to create an Azure subscription before you begin. If you don't have an Azure account or you don't want to create one at this time, you can read through the instructions so you understand the information that's being presented.</p>
+<h3>Set up a virtual network, load balancer, and VMs in Azure</h3>
+<p>When you manually create a virtual network, load balancer, and two VMs, it takes some time. To reduce this time, you can use a Bash setup script that's available on GitHub. Follow these instructions to create a test environment for your alias record.</p>
+<p>- In Azure Cloud Shell, run the following setup script: git clone https://github.com/MicrosoftDocs/mslearn-host-domain-azure-dns.git</p>
+<p>In Azure Cloud Shell, run the following setup script:</p>
+<p>git clone https://github.com/MicrosoftDocs/mslearn-host-domain-azure-dns.git</p>
+<p>- To run the setup script, run the following commands: cd mslearn-host-domain-azure-dns</p>
+<p>chmod +x setup.sh</p>
+<p>./setup.sh The setup script takes a few minutes to run. The script: Creates a network security group. Creates two network interface controllers (NICs) and two VMs. Creates a virtual network and assigns the VMs. Creates a public IP address and updates the configuration of the VMs. Creates a load balancer that references the VMs, including rules for the load balancer. Links the NICs to the load balancer. After the script completes, it shows you the public IP address for the load balancer. Copy the IP address to use it later.</p>
+<p>To run the setup script, run the following commands:</p>
+<p>cd mslearn-host-domain-azure-dns</p>
+<p>chmod +x setup.sh</p>
+<p>./setup.sh</p>
+<p>cd mslearn-host-domain-azure-dns</p>
+<p>chmod +x setup.sh</p>
+<p>./setup.sh</p>
+<p>The setup script takes a few minutes to run. The script:</p>
+<p>- Creates a network security group.</p>
+<p>- Creates two network interface controllers (NICs) and two VMs.</p>
+<p>- Creates a virtual network and assigns the VMs.</p>
+<p>- Creates a public IP address and updates the configuration of the VMs.</p>
+<p>- Creates a load balancer that references the VMs, including rules for the load balancer.</p>
+<p>- Links the NICs to the load balancer.</p>
+<p>After the script completes, it shows you the public IP address for the load balancer. Copy the IP address to use it later.</p>
+<h3>Create an alias record in your zone apex</h3>
+<p>Now that you created a test environment, you're ready to set up the Azure alias record in your zone apex.</p>
+<p>- In the Azure portal , select Resource groups . The Resource groups pane appears.</p>
+<p>In the Azure portal , select Resource groups . The Resource groups pane appears.</p>
+<p>- Select your resource group. The Resource group pane appears.</p>
+<p>Select your resource group. The Resource group pane appears.</p>
+<p>- In the list of resources, select the DNS zone you created in the previous exercise, wideworldimportsXXXX.com. The wideworldimportsXXXX.com DNS zone pane appears.</p>
+<p>In the list of resources, select the DNS zone you created in the previous exercise, wideworldimportsXXXX.com. The wideworldimportsXXXX.com DNS zone pane appears.</p>
+<p>- In the menu bar, select + Record set . The Add record set pane appears.</p>
+<p>In the menu bar, select + Record set . The Add record set pane appears.</p>
+<p>- Enter the following values for each setting to create an alias record. Setting Value Name Leave the name blank. Blank indicates the DNS zone for wideworldimportsXXXX.com. Type A. Even though we're creating an alias, the base record type must still be either A, AAAA, or CNAME. Alias record set Yes Alias type Azure resource Azure resource From the list of resources, select myPublicIP . It can take up to 15 minutes for the deployments to propagate. If this resource isn't listed, wait several minutes, refresh the portal, and try again.</p>
+<p>Enter the following values for each setting to create an alias record.</p>
+<p>Setting</p>
+<p>Value</p>
+<p>Name</p>
+<p>Leave the name blank. Blank indicates the DNS zone for wideworldimportsXXXX.com.</p>
+<p>Type</p>
+<p>A. Even though we're creating an alias, the base record type must still be either A, AAAA, or CNAME.</p>
+<p>Alias record set</p>
+<p>Yes</p>
+<p>Alias type</p>
+<p>Azure resource</p>
+<p>From the list of resources, select myPublicIP . It can take up to 15 minutes for the deployments to propagate. If this resource isn't listed, wait several minutes, refresh the portal, and try again.</p>
+<p>- Select OK to add the record to your zone.</p>
+<p>Select OK to add the record to your zone.</p>
+<p>When the new alias record is created, it should look something like this:</p>
+<h3>Verify that the alias resolves to the load balancer</h3>
+<p>Now, you need to verify that the alias record is set up correctly. In a real-world scenario, you'd have an actual domain, and would complete the domain delegation to Azure DNS. You'd use the registered domain name for this exercise. Because this unit assumes there's no registered domain, you use the public IP address.</p>
+<p>- In the Azure portal, go to the resource group, select myPublicIP , then select the Copy icon next to the IP address.</p>
+<p>In the Azure portal, go to the resource group, select myPublicIP , then select the Copy icon next to the IP address.</p>
+<p>- In a web browser, paste the Public IP address as the URL.</p>
+<p>In a web browser, paste the Public IP address as the URL.</p>
+<p>- You see a basic web page that shows the name of the virtual machine (VM) to which the load balancer sent the request.</p>
+<p>You see a basic web page that shows the name of the virtual machine (VM) to which the load balancer sent the request.</p>
+<h2>Unit 3.3.7 - Summary</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/host-domain-azure-dns/7-summary</p>
+<h3>Summary</h3>
+<p>Your company recently bought the custom domain name wideworldimporters.com from a third-party domain-name registrar. The domain name is for a new website your organization plans to launch. You need a hosting service for DNS domains. This hosting service would resolve the wideworldimporters.com domain to your Azure-based web server's IP address.</p>
+<p>Your company wanted to manage all their infrastructure and related domain name information in one place. You saw how easy it was to manage Domain Name System (DNS) information by using an Azure DNS zone. First, you created an Azure DNS zone, and then you updated the NS records at your domain registrar to point at it.</p>
+<p>You learned the uses of the different record sets, A, AAAA, CNAME, NS, and SOA. You also learned how you can use Azure aliases to override the static A/AAAA/CNAME record to provide a dynamic reference to your resources. Using an Azure DNS zone improved your company's administration of resources, because your staff only needed one place to manage DNS-related tasks.</p>
+<p>The Azure DNS zone allows better control and integration with your Azure resources. It's possible to achieve some of the more basic record set functions by using the domain registrar's management console. However, linking to any of your Azure resources becomes difficult or impossible without a high degree of complex redirection.</p>
+<p>By using an Azure DNS zone to host your domain, your organization benefits by having all the resources managed through a single, common interface. This solution provides better integration with existing Azure resources, improved security, and monitoring tools.</p>
+<p>Important</p>
+<p>In the optional exercises for this module, you created resources by using your own Azure subscription. Clean up these resources so that you won't continue to be charged for them.</p>
+<h3>Learn more</h3>
+<p>- Quickstart: Create an Azure private DNS zone by using the Azure portal</p>
+<p>- Overview of DNS zones and records</p></body>
+</html>

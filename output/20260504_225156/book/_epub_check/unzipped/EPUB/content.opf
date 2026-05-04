@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='utf-8'?>
+<package xmlns="http://www.idpf.org/2007/opf" unique-identifier="id" version="3.0" prefix="rendition: http://www.idpf.org/vocab/rendition/#">
+  <metadata xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:opf="http://www.idpf.org/2007/opf">
+    <meta property="dcterms:modified">2026-05-04T22:57:20Z</meta>
+    <meta name="generator" content="Ebook-lib 0.20.0"/>
+    <dc:identifier id="id">az-104_microsoft_learn_verbatim</dc:identifier>
+    <dc:title>AZ-104 Microsoft Learn Verbatim</dc:title>
+    <dc:language>en</dc:language>
+    <dc:creator id="creator">Microsoft Learn</dc:creator>
+  </metadata>
+  <manifest>
+    <item href="style/main.css" id="style" media-type="text/css"/>
+    <item href="ch001.xhtml" id="chapter_0" media-type="application/xhtml+xml"/>
+    <item href="ch002.xhtml" id="chapter_1" media-type="application/xhtml+xml"/>
+    <item href="ch003.xhtml" id="chapter_2" media-type="application/xhtml+xml"/>
+    <item href="ch004.xhtml" id="chapter_3" media-type="application/xhtml+xml"/>
+    <item href="ch005.xhtml" id="chapter_4" media-type="application/xhtml+xml"/>
+    <item href="ch006.xhtml" id="chapter_5" media-type="application/xhtml+xml"/>
+    <item href="ch007.xhtml" id="chapter_6" media-type="application/xhtml+xml"/>
+    <item href="ch008.xhtml" id="chapter_7" media-type="application/xhtml+xml"/>
+    <item href="ch009.xhtml" id="chapter_8" media-type="application/xhtml+xml"/>
+    <item href="ch010.xhtml" id="chapter_9" media-type="application/xhtml+xml"/>
+    <item href="ch011.xhtml" id="chapter_10" media-type="application/xhtml+xml"/>
+    <item href="ch012.xhtml" id="chapter_11" media-type="application/xhtml+xml"/>
+    <item href="ch013.xhtml" id="chapter_12" media-type="application/xhtml+xml"/>
+    <item href="ch014.xhtml" id="chapter_13" media-type="application/xhtml+xml"/>
+    <item href="ch015.xhtml" id="chapter_14" media-type="application/xhtml+xml"/>
+    <item href="ch016.xhtml" id="chapter_15" media-type="application/xhtml+xml"/>
+    <item href="ch017.xhtml" id="chapter_16" media-type="application/xhtml+xml"/>
+    <item href="ch018.xhtml" id="chapter_17" media-type="application/xhtml+xml"/>
+    <item href="ch019.xhtml" id="chapter_18" media-type="application/xhtml+xml"/>
+    <item href="ch020.xhtml" id="chapter_19" media-type="application/xhtml+xml"/>
+    <item href="ch021.xhtml" id="chapter_20" media-type="application/xhtml+xml"/>
+    <item href="ch022.xhtml" id="chapter_21" media-type="application/xhtml+xml"/>
+    <item href="ch023.xhtml" id="chapter_22" media-type="application/xhtml+xml"/>
+    <item href="ch024.xhtml" id="chapter_23" media-type="application/xhtml+xml"/>
+    <item href="ch025.xhtml" id="chapter_24" media-type="application/xhtml+xml"/>
+    <item href="ch026.xhtml" id="chapter_25" media-type="application/xhtml+xml"/>
+    <item href="ch027.xhtml" id="chapter_26" media-type="application/xhtml+xml"/>
+    <item href="ch028.xhtml" id="chapter_27" media-type="application/xhtml+xml"/>
+    <item href="ch029.xhtml" id="chapter_28" media-type="application/xhtml+xml"/>
+    <item href="toc.ncx" id="ncx" media-type="application/x-dtbncx+xml"/>
+    <item href="nav.xhtml" id="nav" media-type="application/xhtml+xml" properties="nav"/>
+  </manifest>
+  <spine toc="ncx">
+    <itemref idref="nav"/>
+    <itemref idref="chapter_0"/>
+    <itemref idref="chapter_1"/>
+    <itemref idref="chapter_2"/>
+    <itemref idref="chapter_3"/>
+    <itemref idref="chapter_4"/>
+    <itemref idref="chapter_5"/>
+    <itemref idref="chapter_6"/>
+    <itemref idref="chapter_7"/>
+    <itemref idref="chapter_8"/>
+    <itemref idref="chapter_9"/>
+    <itemref idref="chapter_10"/>
+    <itemref idref="chapter_11"/>
+    <itemref idref="chapter_12"/>
+    <itemref idref="chapter_13"/>
+    <itemref idref="chapter_14"/>
+    <itemref idref="chapter_15"/>
+    <itemref idref="chapter_16"/>
+    <itemref idref="chapter_17"/>
+    <itemref idref="chapter_18"/>
+    <itemref idref="chapter_19"/>
+    <itemref idref="chapter_20"/>
+    <itemref idref="chapter_21"/>
+    <itemref idref="chapter_22"/>
+    <itemref idref="chapter_23"/>
+    <itemref idref="chapter_24"/>
+    <itemref idref="chapter_25"/>
+    <itemref idref="chapter_26"/>
+    <itemref idref="chapter_27"/>
+    <itemref idref="chapter_28"/>
+  </spine>
+</package>

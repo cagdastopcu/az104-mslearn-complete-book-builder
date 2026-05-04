@@ -1,0 +1,567 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" epub:prefix="z3998: http://www.daisy.org/z3998/2012/vocab/structure/#" lang="en" xml:lang="en">
+  <head>
+    <title>LP 3 M5 - Manage and control traffic flow in your Azure deployment with routes</title>
+    <link href="style/main.css" rel="stylesheet" type="text/css"/>
+  </head>
+  <body><h1>LP 3 M5 - Manage and control traffic flow in your Azure deployment with routes</h1>
+<p>https://learn.microsoft.com/en-us/training/modules/control-network-traffic-flow-with-routes/?WT.mc_id=api_CatalogApi</p>
+<h2>Unit 3.5.1 - Introduction</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/control-network-traffic-flow-with-routes/1-introduction</p>
+<h3>Introduction</h3>
+<p>A virtual network lets you implement a security perimeter around your resources in the cloud. You can control the information that flows in and out of a virtual network. You can also restrict access to allow only the traffic that originates from trusted sources.</p>
+<p>Suppose that you're the solution architect for a retail organization. Also suppose that your organization recently suffered a security incident that exposed customer information such as names, addresses, and credit card numbers. Malicious actors infiltrated vulnerabilities in your retailer's network infrastructure, which resulted in the loss of customers' confidential information.</p>
+<p>As part of a remediation plan, the security team recommends adding network protections in the form of network virtual appliances. The cloud infrastructure team must ensure traffic gets properly routed through the virtual appliances and gets inspected for malicious activity.</p>
+<p>In this module, you'll learn about Azure routing, and you'll create custom routes to control the traffic flow. You'll also learn to redirect the traffic through the network virtual appliance so you can inspect the traffic before it's allowed through.</p>
+<h3>Learning objectives</h3>
+<p>In this module, you'll:</p>
+<p>- Identify the routing capabilities of an Azure virtual network.</p>
+<p>- Configure routing within a virtual network.</p>
+<p>- Deploy a basic network virtual appliance.</p>
+<p>- Configure routing to send traffic through a network virtual appliance.</p>
+<h3>Prerequisites</h3>
+<p>- Knowledge of basic networking concepts, including subnets and IP addressing</p>
+<p>- Familiarity with Azure virtual networking</p>
+<h2>Unit 3.5.2 - Identify routing capabilities of an Azure virtual network</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/control-network-traffic-flow-with-routes/2-azure-virtual-network-route</p>
+<h3>Identify routing capabilities of an Azure virtual network</h3>
+<p>To control traffic flow within your virtual network, you must learn the purpose and benefits of custom routes. You must also learn how to configure the routes to direct traffic flow through a network virtual appliance (NVA).</p>
+<h3>Azure routing</h3>
+<p>Network traffic in Azure is automatically routed across Azure subnets, virtual networks, and on-premises networks. System routes control this routing. They're assigned by default to each subnet in a virtual network. With these system routes, any Azure virtual machine that is deployed into a virtual network can communicate with any other in the network. These virtual machines are also potentially accessible from on-premises through a hybrid network or the internet.</p>
+<p>You can't create or delete system routes, but you can override the system routes by adding custom routes to control traffic flow to the next hop.</p>
+<p>Every subnet has the following default system routes:</p>
+<p>Address prefix</p>
+<p>Next hop type</p>
+<p>Unique to the virtual network</p>
+<p>Virtual network</p>
+<p>0.0.0.0/0</p>
+<p>Internet</p>
+<p>10.0.0.0/8</p>
+<p>None</p>
+<p>172.16.0.0/12</p>
+<p>None</p>
+<p>192.168.0.0/16</p>
+<p>None</p>
+<p>100.64.0.0/10</p>
+<p>None</p>
+<p>The Next hop type column shows the network path taken by traffic sent to each address prefix. The path can be one of the following hop types:</p>
+<p>- Virtual network : A route is created in the address prefix. The prefix represents each address range created at the virtual-network level. If multiple address ranges are specified, multiple routes are created for each address range.</p>
+<p>- Internet : The default system route 0.0.0.0/0 routes any address range to the internet, unless you override Azure's default route with a custom route.</p>
+<p>- None : Any traffic routed to this hop type is dropped and doesn't get routed outside the subnet. By default, the following IPv4 private-address prefixes are created: 10.0.0.0/8, 172.16.0.0/12, and 192.168.0.0/16. The prefix 100.64.0.0/10 for a shared address space is also added. None of these address ranges are globally routable.</p>
+<p>The following diagram shows an overview of system routes and shows how traffic flows among subnets and the internet by default. You can see from the diagram that traffic flows freely among the two subnets and the internet.</p>
+<p>Within Azure, there are other system routes. Azure creates these routes if the following capabilities are enabled:</p>
+<p>- Virtual network peering</p>
+<p>- Service chaining</p>
+<p>- Virtual network gateway</p>
+<p>- Virtual network service endpoint</p>
+<h4>Virtual network peering and service chaining</h4>
+<p>Virtual network peering and service chaining let virtual networks within Azure connect to one another. With this connection, virtual machines can communicate with each other within the same region or across regions. This communication in turn creates more routes within the default route table. Service chaining lets you override these routes by creating user-defined routes between peered networks.</p>
+<p>The following diagram shows two virtual networks with peering configured. The user-defined routes are configured to route traffic through an NVA or an Azure VPN gateway.</p>
+<h4>Virtual network gateway</h4>
+<p>Use a virtual network gateway to send encrypted traffic between Azure and on-premises over the internet and to send encrypted traffic between Azure networks. A virtual network gateway contains routing tables and gateway services.</p>
+<h4>Virtual network service endpoint</h4>
+<p>Virtual network endpoints extend your private address space in Azure by providing a direct connection to your Azure resources. This connection restricts the flow of traffic: your Azure virtual machines can access your storage account directly from the private address space and deny access from a public virtual machine. As you enable service endpoints, Azure creates routes in the route table to direct this traffic.</p>
+<h3>Custom routes</h3>
+<p>System routes might make it easy for you to quickly get your environment up and running. However, there are many scenarios in which you want to more closely control the traffic flow within your network. For example, you might want to route traffic through an NVA or through a firewall. This control is possible with custom routes.</p>
+<p>You have two options for implementing custom routes: create a user-defined route, or use Border Gateway Protocol (BGP) to exchange routes between Azure and on-premises networks.</p>
+<h4>User-defined routes</h4>
+<p>You can use a user-defined route to override the default system routes so traffic can be routed through firewalls or NVAs.</p>
+<p>For example, you might have a network with two subnets and want to add a virtual machine in the perimeter network to be used as a firewall. You can create a user-defined route so that traffic passes through the firewall and doesn't go directly between the subnets.</p>
+<p>When creating user-defined routes, you can specify these next hop types:</p>
+<p>- Virtual appliance : A virtual appliance is typically a firewall device used to analyze or filter traffic that is entering or leaving your network. You can specify the private IP address of a Network Interface Card (NIC) attached to a virtual machine so that IP forwarding can be enabled. Or you can provide the private IP address of an internal load balancer.</p>
+<p>- Virtual network gateway : Use to indicate when you want routes for a specific address to be routed to a virtual network gateway. The virtual network gateway is specified as a VPN for the next hop type.</p>
+<p>- Virtual network : Use to override the default system route within a virtual network.</p>
+<p>- Internet : Use to route traffic to a specified address prefix that is routed to the internet.</p>
+<p>- None : Use to drop traffic sent to a specified address prefix.</p>
+<p>With user-defined routes, you can't specify the next hop type VirtualNetworkServiceEndpoint , which indicates virtual network peering.</p>
+<h4>Service tags for user-defined routes</h4>
+<p>You can specify a service tag as the address prefix for a user-defined route instead of an explicit IP range. A service tag represents a group of IP address prefixes from a given Azure service. Microsoft manages the address prefixes encompassed by the service tag and automatically updates the service tag as addresses change, thus minimizing the complexity of frequent updates to user-defined routes and reducing the number of routes you need to create.</p>
+<h4>Border gateway protocol</h4>
+<p>A network gateway in your on-premises network can exchange routes with a virtual network gateway in Azure by using BGP. BGP is the standard routing protocol that's normally used to exchange routing information among two or more networks. BGP is used to transfer data and information between autonomous systems on the internet, such as different host gateways.</p>
+<p>Typically, you use BGP to advertise on-premises routes to Azure when you're connected to an Azure datacenter through Azure ExpressRoute. You can also configure BGP if you connect to an Azure virtual network by using a VPN site-to-site connection.</p>
+<p>The following diagram shows a topology with paths that can pass data between Azure VPN Gateway and on-premises networks:</p>
+<p>BGP offers network stability, because routers can quickly change connections to send packets if a connection path goes down.</p>
+<h3>Route selection and priority</h3>
+<p>If multiple routes are available in a route table, Azure uses the route with the longest prefix match. For example, a message is sent to the IP address 10.0.0.2, but two routes are available with the 10.0.0.0/16 and 10.0.0.0/24 prefixes. Azure selects the route with the 10.0.0.0/24 prefix because it's more specific.</p>
+<p>The longer the route prefix, the shorter the list of IP addresses available through that prefix. When you use longer prefixes, the routing algorithm can select the intended address more quickly.</p>
+<p>You can't configure multiple user-defined routes with the same address prefix.</p>
+<p>If there are multiple routes with the same address prefix, Azure selects the route based on the type in the following order of priority:</p>
+<p>- User-defined routes</p>
+<p>- BGP routes</p>
+<p>- System routes</p>
+<h3>Check your knowledge</h3>
+<h2>Unit 3.5.3 - Exercise - Create custom routes</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/control-network-traffic-flow-with-routes/3-exercise-create-custom-routes</p>
+<h3>Exercise - Create custom routes</h3>
+<p>As you implement your security strategy, you want to control how network traffic is routed across your Azure infrastructure.</p>
+<p>In the following exercise, you use a network virtual appliance (NVA) to help secure and monitor traffic. You want to ensure communication between front-end public servers and internal private servers is always routed through the appliance.</p>
+<p>You configure the network so that all traffic flowing from a public subnet to a private subnet will be routed through the NVA. To make this flow happen, you create a custom route for the public subnet to route this traffic to a perimeter-network subnet. Later, you deploy an NVA to the perimeter-network subnet.</p>
+<p>In this exercise, you create the route table, custom route, and subnets. You'll then associate the route table with a subnet.</p>
+<p>Note</p>
+<p>This exercise is optional. If you want to complete this exercise, you'll need to create an Azure subscription before you begin. If you don't have an Azure account or you don't want to create one at this time, you can read through the instructions so you understand the information that's being presented.</p>
+<p>Note</p>
+<p>You need to use a resource group to complete the steps in this exercise. You can use a resource group that you already created, or you can create a new resource group specifically for this exercise. If you choose to create a new resource group, that will make it easier to clean up any resources that you create as you complete the exercise. If you don't have an existing resource group or you want to create a new one specifically for this exercise, you can follow the steps in Use the Azure portal and Azure Resource Manager to manage resource groups to create a resource group by using the Azure portal, or you can follow the steps in Manage Azure resource groups by using Azure CLI to create a resource group by using the the Azure CLI.</p>
+<p>Note</p>
+<p>Throughout this exercise, replace myResourceGroupName in the examples with the name of an existing resource group, or the name of the resource group that you created for this exercise.</p>
+<h3>Create a route table and custom route</h3>
+<p>The first task is to create a new routing table and then add a custom route for all traffic intended for the private subnet.</p>
+<p>Note</p>
+<p>You might get an error that reads: This command is implicitly deprecated . Please ignore this error for this learning module. We're working on it!</p>
+<p>- Open the Azure Cloud Shell , select Settings , then select Go to Classic version .</p>
+<p>Open the Azure Cloud Shell , select Settings , then select Go to Classic version .</p>
+<p>- In Azure Cloud Shell, run the following command to create a route table. Replace myResourceGroupName with the name of your resource group. az network route-table create \</p>
+<p>--name publictable \</p>
+<p>--resource-group "myResourceGroupName" \</p>
+<p>--disable-bgp-route-propagation false</p>
+<p>In Azure Cloud Shell, run the following command to create a route table. Replace myResourceGroupName with the name of your resource group.</p>
+<p>az network route-table create \</p>
+<p>--name publictable \</p>
+<p>--resource-group "myResourceGroupName" \</p>
+<p>--disable-bgp-route-propagation false</p>
+<p>az network route-table create \</p>
+<p>--name publictable \</p>
+<p>--resource-group "myResourceGroupName" \</p>
+<p>--disable-bgp-route-propagation false</p>
+<p>- Run the following command in Cloud Shell to create a custom route: az network route-table route create \</p>
+<p>--route-table-name publictable \</p>
+<p>--resource-group "myResourceGroupName" \</p>
+<p>--name productionsubnet \</p>
+<p>--address-prefix 10.0.1.0/24 \</p>
+<p>--next-hop-type VirtualAppliance \</p>
+<p>--next-hop-ip-address 10.0.2.4</p>
+<p>Run the following command in Cloud Shell to create a custom route:</p>
+<p>az network route-table route create \</p>
+<p>--route-table-name publictable \</p>
+<p>--resource-group "myResourceGroupName" \</p>
+<p>--name productionsubnet \</p>
+<p>--address-prefix 10.0.1.0/24 \</p>
+<p>--next-hop-type VirtualAppliance \</p>
+<p>--next-hop-ip-address 10.0.2.4</p>
+<p>az network route-table route create \</p>
+<p>--route-table-name publictable \</p>
+<p>--resource-group "myResourceGroupName" \</p>
+<p>--name productionsubnet \</p>
+<p>--address-prefix 10.0.1.0/24 \</p>
+<p>--next-hop-type VirtualAppliance \</p>
+<p>--next-hop-ip-address 10.0.2.4</p>
+<h3>Create a virtual network and subnets</h3>
+<p>The next task is to create the vnet virtual network and the three subnets you need: publicsubnet , privatesubnet , and dmzsubnet .</p>
+<p>- Run the following command to create the vnet virtual network and the publicsubnet subnet: az network vnet create \</p>
+<p>--name vnet \</p>
+<p>--resource-group "myResourceGroupName" \</p>
+<p>--address-prefixes 10.0.0.0/16 \</p>
+<p>--subnet-name publicsubnet \</p>
+<p>--subnet-prefixes 10.0.0.0/24</p>
+<p>Run the following command to create the vnet virtual network and the publicsubnet subnet:</p>
+<p>az network vnet create \</p>
+<p>--name vnet \</p>
+<p>--resource-group "myResourceGroupName" \</p>
+<p>--address-prefixes 10.0.0.0/16 \</p>
+<p>--subnet-name publicsubnet \</p>
+<p>--subnet-prefixes 10.0.0.0/24</p>
+<p>az network vnet create \</p>
+<p>--name vnet \</p>
+<p>--resource-group "myResourceGroupName" \</p>
+<p>--address-prefixes 10.0.0.0/16 \</p>
+<p>--subnet-name publicsubnet \</p>
+<p>--subnet-prefixes 10.0.0.0/24</p>
+<p>- Run the following command in Cloud Shell to create the privatesubnet subnet: az network vnet subnet create \</p>
+<p>--name privatesubnet \</p>
+<p>--vnet-name vnet \</p>
+<p>--resource-group "myResourceGroupName" \</p>
+<p>--address-prefixes 10.0.1.0/24</p>
+<p>Run the following command in Cloud Shell to create the privatesubnet subnet:</p>
+<p>az network vnet subnet create \</p>
+<p>--name privatesubnet \</p>
+<p>--vnet-name vnet \</p>
+<p>--resource-group "myResourceGroupName" \</p>
+<p>--address-prefixes 10.0.1.0/24</p>
+<p>az network vnet subnet create \</p>
+<p>--name privatesubnet \</p>
+<p>--vnet-name vnet \</p>
+<p>--resource-group "myResourceGroupName" \</p>
+<p>--address-prefixes 10.0.1.0/24</p>
+<p>- Run the following command to create the dmzsubnet subnet: az network vnet subnet create \</p>
+<p>--name dmzsubnet \</p>
+<p>--vnet-name vnet \</p>
+<p>--resource-group "myResourceGroupName" \</p>
+<p>--address-prefixes 10.0.2.0/24</p>
+<p>Run the following command to create the dmzsubnet subnet:</p>
+<p>az network vnet subnet create \</p>
+<p>--name dmzsubnet \</p>
+<p>--vnet-name vnet \</p>
+<p>--resource-group "myResourceGroupName" \</p>
+<p>--address-prefixes 10.0.2.0/24</p>
+<p>az network vnet subnet create \</p>
+<p>--name dmzsubnet \</p>
+<p>--vnet-name vnet \</p>
+<p>--resource-group "myResourceGroupName" \</p>
+<p>--address-prefixes 10.0.2.0/24</p>
+<p>- You should now have three subnets. Run the following command to show all of the subnets in the vnet virtual network: az network vnet subnet list \</p>
+<p>--resource-group "myResourceGroupName" \</p>
+<p>--vnet-name vnet \</p>
+<p>--output table</p>
+<p>You should now have three subnets. Run the following command to show all of the subnets in the vnet virtual network:</p>
+<p>az network vnet subnet list \</p>
+<p>--resource-group "myResourceGroupName" \</p>
+<p>--vnet-name vnet \</p>
+<p>--output table</p>
+<p>az network vnet subnet list \</p>
+<p>--resource-group "myResourceGroupName" \</p>
+<p>--vnet-name vnet \</p>
+<p>--output table</p>
+<h3>Associate the route table with the public subnet</h3>
+<p>The final task in this exercise is to associate the route table with the publicsubnet subnet.</p>
+<p>Run the following command to associate the route table with the public subnet.</p>
+<p>az network vnet subnet update \</p>
+<p>--name publicsubnet \</p>
+<p>--vnet-name vnet \</p>
+<p>--resource-group "myResourceGroupName" \</p>
+<p>--route-table publictable</p>
+<p>az network vnet subnet update \</p>
+<p>--name publicsubnet \</p>
+<p>--vnet-name vnet \</p>
+<p>--resource-group "myResourceGroupName" \</p>
+<p>--route-table publictable</p>
+<h2>Unit 3.5.4 - What is an NVA?</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/control-network-traffic-flow-with-routes/4-network-virtual-appliances</p>
+<h3>What is an NVA?</h3>
+<p>A network virtual appliance (NVA) is a virtual appliance that consists of various layers like:</p>
+<p>- A firewall</p>
+<p>- A WAN optimizer</p>
+<p>- Application-delivery controllers</p>
+<p>- Routers</p>
+<p>- Load balancers</p>
+<p>- IDS/IPS</p>
+<p>- Proxies</p>
+<p>You can deploy NVAs that you choose from providers in Azure Marketplace. Such providers include Cisco, Check Point, Barracuda, Sophos, WatchGuard, and SonicWall. You can use an NVA to filter traffic inbound to a virtual network, to block malicious requests, and to block requests made from unexpected resources.</p>
+<p>In the retail-organization example scenario, you must work with the security and network teams. You want to implement a secure environment that scrutinizes all incoming traffic and blocks unauthorized traffic from passing on to the internal network. You also want to secure both virtual-machine networking and Azure-services networking as part of your company's network-security strategy.</p>
+<p>Your goal is to prevent unwanted or unsecured network traffic from reaching key systems.</p>
+<p>As part of the network-security strategy, you must control the flow of traffic within your virtual network. You also must learn the role of an NVA and the benefit of using an NVA to control traffic flow through an Azure network.</p>
+<h3>Network virtual appliance</h3>
+<p>Network virtual appliances (NVAs) are virtual machines that control the flow of network traffic by controlling routing. You'll typically use them to manage traffic flowing from a perimeter-network environment to other networks or subnets.</p>
+<p>You can deploy firewall appliances into a virtual network in different configurations. You can put a firewall appliance in a perimeter-network subnet in the virtual network, or if you want more control of security, implement a microsegmentation approach.</p>
+<p>With the microsegmentation approach, you can create dedicated subnets for the firewall and then deploy web applications and other services in other subnets. All traffic is routed through the firewall and inspected by the NVAs. You'll enable forwarding on the virtual-appliance network interfaces to pass traffic that is accepted by the appropriate subnet.</p>
+<p>Microsegmentation lets the firewall inspect all packets at OSI Layer 4 and, for application-aware appliances, Layer 7. When you deploy an NVA to Azure, it acts as a router that forwards requests between subnets on the virtual network.</p>
+<p>Some NVAs require multiple network interfaces. One network interface is dedicated to the management network for the appliance. Additional network interfaces manage and control the traffic processing. After you’ve deployed the NVA, you can then configure the appliance to route the traffic through the proper interface.</p>
+<h4>User-defined routes</h4>
+<p>For most environments, the default system routes already defined by Azure are enough to get the environments up and running. In certain cases, you should create a routing table and add custom routes. Examples include:</p>
+<p>- Access to the internet via on-premises network using forced tunneling</p>
+<p>- Using virtual appliances to control traffic flow</p>
+<p>You can create multiple route tables in Azure. Each route table can be associated with one or more subnets. A subnet can only be associated with one route table.</p>
+<h3>Network virtual appliances in a highly available architecture</h3>
+<p>If traffic is routed through an NVA, the NVA becomes a critical piece of your infrastructure. Any NVA failures directly affect the ability of your services to communicate. It's important to include a highly available architecture in your NVA deployment.</p>
+<p>There are several methods of achieving high availability when using NVAs. At the end of this module, you can find more information about using NVAs in highly available scenarios.</p>
+<h3>Check your knowledge</h3>
+<h2>Unit 3.5.5 - Exercise - Create an NVA and virtual machines</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/control-network-traffic-flow-with-routes/5-exercise-create-nva-vm</p>
+<h3>Exercise - Create an NVA and virtual machines</h3>
+<p>In the next stage of your security implementation, you'll deploy a network virtual appliance (NVA) to secure and monitor traffic between your front-end public servers and internal private servers.</p>
+<p>First, configure the appliance to forward IP traffic. If IP forwarding isn't enabled, traffic that is routed through your appliance will never be received by its intended destination servers.</p>
+<p>In this exercise, you deploy the nva network appliance to the dmzsubnet subnet. Then you enable IP forwarding so that traffic from * and traffic that uses the custom route is sent to the privatesubnet subnet.</p>
+<p>*</p>
+<p>In the following steps, you'll deploy an NVA. You'll then update the Azure virtual NIC and the network settings within the appliance to enable IP forwarding.</p>
+<p>Note</p>
+<p>This exercise is optional. If you want to complete this exercise, you'll need to create an Azure subscription before you begin. If you don't have an Azure account or you don't want to create one at this time, you can read through the instructions so you understand the information that's being presented.</p>
+<h3>Deploy the network virtual appliance</h3>
+<p>To build the NVA, deploy an Ubuntu LTS instance.</p>
+<p>- In Azure Cloud Shell , run the following command to deploy the appliance. Replace &lt;password&gt; with a suitable password of your choice for the azureuser admin account, and myResourceGroupName with the name of your resource group. az vm create \</p>
+<p>--resource-group "myResourceGroupName" \</p>
+<p>--name nva \</p>
+<p>--vnet-name vnet \</p>
+<p>--subnet dmzsubnet \</p>
+<p>--image Ubuntu2204 \</p>
+<p>--admin-username azureuser \</p>
+<p>--admin-password &lt;password&gt;</p>
+<p>In Azure Cloud Shell , run the following command to deploy the appliance. Replace &lt;password&gt; with a suitable password of your choice for the azureuser admin account, and myResourceGroupName with the name of your resource group.</p>
+<p>&lt;password&gt;</p>
+<p>az vm create \</p>
+<p>--resource-group "myResourceGroupName" \</p>
+<p>--name nva \</p>
+<p>--vnet-name vnet \</p>
+<p>--subnet dmzsubnet \</p>
+<p>--image Ubuntu2204 \</p>
+<p>--admin-username azureuser \</p>
+<p>--admin-password &lt;password&gt;</p>
+<p>az vm create \</p>
+<p>--resource-group "myResourceGroupName" \</p>
+<p>--name nva \</p>
+<p>--vnet-name vnet \</p>
+<p>--subnet dmzsubnet \</p>
+<p>--image Ubuntu2204 \</p>
+<p>--admin-username azureuser \</p>
+<p>--admin-password &lt;password&gt;</p>
+<h3>Enable IP forwarding for the Azure network interface</h3>
+<p>In the next steps, you enable IP forwarding for the nva network appliance. When traffic flows to the NVA but is meant for another target, the NVA will route that traffic to its correct destination.</p>
+<p>- Run the following command to get the NVA network interface's ID: NICID=$(az vm nic list \</p>
+<p>--resource-group "myResourceGroupName" \</p>
+<p>--vm-name nva \</p>
+<p>--query "[].{id:id}" --output tsv)</p>
+<p>echo $NICID</p>
+<p>Run the following command to get the NVA network interface's ID:</p>
+<p>NICID=$(az vm nic list \</p>
+<p>--resource-group "myResourceGroupName" \</p>
+<p>--vm-name nva \</p>
+<p>--query "[].{id:id}" --output tsv)</p>
+<p>echo $NICID</p>
+<p>NICID=$(az vm nic list \</p>
+<p>--resource-group "myResourceGroupName" \</p>
+<p>--vm-name nva \</p>
+<p>--query "[].{id:id}" --output tsv)</p>
+<p>echo $NICID</p>
+<p>- Run the following command to get the NVA network interface's name: NICNAME=$(az vm nic show \</p>
+<p>--resource-group "myResourceGroupName" \</p>
+<p>--vm-name nva \</p>
+<p>--nic $NICID \</p>
+<p>--query "{name:name}" --output tsv)</p>
+<p>echo $NICNAME</p>
+<p>Run the following command to get the NVA network interface's name:</p>
+<p>NICNAME=$(az vm nic show \</p>
+<p>--resource-group "myResourceGroupName" \</p>
+<p>--vm-name nva \</p>
+<p>--nic $NICID \</p>
+<p>--query "{name:name}" --output tsv)</p>
+<p>echo $NICNAME</p>
+<p>NICNAME=$(az vm nic show \</p>
+<p>--resource-group "myResourceGroupName" \</p>
+<p>--vm-name nva \</p>
+<p>--nic $NICID \</p>
+<p>--query "{name:name}" --output tsv)</p>
+<p>echo $NICNAME</p>
+<p>- Run the following command to enable IP forwarding for the network interface: az network nic update --name $NICNAME \</p>
+<p>--resource-group "myResourceGroupName" \</p>
+<p>--ip-forwarding true</p>
+<p>Run the following command to enable IP forwarding for the network interface:</p>
+<p>az network nic update --name $NICNAME \</p>
+<p>--resource-group "myResourceGroupName" \</p>
+<p>--ip-forwarding true</p>
+<p>az network nic update --name $NICNAME \</p>
+<p>--resource-group "myResourceGroupName" \</p>
+<p>--ip-forwarding true</p>
+<h3>Enable IP forwarding in the appliance</h3>
+<p>- Run the following command to save the NVA virtual machine's public IP address to the variable NVAIP : NVAIP="$(az vm list-ip-addresses \</p>
+<p>--resource-group "myResourceGroupName" \</p>
+<p>--name nva \</p>
+<p>--query "[].virtualMachine.network.publicIpAddresses[*].ipAddress" \</p>
+<p>--output tsv)"</p>
+<p>echo $NVAIP</p>
+<p>Run the following command to save the NVA virtual machine's public IP address to the variable NVAIP :</p>
+<p>NVAIP</p>
+<p>NVAIP="$(az vm list-ip-addresses \</p>
+<p>--resource-group "myResourceGroupName" \</p>
+<p>--name nva \</p>
+<p>--query "[].virtualMachine.network.publicIpAddresses[*].ipAddress" \</p>
+<p>--output tsv)"</p>
+<p>echo $NVAIP</p>
+<p>NVAIP="$(az vm list-ip-addresses \</p>
+<p>--resource-group "myResourceGroupName" \</p>
+<p>--name nva \</p>
+<p>--query "[].virtualMachine.network.publicIpAddresses[*].ipAddress" \</p>
+<p>--output tsv)"</p>
+<p>echo $NVAIP</p>
+<p>- Run the following command to enable IP forwarding within the NVA: ssh -t -o StrictHostKeyChecking=no azureuser@$NVAIP 'sudo sysctl -w net.ipv4.ip_forward=1; exit;' When prompted, enter the password you used when you created the virtual machine.</p>
+<p>Run the following command to enable IP forwarding within the NVA:</p>
+<p>ssh -t -o StrictHostKeyChecking=no azureuser@$NVAIP 'sudo sysctl -w net.ipv4.ip_forward=1; exit;'</p>
+<p>When prompted, enter the password you used when you created the virtual machine.</p>
+<h2>Unit 3.5.6 - Exercise - Route traffic through the NVA</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/control-network-traffic-flow-with-routes/6-exercise-route-traffic-through-nva</p>
+<h3>Exercise - Route traffic through the NVA</h3>
+<p>Now that you've created the network virtual appliance (NVA) and virtual machines (VMs), you'll route the traffic through the NVA.</p>
+<p>Note</p>
+<p>This exercise is optional. If you want to complete this exercise, you'll need to create an Azure subscription before you begin. If you don't have an Azure account or you don't want to create one at this time, you can read through the instructions so you understand the information that's being presented.</p>
+<h3>Create public and private virtual machines</h3>
+<p>The next steps deploy a VM into the public and private subnets.</p>
+<p>- Open the Azure Cloud Shell editor and create a file named cloud-init.txt . code cloud-init.txt</p>
+<p>Open the Azure Cloud Shell editor and create a file named cloud-init.txt .</p>
+<p>code cloud-init.txt</p>
+<p>- Add the following configuration information to the file. With this configuration, the inetutils-traceroute package is installed when you create a new VM. This package contains the traceroute utility that you'll use later in this exercise. #cloud-config</p>
+<p>package_upgrade: true</p>
+<p>packages:</p>
+<p>- inetutils-traceroute</p>
+<p>Add the following configuration information to the file. With this configuration, the inetutils-traceroute package is installed when you create a new VM. This package contains the traceroute utility that you'll use later in this exercise.</p>
+<p>inetutils-traceroute</p>
+<p>traceroute</p>
+<p>#cloud-config</p>
+<p>package_upgrade: true</p>
+<p>packages:</p>
+<p>- inetutils-traceroute</p>
+<p>#cloud-config</p>
+<p>package_upgrade: true</p>
+<p>packages:</p>
+<p>- inetutils-traceroute</p>
+<p>- Press Ctrl+S to save the file, and then press Ctrl+Q to close the editor.</p>
+<p>Press Ctrl+S to save the file, and then press Ctrl+Q to close the editor.</p>
+<p>- In Cloud Shell, run the following command to create the public VM. Replace &lt;password&gt; with a suitable password for the azureuser account. az vm create \</p>
+<p>--resource-group "myResourceGroupName" \</p>
+<p>--name public \</p>
+<p>--vnet-name vnet \</p>
+<p>--subnet publicsubnet \</p>
+<p>--image Ubuntu2204 \</p>
+<p>--admin-username azureuser \</p>
+<p>--no-wait \</p>
+<p>--custom-data cloud-init.txt \</p>
+<p>--admin-password &lt;password&gt;</p>
+<p>In Cloud Shell, run the following command to create the public VM. Replace &lt;password&gt; with a suitable password for the azureuser account.</p>
+<p>&lt;password&gt;</p>
+<p>az vm create \</p>
+<p>--resource-group "myResourceGroupName" \</p>
+<p>--name public \</p>
+<p>--vnet-name vnet \</p>
+<p>--subnet publicsubnet \</p>
+<p>--image Ubuntu2204 \</p>
+<p>--admin-username azureuser \</p>
+<p>--no-wait \</p>
+<p>--custom-data cloud-init.txt \</p>
+<p>--admin-password &lt;password&gt;</p>
+<p>az vm create \</p>
+<p>--resource-group "myResourceGroupName" \</p>
+<p>--name public \</p>
+<p>--vnet-name vnet \</p>
+<p>--subnet publicsubnet \</p>
+<p>--image Ubuntu2204 \</p>
+<p>--admin-username azureuser \</p>
+<p>--no-wait \</p>
+<p>--custom-data cloud-init.txt \</p>
+<p>--admin-password &lt;password&gt;</p>
+<p>- Run the following command to create the private VM. Replace &lt;password&gt; with a suitable password. az vm create \</p>
+<p>--resource-group "myResourceGroupName" \</p>
+<p>--name private \</p>
+<p>--vnet-name vnet \</p>
+<p>--subnet privatesubnet \</p>
+<p>--image Ubuntu2204 \</p>
+<p>--admin-username azureuser \</p>
+<p>--no-wait \</p>
+<p>--custom-data cloud-init.txt \</p>
+<p>--admin-password &lt;password&gt;</p>
+<p>Run the following command to create the private VM. Replace &lt;password&gt; with a suitable password.</p>
+<p>&lt;password&gt;</p>
+<p>az vm create \</p>
+<p>--resource-group "myResourceGroupName" \</p>
+<p>--name private \</p>
+<p>--vnet-name vnet \</p>
+<p>--subnet privatesubnet \</p>
+<p>--image Ubuntu2204 \</p>
+<p>--admin-username azureuser \</p>
+<p>--no-wait \</p>
+<p>--custom-data cloud-init.txt \</p>
+<p>--admin-password &lt;password&gt;</p>
+<p>az vm create \</p>
+<p>--resource-group "myResourceGroupName" \</p>
+<p>--name private \</p>
+<p>--vnet-name vnet \</p>
+<p>--subnet privatesubnet \</p>
+<p>--image Ubuntu2204 \</p>
+<p>--admin-username azureuser \</p>
+<p>--no-wait \</p>
+<p>--custom-data cloud-init.txt \</p>
+<p>--admin-password &lt;password&gt;</p>
+<p>- Run the following Linux watch command to check that the VMs are running. The watch command periodically runs the az vm list command so that you can monitor the progress of the VMs. watch -d -n 5 "az vm list \</p>
+<p>--resource-group "myResourceGroupName" \</p>
+<p>--show-details \</p>
+<p>--query '[*].{Name:name, ProvisioningState:provisioningState, PowerState:powerState}' \</p>
+<p>--output table" A ProvisioningState value of "Succeeded" and a PowerState value of "VM running" indicate a successful deployment. When all three VMs are running, you're ready to move on. Press Ctrl-C to stop the command and continue with the exercise.</p>
+<p>Run the following Linux watch command to check that the VMs are running. The watch command periodically runs the az vm list command so that you can monitor the progress of the VMs.</p>
+<p>watch</p>
+<p>az vm list</p>
+<p>watch -d -n 5 "az vm list \</p>
+<p>--resource-group "myResourceGroupName" \</p>
+<p>--show-details \</p>
+<p>--query '[*].{Name:name, ProvisioningState:provisioningState, PowerState:powerState}' \</p>
+<p>--output table"</p>
+<p>watch -d -n 5 "az vm list \</p>
+<p>--resource-group "myResourceGroupName" \</p>
+<p>--show-details \</p>
+<p>--query '[*].{Name:name, ProvisioningState:provisioningState, PowerState:powerState}' \</p>
+<p>--output table"</p>
+<p>A ProvisioningState value of "Succeeded" and a PowerState value of "VM running" indicate a successful deployment. When all three VMs are running, you're ready to move on. Press Ctrl-C to stop the command and continue with the exercise.</p>
+<p>- Run the following command to save the public IP address of the public VM to a variable named PUBLICIP : PUBLICIP="$(az vm list-ip-addresses \</p>
+<p>--resource-group "myResourceGroupName" \</p>
+<p>--name public \</p>
+<p>--query "[].virtualMachine.network.publicIpAddresses[*].ipAddress" \</p>
+<p>--output tsv)"</p>
+<p>echo $PUBLICIP</p>
+<p>Run the following command to save the public IP address of the public VM to a variable named PUBLICIP :</p>
+<p>PUBLICIP</p>
+<p>PUBLICIP="$(az vm list-ip-addresses \</p>
+<p>--resource-group "myResourceGroupName" \</p>
+<p>--name public \</p>
+<p>--query "[].virtualMachine.network.publicIpAddresses[*].ipAddress" \</p>
+<p>--output tsv)"</p>
+<p>echo $PUBLICIP</p>
+<p>PUBLICIP="$(az vm list-ip-addresses \</p>
+<p>--resource-group "myResourceGroupName" \</p>
+<p>--name public \</p>
+<p>--query "[].virtualMachine.network.publicIpAddresses[*].ipAddress" \</p>
+<p>--output tsv)"</p>
+<p>echo $PUBLICIP</p>
+<p>- Run the following command to save the public IP address of the private VM to a variable named PRIVATEIP : PRIVATEIP="$(az vm list-ip-addresses \</p>
+<p>--resource-group "myResourceGroupName" \</p>
+<p>--name private \</p>
+<p>--query "[].virtualMachine.network.publicIpAddresses[*].ipAddress" \</p>
+<p>--output tsv)"</p>
+<p>echo $PRIVATEIP</p>
+<p>Run the following command to save the public IP address of the private VM to a variable named PRIVATEIP :</p>
+<p>PRIVATEIP</p>
+<p>PRIVATEIP="$(az vm list-ip-addresses \</p>
+<p>--resource-group "myResourceGroupName" \</p>
+<p>--name private \</p>
+<p>--query "[].virtualMachine.network.publicIpAddresses[*].ipAddress" \</p>
+<p>--output tsv)"</p>
+<p>echo $PRIVATEIP</p>
+<p>PRIVATEIP="$(az vm list-ip-addresses \</p>
+<p>--resource-group "myResourceGroupName" \</p>
+<p>--name private \</p>
+<p>--query "[].virtualMachine.network.publicIpAddresses[*].ipAddress" \</p>
+<p>--output tsv)"</p>
+<p>echo $PRIVATEIP</p>
+<h3>Test traffic routing through the network virtual appliance</h3>
+<p>The final steps use the Linux traceroute utility to show how traffic is routed. You'll use the ssh command to run traceroute on each VM. The first test shows the route taken by ICMP packets sent from the public VM to the private VM. The second test shows the route taken by ICMP packets sent from the private VM to the public VM.</p>
+<p>traceroute</p>
+<p>ssh</p>
+<p>traceroute</p>
+<p>- Run the following command to trace the route from public to private . When prompted, enter the password for the azureuser account that you specified earlier. ssh -t -o StrictHostKeyChecking=no azureuser@$PUBLICIP 'traceroute private --type=icmp; exit' If you receive the error message bash: traceroute: command not found , wait a minute and retry the command. The automated installation of traceroute can take a minute or two after VM deployment. After the command succeeds, the output should look similar to the following example: traceroute to private.kzffavtrkpeulburui2lgywxwg.gx.internal.cloudapp.net (10.0.1.4), 64 hops max</p>
+<p>1 10.0.2.4 0.710ms 0.410ms 0.536ms</p>
+<p>2 10.0.1.4 0.966ms 0.981ms 1.268ms</p>
+<p>Connection to 52.165.151.216 closed. Notice that the first hop is to 10.0.2.4. This address is the private IP address of nva . The second hop is to 10.0.1.4, the address of private . In the first exercise, you added this route to the route table and linked the table to the publicsubnet subnet. So now all traffic from public to private is routed through the NVA.</p>
+<p>Run the following command to trace the route from public to private . When prompted, enter the password for the azureuser account that you specified earlier.</p>
+<p>ssh -t -o StrictHostKeyChecking=no azureuser@$PUBLICIP 'traceroute private --type=icmp; exit'</p>
+<p>If you receive the error message bash: traceroute: command not found , wait a minute and retry the command. The automated installation of traceroute can take a minute or two after VM deployment. After the command succeeds, the output should look similar to the following example:</p>
+<p>bash: traceroute: command not found</p>
+<p>traceroute</p>
+<p>traceroute to private.kzffavtrkpeulburui2lgywxwg.gx.internal.cloudapp.net (10.0.1.4), 64 hops max</p>
+<p>1 10.0.2.4 0.710ms 0.410ms 0.536ms</p>
+<p>2 10.0.1.4 0.966ms 0.981ms 1.268ms</p>
+<p>Connection to 52.165.151.216 closed.</p>
+<p>traceroute to private.kzffavtrkpeulburui2lgywxwg.gx.internal.cloudapp.net (10.0.1.4), 64 hops max</p>
+<p>1 10.0.2.4 0.710ms 0.410ms 0.536ms</p>
+<p>2 10.0.1.4 0.966ms 0.981ms 1.268ms</p>
+<p>Connection to 52.165.151.216 closed.</p>
+<p>Notice that the first hop is to 10.0.2.4. This address is the private IP address of nva . The second hop is to 10.0.1.4, the address of private . In the first exercise, you added this route to the route table and linked the table to the publicsubnet subnet. So now all traffic from public to private is routed through the NVA.</p>
+<p>- Run the following command to trace the route from private to public . When prompted, enter the password for the azureuser account. ssh -t -o StrictHostKeyChecking=no azureuser@$PRIVATEIP 'traceroute public --type=icmp; exit' You should see the traffic go directly to public (10.0.0.4) and not through the NVA, as shown in the following command output. traceroute to public.kzffavtrkpeulburui2lgywxwg.gx.internal.cloudapp.net (10.0.0.4), 64 hops max</p>
+<p>1 10.0.0.4 1.095ms 1.610ms 0.812ms</p>
+<p>Connection to 52.173.21.188 closed. The private VM is using default routes, and traffic is routed directly between the subnets.</p>
+<p>Run the following command to trace the route from private to public . When prompted, enter the password for the azureuser account.</p>
+<p>ssh -t -o StrictHostKeyChecking=no azureuser@$PRIVATEIP 'traceroute public --type=icmp; exit'</p>
+<p>You should see the traffic go directly to public (10.0.0.4) and not through the NVA, as shown in the following command output.</p>
+<p>traceroute to public.kzffavtrkpeulburui2lgywxwg.gx.internal.cloudapp.net (10.0.0.4), 64 hops max</p>
+<p>1 10.0.0.4 1.095ms 1.610ms 0.812ms</p>
+<p>Connection to 52.173.21.188 closed.</p>
+<p>traceroute to public.kzffavtrkpeulburui2lgywxwg.gx.internal.cloudapp.net (10.0.0.4), 64 hops max</p>
+<p>1 10.0.0.4 1.095ms 1.610ms 0.812ms</p>
+<p>Connection to 52.173.21.188 closed.</p>
+<p>The private VM is using default routes, and traffic is routed directly between the subnets.</p>
+<p>You've now configured routing between subnets to direct traffic from the public internet through the dmzsubnet subnet before it reaches the private subnet. In the dmzsubnet subnet, you added a VM that acts as an NVA. You can configure this NVA to detect potentially malicious requests and block them before they reach their intended targets.</p>
+<h2>Unit 3.5.7 - Summary</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/control-network-traffic-flow-with-routes/7-summary</p>
+<h3>Summary</h3>
+<p>In this module, you learned how to customize routes in an Azure virtual network and how to redirect the traffic flow through a network virtual appliance. You also learned how to create your own custom network virtual appliance by deploying an Azure virtual machine.</p>
+<p>Important</p>
+<p>In the optional exercises for this module, you created resources by using your own Azure subscription. Clean up these resources so that you won't continue to be charged for them.</p>
+<h3>Learn more</h3>
+<p>For more information on using routes in your network infrastructure, see the following articles:</p>
+<p>- Virtual network traffic routing</p>
+<p>- Tutorial: Route network traffic with a route table using the Azure portal</p>
+<p>- Deploy highly available network virtual appliances</p>
+<p>- Implement a secure hybrid network</p></body>
+</html>

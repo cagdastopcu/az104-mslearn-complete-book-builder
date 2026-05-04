@@ -1,0 +1,268 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" epub:prefix="z3998: http://www.daisy.org/z3998/2012/vocab/structure/#" lang="en" xml:lang="en">
+  <head>
+    <title>LP 2 M6 - Allow users to reset their password with Microsoft Entra self-service password reset</title>
+    <link href="style/main.css" rel="stylesheet" type="text/css"/>
+  </head>
+  <body><h1>LP 2 M6 - Allow users to reset their password with Microsoft Entra self-service password reset</h1>
+<p>https://learn.microsoft.com/en-us/training/modules/allow-users-reset-their-password/?WT.mc_id=api_CatalogApi</p>
+<h2>Unit 2.6.1 - Introduction</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/allow-users-reset-their-password/1-introduction</p>
+<h3>Introduction</h3>
+<p>Suppose you're an IT administrator for a large retail organization. Your organization starts using Microsoft Entra ID to allow employees to securely sign in and use software as a service (SaaS) apps. It also allows access to the organization's resources in Microsoft 365. You're overwhelmed with password-reset requests because you currently reset employees' passwords manually. To get these employees back to being productive quickly and reduce your workload, you decide to evaluate and set up self-service password reset in Microsoft Entra ID.</p>
+<p>In this module, you learn how Azure supports this feature and how to set it up. Only paid subscriptions can leverage this, while free and pay-as-you-go can't.</p>
+<p>By the end of this module, you'll be able to configure self-service password reset in Microsoft Entra ID.</p>
+<h3>Learning objectives</h3>
+<p>In this module, you:</p>
+<p>- Decide whether to implement self-service password reset.</p>
+<p>- Implement self-service password reset to meet your requirements.</p>
+<p>- Configure self-service password reset to customize the experience.</p>
+<h3>Prerequisites</h3>
+<p>- Basic understanding of Microsoft Entra ID</p>
+<p>- A working Microsoft Entra tenant with a subscription package that includes Microsoft Entra ID P1</p>
+<p>- An account with at least the Authentication Policy Administrator role</p>
+<h2>Unit 2.6.2 - What is self-service password reset in Microsoft Entra ID?</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/allow-users-reset-their-password/2-self-service-password-reset</p>
+<h3>What is self-service password reset in Microsoft Entra ID?</h3>
+<p>You've been asked to assess ways to reduce help-desk costs in your retail organization. You've noticed that the support staff spends a lot of their time resetting passwords for users. Users often complain about delays with this process, and these delays impact their productivity. You want to understand how you can configure Azure to allow users to manage their own passwords.</p>
+<p>In this unit, you'll learn how self-service password reset (SSPR) works in Microsoft Entra ID.</p>
+<h3>Why use SSPR?</h3>
+<p>In Microsoft Entra ID, any user can change their password if they're already signed in. But if they're not signed in, forgot their password, or it's expired, they'll need to reset their password. With SSPR, users can reset their passwords in a web browser or from a Windows sign-in screen to regain access to Azure, Microsoft 365, and any other application that uses Microsoft Entra ID for authentication.</p>
+<p>SSPR reduces the load on administrators because users can fix password problems themselves without having to call the help desk. Also, it minimizes the productivity impact of a forgotten or expired password. Users don't have to wait until an administrator is available to reset their password.</p>
+<h3>How SSPR works</h3>
+<p>The user initiates a password reset either by going directly to the password-reset portal, or by selecting the Can't access your account link on a sign-in page. The reset portal takes these steps:</p>
+<p>- Localization : The portal checks the browser's locale setting and renders the SSPR page in the appropriate language.</p>
+<p>- Verification : The user enters their username and passes a CAPTCHA to ensure that it's a user and not a bot.</p>
+<p>- Authentication : The user enters the required data to authenticate their identity. They might enter a code or answer security questions.</p>
+<p>- Password reset : If the user passes the authentication tests, they can enter a new password and confirm it.</p>
+<p>- Notification : A message is sent to the user to confirm the reset.</p>
+<p>There are several ways you can customize the SSPR user experience. For example, you can add your company logo to the sign-in page so users know they're in the right place to reset their password.</p>
+<h3>Authenticate a password reset</h3>
+<p>It's critical to verify a user's identity before you allow a password reset. Malicious users might exploit any weakness in the system to impersonate that user. Azure supports six different ways to authenticate reset requests.</p>
+<p>As an administrator, you can choose the methods to use when you configure SSPR. Enable two or more of these methods so that users can choose the ones they can easily use. The methods are:</p>
+<p>Authentication method</p>
+<p>How to register</p>
+<p>How to authenticate for a password reset</p>
+<p>Mobile app notification</p>
+<p>Install the Microsoft Authenticator app on your mobile device, then register it on the multifactor authentication setup page.</p>
+<p>Azure sends a notification to the app, which you can either verify or deny.</p>
+<p>Mobile app code</p>
+<p>This method also uses the Authenticator app, and you install and register it in the same way.</p>
+<p>Enter the code from the app.</p>
+<p>Email</p>
+<p>Provide an email address that's external to Azure and Microsoft 365.</p>
+<p>Azure sends a code to the address, which you enter in the reset wizard.</p>
+<p>Mobile phone</p>
+<p>Provide a mobile phone number.</p>
+<p>Azure sends a code to the phone in an SMS message, which you enter in the reset wizard. You can also choose to get an automated call.</p>
+<p>Office phone</p>
+<p>Provide a nonmobile phone number.</p>
+<p>You receive an automated call to this number and press #.</p>
+<p>Security questions</p>
+<p>Select questions such as "In what city was your mother born?" and save their responses.</p>
+<p>Answer the questions.</p>
+<p>In trial Microsoft Entra organizations, phone call options aren't supported.</p>
+<h4>Require the minimum number of authentication methods</h4>
+<p>You can specify the minimum number of methods that the user must set up, either one or two. For example, you might enable the mobile app code, email, office phone, and security questions methods and specify a minimum of two methods. Users can then choose the two methods they prefer, like mobile app code and email.</p>
+<p>For the security-question method, you can specify a minimum number of questions the user must set up to register for this method. You also can specify a minimum number of questions they must answer correctly to reset their password.</p>
+<p>After your users register the required information for the minimum number of methods you've specified, they're considered registered for SSPR.</p>
+<h4>Recommendations</h4>
+<p>- Enable two or more of the authentication reset request methods.</p>
+<p>- Use the mobile app notification or code as the primary method. But also enable the email or office phone methods to support users without mobile devices.</p>
+<p>- The mobile phone method isn't a recommended method, because it's possible to send fraudulent SMS messages.</p>
+<p>- The security-question option is the least recommended method, because the answers to the security questions might be known to other people. Only use the security-question method in combination with at least one other method.</p>
+<h4>Accounts associated with administrator roles</h4>
+<p>- A strong, two-method authentication policy is always applied to accounts with an administrator role, regardless of your configuration for other users.</p>
+<p>- The security-question method isn't available to accounts associated with an administrator role.</p>
+<h3>Configure notifications</h3>
+<p>Administrators can choose how users are notified of password changes. There are two options you can enable:</p>
+<p>- Notify users on password resets : The user who resets their own password is notified to their primary and secondary email addresses. If the reset was done by a malicious user, this notification alerts the user, who can take mitigation steps.</p>
+<p>- Notify all admins when other admins reset their password : All administrators are notified when another administrator resets their password.</p>
+<h3>License requirements</h3>
+<p>There are two editions of Microsoft Entra ID, Premium P1 and Premium P2. The password-reset functionality you can use depends on your edition.</p>
+<p>Any user who is signed in can change their password, regardless of the edition of Microsoft Entra ID.</p>
+<p>What if you're not signed in, and you've forgotten your password or your password has expired? In this case, you can use SSPR in Microsoft Entra ID P1 or P2. It's also available with Microsoft 365 Apps for business or Microsoft 365.</p>
+<p>In a hybrid situation, where you have Active Directory on-premises and Microsoft Entra ID in the cloud, any password change in the cloud must be written back to the on-premises directory. This writeback support is available in Microsoft Entra ID P1 or P2. It's also available with Microsoft 365 Apps for business.</p>
+<h3>SSPR deployment options</h3>
+<p>You can deploy SSPR with password writeback by using Microsoft Entra Connect or cloud sync , depending on user needs. You can deploy each option side-by-side in different domains to target different sets of users. This helps existing users on-premises to write back password changes, while adding an option for users in disconnected domains because of a company merger or split. Users from an existing on-premises domain can use Microsoft Entra Connect, while new users from a merger can use cloud sync in another domain.</p>
+<p>Cloud sync can also provide higher availability, because it doesn't rely on a single instance of Microsoft Entra Connect. For a feature comparison between the two deployment options, see Comparison between Microsoft Entra Connect and cloud sync .</p>
+<h3>Check your knowledge</h3>
+<h2>Unit 2.6.3 - Implement Microsoft Entra self-service password reset</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/allow-users-reset-their-password/3-implement-azure-ad-self-service-password-reset</p>
+<h3>Implement Microsoft Entra self-service password reset</h3>
+<p>You've decided to implement self-service password reset (SSPR) in Microsoft Entra ID for your organization. You want to start using SSPR for a group of 20 users in the marketing department as a trial deployment. If everything works well, you'll enable SSPR for your whole organization.</p>
+<p>In this unit, you'll learn how to enable SSPR in Microsoft Entra ID.</p>
+<h3>Prerequisites</h3>
+<p>Before you start to configure SSPR, you need a:</p>
+<p>- Microsoft Entra organization : This organization must have at least a P1 or P2 trial license enabled.</p>
+<p>- Microsoft Entra account with Authentication Policy Administrator role : You'll use this account to set up SSPR.</p>
+<p>- Non-administrative user account : You'll use this account to test SSPR. It's important that this account isn't an administrator, because Microsoft Entra imposes extra requirements on administrative accounts for SSPR. This user, and all user accounts, must have a valid license to use SSPR.</p>
+<p>- Security group with which to test the configuration : The non-administrative user account must be a member of this group. You'll use this security group to limit who you roll SSPR out to.</p>
+<h3>Scope of SSPR rollout</h3>
+<p>There are three settings for the Self-service password reset enabled property:</p>
+<p>- None : No users in the Microsoft Entra organization can use SSPR. This value is the default.</p>
+<p>- Selected : Only the members of the specified security group can use SSPR. You can use this option to enable SSPR for a targeted group of users who can test it and verify that it works as expected. When you're ready to roll it out broadly, set the property to Enabled so that all users have access to SSPR.</p>
+<p>- All : All users in the Microsoft Entra organization can use SSPR.</p>
+<h3>Configure SSPR</h3>
+<p>Here are the high-level steps to configure SSPR:</p>
+<p>- Go to the Azure portal , then to Microsoft Entra ID &gt; Manage &gt; Password reset .</p>
+<p>Go to the Azure portal , then to Microsoft Entra ID &gt; Manage &gt; Password reset .</p>
+<p>- Properties : Enable SSPR. You can enable it for all users in the Microsoft Entra organization or for selected users. To enable for selected users, you must specify the security group. Members of this group can use SSPR.</p>
+<p>Properties :</p>
+<p>- Enable SSPR.</p>
+<p>- You can enable it for all users in the Microsoft Entra organization or for selected users.</p>
+<p>- To enable for selected users, you must specify the security group. Members of this group can use SSPR.</p>
+<p>- Authentication methods : Choose whether to require one or two authentication methods. Choose the authentication methods that the users can use.</p>
+<p>Authentication methods :</p>
+<p>- Choose whether to require one or two authentication methods.</p>
+<p>- Choose the authentication methods that the users can use.</p>
+<p>- Registration : Specify whether users are required to register for SSPR when they next sign in. Specify how often users are asked to reconfirm their authentication information.</p>
+<p>Registration :</p>
+<p>- Specify whether users are required to register for SSPR when they next sign in.</p>
+<p>- Specify how often users are asked to reconfirm their authentication information.</p>
+<p>- Notifications : Choose whether to notify users and administrators of password resets.</p>
+<p>Notifications : Choose whether to notify users and administrators of password resets.</p>
+<p>- Customization : Provide an email address or web page URL where your users can get help.</p>
+<p>Customization : Provide an email address or web page URL where your users can get help.</p>
+<h2>Unit 2.6.4 - Exercise - Set up self-service password reset</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/allow-users-reset-their-password/4-exercise-set-up-self-service-password-reset</p>
+<h3>Exercise - Set up self-service password reset</h3>
+<p>In this unit, you'll configure and test self-service password reset (SSPR) by using your email. You'll need to use your email to complete the password-reset process in this exercise.</p>
+<h3>Create a group</h3>
+<p>You want to roll out SSPR to a limited set of users first to make sure your SSPR configuration works as expected. Let's begin by creating a security group for the limited rollout.</p>
+<p>- In the Microsoft Entra organization you created, under Manage , select Groups .</p>
+<p>In the Microsoft Entra organization you created, under Manage , select Groups .</p>
+<p>- Select New Group .</p>
+<p>Select New Group .</p>
+<p>- Enter the following values: Setting Value Group type Security Group name SSPRTesters Group description Members are testing the rollout of SSPR Membership type Assigned</p>
+<p>Enter the following values:</p>
+<p>Setting</p>
+<p>Value</p>
+<p>Group type</p>
+<p>Security</p>
+<p>Group name</p>
+<p>SSPRTesters</p>
+<p>Group description</p>
+<p>Members are testing the rollout of SSPR</p>
+<p>Membership type</p>
+<p>Assigned</p>
+<p>- Select Create .</p>
+<p>Select Create .</p>
+<h3>Create a user account</h3>
+<p>To test your configuration, create an account that's not associated with an administrator role. You'll also assign the account to the group you created.</p>
+<p>- In your Microsoft Entra organization, under Manage , select Users .</p>
+<p>In your Microsoft Entra organization, under Manage , select Users .</p>
+<p>- Select + New user , select Create new user in the drop-down, and use the following values: Setting Value User principal name balas Display name Bala Sandhu Password Select the Copy icon next to the autogenerated password, then paste the password to a text editor like Notepad.</p>
+<p>Select + New user , select Create new user in the drop-down, and use the following values:</p>
+<p>Setting</p>
+<p>Value</p>
+<p>User principal name</p>
+<p>balas</p>
+<p>Display name</p>
+<p>Bala Sandhu</p>
+<p>Password</p>
+<p>Select the Copy icon next to the autogenerated password, then paste the password to a text editor like Notepad.</p>
+<p>- Select the Assignments tab.</p>
+<p>Select the Assignments tab.</p>
+<p>- Select Add group , check the box for the SSPRTesters group, and then the Select button.</p>
+<p>Select Add group , check the box for the SSPRTesters group, and then the Select button.</p>
+<p>- Select Review + create and then select Create .</p>
+<p>Select Review + create and then select Create .</p>
+<h3>Enable SSPR</h3>
+<p>Now, you're ready to enable SSPR for the group.</p>
+<p>- In your Microsoft Entra organization, under Manage , select Password reset .</p>
+<p>In your Microsoft Entra organization, under Manage , select Password reset .</p>
+<p>- On the Properties page, select Selected . Select the link under Select Group , select the box next to the SSPRTesters group, and then the Select button.</p>
+<p>On the Properties page, select Selected . Select the link under Select Group , select the box next to the SSPRTesters group, and then the Select button.</p>
+<p>- Select Save .</p>
+<p>Select Save .</p>
+<p>- Under Manage , select the Authentication methods , Registration , and Notifications pages to review the default values. Ensure Authentication methods has Email selected.</p>
+<p>Under Manage , select the Authentication methods , Registration , and Notifications pages to review the default values. Ensure Authentication methods has Email selected.</p>
+<p>- Select Customization .</p>
+<p>Select Customization .</p>
+<p>- Select Yes , and then in the Custom helpdesk email or URL text box, enter admin@organization-domain-name.onmicrosoft.com . Replace "organization-domain-name" with the domain name of the Microsoft Entra organization you created. If you've forgotten the domain name, hover over your profile in the Azure portal.</p>
+<p>Select Yes , and then in the Custom helpdesk email or URL text box, enter admin@organization-domain-name.onmicrosoft.com . Replace "organization-domain-name" with the domain name of the Microsoft Entra organization you created. If you've forgotten the domain name, hover over your profile in the Azure portal.</p>
+<p>- Select Save .</p>
+<p>Select Save .</p>
+<h3>Register for SSPR</h3>
+<p>Now that the SSPR configuration is complete, register an email for the user you created.</p>
+<p>Note</p>
+<p>If you get a message that says "The administrator has not enabled this feature," use private/incognito mode in your web browser.</p>
+<p>- In a new browser window, go to https://aka.ms/ssprsetup .</p>
+<p>In a new browser window, go to https://aka.ms/ssprsetup .</p>
+<p>- Sign in with the user name balas@organization-domain-name.onmicrosoft.com and the password that you noted earlier. Remember to replace "organization-domain-name" with the domain name of the Microsoft Entra organization you created.</p>
+<p>Sign in with the user name balas@organization-domain-name.onmicrosoft.com and the password that you noted earlier. Remember to replace "organization-domain-name" with the domain name of the Microsoft Entra organization you created.</p>
+<p>- If you're asked to update your password, enter a new password of your choice. Make sure you note the new password.</p>
+<p>If you're asked to update your password, enter a new password of your choice. Make sure you note the new password.</p>
+<p>- Select the Security info tab, and then select + Add sign-in method .</p>
+<p>Select the Security info tab, and then select + Add sign-in method .</p>
+<p>- In the Add a method box, select Email .</p>
+<p>In the Add a method box, select Email .</p>
+<p>- Enter your email details.</p>
+<p>Enter your email details.</p>
+<p>- When you receive the code in your email, enter the code in the text box and select Next .</p>
+<p>When you receive the code in your email, enter the code in the text box and select Next .</p>
+<h3>Test SSPR</h3>
+<p>Now, let's test whether the user can reset their password.</p>
+<p>- In a new browser window, go to https://aka.ms/sspr .</p>
+<p>In a new browser window, go to https://aka.ms/sspr .</p>
+<p>- For User ID , type balas@organization-domain-name.onmicrosoft.com . Replace "organization-domain-name" with the domain you used for your Microsoft Entra organization.</p>
+<p>For User ID , type balas@organization-domain-name.onmicrosoft.com . Replace "organization-domain-name" with the domain you used for your Microsoft Entra organization.</p>
+<p>- Complete the CAPTCHA and select Next .</p>
+<p>Complete the CAPTCHA and select Next .</p>
+<p>- The Email my alternate email radio button is selected. Select Email .</p>
+<p>The Email my alternate email radio button is selected. Select Email .</p>
+<p>- When the email arrives, in the Enter your verification code text box, enter the code you were sent. Select Next .</p>
+<p>When the email arrives, in the Enter your verification code text box, enter the code you were sent. Select Next .</p>
+<p>- Enter a new password, and then select Finish . Make sure you note the new password.</p>
+<p>Enter a new password, and then select Finish . Make sure you note the new password.</p>
+<p>- Close the browser window.</p>
+<p>Close the browser window.</p>
+<h2>Unit 2.6.5 - Exercise - Customize directory branding</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/allow-users-reset-their-password/5-exercise-customize-directory-branding</p>
+<h3>Exercise - Customize directory branding</h3>
+<p>Suppose you've been asked to display your retail organization's branding on the Azure sign-in page to reassure users that they're passing credentials to a legitimate system. Here, you'll learn how to configure this custom branding.</p>
+<p>To complete this exercise, you must have two image files:</p>
+<p>- A page background image. This must be a PNG or JPG file, 1920 x 1080 pixels, and smaller than 300 KB.</p>
+<p>- A company logo image. This must be a PNG or JPG file, 32 x 32 pixels, and smaller than 5 KB.</p>
+<h3>Customize Microsoft Entra organization branding</h3>
+<p>Let's use Microsoft Entra ID to set up the custom branding.</p>
+<p>- Sign in to the Azure portal .</p>
+<p>Sign in to the Azure portal .</p>
+<p>- Go to your Microsoft Entra organization by selecting Microsoft Entra ID . If you're not in the right Microsoft Entra organization, go to your Azure profile, and select Switch directory to find your organization.</p>
+<p>Go to your Microsoft Entra organization by selecting Microsoft Entra ID . If you're not in the right Microsoft Entra organization, go to your Azure profile, and select Switch directory to find your organization.</p>
+<p>- Under Manage , select Company branding . Then select the Customize button in the center of the screen.</p>
+<p>Under Manage , select Company branding . Then select the Customize button in the center of the screen.</p>
+<p>- Next to Favicon , select Browse . Select your logo image.</p>
+<p>Next to Favicon , select Browse . Select your logo image.</p>
+<p>- Next to Background image , select Browse . Select your page background image.</p>
+<p>Next to Background image , select Browse . Select your page background image.</p>
+<p>- Select a Page background color or accept the default.</p>
+<p>Select a Page background color or accept the default.</p>
+<p>- Select Review + Create , and then select Create .</p>
+<p>Select Review + Create , and then select Create .</p>
+<h3>Test the organization's branding</h3>
+<p>Now, let's use the account that we created in the last exercise to test the branding.</p>
+<p>- In a new browser window, go to https://login.microsoft.com .</p>
+<p>In a new browser window, go to https://login.microsoft.com .</p>
+<p>- Select the account for Bala Sandhu . Your custom branding is displayed.</p>
+<p>Select the account for Bala Sandhu . Your custom branding is displayed.</p>
+<p>- Select Forgot my password .</p>
+<p>Select Forgot my password .</p>
+<h2>Unit 2.6.6 - Summary</h2>
+<p>https://learn.microsoft.com/en-us/training/modules/allow-users-reset-their-password/6-summary</p>
+<h3>Summary</h3>
+<p>In this module, you've learned how you can use SSPR in Microsoft Entra ID to allow users to reset their forgotten or expired passwords. An administrator doesn't have to do the password reset. SSPR is secured by authentication methods of your choice. These methods can include a mobile authentication app, a code sent to you by an SMS text message, or security questions.</p>
+<p>SSPR helps reduce the amount of work required from administrators. It also minimizes the productivity impact for users when they forget their password.</p>
+<h3>Clean up</h3>
+<p>Remember to clean up after you've finished.</p>
+<p>- Delete the user you created in Microsoft Entra ID : Go to Microsoft Entra ID &gt; Manage &gt; Users . Check the box next to the user and select Delete . Select OK .</p>
+<p>- Delete the group you created in Microsoft Entra ID : Go to Microsoft Entra ID &gt; Manage &gt; Groups . Check the box next to the group and select Delete . Select OK .</p>
+<p>- Turn off self-service password reset : Go to Microsoft Entra ID &gt; Manage &gt; Password reset . Under Self service password reset enabled , select None . Select Save .</p>
+<p>If you created a Premium trial Microsoft Entra tenant for this module, you can delete the tenant 30 days after the trial has expired.</p>
+<h3>Learn more</h3>
+<p>- Tutorial: Enable users to unlock their account or reset passwords using Microsoft Entra self-service password reset</p>
+<p>- How it works: Microsoft Entra self-service password reset</p>
+<p>- Enable self-service password reset</p></body>
+</html>

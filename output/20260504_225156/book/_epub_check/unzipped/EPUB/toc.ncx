@@ -1,0 +1,188 @@
+<?xml version='1.0' encoding='utf-8'?>
+<ncx xmlns="http://www.daisy.org/z3986/2005/ncx/" version="2005-1">
+  <head>
+    <meta content="az-104_microsoft_learn_verbatim" name="dtb:uid"/>
+    <meta content="0" name="dtb:depth"/>
+    <meta content="0" name="dtb:totalPageCount"/>
+    <meta content="0" name="dtb:maxPageNumber"/>
+  </head>
+  <docTitle>
+    <text>AZ-104 Microsoft Learn Verbatim</text>
+  </docTitle>
+  <navMap>
+    <navPoint id="chapter_0">
+      <navLabel>
+        <text>LP 1 M1 - Introduction to Azure Cloud Shell</text>
+      </navLabel>
+      <content src="ch001.xhtml"/>
+    </navPoint>
+    <navPoint id="chapter_1">
+      <navLabel>
+        <text>LP 1 M2 - Deploy Azure infrastructure by using JSON ARM templates</text>
+      </navLabel>
+      <content src="ch002.xhtml"/>
+    </navPoint>
+    <navPoint id="chapter_2">
+      <navLabel>
+        <text>LP 2 M1 - Understand Microsoft Entra ID</text>
+      </navLabel>
+      <content src="ch003.xhtml"/>
+    </navPoint>
+    <navPoint id="chapter_3">
+      <navLabel>
+        <text>LP 2 M2 - Create, configure, and manage identities</text>
+      </navLabel>
+      <content src="ch004.xhtml"/>
+    </navPoint>
+    <navPoint id="chapter_4">
+      <navLabel>
+        <text>LP 2 M3 - Describe the core architectural components of Azure</text>
+      </navLabel>
+      <content src="ch005.xhtml"/>
+    </navPoint>
+    <navPoint id="chapter_5">
+      <navLabel>
+        <text>LP 2 M4 - Azure Policy initiatives</text>
+      </navLabel>
+      <content src="ch006.xhtml"/>
+    </navPoint>
+    <navPoint id="chapter_6">
+      <navLabel>
+        <text>LP 2 M5 - Secure your Azure resources with Azure role-based access control (Azure RBAC)</text>
+      </navLabel>
+      <content src="ch007.xhtml"/>
+    </navPoint>
+    <navPoint id="chapter_7">
+      <navLabel>
+        <text>LP 2 M6 - Allow users to reset their password with Microsoft Entra self-service password reset</text>
+      </navLabel>
+      <content src="ch008.xhtml"/>
+    </navPoint>
+    <navPoint id="chapter_8">
+      <navLabel>
+        <text>LP 3 M1 - Configure virtual networks</text>
+      </navLabel>
+      <content src="ch009.xhtml"/>
+    </navPoint>
+    <navPoint id="chapter_9">
+      <navLabel>
+        <text>LP 3 M2 - Configure network security groups</text>
+      </navLabel>
+      <content src="ch010.xhtml"/>
+    </navPoint>
+    <navPoint id="chapter_10">
+      <navLabel>
+        <text>LP 3 M3 - Host your domain on Azure DNS</text>
+      </navLabel>
+      <content src="ch011.xhtml"/>
+    </navPoint>
+    <navPoint id="chapter_11">
+      <navLabel>
+        <text>LP 3 M4 - Configure Azure Virtual Network peering</text>
+      </navLabel>
+      <content src="ch012.xhtml"/>
+    </navPoint>
+    <navPoint id="chapter_12">
+      <navLabel>
+        <text>LP 3 M5 - Manage and control traffic flow in your Azure deployment with routes</text>
+      </navLabel>
+      <content src="ch013.xhtml"/>
+    </navPoint>
+    <navPoint id="chapter_13">
+      <navLabel>
+        <text>LP 3 M6 - Introduction to Azure Load Balancer</text>
+      </navLabel>
+      <content src="ch014.xhtml"/>
+    </navPoint>
+    <navPoint id="chapter_14">
+      <navLabel>
+        <text>LP 3 M7 - Introduction to Azure Application Gateway</text>
+      </navLabel>
+      <content src="ch015.xhtml"/>
+    </navPoint>
+    <navPoint id="chapter_15">
+      <navLabel>
+        <text>LP 3 M8 - Introduction to Azure Network Watcher</text>
+      </navLabel>
+      <content src="ch016.xhtml"/>
+    </navPoint>
+    <navPoint id="chapter_16">
+      <navLabel>
+        <text>LP 4 M1 - Configure storage accounts</text>
+      </navLabel>
+      <content src="ch017.xhtml"/>
+    </navPoint>
+    <navPoint id="chapter_17">
+      <navLabel>
+        <text>LP 4 M2 - Configure Azure Blob Storage</text>
+      </navLabel>
+      <content src="ch018.xhtml"/>
+    </navPoint>
+    <navPoint id="chapter_18">
+      <navLabel>
+        <text>LP 4 M3 - Configure Azure Storage security</text>
+      </navLabel>
+      <content src="ch019.xhtml"/>
+    </navPoint>
+    <navPoint id="chapter_19">
+      <navLabel>
+        <text>LP 4 M4 - Configure Azure Files</text>
+      </navLabel>
+      <content src="ch020.xhtml"/>
+    </navPoint>
+    <navPoint id="chapter_20">
+      <navLabel>
+        <text>LP 5 M1 - Introduction to Azure virtual machines</text>
+      </navLabel>
+      <content src="ch021.xhtml"/>
+    </navPoint>
+    <navPoint id="chapter_21">
+      <navLabel>
+        <text>LP 5 M2 - Configure virtual machine availability</text>
+      </navLabel>
+      <content src="ch022.xhtml"/>
+    </navPoint>
+    <navPoint id="chapter_22">
+      <navLabel>
+        <text>LP 5 M3 - Configure Azure App Service plans</text>
+      </navLabel>
+      <content src="ch023.xhtml"/>
+    </navPoint>
+    <navPoint id="chapter_23">
+      <navLabel>
+        <text>LP 5 M4 - Configure Azure App Service</text>
+      </navLabel>
+      <content src="ch024.xhtml"/>
+    </navPoint>
+    <navPoint id="chapter_24">
+      <navLabel>
+        <text>LP 5 M5 - Configure Azure Container Instances</text>
+      </navLabel>
+      <content src="ch025.xhtml"/>
+    </navPoint>
+    <navPoint id="chapter_25">
+      <navLabel>
+        <text>LP 6 M1 - Introduction to Azure Backup</text>
+      </navLabel>
+      <content src="ch026.xhtml"/>
+    </navPoint>
+    <navPoint id="chapter_26">
+      <navLabel>
+        <text>LP 6 M2 - Protect your virtual machines by using Azure Backup</text>
+      </navLabel>
+      <content src="ch027.xhtml"/>
+    </navPoint>
+    <navPoint id="chapter_27">
+      <navLabel>
+        <text>LP 6 M3 - Monitor your Azure virtual machines with Azure Monitor</text>
+      </navLabel>
+      <content src="ch028.xhtml"/>
+    </navPoint>
+    <navPoint id="chapter_28">
+      <navLabel>
+        <text>AZ-104 Official Pages</text>
+      </navLabel>
+      <content src="ch029.xhtml"/>
+    </navPoint>
+  </navMap>
+</ncx>
