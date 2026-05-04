@@ -332,32 +332,35 @@ def _format_question(
 
     if style == "choose_two" and len(facts) >= 5:
         same_section = [f for f in facts if f != target and f.section == target.section]
-        second_correct = same_section[0] if same_section else facts[1]
-        pool = [f for f in facts if f not in (target, second_correct)]
-        if len(pool) < 3:
+        if not same_section:
             style = "single_best"
         else:
-            wrong = rng.sample(pool, 3)
-            option_texts = [target.text, second_correct.text, *(w.text for w in wrong)]
-            labels = ["A", "B", "C", "D", "E"]
-            indices = list(range(len(option_texts)))
-            rng.shuffle(indices)
-            shuffled = [option_texts[i] for i in indices]
-            label_map = {i: labels[pos] for pos, i in enumerate(indices)}
-            ans_labels = sorted([label_map[0], label_map[1]])
-            out.append("**Item type:** Choose TWO.")
-            out.append("Select the two options that best satisfy the requirement.")
-            out.append("")
-            out.extend(_render_options(shuffled))
-            out.append("")
-            out.append(f"**Correct answer: {ans_labels[0]}, {ans_labels[1]}**")
-            out.append(
-                f"**Explanation:** The two correct options come from the target section '{target.section}'."
-            )
-            out.append(f"> {target.text}")
-            out.append(f"> {second_correct.text}")
-            out.append("")
-            return "\n".join(out)
+            second_correct = same_section[0]
+            pool = [f for f in facts if f not in (target, second_correct)]
+            if len(pool) < 3:
+                style = "single_best"
+            else:
+                wrong = rng.sample(pool, 3)
+                option_texts = [target.text, second_correct.text, *(w.text for w in wrong)]
+                labels = ["A", "B", "C", "D", "E"]
+                indices = list(range(len(option_texts)))
+                rng.shuffle(indices)
+                shuffled = [option_texts[i] for i in indices]
+                label_map = {i: labels[pos] for pos, i in enumerate(indices)}
+                ans_labels = sorted([label_map[0], label_map[1]])
+                out.append("**Item type:** Choose TWO.")
+                out.append("Select the two options that best satisfy the requirement.")
+                out.append("")
+                out.extend(_render_options(shuffled))
+                out.append("")
+                out.append(f"**Correct answer: {ans_labels[0]}, {ans_labels[1]}**")
+                out.append(
+                    f"**Explanation:** The two correct options come from the target section '{target.section}'."
+                )
+                out.append(f"> {target.text}")
+                out.append(f"> {second_correct.text}")
+                out.append("")
+                return "\n".join(out)
 
     if style == "sequence" and len(facts) >= 6:
         pool = [f for f in facts if f != target]
@@ -399,25 +402,28 @@ def _format_question(
     if style == "true_false_combo" and len(facts) >= 4:
         s1 = target
         alt = [f for f in facts if f != target and f.section != target.section]
-        s2 = alt[0] if alt else facts[1]
-        out.append("**Item type:** True/False combination.")
-        out.append("For the target section context, evaluate the statements:")
-        out.append(f"I. {s1.text}")
-        out.append(f"II. {s2.text}")
-        out.append("")
-        out.append("A. Both statements are true in the target section context.")
-        out.append("B. Statement I is true and Statement II is false in the target section context.")
-        out.append("C. Statement I is false and Statement II is true in the target section context.")
-        out.append("D. Both statements are false in the target section context.")
-        out.append("")
-        out.append("**Correct answer: B**")
-        out.append(
-            f"**Explanation:** Statement I is a direct statement from section '{target.section}'. "
-            "Statement II is from a different section and is not the best fit for this section context."
-        )
-        out.append(f"> {s1.text}")
-        out.append("")
-        return "\n".join(out)
+        if not alt:
+            style = "single_best"
+        else:
+            s2 = alt[0]
+            out.append("**Item type:** True/False combination.")
+            out.append("For the target section context, evaluate the statements:")
+            out.append(f"I. {s1.text}")
+            out.append(f"II. {s2.text}")
+            out.append("")
+            out.append("A. Both statements are true in the target section context.")
+            out.append("B. Statement I is true and Statement II is false in the target section context.")
+            out.append("C. Statement I is false and Statement II is true in the target section context.")
+            out.append("D. Both statements are false in the target section context.")
+            out.append("")
+            out.append("**Correct answer: B**")
+            out.append(
+                f"**Explanation:** Statement I is a direct statement from section '{target.section}'. "
+                "Statement II is from a different section and is not the best fit for this section context."
+            )
+            out.append(f"> {s1.text}")
+            out.append("")
+            return "\n".join(out)
 
     # Default single-best-answer item.
     stem = STEM_VARIANTS[chapter_question_no % len(STEM_VARIANTS)]
@@ -551,7 +557,7 @@ def build_examstyle_book(source_md: Path, out_md: Path) -> None:
     lines.append("")
     lines.append(
         "This chapter-based book contains exam-style MCQs generated from the AZ-104 source book. "
-        "Each chapter includes 15 non-scenario exam-style questions with answer and source-grounded explanation."
+        "Each chapter includes at least 15 non-scenario exam-style questions with answer and source-grounded explanation."
     )
     lines.append("")
 
