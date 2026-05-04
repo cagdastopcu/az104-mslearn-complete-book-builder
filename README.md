@@ -1,6 +1,6 @@
-# AZ-104 Microsoft Learn Complete Book Builder
+# Azure AZ-104 Microsoft Learn Complete Book Builder
 
-This project builds AZ-104 study content from official Microsoft Learn sources, then generates multiple book variants (verbatim, chapter tests, scenario tests, and exam-style tests) in `MD`, `TXT`, and `EPUB`.
+This project builds Azure AZ-104 study content from official Microsoft Learn sources, then generates multiple book variants (verbatim, chapter tests, scenario tests, and exam-style tests) in `MD`, `TXT`, and `EPUB`.
 
 Repository name: `az104-mslearn-complete-book-builder`
 
@@ -12,9 +12,9 @@ After a run, a timestamped folder is created under `output/`, for example:
 
 That folder contains:
 
-- `manifest.json`: discovered AZ-104 learning paths, modules, and units.
+- `manifest.json`: discovered Azure AZ-104 learning paths, modules, and units.
 - `unit_content.jsonl`: fetched unit text content.
-- `official_pages.jsonl`: fetched AZ-104 official related pages.
+- `official_pages.jsonl`: fetched Azure AZ-104 official related pages.
 - `coverage_report.json`: source coverage summary.
 - `book/`: all generated books and test books.
 
@@ -30,6 +30,12 @@ Recommended extras:
 ```bash
 python -m pip install -e .[epub,dev]
 ```
+
+## Certification
+
+Microsoft Certified: Azure Administrator Associate
+
+Demonstrate key skills to configure, manage, secure, and administer key professional functions in Microsoft Azure.
 
 ## Build The Main Verbatim Book
 
@@ -146,7 +152,7 @@ including all generated books and coverage files with original folder structure.
 
 ## Notes
 
-- Content source is official Microsoft Learn AZ-104 related material fetched at generation time.
+- Content source is official Microsoft Learn Azure AZ-104 related material fetched at generation time.
 - Always review Microsoft Learn terms before redistribution.
 
 ## Run Tests
