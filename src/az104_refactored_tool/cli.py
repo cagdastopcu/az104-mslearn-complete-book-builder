@@ -26,6 +26,8 @@ def run_pipeline(
     fetch_delay: float,
     fetch_retries: int,
     fetch_backoff: float,
+    official_link_jumps: int,
+    official_max_connected_pages: int,
 ) -> dict[str, Path]:
     from .book import build_all_formats
     from .catalog import discover_manifest
@@ -51,7 +53,12 @@ def run_pipeline(
     save_jsonl(content_path, content_rows)
     LOGGER.info("Unit content written: %s", content_path)
 
-    official_urls = collect_official_pages(manifest.to_dict(), input_url)
+    official_urls = collect_official_pages(
+        manifest.to_dict(),
+        input_url,
+        link_jumps=official_link_jumps,
+        max_connected_pages=official_max_connected_pages,
+    )
     official_rows, official_errors = fetch_pages(
         urls=official_urls,
         delay_sec=fetch_delay,
@@ -83,6 +90,8 @@ def run_pipeline(
         "official_pages_expected": len(official_urls),
         "official_pages_fetched": len(official_rows),
         "official_pages_successful": sum(1 for r in official_rows if r.get("success")),
+        "official_link_jumps": official_link_jumps,
+        "official_max_connected_pages": official_max_connected_pages,
     }
     coverage_path = run_dir / "coverage_report.json"
     save_json(coverage_path, coverage)
@@ -117,6 +126,18 @@ def _build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--fetch-delay", type=float, default=0.6, help="Delay between unit page requests.")
     parser.add_argument("--fetch-retries", type=int, default=3, help="Retries per unit fetch.")
     parser.add_argument("--fetch-backoff", type=float, default=1.0, help="Backoff multiplier for retries.")
+    parser.add_argument(
+        "--official-link-jumps",
+        type=int,
+        default=2,
+        help="How many link hops to follow from official seed pages when discovering related AZ-104 pages.",
+    )
+    parser.add_argument(
+        "--official-max-connected-pages",
+        type=int,
+        default=120,
+        help="Maximum number of additional connected official pages to include.",
+    )
     parser.add_argument("--verbose", action="store_true", help="Enable debug logs.")
     return parser
 
@@ -135,6 +156,8 @@ def main() -> None:
         fetch_delay=args.fetch_delay,
         fetch_retries=args.fetch_retries,
         fetch_backoff=args.fetch_backoff,
+        official_link_jumps=args.official_link_jumps,
+        official_max_connected_pages=args.official_max_connected_pages,
     )
 
     LOGGER.info("Completed. Files created:")

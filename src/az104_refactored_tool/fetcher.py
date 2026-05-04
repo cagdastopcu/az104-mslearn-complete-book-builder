@@ -95,6 +95,17 @@ def _extract_content_text(soup: BeautifulSoup) -> str:
     return re.sub(r"\n{3,}", "\n\n", "\n".join(lines)).strip()
 
 
+def _extract_fallback_text(soup: BeautifulSoup) -> str:
+    for selector in REMOVE_SELECTORS:
+        for node in soup.select(selector):
+            node.decompose()
+    root = soup.find("main") or soup.find("article") or soup.find("body")
+    if not root:
+        return ""
+    raw = root.get_text(separator="\n", strip=True)
+    return re.sub(r"\n{3,}", "\n\n", raw).strip()
+
+
 def _request_with_retry(
     session: requests.Session,
     url: str,
@@ -220,7 +231,12 @@ def fetch_pages(
             title = _extract_title(soup, url)
             content = _extract_content_text(soup)
             if not content:
-                raise RuntimeError("No extractable content found")
+                content = _extract_fallback_text(soup)
+            if not content:
+                content = (
+                    "This page contains limited or dynamic content in the current session. "
+                    "See the official URL for interactive or sign-in-gated details."
+                )
             results.append(
                 {
                     "page_index": i,
