@@ -1,42 +1,32 @@
 # Azure AZ-104 Microsoft Learn Complete Book Builder
 
-Build a complete Azure AZ-104 study package from official Microsoft Learn content and generate chapter-based exam practice books with source-grounded answers.
+Build a full Azure AZ-104 study package directly from official Microsoft Learn content, then generate multiple exam-practice books with source-grounded answers and explanations.
 
-Repository slug: `az104-mslearn-complete-book-builder`
+## Why This Project Exists
 
-## Certification
+Most Azure AZ-104 prep material has one of these problems: outdated content, weak traceability, or shallow question quality. This project addresses that by:
+
+- Pulling current official Microsoft Learn Azure AZ-104 learning content.
+- Building a verbatim reference book for direct study.
+- Generating high-volume chapter tests and exam-style question sets.
+- Keeping answers and explanations tied to extracted source statements.
+
+## Certification Target
 
 `Microsoft Certified: Azure Administrator Associate`
 
 Demonstrate key skills to configure, manage, secure, and administer key professional functions in Microsoft Azure.
 
-## What This Project Does
+## What You Get
 
-- Discovers Azure AZ-104 learning paths, modules, and units from Microsoft Learn.
-- Fetches and normalizes unit and related official-page content.
-- Builds the main verbatim study book in `MD`, `TXT`, and `EPUB`.
-- Generates three additional test books:
-- `AZ-104_Chapter_Test_Book`
-- `AZ-104_Scenario_Test_Book`
-- `AZ-104_ExamStyle_Chapter_Test_Book` (non-scenario)
-- Produces coverage JSON files for auditability and quality checks.
+After running the pipeline and generators, you get:
 
-## Installation
+- `AZ-104_Microsoft_Learn_Verbatim` in `MD`, `TXT`, `EPUB`
+- `AZ-104_Chapter_Test_Book` in `MD`, `TXT`, `EPUB` + coverage JSON
+- `AZ-104_Scenario_Test_Book` in `MD`, `TXT`, `EPUB` + coverage JSON
+- `AZ-104_ExamStyle_Chapter_Test_Book` (non-scenario) in `MD`, `TXT`, `EPUB` + coverage JSON
 
-```bash
-cd az104-mslearn-complete-book-builder
-python -m pip install -e .
-```
-
-Recommended extras:
-
-```bash
-python -m pip install -e .[epub,dev]
-```
-
-## Quick Start
-
-Run the full fetch + build pipeline:
+## One-Command Build (Main Book)
 
 ```bash
 az104-tool \
@@ -45,13 +35,13 @@ az104-tool \
   --title "Azure AZ-104 Microsoft Learn Complete Study Book"
 ```
 
-Alternative entrypoint:
+Alternative:
 
 ```bash
 python run_az104_book.py --out-dir output
 ```
 
-Generate test books from the latest output run:
+## Generate Test Books
 
 ```bash
 python generate_az104_test_book.py
@@ -59,91 +49,128 @@ python generate_az104_scenario_test_book.py
 python generate_az104_examstyle_chapter_test_book.py
 ```
 
-## CLI Options
+## Book Types, Question Counts, And Styles
 
-`az104-tool` supports:
+### 1) Chapter Test Book
 
-- `--input-url` (default: official AZ-104 course URL)
-- `--out-dir` (default: `output`)
-- `--locale` (default: `en-us`)
-- `--title` (default: `AZ-104 Microsoft Learn Verbatim`)
-- `--discover-delay` (catalog request delay)
-- `--fetch-delay` (unit/page fetch delay)
-- `--fetch-retries` (retry count per page)
-- `--fetch-backoff` (retry backoff multiplier)
-- `--official-link-jumps` (default: `2`)
-- `--official-max-connected-pages` (default: `150`)
-- `--verbose` (debug logging)
+Files:
 
-## Output Structure
+- `AZ-104_Chapter_Test_Book.md`
+- `AZ-104_Chapter_Test_Book.txt`
+- `AZ-104_Chapter_Test_Book.epub`
+- `AZ-104_Chapter_Test_Book_Coverage.json`
 
-Each run creates `output/YYYYMMDD_HHMMSS/` with:
+Purpose:
 
-- `manifest.json`: discovered learning structure.
-- `unit_content.jsonl`: fetched unit content records.
-- `official_pages.jsonl`: fetched related official-page content records.
-- `coverage_report.json`: fetch/coverage summary.
-- `book/`: all generated books and coverage files.
+- Broad chapter-by-chapter recall checks from the source text.
+- Best for high-volume coverage and memory reinforcement after you read the verbatim book.
+- Every question is grounded to extracted chapter statements and includes source-line explanation.
 
-Main study book files:
+Question count behavior:
 
-- `AZ-104_Microsoft_Learn_Verbatim.md`
-- `AZ-104_Microsoft_Learn_Verbatim.txt`
-- `AZ-104_Microsoft_Learn_Verbatim.epub`
+- Variable count per chapter.
+- At least 15 questions per chapter.
+- If a chapter has more extracted facts, it generates more so coverage is not capped.
 
-## Book Types
+Exact counts for the included snapshot `output/20260504_225156/`:
 
-`AZ-104_Chapter_Test_Book`:
+- Chapters: `29`
+- Total questions: `2946`
+- Question style: section-grounded chapter MCQ format (single-answer recall style)
 
-- Chapter-based MCQ practice.
-- Variable question volume per chapter (`max(15, facts_available)` behavior in generation logic).
+### 2) Scenario Test Book
 
-`AZ-104_Scenario_Test_Book`:
+Files:
 
-- Case-study style grouped questions.
-- Chapter-grounded scenario context and linked Q/A blocks.
+- `AZ-104_Scenario_Test_Book.md`
+- `AZ-104_Scenario_Test_Book.txt`
+- `AZ-104_Scenario_Test_Book.epub`
+- `AZ-104_Scenario_Test_Book_Coverage.json`
 
-`AZ-104_ExamStyle_Chapter_Test_Book`:
+Purpose:
 
-- Non-scenario exam-style questions.
-- Mixed item types:
+- Scenario/case-style practice based on source content.
+- Best for practicing grouped case flow and linked questions under shared context.
+- Uses case studies with multiple linked questions and source-grounded explanations.
+
+Question count behavior:
+
+- Variable by chapter/fact extraction.
+- Includes case-study style grouping and linked questions.
+
+Exact counts for the included snapshot `output/20260504_225156/`:
+
+- Chapters: `29`
+- Total case studies: `604`
+- Total questions: `2946`
+- Question style: case-study linked questions (`Case Study N` + `Q1..Qn`)
+
+### 3) Exam-Style Chapter Test Book (Non-Scenario)
+
+Files:
+
+- `AZ-104_ExamStyle_Chapter_Test_Book.md`
+- `AZ-104_ExamStyle_Chapter_Test_Book.txt`
+- `AZ-104_ExamStyle_Chapter_Test_Book.epub`
+- `AZ-104_ExamStyle_Chapter_Test_Book_Coverage.json`
+
+Purpose:
+
+- Chapter-based exam-style practice without scenario blocks.
+- Best for mixed exam-style item practice without case-study scenario framing.
+- Uses operational tradeoff constraints and mixed item types while staying chapter-grounded.
+
+Question count behavior:
+
+- Variable count per chapter.
+- Uses `max(15, facts_available)` per chapter.
+
+Item styles in this book:
+
 - `Single best answer`
 - `Choose TWO`
 - `Sequence`
 - `True/False combination`
-- Constraint/tradeoff wording for more exam-like pressure.
 
-## Quality and Grounding Guarantees
+Style distribution is automatic and mixed throughout each chapter.
+
+Exact counts for the included snapshot `output/20260504_225156/`:
+
+- Chapters: `29`
+- Total questions: `4360`
+- `Single best answer`: `1100`
+- `Choose TWO`: `1092`
+- `Sequence`: `1088`
+- `True/False combination`: `1080`
+
+## Grounding And Integrity Rules
 
 - Questions are generated from extracted chapter facts.
-- Answers are selected from chapter-grounded statements.
-- Explanations are tied back to source lines.
-- Noise filtering removes common website UI text artifacts.
-- EPUB normalization enforces deterministic outputs across repeated runs.
+- Correct answers are selected from that same chapter-grounded fact set.
+- Explanations cite supporting source lines from the verbatim content.
+- Coverage JSON files provide extraction and generation counts for auditability.
 
-## Testing
+## Install
 
-Run all tests:
+```bash
+cd az104-mslearn-complete-book-builder
+python -m pip install -e .
+```
+
+Recommended:
+
+```bash
+python -m pip install -e .[epub,dev]
+```
+
+## Test
 
 ```bash
 python -m pytest -q
 ```
 
-Current test coverage includes:
-
-- fetcher encoding and noise filtering behavior
-- official-page discovery behavior
-- exam-style fallback correctness behavior
-- EPUB normalization idempotence
-- catalog utility behavior
-
-## Documentation Map
-
-- Architecture: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
-- Operations and runbook: [docs/OPERATIONS.md](docs/OPERATIONS.md)
-
 ## Notes
 
-- Source content is fetched from official Microsoft Learn Azure AZ-104 related pages at run time.
-- This project supports study preparation and does not guarantee exam outcomes.
-- Review Microsoft Learn terms before redistribution of generated content.
+- Source content is official Microsoft Learn Azure AZ-104 related material fetched at run time.
+- This project is designed for study acceleration, not as a guarantee of exam pass.
+- Review Microsoft Learn terms before redistribution.
